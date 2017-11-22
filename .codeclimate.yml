@@ -22,6 +22,8 @@ ratings:
   paths:
   - "**.php"
   - "**.md"
+
 exclude_paths:
+- ".github"
 - "**/vendor/**/*"
 - "tests/"
