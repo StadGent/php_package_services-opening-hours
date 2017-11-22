@@ -84,8 +84,8 @@ projects. Questions about our approach can be asked through the issue queue
 [ico-license]: https://poser.pugx.org/StadGent/php_package_services-opening-hours/license
 [ico-downloads]: https://poser.pugx.org/StadGent/php_package_services-opening-hours/downloads
 [ico-travis]: https://travis-ci.org/StadGent/php_package_services-opening-hours.svg?branch=develop
-[ico-maintainability]: https://api.codeclimate.com/v1/badges/<client_id>/maintainability
-[ico-test-coverage]: https://api.codeclimate.com/v1/badges/<client_id>/test_coverage
+[ico-maintainability]: https://api.codeclimate.com/v1/badges/dac41e1c27f734926200/maintainability
+[ico-test-coverage]: https://api.codeclimate.com/v1/badges/dac41e1c27f734926200/test_coverage
 [ico-php7]: https://php7ready.timesplinter.ch/StadGent/php_package_services-opening-hours/develop/badge.svg
 
 [link-packagist]: https://packagist.org/packages/stadgent/services-opening-hours
