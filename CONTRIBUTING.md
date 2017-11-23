@@ -1,30 +1,30 @@
 # Contributing to this project
 
 1. [Contributing](#contributing)
-2. [Submitting an Issue](#issues)
-3. [Submitting a Pull Request](#pull-requests)
+1. [Submitting an Issue](#issues)
+1. [Submitting a Pull Request](#pull-requests)
 
 ## Contributing
 
-Thank you for your interest in contributing to this project. There are several 
-ways to help out, even if you've never worked on an open source project before. 
+Thank you for your interest in contributing to this project. There are several
+ways to help out, even if you've never worked on an open source project before.
 
-* If you've found a bug or want to request a feature, you can report it by 
-  [posting an issue] - be sure to read the [guidelines](#issues) first! 
-* If you want to contribute your own work (be it code or documentation), please 
+* If you've found a bug or want to request a feature, you can report it by
+  [posting an issue] - be sure to read the [guidelines](#issues) first!
+* If you want to contribute your own work (be it code or documentation), please
   read the [guidelines](#pull-requests) for submitting a pull request.
-* **If you want to report a security issue, please read 
+* **If you want to report a security issue, please read
   [the Security guidelines](SECURITY.md) first!**
 
 ## Issues
 
-Issues are intended for reporting bugs and weird behaviour or suggesting 
+Issues are intended for reporting bugs and weird behaviour or suggesting
 improvements to this project.
 
 Before you submit an issue, please go through the following checklist:
 
 * **FILL IN ALL THE FIELDS ASKED FOR**
-* Search through existing issues (*including closed issues!*) first: you might 
+* Search through existing issues (*including closed issues!*) first: you might
   be able to get your answer there.
 * Double check your issue manually, because it could be an external issue.
 * What providers are you using?
@@ -38,20 +38,17 @@ be resolved.
 
 ## Pull Requests
 
-Pull requests are intended for contributing code or documentation to the 
-project. 
+Pull requests are intended for contributing code or documentation to the
+project.
 
 Before you submit a pull request, consider the following:
 
-* Make sure your pull request is made for the *develop* branch (or relevant 
+* Make sure your pull request is made for the *develop* branch (or relevant
   feature branch).
 * Have you tested your PR? If not, why?
 * Does your PR have any limitations we should know of?
 * Is your PR up-to-date with the branch you're trying to push into?
 * Is your code in check with the [PSR-2 Coding Style Guide].
-
- 
- 
 
 [posting an issue]: https://github.com/StadGent/php_package_services-opening-hours/issues/new
 [PSR-2 Coding Style Guide]: http://www.php-fig.org/psr/psr-2/
