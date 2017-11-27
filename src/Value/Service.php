@@ -40,18 +40,11 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     protected $description;
 
     /**
-     * The creation date-time.
+     * The date attributes for the Service.
      *
-     * @var \DateTimeImmutable
+     * @var \StadGent\Services\OpeningHours\Value\DateAttributes
      */
-    protected $createdAt;
-
-    /**
-     * The last update date-time.
-     *
-     * @var \DateTimeImmutable
-     */
-    protected $updatedAt;
+    protected $dateAttributes;
 
     /**
      * The data source for the service.
@@ -114,20 +107,12 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
         if (!empty($data['description'])) {
             $service->description = $data['description'];
         }
-        if (!empty($data['created_at'])) {
-            $service->createdAt = new \DateTimeImmutable($data['created_at']);
-        }
-        if (!empty($data['updated_at'])) {
-            $service->updatedAt = new \DateTimeImmutable($data['updated_at']);
-        }
-        if (!empty($data['identifier'])) {
-            $service->sourceIdentifier = $data['identifier'];
-        }
         if (!empty($data['countChannels'])) {
             $service->countChannels = (int) $data['countChannels'];
         }
 
         $service->source = ServiceSource::fromArray($data);
+        $service->dateAttributes = DateAttributes::fromArray($data);
         $service->isDraft = new Boolean(!empty($data['source']));
 
         return $service;
@@ -177,21 +162,11 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the date-time the service was created.
      *
-     * @return \DateTimeImmutable
+     * @return \StadGent\Services\OpeningHours\Value\DateAttributes
      */
-    public function getCreatedAt()
+    public function getDateAttributes()
     {
-        return $this->createdAt;
-    }
-
-    /**
-     * Get the date-time the service was updated.
-     *
-     * @return \DateTimeImmutable
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
+        return $this->dateAttributes;
     }
 
     /**
@@ -263,8 +238,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
             && $this->getUri() === $object->getUri()
             && $this->getLabel() === $object->getLabel()
             && $this->getDescription() === $object->getDescription()
-            && $this->getCreatedAt() === $object->getCreatedAt()
-            && $this->getUpdatedAt() === $object->getUpdatedAt()
+            && $this->getDateAttributes()->sameValueAs($object->getDateAttributes())
             && $this->getSource()->sameValueAs($object->getSource())
             && $this->getDraft()->sameValueAs($object->getDraft())
             && $this->getCountChannels() === $object->getCountChannels();

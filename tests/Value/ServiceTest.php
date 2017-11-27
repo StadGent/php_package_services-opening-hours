@@ -1,8 +1,9 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHoursTest\Value;
+namespace StadGent\Services\Test\OpeningHours\Value;
 
 use StadGent\Services\OpeningHours\Value\Boolean;
+use StadGent\Services\OpeningHours\Value\DateAttributes;
 use StadGent\Services\OpeningHours\Value\Service;
 use StadGent\Services\OpeningHours\Value\ServiceSource;
 use StadGent\Services\OpeningHours\Value\ValueInterface;
@@ -21,15 +22,19 @@ class ServiceTest extends TestCase
      */
     public function testFromEmptyArray()
     {
-        $data = [];
+        $data = [
+            'created_at' => '2134-12-24 12:34:56',
+            'updated_at' => '2134-12-24 12:34:56',
+        ];
         $service = Service::fromArray($data);
 
         $this->assertNull($service->getId());
         $this->assertNull($service->getUri());
         $this->assertNull($service->getLabel());
         $this->assertNull($service->getDescription());
-        $this->assertNull($service->getCreatedAt());
-        $this->assertNull($service->getUpdatedAt());
+
+        $dateAttributes = DateAttributes::fromArray($data);
+        $dateAttributes->sameValueAs($service->getDateAttributes());
 
         $emptySource = ServiceSource::fromArray([]);
         $this->assertTrue($emptySource->sameValueAs($service->getSource()));
@@ -65,8 +70,6 @@ class ServiceTest extends TestCase
         $this->assertEquals($data['uri'], $service->getUri());
         $this->assertEquals($data['label'], $service->getLabel());
         $this->assertEquals($data['description'], $service->getDescription());
-        $this->assertEquals($data['created_at'], $service->getCreatedAt()->format('Y-m-d H:i:s'));
-        $this->assertEquals($data['updated_at'], $service->getUpdatedAt()->format('Y-m-d H:i:s'));
         $this->assertEquals($data['countChannels'], $service->getCountChannels());
 
         $source = ServiceSource::fromArray($data);
@@ -109,6 +112,8 @@ class ServiceTest extends TestCase
             [
                 'id' => 10,
                 'label' => 'FizzBazz label',
+                'created_at' => '2345-11-05 12:45:00',
+                'updated_at' => '2345-11-12 14:12:11',
             ]
         );
         $this->assertFalse(
@@ -128,10 +133,21 @@ class ServiceTest extends TestCase
      */
     public function testToString()
     {
-        $service = Service::fromArray([]);
+        $service = Service::fromArray(
+            [
+                'created_at' => '2134-12-24 12:34:56',
+                'updated_at' => '2134-12-24 12:34:56',
+            ]
+        );
         $this->assertEquals('', (string) $service);
 
-        $service = Service::fromArray(['label' => 'fooBar']);
+        $service = Service::fromArray(
+            [
+                'label' => 'fooBar',
+                'created_at' => '2134-12-24 12:34:56',
+                'updated_at' => '2134-12-24 12:34:56',
+            ]
+        );
         $this->assertEquals('fooBar', (string) $service);
     }
 }
