@@ -18,6 +18,7 @@ abstract class CollectionAbstract extends ValueAbstract implements \IteratorAggr
      * Compare two Value objects and tells whether they can be considered equal.
      *
      * @param \StadGent\Services\OpeningHours\Value\ValueInterface|CollectionAbstract $collection
+     *   Collection to compare this collection with.
      *
      * @return bool
      */
@@ -27,11 +28,42 @@ abstract class CollectionAbstract extends ValueAbstract implements \IteratorAggr
             return false;
         }
 
-        $collectionIterator = $collection->getIterator();
-        if ($this->getIterator()->count() !== $collectionIterator->count()) {
+        if (!$this->sameCollectionCount($collection)) {
             return false;
         }
 
+        if (!$this->sameCollectionValues($collection)) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Check if collections have the same amount of items.
+     *
+     * @param \StadGent\Services\OpeningHours\Value\ValueInterface|CollectionAbstract $collection
+     *   Collection to compare this collection with.
+     *
+     * @return bool
+     */
+    protected function sameCollectionCount(ValueInterface $collection)
+    {
+        $collectionIterator = $collection->getIterator();
+        return $this->getIterator()->count() === $collectionIterator->count();
+    }
+
+    /**
+     * Check if collections have the same values.
+     *
+     * @param \StadGent\Services\OpeningHours\Value\ValueInterface|CollectionAbstract $collection
+     *   Collection to compare this collection with.
+     *
+     * @return bool
+     */
+    protected function sameCollectionValues(ValueInterface $collection)
+    {
+        $collectionIterator = $collection->getIterator();
         foreach ($this as $index => $item) {
             if (!$collectionIterator->offsetExists($index)) {
                 return false;
