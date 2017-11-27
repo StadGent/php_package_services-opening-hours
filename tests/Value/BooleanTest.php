@@ -34,7 +34,7 @@ class BooleanTest extends TestCase
      */
     public function testTrue()
     {
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $this->assertTrue($boolean->getAsBoolean());
     }
 
@@ -43,7 +43,7 @@ class BooleanTest extends TestCase
      */
     public function testFalse()
     {
-        $boolean = Boolean::False();
+        $boolean = Boolean::false();
         $this->assertFalse($boolean->getAsBoolean());
     }
 
@@ -52,10 +52,10 @@ class BooleanTest extends TestCase
      */
     public function testIsTrue()
     {
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $this->assertTrue($boolean->isTrue());
 
-        $boolean = Boolean::False();
+        $boolean = Boolean::false();
         $this->assertFalse($boolean->isTrue());
     }
 
@@ -64,10 +64,10 @@ class BooleanTest extends TestCase
      */
     public function testIsFalse()
     {
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $this->assertFalse($boolean->isFalse());
 
-        $boolean = Boolean::False();
+        $boolean = Boolean::false();
         $this->assertTrue($boolean->isFalse());
     }
 
@@ -76,10 +76,10 @@ class BooleanTest extends TestCase
      */
     public function testAsInteger()
     {
-        $boolean = Boolean::False();
+        $boolean = Boolean::false();
         $this->assertSame(0, $boolean->getAsInteger());
 
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $this->assertSame(1, $boolean->getAsInteger());
     }
 
@@ -88,10 +88,10 @@ class BooleanTest extends TestCase
      */
     public function testAsYesNo()
     {
-        $boolean = Boolean::False();
+        $boolean = Boolean::false();
         $this->assertSame('No', $boolean->getAsYesNo());
 
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $this->assertSame('Yes', $boolean->getAsYesNo());
     }
 
@@ -100,10 +100,10 @@ class BooleanTest extends TestCase
      */
     public function testAsYN()
     {
-        $boolean = Boolean::False();
+        $boolean = Boolean::false();
         $this->assertSame('N', $boolean->getAsYN());
 
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $this->assertSame('Y', $boolean->getAsYN());
     }
 
@@ -112,7 +112,7 @@ class BooleanTest extends TestCase
      */
     public function testSameValueAs()
     {
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $notBoolean = $this
             ->getMockBuilder(ValueInterface::class)
             ->getMock();
@@ -122,13 +122,13 @@ class BooleanTest extends TestCase
             'Compared value object is not a Boolean.'
         );
 
-        $booleanFalse = Boolean::False();
+        $booleanFalse = Boolean::false();
         $this->assertFalse(
             $boolean->sameValueAs($booleanFalse),
             'Booleans do not share the same state.'
         );
 
-        $booleanTrue = Boolean::True();
+        $booleanTrue = Boolean::true();
         $this->assertTrue(
             $boolean->sameValueAs($booleanTrue),
             'Booleans share the same state.'
@@ -140,10 +140,10 @@ class BooleanTest extends TestCase
      */
     public function testToString()
     {
-        $boolean = Boolean::False();
+        $boolean = Boolean::false();
         $this->assertSame('N', (string) $boolean);
 
-        $boolean = Boolean::True();
+        $boolean = Boolean::true();
         $this->assertSame('Y', (string) $boolean);
     }
 

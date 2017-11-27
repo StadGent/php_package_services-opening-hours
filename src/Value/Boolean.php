@@ -51,7 +51,7 @@ class Boolean extends ValueAbstract
      *
      * @return \StadGent\Services\OpeningHours\Value\Boolean
      */
-    public static function False()
+    public static function false()
     {
         return new static(false);
     }
@@ -61,7 +61,7 @@ class Boolean extends ValueAbstract
      *
      * @return \StadGent\Services\OpeningHours\Value\Boolean
      */
-    public static function True()
+    public static function true()
     {
         return new static(true);
     }
