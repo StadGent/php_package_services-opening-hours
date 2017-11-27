@@ -61,7 +61,7 @@ class DateTimeTest extends TestCase
         $this->assertEquals(
             $string,
             (string) $dateTime,
-            'String version of date = date in format "DATE_W3C"'
+            'String version of date = date in format "DATE_ATOM"'
         );
     }
 }

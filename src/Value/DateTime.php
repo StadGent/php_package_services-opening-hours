@@ -63,6 +63,6 @@ class DateTime extends ValueAbstract
      */
     public function __toString()
     {
-        return (string) $this->format(DATE_W3C);
+        return (string) $this->format(DATE_ATOM);
     }
 }
