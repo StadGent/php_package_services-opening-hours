@@ -64,7 +64,7 @@ class DateAttributesTest extends TestCase
     /**
      * Test same value as.
      */
-    public function _testSameValueAs()
+    public function testSameValueAs()
     {
         $data = [
             'created_at' => '2123-12-24 12:13:14',
