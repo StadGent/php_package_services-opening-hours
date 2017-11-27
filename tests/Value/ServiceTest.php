@@ -98,7 +98,7 @@ class ServiceTest extends TestCase
             'isDraft' => 1,
             'countChannels' => 5,
         ];
-        $service = ServiceSource::fromArray($data);
+        $service = Service::fromArray($data);
         $notService = $this
             ->getMockBuilder(ValueInterface::class)
             ->getMock();
@@ -108,7 +108,7 @@ class ServiceTest extends TestCase
             'Compared value object is not a Service.'
         );
 
-        $serviceNotSame = ServiceSource::fromArray(
+        $serviceNotSame = Service::fromArray(
             [
                 'id' => 10,
                 'label' => 'FizzBazz label',
@@ -121,7 +121,7 @@ class ServiceTest extends TestCase
             'Services do not share the same values.'
         );
 
-        $serviceSame = ServiceSource::fromArray($data);
+        $serviceSame = Service::fromArray($data);
         $this->assertTrue(
             $service->sameValueAs($serviceSame),
             'Services share the same values.'

@@ -72,6 +72,18 @@ class BooleanTest extends TestCase
     }
 
     /**
+     * Test as 'true'/'false' as string.
+     */
+    public function testAsTrueFalse()
+    {
+        $boolean = Boolean::false();
+        $this->assertEquals('false', $boolean->getAsTrueFalse());
+
+        $boolean = Boolean::true();
+        $this->assertEquals('true', $boolean->getAsTrueFalse());
+    }
+
+    /**
      * Test as integer.
      */
     public function testAsInteger()
