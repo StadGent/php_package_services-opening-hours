@@ -7,7 +7,7 @@ use StadGent\Services\OpeningHours\Value\ValueInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class BooleanTest.
+ * Tests the Boolean value object.
  *
  * @package Gent\Zalenzoeker\Tests\Value
  */
