@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHoursTest\Value;
+namespace StadGent\Services\Test\OpeningHours\Value;
 
 use StadGent\Services\OpeningHours\Value\ServiceSource;
 use StadGent\Services\OpeningHours\Value\ValueInterface;
