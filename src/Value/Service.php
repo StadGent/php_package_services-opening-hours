@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
-use phpDocumentor\Reflection\Types\Null_;
-
 /**
  * Object describing a single service.
  *
@@ -90,6 +88,13 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      * - source (string) : The source of the service.
      * - draft (0/1) : Has the service the draft status.
      * - countChannels (int) : The number of channels linked to the service.
+     *
+     * @inheritdoc
+     *
+     * @return \StadGent\Services\OpeningHours\Value\Service
+     *
+     * @throws \InvalidArgumentException
+     *   If the created_at/update_at are empty.
      */
     public static function fromArray(array $data)
     {
@@ -201,7 +206,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Check if the service is in draft modus.
+     * Check if the service is in draft status.
      *
      * @return bool
      */
