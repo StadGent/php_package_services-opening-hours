@@ -46,18 +46,18 @@ class DateAttributesTest extends TestCase
     public function testFromArray()
     {
         $data = [
-            'created_at' => '2123-12-24 12:13:14',
-            'updated_at' => '2123-12-25 13:14:15',
+            'created_at' => '2123-12-24T12:13:14+04:00',
+            'updated_at' => '2123-12-25T13:14:15+04:00',
         ];
         $dateAttributes = DateAttributes::fromArray($data);
 
         $this->assertEquals(
             $data['created_at'],
-            $dateAttributes->getCreatedAt()->format('Y-m-d H:i:s')
+            $dateAttributes->getCreatedAt()->format(DATE_W3C)
         );
         $this->assertEquals(
             $data['updated_at'],
-            $dateAttributes->getUpdatedAt()->format('Y-m-d H:i:s')
+            $dateAttributes->getUpdatedAt()->format(DATE_W3C)
         );
     }
 
@@ -67,8 +67,8 @@ class DateAttributesTest extends TestCase
     public function testSameValueAs()
     {
         $data = [
-            'created_at' => '2123-12-24 12:13:14',
-            'updated_at' => '2123-12-25 13:14:15',
+            'created_at' => '2123-12-24T12:13:14+04:00',
+            'updated_at' => '2123-12-25T13:14:15+04:00',
         ];
         $dateAttributes = DateAttributes::fromArray($data);
         $notDateAttributes = $this
@@ -82,8 +82,8 @@ class DateAttributesTest extends TestCase
 
         $dateAttributesNotSame = DateAttributes::fromArray(
             [
-                'created_at' => '2103-12-24 12:13:14',
-                'updated_at' => '2103-12-25 13:14:15',
+                'created_at' => '2103-12-24T12:13:14+04:00',
+                'updated_at' => '2103-12-25T13:14:15+04:00',
             ]
         );
         $this->assertFalse(
@@ -105,8 +105,8 @@ class DateAttributesTest extends TestCase
     {
         $dateAttributes = DateAttributes::fromArray(
             [
-                'created_at' => '2103-12-24 12:13:14',
-                'updated_at' => '2103-12-25 13:14:15',
+                'created_at' => '2103-12-24T12:13:14+01:00',
+                'updated_at' => '2103-12-25T13:14:15+01:00',
             ]
         );
         $this->assertEquals('2103-12-24T12:13:14+01:00', (string) $dateAttributes);

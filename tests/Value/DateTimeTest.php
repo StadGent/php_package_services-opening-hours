@@ -16,8 +16,8 @@ class DateTimeTest extends TestCase
      */
     public function testConstructor()
     {
-        $string = '2017-03-29T12:18:00+01:00';
-        $dateTime = new DateTime('2017-03-29T12:18:00+01:00');
+        $string = '2017-03-29T12:18:00+03:00';
+        $dateTime = new DateTime($string);
         $this->assertEquals($string, (string) $dateTime);
     }
 
@@ -26,8 +26,8 @@ class DateTimeTest extends TestCase
      */
     public function testSameValueAs()
     {
-        $string = '2017-03-29T12:18:00+01:00';
-        $dateTime = new DateTime('2017-03-29T12:18:00+01:00');
+        $string = '2017-03-29T12:18:00+08:00';
+        $dateTime = new DateTime($string);
         $notDateTime = $this
             ->getMockBuilder(ValueInterface::class)
             ->getMock();
@@ -55,7 +55,7 @@ class DateTimeTest extends TestCase
      */
     public function testToString()
     {
-        $string = '2017-03-29T12:18:00+01:00';
+        $string = '2017-03-29T12:18:00-05:00';
 
         $dateTime = new DateTime($string);
         $this->assertEquals(

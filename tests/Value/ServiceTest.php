@@ -23,8 +23,8 @@ class ServiceTest extends TestCase
     public function testFromEmptyArray()
     {
         $data = [
-            'created_at' => '2134-12-24 12:34:56',
-            'updated_at' => '2134-12-24 12:34:56',
+            'created_at' => '2134-12-24T12:34:56+01:00',
+            'updated_at' => '2134-12-24T12:34:56+01:00',
         ];
         $service = Service::fromArray($data);
 
@@ -57,8 +57,8 @@ class ServiceTest extends TestCase
             'uri' => 'https://foo.bar/item/5',
             'label' => 'FooBar Label',
             'description' => 'Description FooBar',
-            'created_at' => '2345-11-05 12:45:00',
-            'updated_at' => '2345-11-12 14:12:11',
+            'created_at' => '2345-11-05T12:45:00+01:00',
+            'updated_at' => '2345-11-12T14:12:11+01:00',
             'identifier' => '654-987-321',
             'source' => 'foobar',
             'isDraft' => 1,
@@ -91,8 +91,8 @@ class ServiceTest extends TestCase
             'uri' => 'https://foo.bar/item/5',
             'label' => 'FooBar Label',
             'description' => 'Description FooBar',
-            'created_at' => '2345-11-05 12:45:00',
-            'updated_at' => '2345-11-12 14:12:11',
+            'created_at' => '2345-11-05T12:45:00+01:00',
+            'updated_at' => '2345-11-12T14:12:11+01:00',
             'identifier' => '654-987-321',
             'source' => 'foobar',
             'isDraft' => 1,
@@ -112,8 +112,8 @@ class ServiceTest extends TestCase
             [
                 'id' => 10,
                 'label' => 'FizzBazz label',
-                'created_at' => '2345-11-05 12:45:00',
-                'updated_at' => '2345-11-12 14:12:11',
+                'created_at' => '2345-11-05T12:45:00+01:00',
+                'updated_at' => '2345-11-12T14:12:11+01:00',
             ]
         );
         $this->assertFalse(
@@ -135,8 +135,8 @@ class ServiceTest extends TestCase
     {
         $service = Service::fromArray(
             [
-                'created_at' => '2134-12-24 12:34:56',
-                'updated_at' => '2134-12-24 12:34:56',
+                'created_at' => '2134-12-24T12:34:56+01:00',
+                'updated_at' => '2134-12-24T12:34:56+01:00',
             ]
         );
         $this->assertEquals('', (string) $service);
@@ -144,8 +144,8 @@ class ServiceTest extends TestCase
         $service = Service::fromArray(
             [
                 'label' => 'fooBar',
-                'created_at' => '2134-12-24 12:34:56',
-                'updated_at' => '2134-12-24 12:34:56',
+                'created_at' => '2134-12-24T12:34:56+01:00',
+                'updated_at' => '2134-12-24T12:34:56+01:00',
             ]
         );
         $this->assertEquals('fooBar', (string) $service);
