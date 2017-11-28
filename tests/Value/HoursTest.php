@@ -66,12 +66,12 @@ class HoursTest extends TestCase
                 'until' => '18:30',
             ]
         );
-        $notService = $this
+        $notHours = $this
             ->getMockBuilder(ValueInterface::class)
             ->getMock();
-        /* @var $notService ValueInterface */
+        /* @var $notHours ValueInterface */
         $this->assertFalse(
-            $hours->sameValueAs($notService),
+            $hours->sameValueAs($notHours),
             'Compared value object is not of Hours type.'
         );
     }
