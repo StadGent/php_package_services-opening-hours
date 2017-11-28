@@ -2,23 +2,23 @@
 
 namespace StadGent\Services\Test\OpeningHours\Value;
 
-use StadGent\Services\OpeningHours\Value\ServiceCollection;
+use StadGent\Services\OpeningHours\Value\ChannelCollection;
 use StadGent\Services\OpeningHours\Value\ValueInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for the ServiceCollection value object.
+ * Tests for the ChannelCollection value object.
  *
  * @package Gent\Zalenzoeker\Tests\Value
  */
-class ServiceCollectionTest extends TestCase
+class ChannelCollectionTest extends TestCase
 {
     /**
      * Test with empty array.
      */
     public function testFromEmptyArray()
     {
-        $collection = ServiceCollection::fromArray([]);
+        $collection = ChannelCollection::fromArray([]);
         $this->assertEquals(0, $collection->getIterator()->count());
     }
 
@@ -41,7 +41,7 @@ class ServiceCollectionTest extends TestCase
                 'updated_at' => '2023-11-12T13:14:15+05:00',
             ],
         ];
-        $collection = ServiceCollection::fromArray($data);
+        $collection = ChannelCollection::fromArray($data);
         $this->assertEquals(2, $collection->getIterator()->count());
     }
 
@@ -50,7 +50,7 @@ class ServiceCollectionTest extends TestCase
      */
     public function testNotSameValueIfDifferentType()
     {
-        $collection = ServiceCollection::fromArray([]);
+        $collection = ChannelCollection::fromArray([]);
 
         $notCollection = $this
             ->getMockBuilder(ValueInterface::class)
@@ -68,7 +68,7 @@ class ServiceCollectionTest extends TestCase
      */
     public function testNotSameValueIfDifferentCount()
     {
-        $collection = ServiceCollection::fromArray(
+        $collection = ChannelCollection::fromArray(
             [
                 [
                     'id' => 11,
@@ -85,7 +85,7 @@ class ServiceCollectionTest extends TestCase
             ]
         );
 
-        $notSameCollection = ServiceCollection::fromArray(
+        $notSameCollection = ChannelCollection::fromArray(
             [
                 [
                     'id' => 11,
@@ -107,7 +107,7 @@ class ServiceCollectionTest extends TestCase
      */
     public function testNotSameValueIfDifferentKeys()
     {
-        $collection = ServiceCollection::fromArray(
+        $collection = ChannelCollection::fromArray(
             [
                 [
                     'id' => 11,
@@ -124,7 +124,7 @@ class ServiceCollectionTest extends TestCase
             ]
         );
 
-        $notSameCollection = ServiceCollection::fromArray(
+        $notSameCollection = ChannelCollection::fromArray(
             [
                 3 => [
                     'id' => 12,
@@ -168,8 +168,8 @@ class ServiceCollectionTest extends TestCase
             ],
         ];
 
-        $collection = ServiceCollection::fromArray($data);
-        $sameCollection = ServiceCollection::fromArray($data);
+        $collection = ChannelCollection::fromArray($data);
+        $sameCollection = ChannelCollection::fromArray($data);
 
         $this->assertTrue(
             $collection->sameValueAs($sameCollection),
@@ -199,7 +199,7 @@ class ServiceCollectionTest extends TestCase
 
         $expected = 'FooBar, FizzBuzz';
 
-        $collection = ServiceCollection::fromArray($data);
+        $collection = ChannelCollection::fromArray($data);
         $this->assertEquals(
             $expected,
             (string) $collection,
