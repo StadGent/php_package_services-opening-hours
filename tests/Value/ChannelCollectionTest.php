@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for the ChannelCollection value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class ChannelCollectionTest extends TestCase
 {

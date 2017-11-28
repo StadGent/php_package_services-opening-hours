@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for the HoursCollection value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class HoursCollectionTest extends TestCase
 {

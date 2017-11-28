@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests the OpeningHours value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class OpeningHoursTest extends TestCase
 {

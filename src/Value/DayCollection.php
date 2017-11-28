@@ -23,6 +23,9 @@ class DayCollection extends CollectionAbstract implements ValueFromArrayInterfac
      *
      * The array may contain a set of Day array data keyed by the day date.
      *
+     * @param array
+     *   Array of days data.
+     *
      * @returns \StadGent\Services\OpeningHours\Value\DayCollection
      *
      * @throws \InvalidArgumentException

@@ -7,6 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the OpenNowCollection value object.
+ *
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class OpenNowCollectionTest extends TestCase
 {

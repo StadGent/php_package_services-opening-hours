@@ -136,7 +136,7 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\Service */
+        /* @var $object \StadGent\Services\OpeningHours\Value\Channel */
         return $this->getId() === $object->getId()
             && $this->getLabel() === $object->getLabel()
             && $this->getServiceId() === $object->getServiceId()

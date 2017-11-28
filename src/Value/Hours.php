@@ -42,6 +42,11 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      * @inheritdoc
      *
      * @return \StadGent\Services\OpeningHours\Value\Hours
+     *
+     * @throws \InvalidArgumentException
+     *   If the data does not contain a "from" value.
+     * @throws \InvalidArgumentException
+     *   If the data does not contain an "until" value.
      */
     public static function fromArray(array $data)
     {

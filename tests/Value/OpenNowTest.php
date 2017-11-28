@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests the OpeningHours value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class OpenNowTest extends TestCase
 {
@@ -145,7 +145,7 @@ class OpenNowTest extends TestCase
 
         $this->assertFalse(
             $openNow->sameValueAs($notSameOpenNow),
-            'OpenNows do not share the same values.'
+            'OpenNow objects do not share the same values.'
         );
     }
 
@@ -167,7 +167,7 @@ class OpenNowTest extends TestCase
 
         $this->assertTrue(
             $openNow->sameValueAs($sameOpenNow),
-            'OpenNows share the same values.'
+            'OpenNow objects share the same values.'
         );
     }
 

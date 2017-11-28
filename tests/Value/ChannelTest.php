@@ -4,14 +4,13 @@ namespace StadGent\Services\Test\OpeningHours\Value;
 
 use StadGent\Services\OpeningHours\Value\Channel;
 use StadGent\Services\OpeningHours\Value\DateAttributes;
-use StadGent\Services\OpeningHours\Value\Service;
 use StadGent\Services\OpeningHours\Value\ValueInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Service value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class ChannelTest extends TestCase
 {

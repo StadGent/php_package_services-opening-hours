@@ -6,9 +6,9 @@ use StadGent\Services\OpeningHours\Value\OpeningHoursCollection;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for the DaysCollection value object.
+ * Tests for the OpeningHoursCollection value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class OpeningHoursCollectionTest extends TestCase
 {

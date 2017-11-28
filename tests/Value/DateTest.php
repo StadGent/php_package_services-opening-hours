@@ -8,6 +8,8 @@ use StadGent\Services\OpeningHours\Value\ValueInterface;
 
 /**
  * Tests for the Date object.
+ *
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class DateTest extends TestCase
 {

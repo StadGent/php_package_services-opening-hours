@@ -8,6 +8,8 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the DateTime object.
+ *
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class DateTimeTest extends TestCase
 {

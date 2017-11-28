@@ -23,6 +23,9 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      *
      * The array may contain a set of OpeningHours array data.
      *
+     * @param array
+     *   Array of OpeningHours data.
+     *
      * @returns \StadGent\Services\OpeningHours\Value\OpeningHoursCollection
      *
      * @throws \InvalidArgumentException

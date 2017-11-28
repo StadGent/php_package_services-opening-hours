@@ -5,7 +5,7 @@ namespace StadGent\Services\OpeningHours\Value;
 /**
  * Date value object.
  *
- * @package Gent\Zalenzoeker\Value
+ * @package StadGent\Services\OpeningHours\Value
  */
 class Date extends ValueAbstract
 {

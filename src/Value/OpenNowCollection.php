@@ -23,6 +23,9 @@ class OpenNowCollection extends CollectionAbstract implements ValueFromArrayInte
      *
      * The array may contain a set of OpeningHours array data.
      *
+     * @param array
+     *   Array of OpenNow data.
+     *
      * @returns \StadGent\Services\OpeningHours\Value\OpenNowCollection
      *
      * @throws \InvalidArgumentException

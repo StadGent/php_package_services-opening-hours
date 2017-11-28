@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests the Day value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class DayTest extends TestCase
 {

@@ -24,7 +24,9 @@ class HoursCollection extends CollectionAbstract implements ValueFromArrayInterf
      * @returns \StadGent\Services\OpeningHours\Value\HoursCollection
      *
      * @throws \InvalidArgumentException
-     *   If the created_at/update_at are empty.
+     *   If the data does not contain a "channel" value.
+     * @throws \InvalidArgumentException
+     *   If the data does not contain a "channelId" value.
      */
     public static function fromArray(array $data)
     {
