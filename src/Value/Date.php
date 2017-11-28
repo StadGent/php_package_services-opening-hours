@@ -30,7 +30,7 @@ class Date extends ValueAbstract
     }
 
     /**
-     * Get a formatted version of the string.
+     * Get a formatted version of the date.
      *
      * @param string $format
      *   The desired format, default Y-m-d
