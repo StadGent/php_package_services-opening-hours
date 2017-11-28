@@ -7,7 +7,7 @@ use StadGent\Services\OpeningHours\Value\ValueInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for the Date object.
+ * Tests for the DateTime object.
  */
 class DateTimeTest extends TestCase
 {
