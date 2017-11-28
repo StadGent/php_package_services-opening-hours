@@ -54,7 +54,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Is the service a draft item.
      *
-     * @var \StadGent\Services\OpeningHours\Value\Boolean
+     * @var bool
      */
     protected $isDraft;
 
@@ -118,7 +118,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
 
         $service->source = ServiceSource::fromArray($data);
         $service->dateAttributes = DateAttributes::fromArray($data);
-        $service->isDraft = new Boolean(!empty($data['source']));
+        $service->isDraft = !empty($data['source']);
 
         return $service;
     }
@@ -196,23 +196,13 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Is the service in draft status.
-     *
-     * @return \StadGent\Services\OpeningHours\Value\Boolean
-     */
-    public function getDraft()
-    {
-        return $this->isDraft;
-    }
-
-    /**
      * Check if the service is in draft status.
      *
      * @return bool
      */
     public function isDraft()
     {
-        return $this->getDraft()->isTrue();
+        return $this->isDraft;
     }
 
     /**
@@ -245,7 +235,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
             && $this->getDescription() === $object->getDescription()
             && $this->getDateAttributes()->sameValueAs($object->getDateAttributes())
             && $this->getSource()->sameValueAs($object->getSource())
-            && $this->getDraft()->sameValueAs($object->getDraft())
+            && $this->isDraft() === $object->isDraft()
             && $this->getCountChannels() === $object->getCountChannels();
     }
 

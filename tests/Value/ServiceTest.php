@@ -40,10 +40,7 @@ class ServiceTest extends TestCase
         $this->assertTrue($emptySource->sameValueAs($service->getSource()));
         $this->assertFalse($service->hasSource());
 
-        $booleanFalse = Boolean::false();
-        $this->assertTrue($booleanFalse->sameValueAs($service->getDraft()));
         $this->assertFalse($service->isDraft());
-
         $this->assertEquals(0, $service->getCountChannels());
     }
 
@@ -76,8 +73,6 @@ class ServiceTest extends TestCase
         $this->assertTrue($source->sameValueAs($service->getSource()));
         $this->assertTrue($service->hasSource());
 
-        $isDraft = Boolean::true();
-        $this->assertTrue($isDraft->sameValueAs($service->getDraft()));
         $this->assertTrue($service->isDraft());
     }
 
