@@ -68,18 +68,18 @@ class ChannelTest extends TestCase
                 'updated_at' => '2345-11-12T14:12:11+01:00',
             ]
         );
-        $notService = $this
+        $notChannel = $this
             ->getMockBuilder(ValueInterface::class)
             ->getMock();
-        /* @var $notService ValueInterface */
+        /* @var $notChannel ValueInterface */
         $this->assertFalse(
-            $channel->sameValueAs($notService),
-            'Compared value object is not a Service.'
+            $channel->sameValueAs($notChannel),
+            'Compared value object is not a Channel.'
         );
     }
 
     /**
-     * Not the same if not equal amount of items.
+     * Not the same if not the same content.
      */
     public function testNotSameValueIfDifferentContent()
     {
@@ -93,7 +93,7 @@ class ChannelTest extends TestCase
             ]
         );
 
-        $serviceNotSame = Channel::fromArray(
+        $channelNotSame = Channel::fromArray(
             [
                 'id' => 10,
                 'label' => 'FizzBazz label',
@@ -104,8 +104,8 @@ class ChannelTest extends TestCase
         );
 
         $this->assertFalse(
-            $channel->sameValueAs($serviceNotSame),
-            'Services do not share the same values.'
+            $channel->sameValueAs($channelNotSame),
+            'Channels do not share the same values.'
         );
     }
 
@@ -123,11 +123,11 @@ class ChannelTest extends TestCase
         ];
         $channel = Channel::fromArray($data);
 
-        $serviceSame = Channel::fromArray($data);
+        $channelSame = Channel::fromArray($data);
 
         $this->assertTrue(
-            $channel->sameValueAs($serviceSame),
-            'Services share the same values.'
+            $channel->sameValueAs($channelSame),
+            'Channels share the same values.'
         );
     }
 
