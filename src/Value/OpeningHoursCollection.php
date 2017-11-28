@@ -22,6 +22,7 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * Create a Collection of OpeningHours objects from an array of data.
      *
      * The array may contain a set of OpeningHours array data.
+     * @see \StadGent\Services\OpeningHours\Value\OpeningHours.
      *
      * @param array
      *   Array of OpeningHours data.

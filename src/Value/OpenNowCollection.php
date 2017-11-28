@@ -22,6 +22,7 @@ class OpenNowCollection extends CollectionAbstract implements ValueFromArrayInte
      * Create a Collection of OpeningHours objects from an array of data.
      *
      * The array may contain a set of OpeningHours array data.
+     * @see \StadGent\Services\OpeningHours\Value\OpenNow.
      *
      * @param array
      *   Array of OpenNow data.

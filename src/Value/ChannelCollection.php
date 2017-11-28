@@ -19,7 +19,10 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
     }
 
     /**
-     * @inheritdoc
+     * Create a Collection of Channel objects from an array of data.
+     *
+     * The array may contain a set of Channel array data.
+     * @see \StadGent\Services\OpeningHours\Value\Channel.
      *
      * @returns \StadGent\Services\OpeningHours\Value\ChannelCollection
      *

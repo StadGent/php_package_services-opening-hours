@@ -22,6 +22,7 @@ class DayCollection extends CollectionAbstract implements ValueFromArrayInterfac
      * Create a Collection of Day objects from an array of data.
      *
      * The array may contain a set of Day array data keyed by the day date.
+     * @see \StadGent\Services\OpeningHours\Value\Day.
      *
      * @param array
      *   Array of days data.

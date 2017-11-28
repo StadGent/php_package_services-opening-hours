@@ -19,7 +19,10 @@ class HoursCollection extends CollectionAbstract implements ValueFromArrayInterf
     }
 
     /**
-     * @inheritdoc
+     * Create a Collection of Hours objects from an array of data.
+     *
+     * The array may contain a set of Hours array data.
+     * @see \StadGent\Services\OpeningHours\Value\Hours.
      *
      * @returns \StadGent\Services\OpeningHours\Value\HoursCollection
      *
