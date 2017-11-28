@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests for the ServiceCollection value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class ServiceCollectionTest extends TestCase
 {

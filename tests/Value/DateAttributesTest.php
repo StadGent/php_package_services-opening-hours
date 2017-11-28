@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests the DateAttributes value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class DateAttributesTest extends TestCase
 {
@@ -74,7 +74,7 @@ class DateAttributesTest extends TestCase
         $notDateAttributes = $this
             ->getMockBuilder(ValueInterface::class)
             ->getMock();
-        /* @var $notSource ValueInterface */
+        /* @var $notDateAttributes ValueInterface */
         $this->assertFalse(
             $dateAttributes->sameValueAs($notDateAttributes),
             'Compared value object is not a ServiceSource.'

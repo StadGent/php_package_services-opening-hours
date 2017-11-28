@@ -3,11 +3,11 @@
 namespace StadGent\Services\OpeningHours\Value;
 
 /**
- * Object describing a collection of Channels.
+ * Object describing a collection of Days.
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class ChannelCollection extends CollectionAbstract implements ValueFromArrayInterface
+class DayCollection extends CollectionAbstract implements ValueFromArrayInterface
 {
     /**
      * Use only the named constructors.
@@ -19,22 +19,25 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
     }
 
     /**
-     * Create a Collection of Channel objects from an array of data.
+     * Create a Collection of Day objects from an array of data.
      *
-     * The array may contain a set of Channel array data.
-     * @see \StadGent\Services\OpeningHours\Value\Channel.
+     * The array may contain a set of Day array data keyed by the day date.
+     * @see \StadGent\Services\OpeningHours\Value\Day.
      *
-     * @returns \StadGent\Services\OpeningHours\Value\ChannelCollection
+     * @param array
+     *   Array of days data.
+     *
+     * @returns \StadGent\Services\OpeningHours\Value\DayCollection
      *
      * @throws \InvalidArgumentException
-     *   If the created_at/update_at are empty.
+     *   If one of the items does not have a date.
      */
     public static function fromArray(array $data)
     {
         $collection = new static();
 
         foreach ($data as $key => $item) {
-            $collection->values[$key] = Channel::fromArray($item);
+            $collection->values[$key] = Day::fromArray($item);
         }
 
         return $collection;
@@ -42,13 +45,16 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
 
     /**
      * @inheritdoc
+     *
+     * Will return the days separated by ", ":
+     * 2020-02-01, 2020-02-02, 2020-02-03
      */
     public function __toString()
     {
         $labels = [];
         foreach ($this->values as $value) {
-            /* @var $value \StadGent\Services\OpeningHours\Value\Channel */
-            $labels[] = $value->getLabel();
+            /* @var $value \StadGent\Services\OpeningHours\Value\Day */
+            $labels[] = (string) $value;
         }
 
         return (string) implode(', ', $labels);
