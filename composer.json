@@ -30,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "StadGent\\Services\\Tests\\OpeningHours\\": "tests/"
+            "StadGent\\Services\\Test\\OpeningHours\\": "tests/"
         }
     },
     "scripts": {
