@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
-use Prophecy\Exception\InvalidArgumentException;
-
 /**
  * Object describing a single Opening Hours Day.
  *

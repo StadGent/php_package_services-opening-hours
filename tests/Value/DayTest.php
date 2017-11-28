@@ -17,7 +17,7 @@ class DayTest extends TestCase
 {
 
     /**
-     * Test exception when no created_at value in the array.
+     * Test exception when no date value in the array.
      *
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage The array should contain a "date" value.
