@@ -4,7 +4,7 @@ namespace StadGent\Services\Test\OpeningHours\Request\Service;
 
 use StadGent\Services\OpeningHours\Request\AcceptType;
 use StadGent\Services\OpeningHours\Request\MethodType;
-use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
+use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -12,15 +12,14 @@ use PHPUnit\Framework\TestCase;
  *
  * @package StadGent\Services\Test\OpeningHours\Request\Service
  */
-
-class GetAllRequestTest extends TestCase
+class SearchByLabelRequestTest extends TestCase
 {
     /**
      * Test if the method is GET.
      */
     public function testMethodIsGet()
     {
-        $request = new GetAllRequest();
+        $request = new SearchByLabelRequest('FooBar');
         $this->assertEquals(MethodType::GET, $request->getMethod());
     }
 
@@ -29,8 +28,8 @@ class GetAllRequestTest extends TestCase
      */
     public function testEndpoint()
     {
-        $request = new GetAllRequest();
-        $this->assertEquals('services', $request->getRequestTarget());
+        $request = new SearchByLabelRequest('FooBar');
+        $this->assertEquals('services?label=FooBar', $request->getRequestTarget());
     }
 
     /**
@@ -38,7 +37,7 @@ class GetAllRequestTest extends TestCase
      */
     public function testHeaders()
     {
-        $request = new GetAllRequest();
+        $request = new SearchByLabelRequest('FooBar');
         $this->assertEquals(AcceptType::JSON, $request->getHeaderLine('Accept'));
     }
 }
