@@ -3,15 +3,15 @@
 namespace StadGent\Services\Test\OpeningHours\Service\Response\Exception;
 
 use PHPUnit\Framework\TestCase;
+use StadGent\Services\OpeningHours\Response\Exception\ChannelNotFoundException;
 use Psr\Http\Message\ResponseInterface;
-use StadGent\Services\OpeningHours\Response\Exception\NotFoundException;
 
 /**
  * Tests NotFoundException.
  *
  * @package StadGent\Services\Test\OpeningHours\Service\Response\Exception
  */
-class NotFoundExceptionTest extends TestCase
+class ChannelNotFoundExceptionTest extends TestCase
 {
     /**
      * Test the fromResponse method.
@@ -28,11 +28,11 @@ class NotFoundExceptionTest extends TestCase
             ->will($this->returnValue(404));
 
         /* @var $responseMock \Psr\Http\Message\ResponseInterface */
-        $exception = NotFoundException::fromResponse($responseMock);
+        $exception = ChannelNotFoundException::fromResponse($responseMock);
 
         $this->assertEquals(404, $exception->getCode());
         $this->assertEquals(
-            'The requested record was not found.',
+            'The requested Channel was not found.',
             $exception->getMessage()
         );
 

@@ -4,14 +4,14 @@ namespace StadGent\Services\Test\OpeningHours\Service\Response\Exception;
 
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use StadGent\Services\OpeningHours\Response\Exception\NotFoundException;
+use StadGent\Services\OpeningHours\Response\Exception\ServiceNotFoundException;
 
 /**
  * Tests NotFoundException.
  *
  * @package StadGent\Services\Test\OpeningHours\Service\Response\Exception
  */
-class NotFoundExceptionTest extends TestCase
+class ServiceNotFoundExceptionTest extends TestCase
 {
     /**
      * Test the fromResponse method.
@@ -28,11 +28,11 @@ class NotFoundExceptionTest extends TestCase
             ->will($this->returnValue(404));
 
         /* @var $responseMock \Psr\Http\Message\ResponseInterface */
-        $exception = NotFoundException::fromResponse($responseMock);
+        $exception = ServiceNotFoundException::fromResponse($responseMock);
 
         $this->assertEquals(404, $exception->getCode());
         $this->assertEquals(
-            'The requested record was not found.',
+            'The requested Service was not found.',
             $exception->getMessage()
         );
 

@@ -5,11 +5,11 @@ namespace StadGent\Services\OpeningHours\Response\Exception;
 use Psr\Http\Message\ResponseInterface;
 
 /**
- * Generic NotFound Exception.
+ * Channel Not Found Exception.
  *
  * @package StadGent\Services\OpeningHours\Response\Exception
  */
-class NotFoundException extends ExceptionWithResponseAbstract
+class ChannelNotFoundException extends ExceptionWithResponseAbstract
 {
     /**
      * @inheritdoc
@@ -17,7 +17,7 @@ class NotFoundException extends ExceptionWithResponseAbstract
     public static function fromResponse(ResponseInterface $response)
     {
         $exception = new static(
-            'The requested record was not found.',
+            'The requested Channel was not found.',
             $response->getStatusCode()
         );
         $exception->setResponse($response);
