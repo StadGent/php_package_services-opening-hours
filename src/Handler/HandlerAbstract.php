@@ -2,8 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Handler;
 
-use StadGent\Services\OpeningHours\Client\Exception\InvalidResponse;
 use Psr\Http\Message as Psr;
+use StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException;
 
 /**
  * Abstract base Handler.
@@ -20,7 +20,7 @@ abstract class HandlerAbstract implements HandlerInterface
      * @param \StadGent\Services\OpeningHours\Response\Validator\ValidatorInterface[] $validators
      *   Optional array of validators.
      *
-     * @throws \StadGent\Services\OpeningHours\Client\Exception\InvalidResponse
+     * @throws \StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException
      *   When the response is not catched by other specific validators.
      */
     protected function validateResponse(Psr\ResponseInterface $response, array $validators = [])
@@ -38,7 +38,7 @@ abstract class HandlerAbstract implements HandlerInterface
         }
 
         // Default Exception.
-        throw InvalidResponse::fromResponse($response);
+        throw InvalidResponseException::fromResponse($response);
     }
 
     /**

@@ -34,7 +34,7 @@ class HandlerTestBase extends TestCase
           ->method('getStatusCode')
           ->will($this->returnValue($code));
         $mock
-          ->expects($this->atLeastOnce())
+          ->expects($this->any())
           ->method('getBody')
           ->will($this->returnValue($body));
 

@@ -62,13 +62,37 @@ EOT;
     /**
      * Test the Exception when no data is returned.
      *
-     * @expectedException \StadGent\Services\OpeningHours\Client\Exception\InvalidResponse
-     * @expectedExceptionMessage Response with status code 500 was unexpected : "{}".
+     * @expectedException \StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException
+     * @expectedExceptionMessage Response with status code 500 was unexpected.
      */
     public function testExceptionWhenResponseCodeIsNot200()
     {
         $serviceResponse = $this->createResponseMock(500, '{}');
         $handler = new GetByIdHandler();
         $handler->toResponse($serviceResponse);
+    }
+
+    /**
+     * Test the NotFound Exception when response is 404.
+     *
+     * @expectedException \StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException
+     * @expectedExceptionMessage There is no record for the given ID.
+     */
+    public function _testNotFoundExceptionWhenResponseCodeIs404()
+    {
+        $serviceResponse = $this->createResponseMock(404, '{}');
+        $handler = new GetByIdHandler();
+        $handler->toResponse($serviceResponse);
+    }
+
+    /**
+     * Test the NotFound Exception when response is 422.
+     *
+     * @TODO: The 422 is temporary until the wrong return code from the API is
+     *        fixed.
+     */
+    public function _testNotFoundExceptionWhenResponseCodeIs422()
+    {
+
     }
 }

@@ -26,7 +26,7 @@ class GetAllHandler extends HandlerAbstract
     /**
      * @inheritDoc
      *
-     * @throws \StadGent\Services\OpeningHours\Client\Exception\InvalidResponse
+     * @throws \StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException
      * @throws \InvalidArgumentException
      */
     public function toResponse(Psr\ResponseInterface $response)

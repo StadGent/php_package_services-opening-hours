@@ -5,7 +5,6 @@ namespace StadGent\Services\Test\OpeningHours\Handler\Service;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Test the GetAllHandler.
@@ -109,8 +108,8 @@ EOT;
     /**
      * Test the Exception when no data is returned.
      *
-     * @expectedException \StadGent\Services\OpeningHours\Client\Exception\InvalidResponse
-     * @expectedExceptionMessage Response with status code 500 was unexpected : "{}".
+     * @expectedException \StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException
+     * @expectedExceptionMessage Response with status code 500 was unexpected.
      */
     public function testExceptionWhenResponseCodeIsNot200()
     {
