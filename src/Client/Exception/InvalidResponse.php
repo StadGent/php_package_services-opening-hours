@@ -41,9 +41,9 @@ class InvalidResponse extends Exception
 
          return new static(
              sprintf(
-                'Response with status code %s was unexpected : \'%s\'',
-                $response->getStatusCode(),
-                $body
+                 'Response with status code %s was unexpected : "%s".',
+                 $response->getStatusCode(),
+                 $body
              ),
              $data
          );
