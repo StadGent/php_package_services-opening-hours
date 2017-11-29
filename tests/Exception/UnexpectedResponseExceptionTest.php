@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests NoHandlerException;
  *
- * @package Gent\Zalenzoeker\Tests\Client\Handler
+ * @package StadGent\Services\Test\OpeningHours\Exception
  */
 class UnexpectedResponseExceptionTest extends TestCase
 {
