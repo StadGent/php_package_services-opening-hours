@@ -65,9 +65,9 @@ EOT;
         $response = $handler->toResponse($serviceResponse);
 
         $this->assertInstanceOf(
-          ServicesResponse::class,
-          $response,
-          'Response should be a \StadGent\Services\OpeningHours\Response\Service\ServicesResponse object.'
+            ServicesResponse::class,
+            $response,
+            'Response should be a \StadGent\Services\OpeningHours\Response\Service\ServicesResponse object.'
         );
     }
 

@@ -53,9 +53,9 @@ EOT;
         $response = $handler->toResponse($serviceResponse);
 
         $this->assertInstanceOf(
-          ServiceResponse::class,
-          $response,
-          'Response should be a \StadGent\Services\OpeningHours\Response\ServiceResponse object.'
+            ServiceResponse::class,
+            $response,
+            'Response should be a \StadGent\Services\OpeningHours\Response\ServiceResponse object.'
         );
     }
 
@@ -75,10 +75,9 @@ EOT;
     /**
      * Test the NotFound Exception when response is 404.
      *
-     * @expectedException \StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException
-     * @expectedExceptionMessage There is no record for the given ID.
+     * @expectedException \StadGent\Services\OpeningHours\Response\Exception\ServiceNotFoundException
      */
-    public function _testNotFoundExceptionWhenResponseCodeIs404()
+    public function testNotFoundExceptionWhenResponseCodeIs404()
     {
         $serviceResponse = $this->createResponseMock(404, '{}');
         $handler = new GetByIdHandler();
@@ -90,9 +89,13 @@ EOT;
      *
      * @TODO: The 422 is temporary until the wrong return code from the API is
      *        fixed.
+     *
+     * @expectedException \StadGent\Services\OpeningHours\Response\Exception\ServiceNotFoundException
      */
-    public function _testNotFoundExceptionWhenResponseCodeIs422()
+    public function testNotFoundExceptionWhenResponseCodeIs422()
     {
-
+        $serviceResponse = $this->createResponseMock(422, '{}');
+        $handler = new GetByIdHandler();
+        $handler->toResponse($serviceResponse);
     }
 }
