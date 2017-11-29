@@ -112,7 +112,7 @@ trait CacheableTrait
     {
         preg_match('/([^\\\]+)$/', __CLASS__, $matches);
         $className = $matches[0];
-        return sprintf('Zalenzoeker:%s:%s', $className, $key);
+        return sprintf('OpeningHours:%s:%s', $className, $key);
     }
 
     /**
