@@ -6,14 +6,13 @@ use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
 use Psr\Http\Message\ResponseInterface;
-use PHPUnit\Framework\TestCase;
 
 /**
  * Test the GetAllHandler.
  *
  * @package StadGent\Services\Test\OpeningHours\Handler\Service
  */
-class GetAllHandlerTest extends TestCase
+class GetAllHandlerTest extends HandlerTestBase
 {
     /**
      * Test the handles method.
@@ -102,7 +101,7 @@ EOT;
         $this->assertInstanceOf(
             ServicesResponse::class,
             $response,
-            'Response should be a \StadGent\Services\OpeningHours\Response\Service\ServicesResponse object.'
+            'Response should be a \StadGent\Services\OpeningHours\Response\ServicesResponse object.'
         );
     }
 
@@ -118,34 +117,5 @@ EOT;
         $serviceResponse = $this->createResponseMock(500, '{}');
         $handler = new GetAllHandler();
         $handler->toResponse($serviceResponse);
-    }
-
-    /**
-     * Helper to create a response object.
-     *
-     * @param int $code
-     *   The expected response code.
-     * @param string $body
-     *   The expected response body.
-     *
-     * @return \PHPUnit_Framework_MockObject_MockObject|ResponseInterface
-     */
-    protected function createResponseMock($code, $body)
-    {
-        $mock = $this
-          ->getMockBuilder(ResponseInterface::class)
-          ->disableOriginalConstructor()
-          ->getMock();
-
-        $mock
-          ->expects($this->any())
-          ->method('getStatusCode')
-          ->will($this->returnValue($code));
-        $mock
-          ->expects($this->atLeastOnce())
-          ->method('getBody')
-          ->will($this->returnValue($body));
-
-        return $mock;
     }
 }

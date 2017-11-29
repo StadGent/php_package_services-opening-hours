@@ -4,8 +4,6 @@ namespace StadGent\Services\Test\OpeningHours\Handler\Service;
 
 use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
 use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
-use StadGent\Services\OpeningHours\Response\ServicesResponse;
-use Psr\Http\Message\ResponseInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
