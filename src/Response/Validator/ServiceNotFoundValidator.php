@@ -23,5 +23,4 @@ class ServiceNotFoundValidator implements ValidatorInterface
             throw ServiceNotFoundException::fromResponse($response);
         }
     }
-
 }

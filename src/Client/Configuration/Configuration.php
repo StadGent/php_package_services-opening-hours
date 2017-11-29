@@ -33,11 +33,9 @@ class Configuration implements ConfigurationInterface
         $this->endpointUri = $endpointUri;
 
         foreach ($options as $key => $value) {
-            if (!array_key_exists($key, $this->options)) {
-                continue;
+            if (array_key_exists($key, $this->options)) {
+                $this->options[$key] = $value;
             }
-
-            $this->options[$key] = $value;
         }
     }
 
