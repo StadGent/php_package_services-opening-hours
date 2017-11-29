@@ -52,9 +52,9 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
      * The array may contain following data:
      * - id (int) : The Channel ID.
      * - label (string) : The Channel label (name).
-     * - service_id (int) : The Service id the Channel belongs to.
-     * - created_at (string) : The creation date of the Channel.
-     * - updated_at (string) : The last update date of the Channel.
+     * - serviceId (int) : The Service id the Channel belongs to.
+     * - createdAt (string) : The creation date of the Channel.
+     * - updatedAt (string) : The last update date of the Channel.
      *
      * @inheritdoc
      *
@@ -73,8 +73,8 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
         if (!empty($data['label'])) {
             $channel->label = $data['label'];
         }
-        if (!empty($data['service_id'])) {
-            $channel->serviceId = (int) $data['service_id'];
+        if (!empty($data['serviceId'])) {
+            $channel->serviceId = (int) $data['serviceId'];
         }
 
         $channel->dateAttributes = DateAttributes::fromArray($data);

@@ -27,7 +27,7 @@ class ServiceCollection extends CollectionAbstract implements ValueFromArrayInte
      * @returns \StadGent\Services\OpeningHours\Value\ServiceCollection
      *
      * @throws \InvalidArgumentException
-     *   If the created_at/update_at are empty.
+     *   If the createdAt/updateAt are empty.
      */
     public static function fromArray(array $data)
     {

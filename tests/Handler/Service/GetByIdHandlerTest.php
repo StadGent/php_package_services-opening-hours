@@ -39,9 +39,9 @@ class GetByIdHandlerTest extends HandlerTestBase
         "uri": "http://dev.foo/FizzBuzz",
         "label": "Fizz Buzz",
         "description": "Fizz Buzz description",
-        "created_at": "2017-05-18 15:04:49",
-        "updated_at": "2017-11-17 12:01:13",
-        "identifier": "",
+        "createdAt": "2017-05-18 15:04:49",
+        "updatedAt": "2017-11-17 12:01:13",
+        "sourceIdentifier": "",
         "source": null,
         "draft": 0,
         "countChannels": 1

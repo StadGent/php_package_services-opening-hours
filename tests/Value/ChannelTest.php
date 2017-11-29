@@ -21,8 +21,8 @@ class ChannelTest extends TestCase
     public function testFromEmptyArray()
     {
         $data = [
-            'created_at' => '2134-12-24T12:34:56+01:00',
-            'updated_at' => '2134-12-24T12:34:56+01:00',
+            'createdAt' => '2134-12-24T12:34:56+01:00',
+            'updatedAt' => '2134-12-24T12:34:56+01:00',
         ];
         $channel = Channel::fromArray($data);
 
@@ -42,15 +42,15 @@ class ChannelTest extends TestCase
         $data = [
             'id' => 66,
             'label' => 'FooBar Label',
-            'service_id' => 5,
-            'created_at' => '2345-11-05T12:45:00+01:00',
-            'updated_at' => '2345-11-12T14:12:11+01:00',
+            'serviceId' => 5,
+            'createdAt' => '2345-11-05T12:45:00+01:00',
+            'updatedAt' => '2345-11-12T14:12:11+01:00',
         ];
         $channel = Channel::fromArray($data);
 
         $this->assertEquals($data['id'], $channel->getId());
         $this->assertEquals($data['label'], $channel->getLabel());
-        $this->assertEquals($data['service_id'], $channel->getServiceId());
+        $this->assertEquals($data['serviceId'], $channel->getServiceId());
     }
 
     /**
@@ -62,9 +62,9 @@ class ChannelTest extends TestCase
             [
                 'id' => 66,
                 'label' => 'FooBar Label',
-                'service_id' => 5,
-                'created_at' => '2345-11-05T12:45:00+01:00',
-                'updated_at' => '2345-11-12T14:12:11+01:00',
+                'serviceId' => 5,
+                'createdAt' => '2345-11-05T12:45:00+01:00',
+                'updatedAt' => '2345-11-12T14:12:11+01:00',
             ]
         );
         $notChannel = $this
@@ -86,9 +86,9 @@ class ChannelTest extends TestCase
             [
                 'id' => 66,
                 'label' => 'FooBar Label',
-                'service_id' => 5,
-                'created_at' => '2345-11-05T12:45:00+01:00',
-                'updated_at' => '2345-11-12T14:12:11+01:00',
+                'serviceId' => 5,
+                'createdAt' => '2345-11-05T12:45:00+01:00',
+                'updatedAt' => '2345-11-12T14:12:11+01:00',
             ]
         );
 
@@ -96,9 +96,9 @@ class ChannelTest extends TestCase
             [
                 'id' => 10,
                 'label' => 'FizzBazz label',
-                'service_id' => 6,
-                'created_at' => '2345-11-05T12:45:00+01:00',
-                'updated_at' => '2345-11-12T14:12:11+01:00',
+                'serviceId' => 6,
+                'createdAt' => '2345-11-05T12:45:00+01:00',
+                'updatedAt' => '2345-11-12T14:12:11+01:00',
             ]
         );
 
@@ -116,9 +116,9 @@ class ChannelTest extends TestCase
         $data = [
             'id' => 66,
             'label' => 'FooBar Label',
-            'service_id' => 5,
-            'created_at' => '2345-11-05T12:45:00+01:00',
-            'updated_at' => '2345-11-12T14:12:11+01:00',
+            'serviceId' => 5,
+            'createdAt' => '2345-11-05T12:45:00+01:00',
+            'updatedAt' => '2345-11-12T14:12:11+01:00',
         ];
         $channel = Channel::fromArray($data);
 
@@ -137,8 +137,8 @@ class ChannelTest extends TestCase
     {
         $channel = Channel::fromArray(
             [
-                'created_at' => '2134-12-24T12:34:56+01:00',
-                'updated_at' => '2134-12-24T12:34:56+01:00',
+                'createdAt' => '2134-12-24T12:34:56+01:00',
+                'updatedAt' => '2134-12-24T12:34:56+01:00',
             ]
         );
         $this->assertEquals('', (string) $channel);
@@ -146,8 +146,8 @@ class ChannelTest extends TestCase
         $channel = Channel::fromArray(
             [
                 'label' => 'fooBar',
-                'created_at' => '2134-12-24T12:34:56+01:00',
-                'updated_at' => '2134-12-24T12:34:56+01:00',
+                'createdAt' => '2134-12-24T12:34:56+01:00',
+                'updatedAt' => '2134-12-24T12:34:56+01:00',
             ]
         );
         $this->assertEquals('fooBar', (string) $channel);

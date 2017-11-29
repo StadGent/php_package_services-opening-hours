@@ -15,10 +15,10 @@ class DateAttributesTest extends TestCase
 {
 
     /**
-     * Test exception when no created_at value in the array.
+     * Test exception when no createdAt value in the array.
      *
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain a "created_at" value.
+     * @expectedExceptionMessage The array should contain a "createdAt" value.
      */
     public function testExceptionWhenNoCreatedAtInArray()
     {
@@ -27,15 +27,15 @@ class DateAttributesTest extends TestCase
     }
 
     /**
-     * Test exception when no updated_at value in the array.
+     * Test exception when no updatedAt value in the array.
      *
      * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain an "updated_at" value.
+     * @expectedExceptionMessage The array should contain an "updatedAt" value.
      */
     public function testExceptionWhenNoUpdatedAtInArray()
     {
         $data = [
-            'created_at' => '2123-12-24T12:13:14+01:00'
+            'createdAt' => '2123-12-24T12:13:14+01:00'
         ];
         DateAttributes::fromArray($data);
     }
@@ -46,17 +46,17 @@ class DateAttributesTest extends TestCase
     public function testFromArray()
     {
         $data = [
-            'created_at' => '2123-12-24T12:13:14+04:00',
-            'updated_at' => '2123-12-25T13:14:15+04:00',
+            'createdAt' => '2123-12-24T12:13:14+04:00',
+            'updatedAt' => '2123-12-25T13:14:15+04:00',
         ];
         $dateAttributes = DateAttributes::fromArray($data);
 
         $this->assertEquals(
-            $data['created_at'],
+            $data['createdAt'],
             $dateAttributes->getCreatedAt()->format(DATE_W3C)
         );
         $this->assertEquals(
-            $data['updated_at'],
+            $data['updatedAt'],
             $dateAttributes->getUpdatedAt()->format(DATE_W3C)
         );
     }
@@ -67,8 +67,8 @@ class DateAttributesTest extends TestCase
     public function testSameValueAs()
     {
         $data = [
-            'created_at' => '2123-12-24T12:13:14+04:00',
-            'updated_at' => '2123-12-25T13:14:15+04:00',
+            'createdAt' => '2123-12-24T12:13:14+04:00',
+            'updatedAt' => '2123-12-25T13:14:15+04:00',
         ];
         $dateAttributes = DateAttributes::fromArray($data);
         $notDateAttributes = $this
@@ -82,8 +82,8 @@ class DateAttributesTest extends TestCase
 
         $dateAttributesNotSame = DateAttributes::fromArray(
             [
-                'created_at' => '2103-12-24T12:13:14+04:00',
-                'updated_at' => '2103-12-25T13:14:15+04:00',
+                'createdAt' => '2103-12-24T12:13:14+04:00',
+                'updatedAt' => '2103-12-25T13:14:15+04:00',
             ]
         );
         $this->assertFalse(
@@ -105,8 +105,8 @@ class DateAttributesTest extends TestCase
     {
         $dateAttributes = DateAttributes::fromArray(
             [
-                'created_at' => '2103-12-24T12:13:14+01:00',
-                'updated_at' => '2103-12-25T13:14:15+01:00',
+                'createdAt' => '2103-12-24T12:13:14+01:00',
+                'updatedAt' => '2103-12-25T13:14:15+01:00',
             ]
         );
         $this->assertEquals('2103-12-24T12:13:14+01:00', (string) $dateAttributes);

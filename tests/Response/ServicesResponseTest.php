@@ -24,8 +24,8 @@ class ServicesResponseTest extends TestCase
                     'id' => 1,
                     'uri' => 'http://foo.bar/FizzBuzz',
                     'label' => 'FizzBuzz',
-                    'created_at' => '2022-01-01T12:00:00+01:00',
-                    'updated_at' => '2022-01-02T12:00:00+01:00',
+                    'createdAt' => '2022-01-01T12:00:00+01:00',
+                    'updatedAt' => '2022-01-02T12:00:00+01:00',
                 ],
             ]
         );

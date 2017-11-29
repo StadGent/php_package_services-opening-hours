@@ -79,7 +79,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Get the unique identifier for the Channel.
+     * Get the start hour of an open period.
      *
      * @return int
      */
@@ -89,7 +89,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Get the Channel label.
+     * Get the until hour of an open period.
      *
      * @return string
      */
