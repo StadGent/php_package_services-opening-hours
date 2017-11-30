@@ -114,14 +114,4 @@ trait CacheableTrait
         $className = $matches[0];
         return sprintf('OpeningHours:%s:%s', $className, $key);
     }
-
-    /**
-     * Disable use of cache.
-     */
-    public function withoutCache()
-    {
-        $clone = clone $this;
-        $clone->useCache = false;
-        return $clone;
-    }
 }
