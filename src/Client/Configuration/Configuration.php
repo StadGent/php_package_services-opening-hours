@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
      * @var array
      */
     private $options = [
-      'timeout' => 20,
+        'timeout' => 20,
     ];
 
     /**
