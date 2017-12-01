@@ -34,11 +34,9 @@ try {
     example_print(sprintf(' Id       : %d', $service->getId()));
     example_print(sprintf(' Label    : %s', $service->getLabel()));
     example_print(sprintf(' Is Draft : %d', (int) $service->isDraft()));
-}
-catch (\StadGent\Services\OpeningHours\Response\Exception\NotFoundException $e) {
+} catch (\StadGent\Services\OpeningHours\Response\Exception\NotFoundException $e) {
     example_print(sprintf('No Service found for id : %d', $service_id));
-}
-catch (\Exception $e) {
+} catch (\Exception $e) {
     example_print(sprintf('Error : %s', $e->getMessage()));
 }
 

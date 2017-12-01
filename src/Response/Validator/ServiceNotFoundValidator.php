@@ -10,8 +10,6 @@ class ServiceNotFoundValidator implements ValidatorInterface
     /**
      * Throw exception if the status code is 404 or 422.
      *
-     * @TODO: Remove 422 once the API is fixed.
-     *
      * @inheritdoc
      *
      * @throws \StadGent\Services\OpeningHours\Response\Exception\ServiceNotFoundException

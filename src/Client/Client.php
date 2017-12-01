@@ -45,7 +45,7 @@ class Client implements ClientInterface
 
     /**
      * @inheritdoc
-     * 
+     *
      * @throws \StadGent\Services\OpeningHours\Handler\Exception\NoHandlerException
      */
     public function send(RequestInterface $request)
