@@ -76,8 +76,8 @@ class ServiceServiceGetAllTest extends ServiceTestBase
         $cache
             ->expects($this->once())
             ->method('set')
-            ->with($this->equalTo(
-                'OpeningHours:ServiceService:getAll'),
+            ->with(
+                $this->equalTo('OpeningHours:ServiceService:getAll'),
                 $this->equalTo($serviceCollection)
             );
 

@@ -75,8 +75,8 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
         $cache
             ->expects($this->once())
             ->method('set')
-            ->with($this->equalTo(
-                'OpeningHours:ServiceService:getById:10'),
+            ->with(
+                $this->equalTo('OpeningHours:ServiceService:getById:10'),
                 $this->equalTo($service)
             );
 

@@ -46,8 +46,8 @@ abstract class ServiceAbstract implements ServiceInterface
 
         if (!$response instanceof $expectedResponseClassName) {
             throw UnexpectedResponseException::fromClass(
-              get_class($response),
-              $expectedResponseClassName
+                get_class($response),
+                $expectedResponseClassName
             );
         }
 

@@ -6,7 +6,6 @@ use StadGent\Services\OpeningHours\Handler\HandlerInterface;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\ResponseInterface;
 
-
 /**
  * Client Interface.
  *

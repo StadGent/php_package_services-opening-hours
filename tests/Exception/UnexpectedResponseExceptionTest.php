@@ -19,8 +19,8 @@ class UnexpectedResponseExceptionTest extends TestCase
     {
         $exception = UnexpectedResponseException::fromClass('ActualClass', 'ExpectedClass');
         $this->assertEquals(
-          'Got instance of ActualClass expected ExpectedClass response.',
-          $exception->getMessage()
+            'Got instance of ActualClass expected ExpectedClass response.',
+            $exception->getMessage()
         );
     }
 }

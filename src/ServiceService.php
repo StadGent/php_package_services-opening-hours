@@ -67,8 +67,8 @@ class ServiceService extends ServiceAbstract implements CacheableInterface
     {
         /* @var $response \StadGent\Services\OpeningHours\Response\ServicesResponse */
         $response = $this->send(
-          new SearchByLabelRequest($label),
-          ServicesResponse::class
+            new SearchByLabelRequest($label),
+            ServicesResponse::class
         );
 
         return $response->getServices();

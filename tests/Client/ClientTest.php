@@ -31,8 +31,8 @@ class ClientTest extends TestCase
         $client = new Client($guzzle, $config);
         $client->addHandler($handler);
         $this->assertEquals(
-          'Success',
-          $client->send($request)
+            'Success',
+            $client->send($request)
         );
     }
 

@@ -26,7 +26,8 @@ class ServiceServiceFactory
      *
      * @return ServiceService
      */
-    public static function create(ClientInterface $client, CacheInterface $cache = null) {
+    public static function create(ClientInterface $client, CacheInterface $cache = null)
+    {
         $client
             ->addHandler(new GetAllHandler())
             ->addHandler(new GetByIdHandler())
