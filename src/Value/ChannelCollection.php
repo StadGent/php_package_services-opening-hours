@@ -24,6 +24,9 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
      * The array may contain a set of Channel array data.
      * @see \StadGent\Services\OpeningHours\Value\Channel.
      *
+     * @param array $data
+     *   The array to extract the collection from.
+     *
      * @returns \StadGent\Services\OpeningHours\Value\ChannelCollection
      *
      * @throws \InvalidArgumentException

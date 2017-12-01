@@ -46,6 +46,7 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      *   The Date Attributes object.
      *
      * @throws \InvalidArgumentException
+     *   If the array does not contains "createdAt" or "updatedAt" values.
      */
     public static function fromArray(array $data)
     {

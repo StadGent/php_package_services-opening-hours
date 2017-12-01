@@ -24,6 +24,9 @@ class HoursCollection extends CollectionAbstract implements ValueFromArrayInterf
      * The array may contain a set of Hours array data.
      * @see \StadGent\Services\OpeningHours\Value\Hours.
      *
+     * @param array $data
+     *   The array to extract the collection from.
+     *
      * @returns \StadGent\Services\OpeningHours\Value\HoursCollection
      *
      * @throws \InvalidArgumentException

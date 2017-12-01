@@ -13,7 +13,7 @@ use Psr\Http\Message as Psr;
 interface HandlerInterface
 {
     /**
-     * Returns the classname of the request this handler handles.
+     * Returns the class name of the request this handler handles.
      *
      * eg: ServiceGetAll::Class
      *

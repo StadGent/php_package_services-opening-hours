@@ -50,11 +50,8 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
      * @inheritdoc
      *
      * @return \StadGent\Services\OpeningHours\Value\OpeningHours
-     *
      * @throws \InvalidArgumentException
-     *   If the data does not contain a "channel" value.
-     * @throws \InvalidArgumentException
-     *   If the data does not contain a "channelId" value.
+     *   If the data does not contain a "channel" or "channelId" value.
      */
     public static function fromArray(array $data)
     {

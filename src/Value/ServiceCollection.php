@@ -24,6 +24,9 @@ class ServiceCollection extends CollectionAbstract implements ValueFromArrayInte
      * The array may contain a set of Service array data.
      * @see \StadGent\Services\OpeningHours\Value\Service.
      *
+     * @param array $data
+     *   The array to extract the collection from.
+     *
      * @returns \StadGent\Services\OpeningHours\Value\ServiceCollection
      *
      * @throws \InvalidArgumentException
