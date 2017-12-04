@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours\Handler\Service;
+namespace StadGent\Services\Test\OpeningHours\Handler;
 
 use Psr\Http\Message\ResponseInterface;
 use PHPUnit\Framework\TestCase;

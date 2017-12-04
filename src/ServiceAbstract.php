@@ -5,7 +5,6 @@ namespace StadGent\Services\OpeningHours;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Exception\UnexpectedResponseException;
-use StadGent\Services\OpeningHours\Response\ResponseInterface;
 
 /**
  * Class ServiceAbstract.
