@@ -14,7 +14,7 @@ use StadGent\Services\OpeningHours\Request\RequestAbstract;
 class GetByServiceAndChannelIdRequest extends RequestAbstract
 {
     /**
-     * Get all channels for a service by the Service & Channel Id.
+     * Get all channels for a service by the Service & Channel ID.
      *
      * @param int $serviceId
      *   The Service ID to get the channel for.

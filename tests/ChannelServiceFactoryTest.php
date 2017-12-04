@@ -18,6 +18,10 @@ use StadGent\Services\OpeningHours\Value\ChannelCollection;
  */
 class ChannelServiceFactoryTest extends TestCase
 {
+
+    /**
+     * Test creating the ChannelService.
+     */
     public function testCreate()
     {
         // Handlers we expect to be added to the factory.
