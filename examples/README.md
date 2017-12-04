@@ -19,6 +19,8 @@ file.
 * `03-Service-GetById.php` : Get a single Service by its Id.
 * `04-Channel-GetAllByServiceId.php` : Get all channels related to a single 
   service (by the service ID).
+* `05-Channel-GetByServiceAndChannelId.php` : Get a single Channel by the
+  Service ID and the Channel ID.
 
 ## Usage
 
