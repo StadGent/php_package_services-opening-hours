@@ -5,12 +5,8 @@ namespace StadGent\Services\Test\OpeningHours;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\ChannelService;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllByServiceIdRequest;
-use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
-use StadGent\Services\OpeningHours\Response\ServicesResponse;
-use StadGent\Services\OpeningHours\ServiceService;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
-use StadGent\Services\OpeningHours\Value\ServiceCollection;
 
 /**
  * Tests for ServiceService::getAll method.

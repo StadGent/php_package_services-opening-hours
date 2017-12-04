@@ -5,6 +5,8 @@ namespace StadGent\Services\OpeningHours;
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllByServiceIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\GetByServiceAndChannelIdRequest;
+use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
 
 /**
@@ -44,5 +46,43 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         $channels = $response->getChannels();
         $this->cacheSet($cacheKey, $channels);
         return $channels;
+    }
+
+    /**
+     * Get a single Channel by its Service & Channel ID.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     *
+     * @return \StadGent\Services\OpeningHours\Value\Channel
+     *
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
+     */
+    public function getByServiceAndChannelId($serviceId, $channelId)
+    {
+        $cacheKey = $this->createCacheKey(
+            __FUNCTION__ . ':' . $serviceId . ':' . $channelId
+        );
+
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        // Get from service.
+        $response = $this->send(
+            new GetByServiceAndChannelIdRequest($serviceId, $channelId),
+            ChannelResponse::class
+        );
+
+        /* @var $response \StadGent\Services\OpeningHours\Response\ChannelResponse */
+        $channel = $response->getChannel();
+        $this->cacheSet($cacheKey, $channel);
+
+        return $channel;
     }
 }
