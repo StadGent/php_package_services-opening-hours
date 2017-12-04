@@ -49,6 +49,9 @@ function example_print_header($title)
     example_print($title);
     example_print_separator();
     example_print();
+
+    global $timer_start;
+    $timer_start = microtime(true);
 }
 
 /**
@@ -56,7 +59,16 @@ function example_print_header($title)
  */
 function example_print_footer()
 {
+    global $timer_start;
+    $timer_end = microtime(true);
+    $time = round(($timer_end - $timer_start) * 1000);
+
+    $memory = memory_get_peak_usage(true) / (1024 * 1024);
+
     example_print();
+    example_print_separator();
+    example_print(sprintf(' Time   : %sms', $time));
+    example_print(sprintf(' Memory : %dMb', $memory));
     example_print_separator();
     example_print();
 }
