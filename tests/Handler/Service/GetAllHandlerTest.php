@@ -105,17 +105,4 @@ EOT;
         );
     }
 
-
-    /**
-     * Test the Exception when no data is returned.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException
-     * @expectedExceptionMessage Response with status code 500 was unexpected.
-     */
-    public function testExceptionWhenResponseCodeIsNot200()
-    {
-        $serviceResponse = $this->createResponseMock(500, '{}');
-        $handler = new GetAllHandler();
-        $handler->toResponse($serviceResponse);
-    }
 }

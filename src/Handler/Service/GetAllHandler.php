@@ -31,8 +31,6 @@ class GetAllHandler extends HandlerAbstract
      */
     public function toResponse(Psr\ResponseInterface $response)
     {
-        $this->validateResponse($response);
-
         $data = $this->getBodyData($response);
 
         // Check if not single result!
