@@ -9,13 +9,7 @@ use StadGent\Services\OpeningHours\ChannelServiceFactory;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllByServiceIdHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByServiceAndChannelIdHandler;
-use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
-use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
-use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
-use StadGent\Services\OpeningHours\ServiceService;
-use StadGent\Services\OpeningHours\ServiceServiceFactory;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
-use StadGent\Services\OpeningHours\Value\ServiceCollection;
 
 /**
  * Class RoomServiceFactoryTest

@@ -14,7 +14,7 @@ use StadGent\Services\OpeningHours\Response\Validator\ServiceNotFoundValidator;
 class ServiceNotFoundValidatorTest extends TestCase
 {
     /**
-     * The validator throws ServiceNotFoundException when statuscode = 404.
+     * The validator throws ServiceNotFoundException when status code = 404.
      *
      * @expectedException \StadGent\Services\OpeningHours\Response\Exception\ServiceNotFoundException
      */
@@ -35,7 +35,7 @@ class ServiceNotFoundValidatorTest extends TestCase
     }
 
     /**
-     * The validator throws ServiceNotFoundException when statuscode = 422.
+     * The validator throws ServiceNotFoundException when status code = 422.
      *
      * @expectedException \StadGent\Services\OpeningHours\Response\Exception\ServiceNotFoundException
      *

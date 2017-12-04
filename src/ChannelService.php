@@ -21,7 +21,11 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
     /**
      * Get all Channels for the given Service Id.
      *
+     * @param int $serviceId
+     *   The ID of the Service to get all Channels for.
+     *
      * @return \StadGent\Services\OpeningHours\Value\ChannelCollection
+     *   The Channels linked to the Service.
      *
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
