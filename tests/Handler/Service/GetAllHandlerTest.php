@@ -71,38 +71,4 @@ EOT;
             'Response should be a \StadGent\Services\OpeningHours\Response\Service\ServicesResponse object.'
         );
     }
-
-    /**
-     * Test the toResponse method if the response contains a single Service.
-     *
-     * @TODO: remove this test once the API is fixed.
-     */
-    public function testToResponseWithSingleServiceInData()
-    {
-        $body = <<<EOT
-{
-    "id": 1,
-    "uri": "http://dev.foo/FizzBuzz",
-    "label": "Fizz Buzz",
-    "description": "Fizz Buzz description",
-    "createdAt": "2017-05-18 15:04:49",
-    "updatedAt": "2017-11-17 12:01:13",
-    "sourceIdentifier": "",
-    "source": null,
-    "draft": 0,
-    "countChannels": 1
-}
-EOT;
-        $serviceResponse = $this->createResponseMock(200, $body);
-
-        $handler = new GetAllHandler();
-        $response = $handler->toResponse($serviceResponse);
-
-        $this->assertInstanceOf(
-            ServicesResponse::class,
-            $response,
-            'Response should be a \StadGent\Services\OpeningHours\Response\ServicesResponse object.'
-        );
-    }
-
 }
