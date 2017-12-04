@@ -15,7 +15,7 @@ use StadGent\Services\OpeningHours\Response\ResponseInterface;
 abstract class ServiceAbstract implements ServiceInterface
 {
     /**
-     * @var ClientInterface
+     * @var \StadGent\Services\OpeningHours\Client\ClientInterface
      */
     protected $client;
 
@@ -30,14 +30,14 @@ abstract class ServiceAbstract implements ServiceInterface
     /**
      * Send the request using the client and validate the response object.
      *
-     * @param RequestInterface $request
+     * @param \StadGent\Services\OpeningHours\Request\RequestInterface $request
      *   The request object to send trough the client.
      * @param string $expectedResponseClassName
      *   The expected response class.
      *
-     * @return ResponseInterface
+     * @return \StadGent\Services\OpeningHours\Response\ResponseInterface
      *
-     * @throws UnexpectedResponseException
+     * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
     protected function send(RequestInterface $request, $expectedResponseClassName)
     {

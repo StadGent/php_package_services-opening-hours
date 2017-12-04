@@ -23,6 +23,7 @@ interface ConfigurationInterface
      * Get the endpoint URI.
      *
      * @return string
+     *   The endpoint URI.
      */
     public function getUri();
 

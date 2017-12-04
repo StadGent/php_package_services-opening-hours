@@ -58,9 +58,9 @@ class Client implements ClientInterface
     /**
      * Returns the correct handler for the given Request object.
      *
-     * @param RequestInterface $request
+     * @param \StadGent\Services\OpeningHours\Request\RequestInterface $request
      *   The request to get the handler for.
-     * @return HandlerInterface
+     * @return \StadGent\Services\OpeningHours\Handler\HandlerInterface
      *   The supporting handler.
      *
      * @throws \StadGent\Services\OpeningHours\Handler\Exception\NoHandlerException

@@ -7,7 +7,7 @@ use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
 
 /**
- * Request to get all Services
+ * Request to get all Services.
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */

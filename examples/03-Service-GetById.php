@@ -18,7 +18,7 @@ example_print_step('Create the API client configuration.');
 $configuration = new \StadGent\Services\OpeningHours\Client\Configuration\Configuration($apiEndpoint);
 
 example_print_step('Create the Guzzle client.');
-$guzzleClient = new GuzzleHttp\Client(['base_uri' => $configuration->getUri()]);
+$guzzleClient = new \GuzzleHttp\Client(['base_uri' => $configuration->getUri()]);
 
 example_print_step('Create the HTTP client.');
 $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);

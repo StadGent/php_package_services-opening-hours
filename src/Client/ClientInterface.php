@@ -21,7 +21,7 @@ interface ClientInterface
      * @param RequestInterface $request
      *   The request parameters.
      *
-     * @return ResponseInterface
+     * @return \StadGent\Services\OpeningHours\Response\ResponseInterface
      *   The response of the service call.
      */
     public function send(RequestInterface $request);
@@ -29,8 +29,11 @@ interface ClientInterface
     /**
      * Adds a Handler to the Client.
      *
-     * @param HandlerInterface $handler
-     * @return ClientInterface
+     * @param \StadGent\Services\OpeningHours\Handler\HandlerInterface $handler
+     *   The handler to add to the Client.
+     *
+     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     *   The client.
      */
     public function addHandler(HandlerInterface $handler);
 }

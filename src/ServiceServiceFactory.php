@@ -21,10 +21,10 @@ class ServiceServiceFactory
      * Will add the package handlers and inject the client and optional cache
      * into the ServiceService.
      *
-     * @param ClientInterface $client
-     * @param CacheInterface $cache
+     * @param \StadGent\Services\OpeningHours\Client\ClientInterface $client
+     * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return ServiceService
+     * @return \StadGent\Services\OpeningHours\ServiceService
      */
     public static function create(ClientInterface $client, CacheInterface $cache = null)
     {

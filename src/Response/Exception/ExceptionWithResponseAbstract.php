@@ -22,6 +22,7 @@ abstract class ExceptionWithResponseAbstract extends \Exception implements Excep
      * Set the response object.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
+     *   The response object.
      */
     protected function setResponse(ResponseInterface $response)
     {

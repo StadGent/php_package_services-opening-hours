@@ -16,7 +16,7 @@ trait CacheableTrait
     /**
      * The cache service.
      *
-     * @var CacheInterface
+     * @var \Psr\SimpleCache\CacheInterface
      */
     protected $cache;
 
@@ -28,9 +28,10 @@ trait CacheableTrait
     protected $useCache = true;
 
     /**
-     * Get useCache state.
+     * Get the state of the cache.
      *
      * @return bool
+     *   Is caching active or not.
      */
     public function useCache()
     {
@@ -40,7 +41,8 @@ trait CacheableTrait
     /**
      * Set the cache service.
      *
-     * @param CacheInterface $cache
+     * @param \Psr\SimpleCache\CacheInterface $cache
+     *   The cache to set.
      */
     public function setCacheService(CacheInterface $cache)
     {

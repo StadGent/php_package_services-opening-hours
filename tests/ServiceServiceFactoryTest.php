@@ -19,6 +19,10 @@ use StadGent\Services\OpeningHours\Value\ServiceCollection;
  */
 class ServiceServiceFactoryTest extends TestCase
 {
+
+    /**
+     * Test the create factory method.
+     */
     public function testCreate()
     {
         // Handlers we expect to be added to the factory.

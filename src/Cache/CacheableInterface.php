@@ -14,7 +14,7 @@ interface CacheableInterface
     /**
     * Set the cache service.
     *
-    * @param CacheInterface $cache
+    * @param \Psr\SimpleCache\CacheInterface $cache
     */
     public function setCacheService(CacheInterface $cache);
 }
