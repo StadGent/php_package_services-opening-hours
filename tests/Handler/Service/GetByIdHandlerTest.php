@@ -7,6 +7,7 @@ use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use Psr\Http\Message\ResponseInterface;
+use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
 /**
  * Test the GetByIdHandler.

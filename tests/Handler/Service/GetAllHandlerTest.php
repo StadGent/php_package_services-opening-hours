@@ -5,6 +5,7 @@ namespace StadGent\Services\Test\OpeningHours\Handler\Service;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
+use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
 /**
  * Test the GetAllHandler.
