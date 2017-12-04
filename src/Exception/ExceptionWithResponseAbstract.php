@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\OpeningHours\Response\Exception;
+namespace StadGent\Services\OpeningHours\Exception;
 
 use \Psr\Http\Message\ResponseInterface;
 
@@ -19,10 +19,7 @@ abstract class ExceptionWithResponseAbstract extends \Exception implements Excep
     private $response;
 
     /**
-     * Set the response object.
-     *
-     * @param \Psr\Http\Message\ResponseInterface $response
-     *   The response object.
+     * @inheritdoc
      */
     protected function setResponse(ResponseInterface $response)
     {

@@ -1,8 +1,8 @@
 <?php
 
-namespace StadGent\Services\OpeningHours\Response\Exception;
+namespace StadGent\Services\OpeningHours\Exception;
 
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Channel Not Found Exception.
@@ -14,13 +14,14 @@ class ChannelNotFoundException extends ExceptionWithResponseAbstract
     /**
      * @inheritdoc
      */
-    public static function fromResponse(ResponseInterface $response)
+    public static function fromException(RequestException $e)
     {
         $exception = new static(
             'The requested Channel was not found.',
-            $response->getStatusCode()
+            404,
+            $e
         );
-        $exception->setResponse($response);
+        $exception->setResponse($e->getResponse());
         return $exception;
     }
 }

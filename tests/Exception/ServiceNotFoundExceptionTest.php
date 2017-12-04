@@ -1,34 +1,40 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours\Service\Response\Exception;
+namespace StadGent\Services\Test\OpeningHours\Exception;
 
+use GuzzleHttp\Exception\RequestException;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
-use StadGent\Services\OpeningHours\Response\Exception\ServiceNotFoundException;
+use StadGent\Services\OpeningHours\Exception\ServiceNotFoundException;
 
 /**
- * Tests NotFoundException.
+ * Tests ServiceNotFoundException.
  *
  * @package StadGent\Services\Test\OpeningHours\Service\Response\Exception
  */
 class ServiceNotFoundExceptionTest extends TestCase
 {
     /**
-     * Test the fromResponse method.
+     * Test the testFromException() method.
      */
-    public function testFromResponse()
+    public function testFromException()
     {
         $responseMock = $this
             ->getMockBuilder(ResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $responseMock
-            ->expects($this->once())
-            ->method('getStatusCode')
-            ->will($this->returnValue(404));
 
-        /* @var $responseMock \Psr\Http\Message\ResponseInterface */
-        $exception = ServiceNotFoundException::fromResponse($responseMock);
+        $exceptionMock = $this
+            ->getMockBuilder(RequestException::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $exceptionMock
+            ->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($responseMock));
+
+        /* @var $exceptionMock RequestException */
+        $exception = ServiceNotFoundException::fromException($exceptionMock);
 
         $this->assertEquals(404, $exception->getCode());
         $this->assertEquals(
