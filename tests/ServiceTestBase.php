@@ -2,8 +2,12 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
+use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\ResponseInterface;
 
 /**
@@ -55,5 +59,74 @@ class ServiceTestBase extends TestCase
           ->getMockBuilder(ResponseInterface::class)
           ->disableOriginalConstructor()
           ->getMock();
+    }
+
+    /**
+     * Helper to create a mock that will return a given exception.
+     *
+     * @param \Exception $exception
+     *   The exception to be returned by the client.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     */
+    protected function getClientWithExceptionMock(\Exception $exception)
+    {
+        $client = $this
+            ->getMockBuilder(ClientInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $client
+            ->expects($this->once())
+            ->method('send')
+            ->will($this->throwException($exception));
+
+        return $client;
+    }
+
+    /**
+     * Create an exception mock with response object.
+     *
+     * @param int $code
+     *   The error code.
+     * @param string $responseBody
+     *   The response content.
+     *
+     * @return \GuzzleHttp\Exception\RequestException
+     */
+    protected function getExceptionMock($code, $responseBody)
+    {
+        $streamMock = $this
+            ->getMockBuilder(Stream::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $streamMock
+            ->expects($this->once())
+            ->method('getContents')
+            ->will($this->returnValue($responseBody));
+
+        $requestMock = $this
+            ->getMockBuilder(RequestInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $responseMock = $this
+            ->getMockBuilder(Response::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $responseMock
+            ->expects($this->once())
+            ->method('getStatusCode')
+            ->will($this->returnValue($code));
+        $responseMock
+            ->expects($this->once())
+            ->method('getBody')
+            ->will($this->returnValue($streamMock));
+
+        return new RequestException(
+            'FooBar',
+            $requestMock,
+            $responseMock
+        );
     }
 }

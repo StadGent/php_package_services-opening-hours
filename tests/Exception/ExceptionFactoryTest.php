@@ -22,16 +22,22 @@ class ExceptionFactoryTest extends TestCase
 {
     /**
      * Test the fromException() method with a non RequestException.
+     *
+     * @expectedException \Exception
+     * @expectedExceptionMessage Test me now.
      */
     public function testFromNonRequestException()
     {
         $e = new \Exception('Test me now.');
-        $exception = ExceptionFactory::fromException($e);
-        $this->assertSame($e, $exception);
+        ExceptionFactory::fromException($e);
     }
 
     /**
      * Test if the exception is returned if no special one.
+     *
+     * @expectedException \GuzzleHttp\Exception\RequestException
+     * @expectedExceptionCode 9999
+     * @expectedExceptionMessage FooBar
      */
     public function testFromFallbackResponseException()
     {
@@ -55,22 +61,26 @@ class ExceptionFactoryTest extends TestCase
             $responseMock
         );
 
-        $exception = ExceptionFactory::fromException($exceptionMock);
-        $this->assertSame($exceptionMock, $exception);
+        ExceptionFactory::fromException($exceptionMock);
     }
 
     /**
      * Test the NotFoundException when the response body has no error target.
+     *
+     * @expectedException \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @expectedExceptionCode 404
      */
     public function testFromServiceResponseWithoutTargetException()
     {
         $exceptionMock = $this->createExceptionMock(404, '{}');
-        $exception = ExceptionFactory::fromException($exceptionMock);
-        $this->assertInstanceOf(NotFoundException::class, $exception);
+        ExceptionFactory::fromException($exceptionMock);
     }
 
     /**
      * Test the fromException() method with a 404 RequestException (Service).
+     *
+     * We don't check the exception using annotations as we want to validate
+     * getting the response object within.
      */
     public function testFromServiceResponse404Exception()
     {
@@ -78,7 +88,11 @@ class ExceptionFactoryTest extends TestCase
             404,
             $this->getServiceNotFoundBody()
         );
-        $exception = ExceptionFactory::fromException($exceptionMock);
+
+        try {
+            ExceptionFactory::fromException($exceptionMock);
+        } catch (\Exception $exception) {}
+
         $this->assertInstanceOf(ServiceNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
         $this->assertSame($exceptionMock->getResponse(), $exception->getResponse());
@@ -86,6 +100,9 @@ class ExceptionFactoryTest extends TestCase
 
     /**
      * Test the fromException() method with a 422 RequestException (Service).
+     *
+     * We don't check the exception using annotations as we want to validate
+     * getting the response object within.
      */
     public function testFromServiceResponse422Exception()
     {
@@ -93,7 +110,11 @@ class ExceptionFactoryTest extends TestCase
             422,
             $this->getServiceNotFoundBody()
         );
-        $exception = ExceptionFactory::fromException($exceptionMock);
+
+        try {
+            ExceptionFactory::fromException($exceptionMock);
+        } catch (\Exception $exception) {}
+
         $this->assertInstanceOf(ServiceNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
         $this->assertSame($exceptionMock->getResponse(), $exception->getResponse());
@@ -101,6 +122,9 @@ class ExceptionFactoryTest extends TestCase
 
     /**
      * Test the fromException() method with a 404 RequestException (Channel).
+     *
+     * We don't check the exception using annotations as we want to validate
+     * getting the response object within.
      */
     public function testFromChannelResponse404Exception()
     {
@@ -108,7 +132,11 @@ class ExceptionFactoryTest extends TestCase
             404,
             $this->getChannelNotFoundBody()
         );
-        $exception = ExceptionFactory::fromException($exceptionMock);
+
+        try {
+            ExceptionFactory::fromException($exceptionMock);
+        } catch (\Exception $exception) {}
+
         $this->assertInstanceOf(ChannelNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
         $this->assertSame($exceptionMock->getResponse(), $exception->getResponse());
@@ -116,6 +144,9 @@ class ExceptionFactoryTest extends TestCase
 
     /**
      * Test the fromException() method with a 422 RequestException (Channel).
+     *
+     * We don't check the exception using annotations as we want to validate
+     * getting the response object within.
      */
     public function testFromChannelResponse422Exception()
     {
@@ -123,7 +154,11 @@ class ExceptionFactoryTest extends TestCase
             422,
             $this->getChannelNotFoundBody()
         );
-        $exception = ExceptionFactory::fromException($exceptionMock);
+
+        try {
+            ExceptionFactory::fromException($exceptionMock);
+        } catch (\Exception $exception) {}
+
         $this->assertInstanceOf(ChannelNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
         $this->assertSame($exceptionMock->getResponse(), $exception->getResponse());
@@ -131,6 +166,9 @@ class ExceptionFactoryTest extends TestCase
 
     /**
      * Test the fromException() method with a 422 RequestException (Other).
+     *
+     * We don't check the exception using annotations as we want to validate
+     * getting the response object within.
      */
     public function testFromOtherResponse422Exception()
     {
@@ -138,7 +176,11 @@ class ExceptionFactoryTest extends TestCase
             404,
             $this->getItemNotFoundBody()
         );
-        $exception = ExceptionFactory::fromException($exceptionMock);
+
+        try {
+            ExceptionFactory::fromException($exceptionMock);
+        } catch (\Exception $exception) {}
+
         $this->assertInstanceOf(NotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
         $this->assertSame($exceptionMock->getResponse(), $exception->getResponse());

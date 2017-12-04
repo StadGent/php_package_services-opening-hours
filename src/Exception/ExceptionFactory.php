@@ -16,20 +16,24 @@ class ExceptionFactory
      *
      * This allows us to wrap API exceptions to our own.
      *
-     * @return \Exception
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      */
     public static function fromException(\Exception $e)
     {
         if (!($e instanceof RequestException)) {
-            return $e;
+            throw $e;
         }
 
         $factory = new static();
         if ($factory->isNotFound($e)) {
-            return $factory->createNotFound($e);
+            $factory->throwNotFound($e);
         }
 
-        return $e;
+        throw $e;
     }
 
     /**
@@ -48,30 +52,31 @@ class ExceptionFactory
     }
 
     /**
-     * Create a not found Exception.
+     * Throw a not found Exception based on the error message in the body.
      *
      * @param \GuzzleHttp\Exception\RequestException $e
      *   The Exception to create the NotFound from.
      *
-     * @return \StadGent\Services\OpeningHours\Exception\ExceptionWithResponseInterface
-     *   The proper NotFoundException.
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      */
-    protected function createNotFound(RequestException $e)
+    protected function throwNotFound(RequestException $e)
     {
         $body = json_decode($e->getResponse()->getBody()->getContents());
 
         if (!isset($body->error->target)) {
-            return NotFoundException::fromException($e);
+            throw NotFoundException::fromException($e);
         }
 
         if ($body->error->target === 'Service') {
-            return ServiceNotFoundException::fromException($e);
+            throw ServiceNotFoundException::fromException($e);
         }
 
         if ($body->error->target === 'Channel') {
-            return ChannelNotFoundException::fromException($e);
+            throw ChannelNotFoundException::fromException($e);
         }
 
-        return NotFoundException::fromException($e);
+        throw NotFoundException::fromException($e);
     }
 }

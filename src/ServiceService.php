@@ -4,6 +4,7 @@ namespace StadGent\Services\OpeningHours;
 
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
+use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
@@ -83,8 +84,11 @@ class ServiceService extends ServiceAbstract implements CacheableInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\Service
      *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function getById($serviceId)
     {
@@ -96,11 +100,15 @@ class ServiceService extends ServiceAbstract implements CacheableInterface
             return $cached;
         }
 
-        // Get from service.
-        $response = $this->send(
-            new GetByIdRequest($serviceId),
-            ServiceResponse::class
-        );
+        try {
+            // Get from service.
+            $response = $this->send(
+                new GetByIdRequest($serviceId),
+                ServiceResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
 
         /* @var $response \StadGent\Services\OpeningHours\Response\ServiceResponse */
         $service = $response->getService();
