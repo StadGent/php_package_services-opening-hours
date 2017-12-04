@@ -4,7 +4,7 @@ namespace StadGent\Services\Test\OpeningHours;
 
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\ChannelService;
-use StadGent\Services\OpeningHours\Request\Channel\GetByServiceAndChannelIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Value\Channel;
 
@@ -13,7 +13,7 @@ use StadGent\Services\OpeningHours\Value\Channel;
  *
  * @package StadGent\Services\Test\OpeningHours
  */
-class ChannelServiceGetByServiceAndChannelIdTest extends ServiceTestBase
+class ChannelServiceGetByIdTest extends ServiceTestBase
 {
     /**
      * Test the getByServiceAndChannelId return object.
@@ -24,7 +24,7 @@ class ChannelServiceGetByServiceAndChannelIdTest extends ServiceTestBase
         $client = $this->createClientForChannel($channel);
 
         $channelService = new ChannelService($client);
-        $responseChannel = $channelService->getByServiceAndChannelId(10, 20);
+        $responseChannel = $channelService->getById(10, 20);
         $this->assertSame($channel, $responseChannel);
     }
 
@@ -44,12 +44,12 @@ class ChannelServiceGetByServiceAndChannelIdTest extends ServiceTestBase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getByServiceAndChannelId:10:20'))
+            ->with($this->equalTo('OpeningHours:ChannelService:getById:10:20'))
             ->will($this->returnValue($channel));
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
-        $responseService = $channelService->getByServiceAndChannelId(10, 20);
+        $responseService = $channelService->getById(10, 20);
         $this->assertSame($channel, $responseService);
     }
 
@@ -69,20 +69,20 @@ class ChannelServiceGetByServiceAndChannelIdTest extends ServiceTestBase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getByServiceAndChannelId:12:34'))
+            ->with($this->equalTo('OpeningHours:ChannelService:getById:12:34'))
             ->will($this->returnValue(null));
 
         $cache
             ->expects($this->once())
             ->method('set')
             ->with(
-                $this->equalTo('OpeningHours:ChannelService:getByServiceAndChannelId:12:34'),
+                $this->equalTo('OpeningHours:ChannelService:getById:12:34'),
                 $this->equalTo($channel)
             );
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
-        $channelService->getByServiceAndChannelId(12, 34);
+        $channelService->getById(12, 34);
     }
 
     /**
@@ -113,7 +113,7 @@ class ChannelServiceGetByServiceAndChannelIdTest extends ServiceTestBase
     protected function createClientForChannel(Channel $channel)
     {
         $response = new ChannelResponse($channel);
-        $expectedRequest = GetByServiceAndChannelIdRequest::class;
+        $expectedRequest = GetByIdRequest::class;
         return $this->getClientMock($response, $expectedRequest);
     }
 }

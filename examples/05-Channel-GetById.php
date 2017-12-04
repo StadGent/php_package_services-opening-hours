@@ -30,7 +30,7 @@ example_print_step('Get the Channel by the Services & Channel ID');
 example_print();
 
 try {
-    $channel = $channelService->getByServiceAndChannelId($service_id, $channel_id);
+    $channel = $channelService->getById($service_id, $channel_id);
     example_print(sprintf(' Id         : %d', $channel->getId()));
     example_print(sprintf(' Label      : %s', $channel->getLabel()));
     example_print(sprintf(' Service ID : %d', $channel->getServiceId()));

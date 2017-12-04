@@ -11,23 +11,17 @@ use StadGent\Services\OpeningHours\Request\RequestAbstract;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class GetByServiceAndChannelIdRequest extends RequestAbstract
+class GetAllRequest extends RequestAbstract
 {
     /**
-     * Get all channels for a service by the Service & Channel ID.
+     * Get all channels for a service by the Service Id.
      *
      * @param int $serviceId
-     *   The Service ID to get the channel for.
-     * @param int $channelId
-     *   The Channel ID to get.
+     *   The Service ID to get all channels for.
      */
-    public function __construct($serviceId, $channelId)
+    public function __construct($serviceId)
     {
-        $uri = sprintf(
-            'services/%d/channels/%d',
-            (int) $serviceId,
-            (int) $channelId
-        );
+        $uri = sprintf('services/%d/channels', (int) $serviceId);
 
         parent::__construct(
             MethodType::GET,

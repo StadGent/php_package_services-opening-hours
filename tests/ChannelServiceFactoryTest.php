@@ -7,8 +7,8 @@ use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\ChannelService;
 use StadGent\Services\OpeningHours\ChannelServiceFactory;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
-use StadGent\Services\OpeningHours\Handler\Channel\GetAllByServiceIdHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\GetByServiceAndChannelIdHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
 
 /**
@@ -26,8 +26,8 @@ class ChannelServiceFactoryTest extends TestCase
     {
         // Handlers we expect to be added to the factory.
         $expectedHandlers = [
-            GetAllByServiceIdHandler::class,
-            GetByServiceAndChannelIdHandler::class,
+            GetAllHandler::class,
+            GetByIdHandler::class,
         ];
 
         // Create the client so we can spy on the factory method.
@@ -95,13 +95,13 @@ class ChannelServiceFactoryTest extends TestCase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getAllByServiceId:6'))
+            ->with($this->equalTo('OpeningHours:ChannelService:getAll:6'))
             ->will($this->returnValue($collection));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
         $service = ChannelServiceFactory::create($client, $cache);
 
-        $responseCollection = $service->getAllByServiceId(6);
+        $responseCollection = $service->getAll(6);
         $this->assertSame($collection, $responseCollection);
     }
 }

@@ -1,25 +1,26 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours\Request\Service;
+namespace StadGent\Services\Test\OpeningHours\Request\Channel;
 
 use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\Channel\GetByServiceAndChannelIdRequest;
 use StadGent\Services\OpeningHours\Request\MethodType;
+use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Test the GetByIdRequest object.
+ * Test the GetAllRequest object.
  *
- * @package StadGent\Services\Test\OpeningHours\Request\Service
+ * @package StadGent\Services\Test\OpeningHours\Request\Channel
  */
-class GetByServiceAndChannelIdRequestTest extends TestCase
+
+class GetAllRequestTest extends TestCase
 {
     /**
      * Test if the method is GET.
      */
     public function testMethodIsGet()
     {
-        $request = new GetByServiceAndChannelIdRequest(1, 123);
+        $request = new GetAllRequest(123);
         $this->assertEquals(MethodType::GET, $request->getMethod());
     }
 
@@ -28,8 +29,8 @@ class GetByServiceAndChannelIdRequestTest extends TestCase
      */
     public function testEndpoint()
     {
-        $request = new GetByServiceAndChannelIdRequest(1, 123);
-        $this->assertEquals('services/1/channels/123', $request->getRequestTarget());
+        $request = new GetAllRequest(123);
+        $this->assertEquals('services/123/channels', $request->getRequestTarget());
     }
 
     /**
@@ -37,7 +38,7 @@ class GetByServiceAndChannelIdRequestTest extends TestCase
      */
     public function testHeaders()
     {
-        $request = new GetByServiceAndChannelIdRequest(1, 123);
+        $request = new GetAllRequest(123);
         $this->assertEquals(AcceptType::JSON, $request->getHeaderLine('Accept'));
     }
 }

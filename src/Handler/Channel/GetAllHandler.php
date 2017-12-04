@@ -3,7 +3,7 @@
 namespace StadGent\Services\OpeningHours\Handler\Channel;
 
 use StadGent\Services\OpeningHours\Handler\HandlerAbstract;
-use StadGent\Services\OpeningHours\Request\Channel\GetAllByServiceIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
 use Psr\Http\Message as Psr;
@@ -13,14 +13,14 @@ use Psr\Http\Message as Psr;
  *
  * @package StadGent\Services\OpeningHours\Handler\Channel
  */
-class GetAllByServiceIdHandler extends HandlerAbstract
+class GetAllHandler extends HandlerAbstract
 {
     /**
      * @inheritDoc
      */
     public function handles()
     {
-        return GetAllByServiceIdRequest::class;
+        return GetAllRequest::class;
     }
 
     /**

@@ -4,8 +4,8 @@ namespace StadGent\Services\OpeningHours;
 
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\Handler\Channel\GetAllByServiceIdHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\GetByServiceAndChannelIdHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
 
 /**
  * Factory to create the ChannelService.
@@ -28,8 +28,8 @@ class ChannelServiceFactory
     public static function create(ClientInterface $client, CacheInterface $cache = null)
     {
         $client
-            ->addHandler(new GetAllByServiceIdHandler())
-            ->addHandler(new GetByServiceAndChannelIdHandler())
+            ->addHandler(new GetAllHandler())
+            ->addHandler(new GetByIdHandler())
         ;
 
         $service = new ChannelService($client);

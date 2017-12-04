@@ -27,7 +27,7 @@ example_print_step('Get the ChannelService.');
 $service = \StadGent\Services\OpeningHours\ChannelServiceFactory::create($client);
 
 example_print_step('Get all Channels for a single service.');
-$collection = $service->getAllByServiceId($service_id);
+$collection = $service->getAll($service_id);
 
 if ($collection->getIterator()->count()) {
     foreach ($collection as $item) {

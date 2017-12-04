@@ -2,8 +2,8 @@
 
 namespace StadGent\Services\Test\OpeningHours\Handler\Channel;
 
-use StadGent\Services\OpeningHours\Handler\Channel\GetByServiceAndChannelIdHandler;
-use StadGent\Services\OpeningHours\Request\Channel\GetByServiceAndChannelIdRequest;
+use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
+use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
@@ -12,16 +12,16 @@ use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
  *
  * @package StadGent\Services\Test\OpeningHours\Handler\Service
  */
-class GetByServiceAndChannelIdHandlerTest extends HandlerTestBase
+class GetByIdHandlerTest extends HandlerTestBase
 {
     /**
      * Test the handles method.
      */
     public function testHandles()
     {
-        $handler = new GetByServiceAndChannelIdHandler();
+        $handler = new GetByIdHandler();
         $this->assertEquals(
-            GetByServiceAndChannelIdRequest::class,
+            GetByIdRequest::class,
             $handler->handles(),
             'Handler only handles \StadGent\Services\OpeningHours\Request\Channel\GetByServiceAndChannelIdRequest.'
         );
@@ -43,7 +43,7 @@ class GetByServiceAndChannelIdHandlerTest extends HandlerTestBase
 EOT;
         $channelResponse = $this->createResponseMock(200, $body);
 
-        $handler = new GetByServiceAndChannelIdHandler();
+        $handler = new GetByIdHandler();
         $response = $handler->toResponse($channelResponse);
 
         $this->assertInstanceOf(

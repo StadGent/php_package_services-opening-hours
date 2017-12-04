@@ -4,8 +4,8 @@ namespace StadGent\Services\OpeningHours;
 
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
-use StadGent\Services\OpeningHours\Request\Channel\GetAllByServiceIdRequest;
-use StadGent\Services\OpeningHours\Request\Channel\GetByServiceAndChannelIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
+use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
 
@@ -30,7 +30,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
-    public function getAllByServiceId($serviceId)
+    public function getAll($serviceId)
     {
         $cacheKey = $this->createCacheKey(__FUNCTION__ . ':' . $serviceId);
 
@@ -43,7 +43,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         // Get from service.
         /* @var $response \StadGent\Services\OpeningHours\Response\ChannelsResponse */
         $response = $this->send(
-            new GetAllByServiceIdRequest($serviceId),
+            new GetAllRequest($serviceId),
             ChannelsResponse::class
         );
 
@@ -65,7 +65,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
-    public function getByServiceAndChannelId($serviceId, $channelId)
+    public function getById($serviceId, $channelId)
     {
         $cacheKey = $this->createCacheKey(
             __FUNCTION__ . ':' . $serviceId . ':' . $channelId
@@ -79,7 +79,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
 
         // Get from service.
         $response = $this->send(
-            new GetByServiceAndChannelIdRequest($serviceId, $channelId),
+            new GetByIdRequest($serviceId, $channelId),
             ChannelResponse::class
         );
 
