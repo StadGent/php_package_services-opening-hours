@@ -44,9 +44,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      * @return \StadGent\Services\OpeningHours\Value\Hours
      *
      * @throws \InvalidArgumentException
-     *   If the data does not contain a "from" value.
-     * @throws \InvalidArgumentException
-     *   If the data does not contain an "until" value.
+     *   If the data does not contain a "from" or "until" value.
      */
     public static function fromArray(array $data)
     {
@@ -79,7 +77,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Get the unique identifier for the Channel.
+     * Get the start hour of an open period.
      *
      * @return int
      */
@@ -89,7 +87,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Get the Channel label.
+     * Get the until hour of an open period.
      *
      * @return string
      */

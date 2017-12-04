@@ -11,5 +11,6 @@ All Notable changes to `gent/services-opening-hours` package.
 * DMOH-5: Added the ServiceCollection value object.
 * DMOH-6: Added the ChannelCollection value object.
 * DMOH-11 : Added the Value objects related to the OpenNow & OpeningHours data.
+* DMOH-7 : Added the ServiceService to access available Services.
 
 [Unreleased]: https://github.com/StadGent/php_package_services-opening-hours/compare/master...develop

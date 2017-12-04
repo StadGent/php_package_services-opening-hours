@@ -24,10 +24,13 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
      * The array may contain a set of Channel array data.
      * @see \StadGent\Services\OpeningHours\Value\Channel.
      *
+     * @param array $data
+     *   The array to extract the collection from.
+     *
      * @returns \StadGent\Services\OpeningHours\Value\ChannelCollection
      *
      * @throws \InvalidArgumentException
-     *   If the created_at/update_at are empty.
+     *   If the createdAt/updateAt are empty.
      */
     public static function fromArray(array $data)
     {

@@ -9,3 +9,6 @@
 
 # Exclude the examples config file.
 /examples/config.php
+
+# Exclude the cghooks.lock file.
+/cghooks.lock
