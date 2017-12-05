@@ -91,7 +91,9 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {}
+        } catch (\Exception $exception) {
+            // No catch specific code.
+        }
 
         $this->assertInstanceOf(ServiceNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
@@ -113,7 +115,9 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {}
+        } catch (\Exception $exception) {
+            // No catch specific code.
+        }
 
         $this->assertInstanceOf(ServiceNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
@@ -135,7 +139,9 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {}
+        } catch (\Exception $exception) {
+            // No catch specific code.
+        }
 
         $this->assertInstanceOf(ChannelNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
@@ -157,7 +163,9 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {}
+        } catch (\Exception $exception) {
+            // No catch specific code.
+        }
 
         $this->assertInstanceOf(ChannelNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
@@ -179,7 +187,9 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {}
+        } catch (\Exception $exception) {
+            // No catch specific code.
+        }
 
         $this->assertInstanceOf(NotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
