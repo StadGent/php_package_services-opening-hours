@@ -4,6 +4,7 @@ namespace StadGent\Services\OpeningHours;
 
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
+use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
@@ -27,8 +28,11 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      * @return \StadGent\Services\OpeningHours\Value\ChannelCollection
      *   The Channels linked to the Service.
      *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function getAll($serviceId)
     {
@@ -41,11 +45,15 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         }
 
         // Get from service.
-        /* @var $response \StadGent\Services\OpeningHours\Response\ChannelsResponse */
-        $response = $this->send(
-            new GetAllRequest($serviceId),
-            ChannelsResponse::class
-        );
+        try {
+            /* @var $response \StadGent\Services\OpeningHours\Response\ChannelsResponse */
+            $response = $this->send(
+                new GetAllRequest($serviceId),
+                ChannelsResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
 
         $channels = $response->getChannels();
         $this->cacheSet($cacheKey, $channels);
@@ -62,8 +70,12 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\Channel
      *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
      * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function getById($serviceId, $channelId)
     {
@@ -77,11 +89,15 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
             return $cached;
         }
 
-        // Get from service.
-        $response = $this->send(
-            new GetByIdRequest($serviceId, $channelId),
-            ChannelResponse::class
-        );
+        try {
+            // Get from service.
+            $response = $this->send(
+                new GetByIdRequest($serviceId, $channelId),
+                ChannelResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
 
         /* @var $response \StadGent\Services\OpeningHours\Response\ChannelResponse */
         $channel = $response->getChannel();

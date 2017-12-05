@@ -34,11 +34,17 @@ try {
     example_print(sprintf(' Id         : %d', $channel->getId()));
     example_print(sprintf(' Label      : %s', $channel->getLabel()));
     example_print(sprintf(' Service ID : %d', $channel->getServiceId()));
-} catch (\StadGent\Services\OpeningHours\Response\Exception\NotFoundException $e) {
+} catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_print(
         sprintf(
-            'No Service found for Service ID : %d and Channel ID : %d',
-            $service_id,
+            ' ! No Service found for Service ID : %d',
+            $service_id
+        )
+    );
+} catch (\StadGent\Services\OpeningHours\Exception\ChannelNotFoundException $e) {
+    example_print(
+        sprintf(
+            ' ! No Channel found for Channel ID : %d',
             $channel_id
         )
     );
