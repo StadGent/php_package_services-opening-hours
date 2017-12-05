@@ -22,61 +22,61 @@ class ExceptionFactory
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      */
-    public static function fromException(\Exception $e)
+    public static function fromException(\Exception $exception)
     {
-        if (!($e instanceof RequestException)) {
-            throw $e;
+        if (!($exception instanceof RequestException)) {
+            throw $exception;
         }
 
         $factory = new static();
-        if ($factory->isNotFound($e)) {
-            $factory->throwNotFound($e);
+        if ($factory->isNotFound($exception)) {
+            $factory->throwNotFound($exception);
         }
 
-        throw $e;
+        throw $exception;
     }
 
     /**
      * Check if given exception is a Not Found Exception.
      *
-     * @param \GuzzleHttp\Exception\RequestException $e
+     * @param \GuzzleHttp\Exception\RequestException $exception
      *   The Exception to test.
      *
      * @return bool
      *   Is Not Found.
      */
-    protected function isNotFound(RequestException $e)
+    protected function isNotFound(RequestException $exception)
     {
         $codes = [404, 422];
-        return in_array($e->getCode(), $codes);
+        return in_array($exception->getCode(), $codes);
     }
 
     /**
      * Throw a not found Exception based on the error message in the body.
      *
-     * @param \GuzzleHttp\Exception\RequestException $e
+     * @param \GuzzleHttp\Exception\RequestException $exception
      *   The Exception to create the NotFound from.
      *
      * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      */
-    protected function throwNotFound(RequestException $e)
+    protected function throwNotFound(RequestException $exception)
     {
-        $body = json_decode($e->getResponse()->getBody()->getContents());
+        $body = json_decode($exception->getResponse()->getBody()->getContents());
 
         if (!isset($body->error->target)) {
-            throw NotFoundException::fromException($e);
+            throw NotFoundException::fromException($exception);
         }
 
         if ($body->error->target === 'Service') {
-            throw ServiceNotFoundException::fromException($e);
+            throw ServiceNotFoundException::fromException($exception);
         }
 
         if ($body->error->target === 'Channel') {
-            throw ChannelNotFoundException::fromException($e);
+            throw ChannelNotFoundException::fromException($exception);
         }
 
-        throw NotFoundException::fromException($e);
+        throw NotFoundException::fromException($exception);
     }
 }
