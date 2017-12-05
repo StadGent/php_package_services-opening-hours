@@ -93,6 +93,7 @@ class ServiceTestBase extends TestCase
      *   The response content.
      *
      * @return \GuzzleHttp\Exception\RequestException
+     *   The exception.
      */
     protected function getExceptionMock($code, $responseBody)
     {
