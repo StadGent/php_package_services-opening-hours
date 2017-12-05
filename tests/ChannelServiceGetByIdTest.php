@@ -92,18 +92,7 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
      */
     public function testServiceNotFoundException()
     {
-        $responseBody = <<<EOT
-{
-    "error": {
-        "code": "ModelNotFoundException",
-        "message": "Service model is not found with given identifier",
-        "target": "Service"
-    }
-}
-EOT;
-
-        $exceptionMock = $this->getExceptionMock(404, $responseBody);
-        $client = $this->getClientWithExceptionMock($exceptionMock);
+        $client = $this->getClientWithServiceNotFoundExceptionMock();
         $channelService = new ChannelService($client);
         $channelService->getById(777, 666);
     }
@@ -115,18 +104,7 @@ EOT;
      */
     public function testChannelNotFoundException()
     {
-        $responseBody = <<<EOT
-{
-    "error": {
-        "code": "ModelNotFoundException",
-        "message": "Channel model is not found with given identifier",
-        "target": "Channel"
-    }
-}
-EOT;
-
-        $exceptionMock = $this->getExceptionMock(404, $responseBody);
-        $client = $this->getClientWithExceptionMock($exceptionMock);
+        $client = $this->getClientWithChannelNotFoundExceptionMock();
         $channelService = new ChannelService($client);
         $channelService->getById(1, 666);
     }
