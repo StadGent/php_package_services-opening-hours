@@ -7,9 +7,11 @@ use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
+use StadGent\Services\OpeningHours\Response\HtmlResponse;
 use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 
 /**
@@ -152,5 +154,52 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         $this->cacheSet($cacheKey, $openNow);
 
         return $openNow;
+    }
+
+    /**
+     * Get the Open now status as HTML.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     *
+     * @return string
+     *   The HTML.
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function openNowHtml($serviceId, $channelId)
+    {
+        $cacheKey = $this->createCacheKey(
+            __FUNCTION__ . ':' . $serviceId . ':' . $channelId
+        );
+
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        try {
+            // Get from service.
+            $response = $this->send(
+                new OpenNowHtmlRequest($serviceId, $channelId),
+                HtmlResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
+
+        /* @var $response \StadGent\Services\OpeningHours\Response\HtmlResponse */
+        $html = $response->getHtml();
+        $this->cacheSet($cacheKey, $html);
+
+        return $html;
     }
 }
