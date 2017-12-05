@@ -31,13 +31,13 @@ example_print();
 
 try {
     $service = $serviceService->getById($service_id);
-    example_print(sprintf(' Id       : %d', $service->getId()));
-    example_print(sprintf(' Label    : %s', $service->getLabel()));
-    example_print(sprintf(' Is Draft : %d', (int) $service->isDraft()));
+    example_sprintf(' Id       : %d', $service->getId());
+    example_sprintf(' Label    : %s', $service->getLabel());
+    example_sprintf(' Is Draft : %d', (int) $service->isDraft());
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
-    example_print(sprintf(' ! No Service found for id : %d', $service_id));
+    example_sprintf(' ! No Service found for id : %d', $service_id);
 } catch (\Exception $e) {
-    example_print(sprintf(' ! Error : %s', $e->getMessage()));
+    example_sprintf(' ! Error : %s', $e->getMessage());
 }
 
 

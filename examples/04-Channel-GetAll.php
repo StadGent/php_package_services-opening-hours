@@ -36,17 +36,17 @@ try {
         foreach ($collection as $item) {
             /* @var $item \StadGent\Services\OpeningHours\Value\Channel */
             example_print();
-            example_print(sprintf(' Id         : %d', $item->getId()));
-            example_print(sprintf(' Label      : %s', $item->getLabel()));
-            example_print(sprintf(' Service Id : %d', $item->getServiceId()));
+            example_sprintf(' Id         : %d', $item->getId());
+            example_sprintf(' Label      : %s', $item->getLabel());
+            example_sprintf(' Service Id : %d', $item->getServiceId());
         }
     } else {
         example_print(' ! No Channels found.');
     }
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
-    example_print(sprintf(' ! No Service found for id : %d', $service_id));
+    example_sprintf(' ! No Service found for id : %d', $service_id);
 } catch (\Exception $e) {
-    example_print(sprintf(' ! Error : %s', $e->getMessage()));
+    example_sprintf(' ! Error : %s', $e->getMessage());
 }
 
 

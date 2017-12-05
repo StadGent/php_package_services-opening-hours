@@ -34,9 +34,9 @@ if ($collection->getIterator()->count()) {
     foreach ($collection as $item) {
         /* @var $item \StadGent\Services\OpeningHours\Value\Service */
         example_print();
-        example_print(sprintf(' Id       : %d', $item->getId()));
-        example_print(sprintf(' Label    : %s', $item->getLabel()));
-        example_print(sprintf(' Is Draft : %d', (int) $item->isDraft()));
+        example_sprintf(' Id       : %d', $item->getId());
+        example_sprintf(' Label    : %s', $item->getLabel());
+        example_sprintf(' Is Draft : %d', (int) $item->isDraft());
     }
 } else {
     echo ' ! No Service found.' . PHP_EOL;
