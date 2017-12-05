@@ -35,10 +35,10 @@ try {
     if ($collection->getIterator()->count()) {
         foreach ($collection as $item) {
             /* @var $item \StadGent\Services\OpeningHours\Value\Channel */
-            example_print();
             example_sprintf(' Id         : %d', $item->getId());
             example_sprintf(' Label      : %s', $item->getLabel());
             example_sprintf(' Service Id : %d', $item->getServiceId());
+            example_print();
         }
     } else {
         example_print(' ! No Channels found.');
