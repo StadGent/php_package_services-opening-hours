@@ -2,7 +2,6 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\ChannelService;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
@@ -35,17 +34,7 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
     {
         $channel = $this->createChannel();
         $client = $this->createClientForChannel($channel);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getById:10:20'))
-            ->will($this->returnValue($channel));
+        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:getById:10:20', $channel);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
@@ -60,25 +49,7 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
     {
         $channel = $this->createChannel();
         $client = $this->createClientForChannel($channel);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getById:12:34'))
-            ->will($this->returnValue(null));
-
-        $cache
-            ->expects($this->once())
-            ->method('set')
-            ->with(
-                $this->equalTo('OpeningHours:ChannelService:getById:12:34'),
-                $this->equalTo($channel)
-            );
+        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:getById:12:34', $channel);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);

@@ -2,7 +2,6 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
 use StadGent\Services\OpeningHours\ServiceService;
@@ -35,21 +34,10 @@ class ServiceServiceGetAllTest extends ServiceTestBase
     {
         $serviceCollection = $this->createServiceCollection();
         $client = $this->createClientForServiceCollection($serviceCollection);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getAll'))
-            ->will($this->returnValue($serviceCollection));
+        $cache = $this->getFromCacheMock('OpeningHours:ServiceService:getAll', $serviceCollection);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
-
         $responseServiceCollection = $serviceService->getAll();
         $this->assertSame($serviceCollection, $responseServiceCollection);
     }
@@ -61,25 +49,7 @@ class ServiceServiceGetAllTest extends ServiceTestBase
     {
         $serviceCollection = $this->createServiceCollection();
         $client = $this->createClientForServiceCollection($serviceCollection);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getAll'))
-            ->will($this->returnValue(null));
-
-        $cache
-            ->expects($this->once())
-            ->method('set')
-            ->with(
-                $this->equalTo('OpeningHours:ServiceService:getAll'),
-                $this->equalTo($serviceCollection)
-            );
+        $cache = $this->getSetCacheMock('OpeningHours:ServiceService:getAll', $serviceCollection);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);

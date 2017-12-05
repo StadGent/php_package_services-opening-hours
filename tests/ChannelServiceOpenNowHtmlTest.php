@@ -2,7 +2,6 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\ChannelService;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
@@ -34,17 +33,7 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpenNowHtml();
         $client = $this->createClientForOpenNowHtml($html);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:openNowHtml:10:20'))
-            ->will($this->returnValue($html));
+        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:openNowHtml:10:20', $html);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
@@ -59,25 +48,7 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpenNowHtml();
         $client = $this->createClientForOpenNowHtml($html);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:openNowHtml:12:34'))
-            ->will($this->returnValue(null));
-
-        $cache
-            ->expects($this->once())
-            ->method('set')
-            ->with(
-                $this->equalTo('OpeningHours:ChannelService:openNowHtml:12:34'),
-                $this->equalTo($html)
-            );
+        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:openNowHtml:12:34', $html);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);

@@ -2,7 +2,6 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\ServiceService;
@@ -35,17 +34,7 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
     {
         $service = $this->createService();
         $client = $this->createClientForService($service);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getById:10'))
-            ->will($this->returnValue($service));
+        $cache = $this->getFromCacheMock('OpeningHours:ServiceService:getById:10', $service);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
@@ -60,25 +49,7 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
     {
         $service = $this->createService();
         $client = $this->createClientForService($service);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getById:10'))
-            ->will($this->returnValue(null));
-
-        $cache
-            ->expects($this->once())
-            ->method('set')
-            ->with(
-                $this->equalTo('OpeningHours:ServiceService:getById:10'),
-                $this->equalTo($service)
-            );
+        $cache = $this->getSetCacheMock('OpeningHours:ServiceService:getById:10', $service);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);

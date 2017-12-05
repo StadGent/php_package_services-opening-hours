@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
+use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\ResponseInterface;
@@ -171,5 +172,65 @@ EOT;
             $requestMock,
             $responseMock
         );
+    }
+
+    /**
+     * Use this mock to test loading a cached item by its key from the cache.
+     *
+     * @param string $key
+     *   The cache key to get the cache from.
+     * @param mixed $item
+     *   The cached item.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\SimpleCache\CacheInterface
+     */
+    protected function getFromCacheMock($key, $item)
+    {
+        $cache = $this
+            ->getMockBuilder(CacheInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $cache
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo($key))
+            ->will($this->returnValue($item));
+
+        return $cache;
+    }
+
+    /**
+     * Use this mock to test saving an item to the cache by its key.
+     *
+     * @param string $key
+     *   The cache key to store the item to.
+     * @param mixed $item
+     *   The expected item to store in the cache.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\SimpleCache\CacheInterface
+     */
+    protected function getSetCacheMock($key, $item)
+    {
+        $cache = $this
+            ->getMockBuilder(CacheInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $cache
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo($key))
+            ->will($this->returnValue(null));
+
+        $cache
+            ->expects($this->once())
+            ->method('set')
+            ->with(
+                $this->equalTo($key),
+                $this->equalTo($item)
+            );
+
+        return $cache;
     }
 }
