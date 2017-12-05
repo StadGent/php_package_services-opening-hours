@@ -62,7 +62,7 @@ class ServiceTestBase extends TestCase
     }
 
     /**
-     * Helper to create a mock that will return a given exception.
+     * Helper to create a mocked client that will return a given exception.
      *
      * @param \Exception $exception
      *   The exception to be returned by the client.
@@ -82,6 +82,48 @@ class ServiceTestBase extends TestCase
             ->will($this->throwException($exception));
 
         return $client;
+    }
+
+    /**
+     * Helper to create a mocked client throwing a ServiceNotFound exception.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     */
+    protected function getClientWithServiceNotFoundExceptionMock()
+    {
+        $responseBody = <<<EOT
+{
+    "error": {
+        "code": "ModelNotFoundException",
+        "message": "Service model is not found with given identifier",
+        "target": "Service"
+    }
+}
+EOT;
+
+        $exceptionMock = $this->getExceptionMock(404, $responseBody);
+        return $this->getClientWithExceptionMock($exceptionMock);
+    }
+
+    /**
+     * Helper to create a mocked client throwing a ChannelNotFound exception.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     */
+    protected function getClientWithChannelNotFoundExceptionMock()
+    {
+        $responseBody = <<<EOT
+{
+    "error": {
+        "code": "ModelNotFoundException",
+        "message": "Channel model is not found with given identifier",
+        "target": "Channel"
+    }
+}
+EOT;
+
+        $exceptionMock = $this->getExceptionMock(404, $responseBody);
+        return $this->getClientWithExceptionMock($exceptionMock);
     }
 
     /**

@@ -7,8 +7,10 @@ use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
+use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 
 /**
  * Service to access the Channels related API.
@@ -104,5 +106,51 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         $this->cacheSet($cacheKey, $channel);
 
         return $channel;
+    }
+
+    /**
+     * Get the Open now status as Value object.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     *
+     * @return \StadGent\Services\OpeningHours\Value\OpenNow
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function openNow($serviceId, $channelId)
+    {
+        $cacheKey = $this->createCacheKey(
+            __FUNCTION__ . ':' . $serviceId . ':' . $channelId
+        );
+
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        try {
+            // Get from service.
+            $response = $this->send(
+                new OpenNowRequest($serviceId, $channelId),
+                OpenNowResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
+
+        /* @var $response \StadGent\Services\OpeningHours\Response\OpenNowResponse */
+        $openNow = $response->getOpenNow();
+        $this->cacheSet($cacheKey, $openNow);
+
+        return $openNow;
     }
 }
