@@ -6,6 +6,8 @@ use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 
 /**
  * Factory to create the ChannelService.
@@ -30,6 +32,8 @@ class ChannelServiceFactory
         $client
             ->addHandler(new GetAllHandler())
             ->addHandler(new GetByIdHandler())
+            ->addHandler(new OpenNowHandler())
+            ->addHandler(new OpenNowHtmlHandler())
         ;
 
         $service = new ChannelService($client);
