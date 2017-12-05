@@ -21,6 +21,8 @@ file.
   service ID).
 * `05-Channel-GetById.php` : Get a single Channel by the Service ID and the
   Channel ID.
+* `06-Channel-OpenNow.php` : Get the Open Now status as object.
+* `06-Channel-OpenNowHtml.php` : Get the Open Now status as HTML.
 
 ## Usage
 
