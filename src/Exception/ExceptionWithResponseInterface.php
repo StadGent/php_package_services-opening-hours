@@ -1,8 +1,8 @@
 <?php
 
-namespace StadGent\Services\OpeningHours\Response\Exception;
+namespace StadGent\Services\OpeningHours\Exception;
 
-use Psr\Http\Message\ResponseInterface;
+use GuzzleHttp\Exception\RequestException;
 
 /**
  * Interface for exceptions containing the response object.
@@ -12,14 +12,14 @@ use Psr\Http\Message\ResponseInterface;
 interface ExceptionWithResponseInterface
 {
     /**
-     * Generates an Exception from a response object.
+     * Generates an Exception from a request exception.
      *
-     * @param \Psr\Http\Message\ResponseInterface
-     *   The response object.
+     * @param \GuzzleHttp\Exception\RequestException $exception
+     *   The request exception.
      *
      * @return static
      */
-    public static function fromResponse(ResponseInterface $response);
+    public static function fromException(RequestException $exception);
 
     /**
      * Get te response object.

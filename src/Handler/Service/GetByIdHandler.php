@@ -32,12 +32,6 @@ class GetByIdHandler extends HandlerAbstract
      */
     public function toResponse(Psr\ResponseInterface $response)
     {
-        $this->validateResponse(
-            $response,
-            [
-                new ServiceNotFoundValidator(),
-            ]
-        );
         $data = $this->getBodyData($response);
         $service = Service::fromArray($data);
         return new ServiceResponse($service);

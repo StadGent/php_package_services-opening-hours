@@ -17,6 +17,19 @@ function example_print($text = '')
 }
 
 /**
+ * Helper to print text with replacements.
+ *
+ * @param string $text
+ *   The string to print.
+ * @param array $replacements
+ *   The replacements for the string.
+ */
+function example_sprintf($text, ...$replacements)
+{
+    example_print(sprintf($text, ...$replacements));
+}
+
+/**
  * Helper to print a step output.
  *
  * @param string
@@ -67,8 +80,8 @@ function example_print_footer()
 
     example_print();
     example_print_separator();
-    example_print(sprintf(' Time   : %sms', $time));
-    example_print(sprintf(' Memory : %dMb', $memory));
+    example_sprintf(' Time   : %sms', $time);
+    example_sprintf(' Memory : %dMb', $memory);
     example_print_separator();
     example_print();
 }

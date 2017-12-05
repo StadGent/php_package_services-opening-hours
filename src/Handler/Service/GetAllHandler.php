@@ -31,17 +31,7 @@ class GetAllHandler extends HandlerAbstract
      */
     public function toResponse(Psr\ResponseInterface $response)
     {
-        $this->validateResponse($response);
-
         $data = $this->getBodyData($response);
-
-        // Check if not single result!
-        // This is a fallback for when the API returns an object if only 1 item
-        // is found.
-        if (isset($data['id'])) {
-            $data = [$data];
-        }
-
         $collection = ServiceCollection::fromArray($data);
         return new ServicesResponse($collection);
     }

@@ -31,19 +31,15 @@ example_print();
 
 try {
     $channel = $channelService->getById($service_id, $channel_id);
-    example_print(sprintf(' Id         : %d', $channel->getId()));
-    example_print(sprintf(' Label      : %s', $channel->getLabel()));
-    example_print(sprintf(' Service ID : %d', $channel->getServiceId()));
-} catch (\StadGent\Services\OpeningHours\Response\Exception\NotFoundException $e) {
-    example_print(
-        sprintf(
-            'No Service found for Service ID : %d and Channel ID : %d',
-            $service_id,
-            $channel_id
-        )
-    );
+    example_sprintf(' Id         : %d', $channel->getId());
+    example_sprintf(' Label      : %s', $channel->getLabel());
+    example_sprintf(' Service ID : %d', $channel->getServiceId());
+} catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
+    example_sprintf(' ! No Service found for Service ID : %d', $service_id);
+} catch (\StadGent\Services\OpeningHours\Exception\ChannelNotFoundException $e) {
+    example_sprintf(' ! No Channel found for Channel ID : %d', $channel_id);
 } catch (\Exception $e) {
-    example_print(sprintf('Error : %s', $e->getMessage()));
+    example_sprintf(' ! Error : %s', $e->getMessage());
 }
 
 

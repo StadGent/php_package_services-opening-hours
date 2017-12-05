@@ -2,7 +2,12 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Psr7\Response;
+use GuzzleHttp\Psr7\Stream;
 use Psr\SimpleCache\CacheInterface;
+use StadGent\Services\OpeningHours\Client\ClientInterface;
+use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\ServiceService;
@@ -83,6 +88,29 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
         $serviceService->getById(10);
+    }
+
+    /**
+     * Test the exception when the ServiceId does not exists.
+     *
+     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function testServiceNotFoundException()
+    {
+        $responseBody = <<<EOT
+{
+    "error": {
+        "code": "ModelNotFoundException",
+        "message": "Service model is not found with given identifier",
+        "target": "Service"
+    }
+}
+EOT;
+
+        $exceptionMock = $this->getExceptionMock(404, $responseBody);
+        $client = $this->getClientWithExceptionMock($exceptionMock);
+        $serviceService = new ServiceService($client);
+        $serviceService->getById(1234);
     }
 
     /**

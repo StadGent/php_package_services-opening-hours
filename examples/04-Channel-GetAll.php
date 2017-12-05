@@ -27,18 +27,26 @@ example_print_step('Get the ChannelService.');
 $service = \StadGent\Services\OpeningHours\ChannelServiceFactory::create($client);
 
 example_print_step('Get all Channels for a single service.');
-$collection = $service->getAll($service_id);
+example_print();
 
-if ($collection->getIterator()->count()) {
-    foreach ($collection as $item) {
-        /* @var $item \StadGent\Services\OpeningHours\Value\Channel */
-        example_print();
-        example_print(sprintf(' Id         : %d', $item->getId()));
-        example_print(sprintf(' Label      : %s', $item->getLabel()));
-        example_print(sprintf(' Service Id : %d', $item->getServiceId()));
+try {
+    $collection = $service->getAll($service_id);
+
+    if ($collection->getIterator()->count()) {
+        foreach ($collection as $item) {
+            /* @var $item \StadGent\Services\OpeningHours\Value\Channel */
+            example_print();
+            example_sprintf(' Id         : %d', $item->getId());
+            example_sprintf(' Label      : %s', $item->getLabel());
+            example_sprintf(' Service Id : %d', $item->getServiceId());
+        }
+    } else {
+        example_print(' ! No Channels found.');
     }
-} else {
-    echo ' ! No Channels found.' . PHP_EOL;
+} catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
+    example_sprintf(' ! No Service found for id : %d', $service_id);
+} catch (\Exception $e) {
+    example_sprintf(' ! Error : %s', $e->getMessage());
 }
 
 

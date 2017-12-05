@@ -1,34 +1,40 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours\Service\Response\Exception;
+namespace StadGent\Services\Test\OpeningHours\Exception;
 
+use GuzzleHttp\Exception\RequestException;
 use PHPUnit\Framework\TestCase;
-use StadGent\Services\OpeningHours\Response\Exception\ChannelNotFoundException;
 use Psr\Http\Message\ResponseInterface;
+use StadGent\Services\OpeningHours\Exception\ChannelNotFoundException;
 
 /**
- * Tests NotFoundException.
+ * Tests ChannelNotFoundException.
  *
  * @package StadGent\Services\Test\OpeningHours\Service\Response\Exception
  */
 class ChannelNotFoundExceptionTest extends TestCase
 {
     /**
-     * Test the fromResponse method.
+     * Test the testFromException() method.
      */
-    public function testFromResponse()
+    public function testFromException()
     {
         $responseMock = $this
             ->getMockBuilder(ResponseInterface::class)
             ->disableOriginalConstructor()
             ->getMock();
-        $responseMock
-            ->expects($this->once())
-            ->method('getStatusCode')
-            ->will($this->returnValue(404));
 
-        /* @var $responseMock \Psr\Http\Message\ResponseInterface */
-        $exception = ChannelNotFoundException::fromResponse($responseMock);
+        $exceptionMock = $this
+            ->getMockBuilder(RequestException::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+        $exceptionMock
+            ->expects($this->once())
+            ->method('getResponse')
+            ->will($this->returnValue($responseMock));
+
+        /* @var $exceptionMock RequestException */
+        $exception = ChannelNotFoundException::fromException($exceptionMock);
 
         $this->assertEquals(404, $exception->getCode());
         $this->assertEquals(

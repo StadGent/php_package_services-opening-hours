@@ -100,6 +100,29 @@ class ChannelServiceGetAllTest extends ServiceTestBase
     }
 
     /**
+     * Test the Service not found exception.
+     *
+     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function testServiceNotFoundException()
+    {
+        $responseBody = <<<EOT
+{
+    "error": {
+        "code": "ModelNotFoundException",
+        "message": "Service model is not found with given identifier",
+        "target": "Service"
+    }
+}
+EOT;
+
+        $exceptionMock = $this->getExceptionMock(404, $responseBody);
+        $client = $this->getClientWithExceptionMock($exceptionMock);
+        $channelService = new ChannelService($client);
+        $channelService->getAll(777);
+    }
+
+    /**
      * Helper to create the client response.
      *
      * @return \StadGent\Services\OpeningHours\Value\ChannelCollection
