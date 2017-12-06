@@ -3,7 +3,6 @@
 namespace StadGent\Services\OpeningHours\Handler;
 
 use Psr\Http\Message as Psr;
-use StadGent\Services\OpeningHours\Response\Exception\InvalidResponseException;
 
 /**
  * Abstract base Handler.

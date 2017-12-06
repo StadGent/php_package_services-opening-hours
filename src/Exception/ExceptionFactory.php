@@ -16,6 +16,9 @@ class ExceptionFactory
      *
      * This allows us to wrap API exceptions to our own.
      *
+     * @param \Exception $exception
+     *   The exception to check and optionally transform.
+     *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
      * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
@@ -48,7 +51,7 @@ class ExceptionFactory
     protected function isNotFound(RequestException $exception)
     {
         $codes = [404, 422];
-        return in_array($exception->getCode(), $codes);
+        return in_array($exception->getCode(), $codes, true);
     }
 
     /**

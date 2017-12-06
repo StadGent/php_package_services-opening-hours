@@ -15,6 +15,11 @@ abstract class HtmlHandlerAbstract implements HandlerInterface
     /**
      * Get the HTML response from the response object.
      *
+     * @param \Psr\Http\Message\ResponseInterface $response
+     *   The PSR response message.
+     *
+     * @return \StadGent\Services\OpeningHours\Response\HtmlResponse
+     *
      * @throws \InvalidArgumentException
      */
     public function toResponse(Psr\ResponseInterface $response)
@@ -27,6 +32,7 @@ abstract class HtmlHandlerAbstract implements HandlerInterface
      * Get the array version of the response body.
      *
      * @param \Psr\Http\Message\ResponseInterface $response
+     *   The PSR response message.
      *
      * @return string
      */
