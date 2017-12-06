@@ -2,9 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Response;
 
-use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
-use StadGent\Services\OpeningHours\Value\Channel;
 use PHPUnit\Framework\TestCase;
 
 /**

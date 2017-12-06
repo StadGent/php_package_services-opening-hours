@@ -34,7 +34,7 @@ class OpeningHoursDayHandlerTest extends HandlerTestBase
     {
         $body = <<<EOT
 {
-    "channel": "Loketten",
+    "channel": "FooBar",
     "channelId": 57,
     "openinghours": [
         {

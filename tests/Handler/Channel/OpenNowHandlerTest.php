@@ -34,7 +34,7 @@ class OpenNowHandlerTest extends HandlerTestBase
     {
         $body = <<<EOT
 {
-    "channel": "Loketten",
+    "channel": "FooBar",
     "channelId": 57,
     "openNow": {
         "label": "open",
