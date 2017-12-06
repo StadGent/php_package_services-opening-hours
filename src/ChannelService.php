@@ -7,12 +7,16 @@ use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
+use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
+use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\OpeningHours\Response\OpenNowResponse;
+use StadGent\Services\OpeningHours\Value\OpeningHours;
 
 /**
  * Service to access the Channels related API.
@@ -40,7 +44,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function getAll($serviceId)
     {
-        $cacheKey = $this->createCacheKey(__FUNCTION__ . ':' . $serviceId);
+        $cacheKey = $this->createCacheKeyFromArray([__FUNCTION__, $serviceId]);
 
         // From cache?
         $cached = $this->cacheGet($cacheKey);
@@ -83,7 +87,9 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function getById($serviceId, $channelId)
     {
-        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
+        $cacheKey = $this->createCacheKeyFromArray(
+            [__FUNCTION__, $serviceId, $channelId]
+        );
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -127,7 +133,9 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function openNow($serviceId, $channelId)
     {
-        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
+        $cacheKey = $this->createCacheKeyFromArray(
+            [__FUNCTION__, $serviceId, $channelId]
+        );
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -172,7 +180,9 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function openNowHtml($serviceId, $channelId)
     {
-        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
+        $cacheKey = $this->createCacheKeyFromArray(
+            [__FUNCTION__, $serviceId, $channelId]
+        );
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -198,22 +208,87 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
     }
 
     /**
+     * Get the Opening Hours for a single day as Value object.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     * @param string $date
+     *   The day date (Y-m-d) to get the data for.
+     *
+     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function openingHoursDay($serviceId, $channelId, $date)
+    {
+        $cacheKey = $this->createCacheKeyFromArray(
+            [__FUNCTION__, $serviceId, $channelId, $date]
+        );
+
+        return $this->sendOpeninghoursRequest(
+            $cacheKey,
+            new OpeningHoursDayRequest($serviceId, $channelId, $date)
+        );
+    }
+
+    /**
+     * Helper to send a request that will result in a openingHoursResponse.
+     *
+     * @param string $cacheKey
+     *   The cache key to retrieve & store the result.
+     * @param \StadGent\Services\OpeningHours\Request\RequestInterface $request
+     *   The request to send.
+     *
+     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
+     *   The openinghours from the backend.
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    protected function sendOpeninghoursRequest($cacheKey, RequestInterface $request)
+    {
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        try {
+            // Get from service.
+            $response = $this->send($request, OpeningHoursResponse::class);
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
+
+        /* @var $response \StadGent\Services\OpeningHours\Response\OpeningHoursResponse */
+        $openingHours = $response->getOpeninghours();
+        $this->cacheSet($cacheKey, $openingHours);
+        return $openingHours;
+    }
+
+    /**
      * Helper to create a cache key.
      *
-     * @param string $function
-     *   The function to create a cache key for.
-     * @param int $serviceId
-     *   The Service id to create a cache key for.
-     * @param int $channelId
-     *   The channel id to create the cache key for.
+     * @param array $parts
+     *   The cache key parts, will be added to the key separated by ":".
      *
      * @return string
      *   Prefixed cache key.
      */
-    protected function createChannelCacheKey($function, $serviceId, $channelId)
+    protected function createCacheKeyFromArray(array $parts)
     {
-        return $this->createCacheKey(
-            $function . ':' . $serviceId . ':' . $channelId
-        );
+        $key = implode(':', $parts);
+        return $this->createCacheKey($key);
     }
 }
