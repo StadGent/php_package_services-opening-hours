@@ -59,7 +59,7 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
-        $channelService->openingHoursDay(12, 34,'2020-01-02');
+        $channelService->openingHoursDay(12, 34, '2020-01-02');
     }
 
     /**

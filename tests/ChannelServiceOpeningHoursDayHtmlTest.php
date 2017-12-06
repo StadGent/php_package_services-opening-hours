@@ -97,7 +97,6 @@ class ChannelServiceOpeningHoursDayHtmlTest extends ServiceTestBase
     </div>
 </div>
 EOT;
-
     }
 
     /**
