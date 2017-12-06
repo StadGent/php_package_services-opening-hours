@@ -9,6 +9,7 @@ use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
@@ -364,6 +365,38 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         return $this->sendOpeninghoursRequest(
             $cacheKey,
             new OpeningHoursMonthRequest($serviceId, $channelId, $date)
+        );
+    }
+
+    /**
+     * Get the Opening Hours for a single month as HTML.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     * @param string $date
+     *   The start date (Y-m-d) of the month period to get the data for.
+     *
+     * @return string
+     *   The HTML.
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function openingHoursMonthHtml($serviceId, $channelId, $date)
+    {
+        $cacheKey = $this->createCacheKeyFromArray(
+            [__FUNCTION__, $serviceId, $channelId, $date]
+        );
+
+        return $this->sendHtmlRequest(
+            $cacheKey,
+            new OpeningHoursMonthHtmlRequest($serviceId, $channelId, $date)
         );
     }
 
