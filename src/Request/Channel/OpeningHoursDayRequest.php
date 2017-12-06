@@ -7,14 +7,14 @@ use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
 
 /**
- * Request to get OpenNow for a Channel in JSON format.
+ * Get the OpeningHours for a single day as JSON.
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
 class OpeningHoursDayRequest extends RequestAbstract
 {
     /**
-     * Get all channels for a service by the Service & Channel ID.
+     * Get the OpeningHours for a single day by the Service & Channel ID.
      *
      * @param int $serviceId
      *   The Service ID to get the channel for.
