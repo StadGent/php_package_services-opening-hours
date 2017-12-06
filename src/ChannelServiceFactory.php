@@ -8,6 +8,8 @@ use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursDayHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursDayHtmlHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursWeekHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursWeekHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 
@@ -38,6 +40,8 @@ class ChannelServiceFactory
             ->addHandler(new OpenNowHtmlHandler())
             ->addHandler(new OpeningHoursDayHandler())
             ->addHandler(new OpeningHoursDayHtmlHandler())
+            ->addHandler(new OpeningHoursWeekHandler())
+            ->addHandler(new OpeningHoursWeekHtmlHandler())
         ;
 
         $service = new ChannelService($client);
