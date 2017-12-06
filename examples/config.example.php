@@ -33,3 +33,6 @@ $channel_id = '';
 
 // Opening hours for a single day (yyyy-mm-dd).
 $openinghours_day_date = '';
+
+// Start date of a single week (yyy-mm-dd).
+$openinghours_week_startdate = '';
