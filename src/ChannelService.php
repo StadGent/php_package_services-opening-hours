@@ -83,9 +83,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function getById($serviceId, $channelId)
     {
-        $cacheKey = $this->createCacheKey(
-            __FUNCTION__ . ':' . $serviceId . ':' . $channelId
-        );
+        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -129,9 +127,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function openNow($serviceId, $channelId)
     {
-        $cacheKey = $this->createCacheKey(
-            __FUNCTION__ . ':' . $serviceId . ':' . $channelId
-        );
+        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -176,9 +172,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function openNowHtml($serviceId, $channelId)
     {
-        $cacheKey = $this->createCacheKey(
-            __FUNCTION__ . ':' . $serviceId . ':' . $channelId
-        );
+        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -201,5 +195,25 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         $this->cacheSet($cacheKey, $html);
 
         return $html;
+    }
+
+    /**
+     * Helper to create a cache key.
+     *
+     * @param string $function
+     *   The function to create a cache key for.
+     * @param int $serviceId
+     *   The Service id to create a cache key for.
+     * @param int $channelId
+     *   The channel id to create the cache key for.
+     *
+     * @return string
+     *   Prefixed cache key.
+     */
+    protected function createChannelCacheKey($function, $serviceId, $channelId)
+    {
+        return $this->createCacheKey(
+            $function . ':' . $serviceId . ':' . $channelId
+        );
     }
 }
