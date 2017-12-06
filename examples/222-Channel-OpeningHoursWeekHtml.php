@@ -30,11 +30,11 @@ $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $conf
 example_print_step('Get the ChannelService.');
 $channelService = \StadGent\Services\OpeningHours\ChannelServiceFactory::create($client);
 
-example_print_step('Get the OpeningHours by the Services, Channel ID & start date');
+example_print_step('Get the OpeningHours by the Service, Channel ID & start date');
 example_print();
 
 try {
-    $html = $channelService->openingHoursDayHtml($service_id, $channel_id, $openinghours_week_startdate);
+    $html = $channelService->openingHoursWeekHtml($service_id, $channel_id, $openinghours_week_startdate);
     example_print_html($html);
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_sprintf(' ! No Service found for Service ID : %d', $service_id);

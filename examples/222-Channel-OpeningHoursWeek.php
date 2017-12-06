@@ -30,7 +30,7 @@ $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $conf
 example_print_step('Get the ChannelService.');
 $channelService = \StadGent\Services\OpeningHours\ChannelServiceFactory::create($client);
 
-example_print_step('Get the OpeningHours by the Services, Channel ID & start date');
+example_print_step('Get the OpeningHours by the Service, Channel ID & start date');
 example_print();
 
 try {
