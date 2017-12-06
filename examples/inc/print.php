@@ -85,3 +85,14 @@ function example_print_footer()
     example_print_separator();
     example_print();
 }
+
+/**
+ * Print HTML output.
+ *
+ * @param string $html
+ *   The HTML string to print.
+ */
+function example_print_html($html)
+{
+    example_print(\Mihaeu\HtmlFormatter::format($html));
+}

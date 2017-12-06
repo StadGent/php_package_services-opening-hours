@@ -31,7 +31,7 @@ example_print();
 
 try {
     $html = $channelService->openNowHtml($service_id, $channel_id);
-    example_print($html);
+    example_print_html($html);
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_sprintf(' ! No Service found for Service ID : %d', $service_id);
 } catch (\StadGent\Services\OpeningHours\Exception\ChannelNotFoundException $e) {
