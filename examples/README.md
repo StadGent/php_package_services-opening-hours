@@ -28,6 +28,10 @@ file.
   Channel ID.
 * `211-Channel-OpenNow.php` : Get the Open Now status as object.
 * `211-Channel-OpenNowHtml.php` : Get the Open Now status as HTML.
+* `221-Channel-OpeningHoursDay.php` : Get the opening hours for a single day as
+  object.
+* `221-Channel-OpeningHoursDayHtml.php` : Get the opening hours for a single day
+  as HTML.
 
 ## Usage
 
