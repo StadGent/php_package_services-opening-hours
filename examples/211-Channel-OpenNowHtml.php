@@ -24,13 +24,13 @@ example_print_step('Create the HTTP client.');
 $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);
 
 example_print_step('Get the ChannelService.');
-$channelService = \StadGent\Services\OpeningHours\ChannelServiceFactory::create($client);
+$service = \StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlServiceFactory::create($client);
 
 example_print_step('Get the Open Now status by the Services & Channel ID');
 example_print();
 
 try {
-    $html = $channelService->openNowHtml($service_id, $channel_id);
+    $html = $service->openNowHtml($service_id, $channel_id);
     example_print_html($html);
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_sprintf(' ! No Service found for Service ID : %d', $service_id);

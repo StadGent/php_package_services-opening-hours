@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
 
@@ -21,7 +21,7 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
         $html = $this->createOpenNowHtml();
         $client = $this->createClientForOpenNowHtml($html);
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $responseHtml = $channelService->openNowHtml(10, 20);
         $this->assertSame($html, $responseHtml);
     }
@@ -33,9 +33,9 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpenNowHtml();
         $client = $this->createClientForOpenNowHtml($html);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:openNowHtml:10:20', $html);
+        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:openNowHtml:10:20', $html);
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
         $responseHtml = $channelService->openNowHtml(10, 20);
         $this->assertSame($html, $responseHtml);
@@ -48,9 +48,9 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpenNowHtml();
         $client = $this->createClientForOpenNowHtml($html);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:openNowHtml:12:34', $html);
+        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:openNowHtml:12:34', $html);
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
         $channelService->openNowHtml(12, 34);
     }
@@ -63,7 +63,7 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
     public function testServiceNotFoundException()
     {
         $client = $this->getClientWithServiceNotFoundExceptionMock();
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->openNowHtml(777, 666);
     }
 
@@ -75,7 +75,7 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
     public function testChannelNotFoundException()
     {
         $client = $this->getClientWithChannelNotFoundExceptionMock();
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->openNowHtml(1, 666);
     }
 

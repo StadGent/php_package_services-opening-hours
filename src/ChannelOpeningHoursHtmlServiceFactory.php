@@ -4,15 +4,15 @@ namespace StadGent\Services\OpeningHours;
 
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHtmlHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 
 /**
- * Factory to create the ChannelService.
+ * Factory to create the ChannelOpeningHoursHtmlService.
  *
  * @package StadGent\Services\OpeningHours
  */
-class ChannelServiceFactory
+class ChannelOpeningHoursHtmlServiceFactory
 {
     /**
      * Expects a Client object.
@@ -23,16 +23,16 @@ class ChannelServiceFactory
      * @param \StadGent\Services\OpeningHours\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return \StadGent\Services\OpeningHours\ChannelService
+     * @return \StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlService
      */
     public static function create(ClientInterface $client, CacheInterface $cache = null)
     {
         $client
-            ->addHandler(new GetAllHandler())
-            ->addHandler(new GetByIdHandler())
+            ->addHandler(new OpenNowHtmlHandler())
+            ->addHandler(new OpeningHoursHtmlHandler())
         ;
 
-        $service = new ChannelService($client);
+        $service = new ChannelOpeningHoursHtmlService($client);
         if ($cache) {
             $service->setCacheService($cache);
         }

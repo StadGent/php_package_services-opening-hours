@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursService;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
 use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\OpeningHours\Value\OpeningHours;
@@ -22,7 +22,7 @@ class ChannelServiceOpeningHoursMonthTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursService($client);
         $responseOpeningsHours = $channelService->openingHoursMonth(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningsHours);
     }
@@ -35,11 +35,11 @@ class ChannelServiceOpeningHoursMonthTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getFromCacheMock(
-            'OpeningHours:ChannelService:openingHoursMonth:10:20:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:openingHoursMonth:10:20:2020-01-02',
             $openingHours
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
         $responseOpeningHours = $channelService->openingHoursMonth(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningHours);
@@ -53,11 +53,11 @@ class ChannelServiceOpeningHoursMonthTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getSetCacheMock(
-            'OpeningHours:ChannelService:openingHoursMonth:12:34:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:openingHoursMonth:12:34:2020-01-02',
             $openingHours
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
         $channelService->openingHoursMonth(12, 34, '2020-01-02');
     }

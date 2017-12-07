@@ -28,13 +28,13 @@ example_print_step('Create the HTTP client.');
 $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);
 
 example_print_step('Get the ChannelService.');
-$channelService = \StadGent\Services\OpeningHours\ChannelServiceFactory::create($client);
+$service = \StadGent\Services\OpeningHours\ChannelOpeningHoursServiceFactory::create($client);
 
 example_print_step('Get the OpeningHours by the Services, Channel ID & date');
 example_print();
 
 try {
-    $openingHours = $channelService->openingHoursDay($service_id, $channel_id, $openinghours_day_date);
+    $openingHours = $service->openingHoursDay($service_id, $channel_id, $openinghours_day_date);
     example_sprintf(' Id      : %d', $openingHours->getChannelId());
     example_sprintf(' Label   : %s', $openingHours->getChannelLabel());
     example_print();
