@@ -26,7 +26,8 @@ composer require stadgent/services-opening-hours
 
 ## Usage
 
-Explain how to use the project/package/module. Add some code examples.
+See the [code examples documentation](examples/README.md) included in this
+package.
 
 ## Change log
 
@@ -38,7 +39,7 @@ recently.
 Run all tests:
 
 ```bash
-composer test
+vendor/bin/phpunit
 ```
 
 ## Contributing
