@@ -6,21 +6,13 @@ use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayHtmlRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthHtmlRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodHtmlRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekHtmlRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearHtmlRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
-use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
-use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 
 /**
  * Service to access the Channel OpeningHours.

@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
 
 /**
