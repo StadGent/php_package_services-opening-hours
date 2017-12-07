@@ -20,7 +20,7 @@ example_print_header(
 
 
 example_print_step('Create the API client configuration.');
-$configuration = new \StadGent\Services\OpeningHours\Client\Configuration\Configuration($apiEndpoint);
+$configuration = new \StadGent\Services\OpeningHours\Configuration\Configuration($apiEndpoint);
 
 example_print_step('Create the Guzzle client.');
 $guzzleClient = new \GuzzleHttp\Client(['base_uri' => $configuration->getUri()]);

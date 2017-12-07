@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Client;
 
-use StadGent\Services\OpeningHours\Client\Configuration\ConfigurationInterface;
+use StadGent\Services\OpeningHours\Configuration\ConfigurationInterface;
 use StadGent\Services\OpeningHours\Handler\HandlerInterface;
 use StadGent\Services\OpeningHours\Handler\Exception\NoHandlerException;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
@@ -25,7 +25,7 @@ class Client implements ClientInterface
     protected $guzzle;
 
     /**
-     * @var \StadGent\Services\OpeningHours\Client\Configuration\ConfigurationInterface
+     * @var \StadGent\Services\OpeningHours\Configuration\ConfigurationInterface
      */
     protected $configuration;
 
@@ -34,7 +34,7 @@ class Client implements ClientInterface
      *
      * @param \GuzzleHttp\Client $guzzle
      *   The HTTP client.
-     * @param \StadGent\Services\OpeningHours\Client\Configuration\ConfigurationInterface $configuration
+     * @param \StadGent\Services\OpeningHours\Configuration\ConfigurationInterface $configuration
      *   The configuration.
      */
     public function __construct(\GuzzleHttp\Client $guzzle, ConfigurationInterface $configuration)

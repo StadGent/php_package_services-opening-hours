@@ -3,7 +3,7 @@
 namespace StadGent\Services\Test\OpeningHours\Client;
 
 use StadGent\Services\OpeningHours\Client\Client;
-use StadGent\Services\OpeningHours\Client\Configuration\ConfigurationInterface;
+use StadGent\Services\OpeningHours\Configuration\ConfigurationInterface;
 use StadGent\Services\OpeningHours\Handler\HandlerInterface;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use GuzzleHttp\Client as GuzzleClient;

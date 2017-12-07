@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Client\Configuration;
 
-use StadGent\Services\OpeningHours\Client\Configuration\Configuration;
+use StadGent\Services\OpeningHours\Configuration\Configuration;
 use PHPUnit\Framework\TestCase;
 
 /**
