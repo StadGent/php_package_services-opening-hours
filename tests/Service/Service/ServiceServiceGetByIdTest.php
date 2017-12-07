@@ -35,7 +35,7 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
     {
         $service = $this->createService();
         $client = $this->createClientForService($service);
-        $cache = $this->getFromCacheMock('OpeningHours:ServiceService:getById:10', $service);
+        $cache = $this->getFromCacheMock('OpeningHours:service:value:id:10', $service);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
@@ -50,7 +50,7 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
     {
         $service = $this->createService();
         $client = $this->createClientForService($service);
-        $cache = $this->getSetCacheMock('OpeningHours:ServiceService:getById:10', $service);
+        $cache = $this->getSetCacheMock('OpeningHours:service:value:id:10', $service);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);

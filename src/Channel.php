@@ -24,7 +24,7 @@ class Channel
      * @param \StadGent\Services\OpeningHours\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return \StadGent\Services\OpeningHours\ChannelService
+     * @return \StadGent\Services\OpeningHours\Service\Channel\ChannelService
      */
     public static function create(ClientInterface $client, CacheInterface $cache = null)
     {

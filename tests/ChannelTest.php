@@ -95,7 +95,7 @@ class ChannelTest extends TestCase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getAll:6'))
+            ->with($this->equalTo('OpeningHours:channel:value:all:6'))
             ->will($this->returnValue($collection));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */

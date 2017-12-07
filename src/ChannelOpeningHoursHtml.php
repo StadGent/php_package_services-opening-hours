@@ -6,7 +6,7 @@ use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
-use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService;
+use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlService;
 
 /**
  * Factory to create the ChannelOpeningHoursHtmlService.
@@ -24,7 +24,7 @@ class ChannelOpeningHoursHtml
      * @param \StadGent\Services\OpeningHours\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return \StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService
+     * @return \StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlService
      */
     public static function create(ClientInterface $client, CacheInterface $cache = null)
     {
@@ -33,7 +33,7 @@ class ChannelOpeningHoursHtml
             ->addHandler(new OpeningHoursHtmlHandler())
         ;
 
-        $service = new ChannelOpeningHoursHtmlService($client);
+        $service = new OpeningHoursHtmlService($client);
         if ($cache) {
             $service->setCacheService($cache);
         }

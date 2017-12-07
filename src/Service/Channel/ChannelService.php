@@ -37,7 +37,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function getAll($serviceId)
     {
-        $cacheKey = $this->createCacheKeyFromArray([__FUNCTION__, $serviceId]);
+        $cacheKey = $this->createCacheKeyFromArray(['all', $serviceId]);
 
         // From cache?
         $cached = $this->cacheGet($cacheKey);
@@ -81,7 +81,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
     public function getById($serviceId, $channelId)
     {
         $cacheKey = $this->createCacheKeyFromArray(
-            [__FUNCTION__, $serviceId, $channelId]
+            ['id', $serviceId, $channelId]
         );
 
         // By default from cache.
@@ -118,7 +118,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     protected function createCacheKeyFromArray(array $parts)
     {
-        $key = implode(':', $parts);
+        $key = 'channel:value:' . implode(':', $parts);
         return $this->createCacheKey($key);
     }
 }

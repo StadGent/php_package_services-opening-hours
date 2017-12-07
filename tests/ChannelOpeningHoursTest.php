@@ -4,7 +4,7 @@ namespace StadGent\Services\Test\OpeningHours;
 
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursService;
+use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursService;
 use StadGent\Services\OpeningHours\ChannelOpeningHours;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHandler;
@@ -46,7 +46,7 @@ class ChannelOpeningHoursTest extends TestCase
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
         $service = ChannelOpeningHours::create($client);
         $this->assertInstanceOf(
-            ChannelOpeningHoursService::class,
+            OpeningHoursService::class,
             $service,
             'Service is an ChannelOpeningHoursService.'
         );
@@ -95,7 +95,7 @@ class ChannelOpeningHoursTest extends TestCase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelOpeningHoursService:day:12:34:2020-01-02'))
+            ->with($this->equalTo('OpeningHours:channel:value:day:12:34:2020-01-02'))
             ->will($this->returnValue($collection));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */

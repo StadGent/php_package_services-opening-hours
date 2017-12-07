@@ -97,7 +97,7 @@ class ServiceTest extends TestCase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getAll'))
+            ->with($this->equalTo('OpeningHours:service:value:all'))
             ->will($this->returnValue($collection));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */

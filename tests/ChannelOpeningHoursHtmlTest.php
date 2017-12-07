@@ -8,7 +8,7 @@ use StadGent\Services\OpeningHours\ChannelOpeningHoursHtml;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
-use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService;
+use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
 
 /**
@@ -46,7 +46,7 @@ class ChannelOpeningHoursHtmlTest extends TestCase
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
         $service = ChannelOpeningHoursHtml::create($client);
         $this->assertInstanceOf(
-            ChannelOpeningHoursHtmlService::class,
+            OpeningHoursHtmlService::class,
             $service,
             'Service is an ChannelOpeningHoursService.'
         );
@@ -95,7 +95,7 @@ class ChannelOpeningHoursHtmlTest extends TestCase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelOpeningHoursHtmlService:day:12:34:2020-01-02'))
+            ->with($this->equalTo('OpeningHours:channel:html:day:12:34:2020-01-02'))
             ->will($this->returnValue($collection));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */

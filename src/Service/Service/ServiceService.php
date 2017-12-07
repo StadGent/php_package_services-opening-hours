@@ -31,7 +31,7 @@ class ServiceService extends ServiceAbstract implements CacheableInterface
      */
     public function getAll()
     {
-        $cacheKey = $this->createCacheKey(__FUNCTION__);
+        $cacheKey = $this->createCacheKeyFromArray(['all']);
 
         // From cache?
         $cached = $this->cacheGet($cacheKey);
@@ -93,7 +93,9 @@ class ServiceService extends ServiceAbstract implements CacheableInterface
      */
     public function getById($serviceId)
     {
-        $cacheKey = $this->createCacheKey(__FUNCTION__ . ':' . $serviceId);
+        $cacheKey = $this->createCacheKeyFromArray(
+            ['id', $serviceId]
+        );
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -116,5 +118,20 @@ class ServiceService extends ServiceAbstract implements CacheableInterface
         $this->cacheSet($cacheKey, $service);
 
         return $service;
+    }
+
+    /**
+     * Helper to create a cache key.
+     *
+     * @param array $parts
+     *   The cache key parts, will be added to the key separated by ":".
+     *
+     * @return string
+     *   Prefixed cache key.
+     */
+    protected function createCacheKeyFromArray(array $parts)
+    {
+        $key = 'service:value:' . implode(':', $parts);
+        return $this->createCacheKey($key);
     }
 }

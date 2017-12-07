@@ -5,15 +5,14 @@ namespace StadGent\Services\OpeningHours\Service\Channel;
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearRequest;
-use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayHtmlRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthHtmlRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodHtmlRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekHtmlRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearHtmlRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
-use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
-use StadGent\Services\OpeningHours\Response\OpenNowResponse;
+use StadGent\Services\OpeningHours\Response\HtmlResponse;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 
 /**
@@ -21,19 +20,20 @@ use StadGent\Services\OpeningHours\Service\ServiceAbstract;
  *
  * @package StadGent\Services\OpeningHours
  */
-class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInterface
+class OpeningHoursHtmlService extends ServiceAbstract implements CacheableInterface
 {
     use CacheableTrait;
 
     /**
-     * Get the Open now status as Value object.
+     * Get the Open now status as HTML.
      *
      * @param int $serviceId
      *   The Service ID.
      * @param int $channelId
      *   The Channel ID.
      *
-     * @return \StadGent\Services\OpeningHours\Value\OpenNow
+     * @return string
+     *   The HTML.
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
@@ -47,19 +47,19 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
         try {
             // Get from service.
             $response = $this->send(
-                new OpenNowRequest($serviceId, $channelId),
-                OpenNowResponse::class
+                new OpenNowHtmlRequest($serviceId, $channelId),
+                HtmlResponse::class
             );
         } catch (\Exception $e) {
             ExceptionFactory::fromException($e);
         }
 
-        /* @var $response \StadGent\Services\OpeningHours\Response\OpenNowResponse */
-        return $response->getOpenNow();
+        /* @var $response \StadGent\Services\OpeningHours\Response\HtmlResponse */
+        return $response->getHtml();
     }
 
     /**
-     * Get the Opening Hours for a single day as Value object.
+     * Get the Opening Hours for a single day as HTML.
      *
      * @param int $serviceId
      *   The Service ID.
@@ -68,7 +68,8 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @param string $date
      *   The day date (Y-m-d) to get the data for.
      *
-     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
+     * @return string
+     *   The HTML.
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
@@ -83,14 +84,14 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
             ['day', $serviceId, $channelId, $date]
         );
 
-        return $this->sendOpeninghoursRequest(
+        return $this->sendHtmlRequest(
             $cacheKey,
-            new OpeningHoursDayRequest($serviceId, $channelId, $date)
+            new OpeningHoursDayHtmlRequest($serviceId, $channelId, $date)
         );
     }
 
     /**
-     * Get the Opening Hours for a single week as Value object.
+     * Get the Opening Hours for a single week as HTML.
      *
      * @param int $serviceId
      *   The Service ID.
@@ -99,7 +100,8 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @param string $date
      *   A date (Y-m-d) in the week to get the data for.
      *
-     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
+     * @return string
+     *   The HTML.
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
@@ -114,14 +116,14 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
             ['week', $serviceId, $channelId, $date]
         );
 
-        return $this->sendOpeninghoursRequest(
+        return $this->sendHtmlRequest(
             $cacheKey,
-            new OpeningHoursWeekRequest($serviceId, $channelId, $date)
+            new OpeningHoursWeekHtmlRequest($serviceId, $channelId, $date)
         );
     }
 
     /**
-     * Get the Opening Hours for a single month as Value object.
+     * Get the Opening Hours for a single month as HTML.
      *
      * @param int $serviceId
      *   The Service ID.
@@ -130,7 +132,8 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @param string $date
      *   A date (Y-m-d) in the month to get the data for.
      *
-     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
+     * @return string
+     *   The HTML.
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
@@ -145,14 +148,14 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
             ['month', $serviceId, $channelId, $date]
         );
 
-        return $this->sendOpeninghoursRequest(
+        return $this->sendHtmlRequest(
             $cacheKey,
-            new OpeningHoursMonthRequest($serviceId, $channelId, $date)
+            new OpeningHoursMonthHtmlRequest($serviceId, $channelId, $date)
         );
     }
 
     /**
-     * Get the Opening Hours for a single year as Value object.
+     * Get the Opening Hours for a single year as HTML.
      *
      * @param int $serviceId
      *   The Service ID.
@@ -161,7 +164,8 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @param string $date
      *   A date (Y-m-d) in the year to get the data for.
      *
-     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
+     * @return string
+     *   The HTML.
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
@@ -176,14 +180,14 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
             ['year', $serviceId, $channelId, $date]
         );
 
-        return $this->sendOpeninghoursRequest(
+        return $this->sendHtmlRequest(
             $cacheKey,
-            new OpeningHoursYearRequest($serviceId, $channelId, $date)
+            new OpeningHoursYearHtmlRequest($serviceId, $channelId, $date)
         );
     }
 
     /**
-     * Get the Opening Hours for a given period as Value object.
+     * Get the Opening Hours for a given period as HTML.
      *
      * @param int $serviceId
      *   The Service ID.
@@ -194,7 +198,8 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @param string $dateUntil
      *   The end date (Y-m-d) of the period to get the data for.
      *
-     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
+     * @return string
+     *   The HTML.
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
@@ -209,22 +214,22 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
             ['period', $serviceId, $channelId, $dateFrom, $dateUntil]
         );
 
-        return $this->sendOpeninghoursRequest(
+        return $this->sendHtmlRequest(
             $cacheKey,
-            new OpeningHoursPeriodRequest($serviceId, $channelId, $dateFrom, $dateUntil)
+            new OpeningHoursPeriodHtmlRequest($serviceId, $channelId, $dateFrom, $dateUntil)
         );
     }
 
     /**
-     * Helper to send a request that will result in a openingHours value.
+     * Helper to send a request that will result in a HTML.
      *
      * @param string $cacheKey
      *   The cache key to retrieve & store the result.
      * @param \StadGent\Services\OpeningHours\Request\RequestInterface $request
      *   The request to send.
      *
-     * @return \StadGent\Services\OpeningHours\Value\OpeningHours
-     *   The openinghours from the backend.
+     * @return string
+     *   The HTML.
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
@@ -233,7 +238,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    protected function sendOpeninghoursRequest($cacheKey, RequestInterface $request)
+    protected function sendHtmlRequest($cacheKey, RequestInterface $request)
     {
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -243,15 +248,15 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
 
         try {
             // Get from service.
-            $response = $this->send($request, OpeningHoursResponse::class);
+            $response = $this->send($request, HtmlResponse::class);
         } catch (\Exception $e) {
             ExceptionFactory::fromException($e);
         }
 
-        /* @var $response \StadGent\Services\OpeningHours\Response\OpeningHoursResponse */
-        $openingHours = $response->getOpeninghours();
-        $this->cacheSet($cacheKey, $openingHours);
-        return $openingHours;
+        /* @var $response \StadGent\Services\OpeningHours\Response\HtmlResponse */
+        $html = $response->getHtml();
+        $this->cacheSet($cacheKey, $html);
+        return $html;
     }
 
     /**
@@ -265,7 +270,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      */
     protected function createCacheKeyFromArray(array $parts)
     {
-        $key = implode(':', $parts);
+        $key = 'channel:html:' . implode(':', $parts);
         return $this->createCacheKey($key);
     }
 }

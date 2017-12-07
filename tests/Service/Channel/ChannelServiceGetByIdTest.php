@@ -35,7 +35,7 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
     {
         $channel = $this->createChannel();
         $client = $this->createClientForChannel($channel);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:getById:10:20', $channel);
+        $cache = $this->getFromCacheMock('OpeningHours:channel:value:id:10:20', $channel);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
@@ -50,7 +50,7 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
     {
         $channel = $this->createChannel();
         $client = $this->createClientForChannel($channel);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:getById:12:34', $channel);
+        $cache = $this->getSetCacheMock('OpeningHours:channel:value:id:12:34', $channel);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);

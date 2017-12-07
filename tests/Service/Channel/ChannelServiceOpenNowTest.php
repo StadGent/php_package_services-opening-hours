@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursService;
+use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursService;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
 use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 use StadGent\Services\OpeningHours\Value\OpenNow;
@@ -23,7 +23,7 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
         $openNow = $this->createOpenNow();
         $client = $this->createClientForOpenNow($openNow);
 
-        $channelService = new ChannelOpeningHoursService($client);
+        $channelService = new OpeningHoursService($client);
         $responseOpenNow = $channelService->getOpenNow(10, 20);
         $this->assertSame($openNow, $responseOpenNow);
     }
@@ -36,7 +36,7 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
     public function testServiceNotFoundException()
     {
         $client = $this->getClientWithServiceNotFoundExceptionMock();
-        $channelService = new ChannelOpeningHoursService($client);
+        $channelService = new OpeningHoursService($client);
         $channelService->getOpenNow(777, 666);
     }
 
@@ -48,7 +48,7 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
     public function testChannelNotFoundException()
     {
         $client = $this->getClientWithChannelNotFoundExceptionMock();
-        $channelService = new ChannelOpeningHoursService($client);
+        $channelService = new OpeningHoursService($client);
         $channelService->getOpenNow(1, 666);
     }
 

@@ -35,7 +35,7 @@ class ServiceServiceGetAllTest extends ServiceTestBase
     {
         $serviceCollection = $this->createServiceCollection();
         $client = $this->createClientForServiceCollection($serviceCollection);
-        $cache = $this->getFromCacheMock('OpeningHours:ServiceService:getAll', $serviceCollection);
+        $cache = $this->getFromCacheMock('OpeningHours:service:value:all', $serviceCollection);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
@@ -50,7 +50,7 @@ class ServiceServiceGetAllTest extends ServiceTestBase
     {
         $serviceCollection = $this->createServiceCollection();
         $client = $this->createClientForServiceCollection($serviceCollection);
-        $cache = $this->getSetCacheMock('OpeningHours:ServiceService:getAll', $serviceCollection);
+        $cache = $this->getSetCacheMock('OpeningHours:service:value:all', $serviceCollection);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);

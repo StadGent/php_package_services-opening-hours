@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService;
+use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
 use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
@@ -22,7 +22,7 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
 
-        $channelService = new ChannelOpeningHoursHtmlService($client);
+        $channelService = new OpeningHoursHtmlService($client);
         $responseHtml = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
@@ -34,9 +34,9 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:week:10:20:2020-01-02', $html);
+        $cache = $this->getFromCacheMock('OpeningHours:channel:html:week:10:20:2020-01-02', $html);
 
-        $channelService = new ChannelOpeningHoursHtmlService($client);
+        $channelService = new OpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
         $responseHtml = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
@@ -49,9 +49,9 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:week:10:20:2020-01-02', $html);
+        $cache = $this->getSetCacheMock('OpeningHours:channel:html:week:10:20:2020-01-02', $html);
 
-        $channelService = new ChannelOpeningHoursHtmlService($client);
+        $channelService = new OpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
         $channelService->getWeek(10, 20, '2020-01-02');
     }

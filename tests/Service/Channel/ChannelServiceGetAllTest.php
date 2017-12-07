@@ -35,7 +35,7 @@ class ChannelServiceGetAllTest extends ServiceTestBase
     {
         $channelCollection = $this->createChannelCollection();
         $client = $this->createClientForChannelCollection($channelCollection);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:getAll:5', $channelCollection);
+        $cache = $this->getFromCacheMock('OpeningHours:channel:value:all:5', $channelCollection);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
@@ -51,7 +51,7 @@ class ChannelServiceGetAllTest extends ServiceTestBase
     {
         $channelCollection = $this->createChannelCollection();
         $client = $this->createClientForChannelCollection($channelCollection);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:getAll:6', $channelCollection);
+        $cache = $this->getSetCacheMock('OpeningHours:channel:value:all:6', $channelCollection);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
