@@ -11,6 +11,7 @@ use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
@@ -496,6 +497,40 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         return $this->sendOpeninghoursRequest(
             $cacheKey,
             new OpeningHoursPeriodRequest($serviceId, $channelId, $dateFrom, $dateUntil)
+        );
+    }
+
+    /**
+     * Get the Opening Hours for a given period as HTML.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     * @param string $dateFrom
+     *   The start date (Y-m-d) of the period to get the data for.
+     * @param string $dateUntil
+     *   The end date (Y-m-d) of the period to get the data for.
+     *
+     * @return string
+     *   The HTML.
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function openingHoursPeriodHtml($serviceId, $channelId, $dateFrom, $dateUntil)
+    {
+        $cacheKey = $this->createCacheKeyFromArray(
+            [__FUNCTION__, $serviceId, $channelId, $dateFrom, $dateUntil]
+        );
+
+        return $this->sendHtmlRequest(
+            $cacheKey,
+            new OpeningHoursPeriodHtmlRequest($serviceId, $channelId, $dateFrom, $dateUntil)
         );
     }
 
