@@ -18,10 +18,6 @@ class GetAllRequest extends RequestAbstract
      */
     public function __construct()
     {
-        parent::__construct(
-            MethodType::GET,
-            'services',
-            ['Accept' => AcceptType::JSON]
-        );
+        parent::__construct('services');
     }
 }

@@ -22,10 +22,6 @@ class GetByIdRequest extends RequestAbstract
     public function __construct($id)
     {
         $uri = sprintf('services/%d', $id);
-        parent::__construct(
-            MethodType::GET,
-            $uri,
-            ['Accept' => AcceptType::JSON]
-        );
+        parent::__construct($uri);
     }
 }

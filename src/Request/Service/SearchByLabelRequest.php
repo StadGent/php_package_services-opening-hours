@@ -22,10 +22,6 @@ class SearchByLabelRequest extends RequestAbstract
     public function __construct($label)
     {
         $uri = sprintf('services?label=%s', $label);
-        parent::__construct(
-            MethodType::GET,
-            $uri,
-            ['Accept' => AcceptType::JSON]
-        );
+        parent::__construct($uri);
     }
 }

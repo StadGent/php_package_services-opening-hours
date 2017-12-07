@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
 
 /**
@@ -32,10 +30,6 @@ class OpeningHoursYearRequest extends RequestAbstract
             $date
         );
 
-        parent::__construct(
-            MethodType::GET,
-            $uri,
-            ['Accept' => AcceptType::JSON]
-        );
+        parent::__construct($uri);
     }
 }
