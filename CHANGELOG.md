@@ -18,5 +18,7 @@ All Notable changes to `gent/services-opening-hours` package.
   ChannelService.
 * DMOH-14: Added the OpeningHoursWeek & OpeningHoursWeekHTML methods to the
   ChannelService.
+* DMOH-15: Added the OpeningHoursMonth & OpeningHoursMonthHTML methods to the
+  ChannelService.
 
 [Unreleased]: https://github.com/StadGent/php_package_services-opening-hours/compare/master...develop

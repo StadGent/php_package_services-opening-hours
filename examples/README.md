@@ -36,6 +36,10 @@ file.
   as object.
 * `222-Channel-OpeningHoursWeekHtml.php` : Get the opening hours for a single
   week as HTML.
+* `223-Channel-OpeningHoursMonth.php` : Get the opening hours for a single month
+  as object.
+* `223-Channel-OpeningHoursMonthHtml.php` : Get the opening hours for a single
+  month as HTML.
 
 ## Usage
 
