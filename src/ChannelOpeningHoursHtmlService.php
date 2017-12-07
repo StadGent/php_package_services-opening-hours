@@ -51,16 +51,6 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
      */
     public function getOpenNow($serviceId, $channelId)
     {
-        $cacheKey = $this->createCacheKeyFromArray(
-            ['openNow', $serviceId, $channelId]
-        );
-
-        // By default from cache.
-        $cached = $this->cacheGet($cacheKey);
-        if ($cached) {
-            return $cached;
-        }
-
         try {
             // Get from service.
             $response = $this->send(
@@ -72,10 +62,7 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
         }
 
         /* @var $response \StadGent\Services\OpeningHours\Response\HtmlResponse */
-        $html = $response->getHtml();
-        $this->cacheSet($cacheKey, $html);
-
-        return $html;
+        return $response->getHtml();
     }
 
     /**

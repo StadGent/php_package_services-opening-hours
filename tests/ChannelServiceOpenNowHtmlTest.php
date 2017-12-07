@@ -27,35 +27,6 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
     }
 
     /**
-     * Test the openNow return HTML from cache.
-     */
-    public function testOpenNowHtmlFromCache()
-    {
-        $html = $this->createOpenNowHtml();
-        $client = $this->createClientForOpenNowHtml($html);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:openNow:10:20', $html);
-
-        $channelService = new ChannelOpeningHoursHtmlService($client);
-        $channelService->setCacheService($cache);
-        $responseHtml = $channelService->getOpenNow(10, 20);
-        $this->assertSame($html, $responseHtml);
-    }
-
-    /**
-     * Test the openNow setCache when not yet cached.
-     */
-    public function testOpenNowHtmlSetCache()
-    {
-        $html = $this->createOpenNowHtml();
-        $client = $this->createClientForOpenNowHtml($html);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:openNow:12:34', $html);
-
-        $channelService = new ChannelOpeningHoursHtmlService($client);
-        $channelService->setCacheService($cache);
-        $channelService->getOpenNow(12, 34);
-    }
-
-    /**
      * Test the Service not found exception.
      *
      * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException

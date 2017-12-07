@@ -43,16 +43,6 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      */
     public function getOpenNow($serviceId, $channelId)
     {
-        $cacheKey = $this->createCacheKeyFromArray(
-            ['openNow', $serviceId, $channelId]
-        );
-
-        // By default from cache.
-        $cached = $this->cacheGet($cacheKey);
-        if ($cached) {
-            return $cached;
-        }
-
         try {
             // Get from service.
             $response = $this->send(
@@ -64,10 +54,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
         }
 
         /* @var $response \StadGent\Services\OpeningHours\Response\OpenNowResponse */
-        $openNow = $response->getOpenNow();
-        $this->cacheSet($cacheKey, $openNow);
-
-        return $openNow;
+        return $response->getOpenNow();
     }
 
     /**

@@ -28,35 +28,6 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
     }
 
     /**
-     * Test the openNow return object from cache.
-     */
-    public function testOpenNowFromCache()
-    {
-        $openNow = $this->createOpenNow();
-        $client = $this->createClientForOpenNow($openNow);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursService:openNow:10:20', $openNow);
-
-        $channelService = new ChannelOpeningHoursService($client);
-        $channelService->setCacheService($cache);
-        $responseService = $channelService->getOpenNow(10, 20);
-        $this->assertSame($openNow, $responseService);
-    }
-
-    /**
-     * Test the getByServiceAndChannelId setCache when not yet cached.
-     */
-    public function testOpenNowSetCache()
-    {
-        $openNow = $this->createOpenNow();
-        $client = $this->createClientForOpenNow($openNow);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursService:openNow:12:34', $openNow);
-
-        $channelService = new ChannelOpeningHoursService($client);
-        $channelService->setCacheService($cache);
-        $channelService->getOpenNow(12, 34);
-    }
-
-    /**
      * Test the Service not found exception.
      *
      * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
