@@ -15,6 +15,8 @@ use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursMonthHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursMonthHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursWeekHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursWeekHtmlHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursYearHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursYearHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
@@ -44,6 +46,8 @@ class ChannelServiceFactoryTest extends TestCase
             OpeningHoursWeekHtmlHandler::class,
             OpeningHoursMonthHandler::class,
             OpeningHoursMonthHtmlHandler::class,
+            OpeningHoursYearHandler::class,
+            OpeningHoursYearHtmlHandler::class,
         ];
 
         // Create the client so we can spy on the factory method.
