@@ -29,4 +29,5 @@ ratings:
 exclude_paths:
 - ".github"
 - "**/vendor/**/*"
+- "examples/"
 - "tests/"
