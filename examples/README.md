@@ -40,6 +40,10 @@ file.
   as object.
 * `223-Channel-OpeningHoursMonthHtml.php` : Get the opening hours for a single
   month as HTML.
+* `224-Channel-OpeningHoursYear.php` : Get the opening hours for a single year
+  as object.
+* `224-Channel-OpeningHoursYearHtml.php` : Get the opening hours for a single
+  year as HTML.
 
 ## Usage
 
