@@ -30,3 +30,6 @@ $channel_id = '';
 
 
 // Dates to lookup OpeningHours for -------------------------------------------
+
+// Opening hours for a single day (yyyy-mm-dd).
+$openinghours_day_date = '';
