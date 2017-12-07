@@ -4,32 +4,30 @@ namespace StadGent\Services\Test\OpeningHours;
 
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursHtml;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
-use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
-use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
-use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
-use StadGent\Services\OpeningHours\Service\Service\ServiceService;
-use StadGent\Services\OpeningHours\ServiceServiceFactory;
-use StadGent\Services\OpeningHours\Value\ServiceCollection;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHtmlHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService;
+use StadGent\Services\OpeningHours\Value\ChannelCollection;
 
 /**
- * Class RoomServiceFactoryTest
+ * Tests the ChannelOpeningHoursHtmlServiceFactory.
  *
- * @package Gent\Zalenzoeker\Tests\Services\Room
+ * @package StadGent\Services\Test\OpeningHours
  */
-class ServiceServiceFactoryTest extends TestCase
+class ChannelOpeningHoursHtmlTest extends TestCase
 {
 
     /**
-     * Test the create factory method.
+     * Test creating the ChannelService.
      */
     public function testCreate()
     {
         // Handlers we expect to be added to the factory.
         $expectedHandlers = [
-            GetAllHandler::class,
-            GetByIdHandler::class,
-            SearchByLabelHandler::class,
+            OpenNowHtmlHandler::class,
+            OpeningHoursHtmlHandler::class,
         ];
 
         // Create the client so we can spy on the factory method.
@@ -46,11 +44,11 @@ class ServiceServiceFactoryTest extends TestCase
             ->will($this->returnValue($client));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
-        $service = ServiceServiceFactory::create($client);
+        $service = ChannelOpeningHoursHtml::create($client);
         $this->assertInstanceOf(
-            ServiceService::class,
+            ChannelOpeningHoursHtmlService::class,
             $service,
-            'Service is an ServiceService.'
+            'Service is an ChannelOpeningHoursService.'
         );
 
         // Validate the number of handlers added.
@@ -79,7 +77,7 @@ class ServiceServiceFactoryTest extends TestCase
      */
     public function testCreateWithCache()
     {
-        $collection = ServiceCollection::fromArray([]);
+        $collection = ChannelCollection::fromArray([]);
 
         $client = $this
             ->getMockBuilder(ClientInterface::class)
@@ -97,13 +95,13 @@ class ServiceServiceFactoryTest extends TestCase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getAll'))
+            ->with($this->equalTo('OpeningHours:ChannelOpeningHoursHtmlService:day:12:34:2020-01-02'))
             ->will($this->returnValue($collection));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
-        $service = ServiceServiceFactory::create($client, $cache);
+        $service = ChannelOpeningHoursHtml::create($client, $cache);
 
-        $responseCollection = $service->getAll();
+        $responseCollection = $service->getDay(12, 34, '2020-01-02');
         $this->assertSame($collection, $responseCollection);
     }
 }

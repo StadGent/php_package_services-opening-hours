@@ -28,7 +28,7 @@ example_print_step('Create the HTTP client.');
 $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);
 
 example_print_step('Get the ChannelService.');
-$service = \StadGent\Services\OpeningHours\ChannelOpeningHoursServiceFactory::create($client);
+$service = \StadGent\Services\OpeningHours\ChannelOpeningHours::create($client);
 
 example_print_step('Get the OpeningHours by the Service, Channel ID & start date');
 example_print();

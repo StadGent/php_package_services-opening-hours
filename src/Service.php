@@ -4,16 +4,17 @@ namespace StadGent\Services\OpeningHours;
 
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
-use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursService;
+use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
+use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
+use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
+use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 
 /**
- * Factory to create the ChannelOpeningHoursService.
+ * Factory to create the ServiceService.
  *
  * @package StadGent\Services\OpeningHours
  */
-class ChannelOpeningHoursServiceFactory
+class Service
 {
     /**
      * Expects a Client object.
@@ -24,16 +25,17 @@ class ChannelOpeningHoursServiceFactory
      * @param \StadGent\Services\OpeningHours\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return \StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursService
+     * @return \StadGent\Services\OpeningHours\Service\Service\ServiceService
      */
     public static function create(ClientInterface $client, CacheInterface $cache = null)
     {
         $client
-            ->addHandler(new OpenNowHandler())
-            ->addHandler(new OpeningHoursHandler())
+            ->addHandler(new GetAllHandler())
+            ->addHandler(new GetByIdHandler())
+            ->addHandler(new SearchByLabelHandler())
         ;
 
-        $service = new ChannelOpeningHoursService($client);
+        $service = new ServiceService($client);
         if ($cache) {
             $service->setCacheService($cache);
         }

@@ -13,7 +13,7 @@ use StadGent\Services\OpeningHours\Service\Channel\ChannelService;
  *
  * @package StadGent\Services\OpeningHours
  */
-class ChannelServiceFactory
+class Channel
 {
     /**
      * Expects a Client object.

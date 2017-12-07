@@ -13,7 +13,7 @@ use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlServic
  *
  * @package StadGent\Services\OpeningHours
  */
-class ChannelOpeningHoursHtmlServiceFactory
+class ChannelOpeningHoursHtml
 {
     /**
      * Expects a Client object.
