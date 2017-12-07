@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
  *
  * @package StadGent\Services\Test\OpeningHours\Request\Service
  */
-class OpeningHoursRequestTest extends TestCase
+class OpeningHoursPeriodRequestTest extends TestCase
 {
     /**
      * Test if the method is GET.

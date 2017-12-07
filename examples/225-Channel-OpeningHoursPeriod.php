@@ -35,7 +35,12 @@ example_print_step('Get the OpeningHours by the Service, Channel ID & period');
 example_print();
 
 try {
-    $openingHours = $channelService->openingHoursPeriod($service_id, $channel_id, $openinghours_period_from, $openinghours_period_until);
+    $openingHours = $channelService->openingHoursPeriod(
+        $service_id,
+        $channel_id,
+        $openinghours_period_from,
+        $openinghours_period_until
+    );
     example_sprintf(' Id      : %d', $openingHours->getChannelId());
     example_sprintf(' Label   : %s', $openingHours->getChannelLabel());
     example_print();

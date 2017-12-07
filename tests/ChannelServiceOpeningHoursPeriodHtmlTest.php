@@ -33,7 +33,10 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01', $html);
+        $cache = $this->getFromCacheMock(
+            'OpeningHours:ChannelService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01',
+            $html
+        );
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
@@ -48,7 +51,10 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01', $html);
+        $cache = $this->getSetCacheMock(
+            'OpeningHours:ChannelService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01',
+            $html
+        );
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);

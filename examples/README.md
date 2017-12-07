@@ -47,7 +47,7 @@ file.
 * `225-Channel-OpeningHoursPeriod.php` : Get the opening hours for a given
   period as object.
 * `225-Channel-OpeningHoursPeriodHtml.php` : Get the opening hours for a given
-  period as HTML.  
+  period as HTML.
 
 ## Usage
 

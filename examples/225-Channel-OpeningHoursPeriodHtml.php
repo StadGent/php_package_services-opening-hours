@@ -34,7 +34,12 @@ example_print_step('Get the OpeningHours by the Service, Channel ID & period');
 example_print();
 
 try {
-    $html = $channelService->openingHoursPeriodHtml($service_id, $channel_id, $openinghours_period_from, $openinghours_period_until);
+    $html = $channelService->openingHoursPeriodHtml(
+        $service_id,
+        $channel_id,
+        $openinghours_period_from,
+        $openinghours_period_until
+    );
     example_print_html($html);
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_sprintf(' ! No Service found for Service ID : %d', $service_id);
