@@ -2,9 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursYearUri;
 
 /**
  * Get the OpeningHours for a single year as JSON.
@@ -25,17 +24,7 @@ class OpeningHoursYearRequest extends RequestAbstract
      */
     public function __construct($serviceId, $channelId, $date)
     {
-        $uri = sprintf(
-            'services/%d/channels/%d/openinghours/year?date=%s',
-            (int) $serviceId,
-            (int) $channelId,
-            $date
-        );
-
-        parent::__construct(
-            MethodType::GET,
-            $uri,
-            ['Accept' => AcceptType::JSON]
-        );
+        $uri = new OpeningHoursYearUri($serviceId, $channelId, $date);
+        parent::__construct($uri);
     }
 }

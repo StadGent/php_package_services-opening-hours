@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursService;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
 use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\OpeningHours\Value\OpeningHours;
@@ -22,8 +22,8 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
 
-        $channelService = new ChannelService($client);
-        $responseOpeningsHours = $channelService->openingHoursDay(10, 20, '2020-01-02');
+        $channelService = new ChannelOpeningHoursService($client);
+        $responseOpeningsHours = $channelService->getDay(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningsHours);
     }
 
@@ -35,13 +35,13 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getFromCacheMock(
-            'OpeningHours:ChannelService:openingHoursDay:10:20:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:day:10:20:2020-01-02',
             $openingHours
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $responseOpeningHours = $channelService->openingHoursDay(10, 20, '2020-01-02');
+        $responseOpeningHours = $channelService->getDay(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningHours);
     }
 
@@ -53,13 +53,13 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getSetCacheMock(
-            'OpeningHours:ChannelService:openingHoursDay:12:34:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:day:12:34:2020-01-02',
             $openingHours
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $channelService->openingHoursDay(12, 34, '2020-01-02');
+        $channelService->getDay(12, 34, '2020-01-02');
     }
 
     /**
@@ -70,8 +70,8 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
     public function testServiceNotFoundException()
     {
         $client = $this->getClientWithServiceNotFoundExceptionMock();
-        $channelService = new ChannelService($client);
-        $channelService->openingHoursDay(777, 666, '2020-01-02');
+        $channelService = new ChannelOpeningHoursService($client);
+        $channelService->getDay(777, 666, '2020-01-02');
     }
 
     /**
@@ -82,8 +82,8 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
     public function testChannelNotFoundException()
     {
         $client = $this->getClientWithChannelNotFoundExceptionMock();
-        $channelService = new ChannelService($client);
-        $channelService->openingHoursDay(1, 666, '2020-01-02');
+        $channelService = new ChannelOpeningHoursService($client);
+        $channelService->getDay(1, 666, '2020-01-02');
     }
 
     /**

@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
 
@@ -21,8 +21,8 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
 
-        $channelService = new ChannelService($client);
-        $responseHtml = $channelService->openingHoursWeekHtml(10, 20, '2020-01-02');
+        $channelService = new ChannelOpeningHoursHtmlService($client);
+        $responseHtml = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -33,11 +33,11 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:openingHoursWeekHtml:10:20:2020-01-02', $html);
+        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:week:10:20:2020-01-02', $html);
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $responseHtml = $channelService->openingHoursWeekHtml(10, 20, '2020-01-02');
+        $responseHtml = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -48,11 +48,11 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:openingHoursWeekHtml:10:20:2020-01-02', $html);
+        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:week:10:20:2020-01-02', $html);
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $channelService->openingHoursWeekHtml(10, 20, '2020-01-02');
+        $channelService->getWeek(10, 20, '2020-01-02');
     }
 
     /**
@@ -65,7 +65,7 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         return <<<EOT
 <div vocab="http://schema.org/" typeof="Library">
-    <h1>Loketten</h1>
+    <h1>FooBar</h1>
     <div property="openingHoursSpecification" typeof="OpeningHoursSpecification">
         <time property="validFrom validThrough" datetime="2020-01-02">02/01</time>:  from
         <time property="opens" content="09:00:00">09:00</time> to

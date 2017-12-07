@@ -20,7 +20,9 @@ class GetAllHandler extends HandlerAbstract
      */
     public function handles()
     {
-        return GetAllRequest::class;
+        return [
+            GetAllRequest::class,
+        ];
     }
 
     /**

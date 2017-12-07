@@ -2,9 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Channel\GetByIdUri;
 
 /**
  * Request to get all Channels for the given Service Id.
@@ -23,16 +22,7 @@ class GetByIdRequest extends RequestAbstract
      */
     public function __construct($serviceId, $channelId)
     {
-        $uri = sprintf(
-            'services/%d/channels/%d',
-            (int) $serviceId,
-            (int) $channelId
-        );
-
-        parent::__construct(
-            MethodType::GET,
-            $uri,
-            ['Accept' => AcceptType::JSON]
-        );
+        $uri = new GetByIdUri($serviceId, $channelId);
+        parent::__construct($uri);
     }
 }

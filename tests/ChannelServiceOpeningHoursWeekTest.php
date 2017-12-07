@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursService;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
 use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\OpeningHours\Value\OpeningHours;
@@ -22,8 +22,8 @@ class ChannelServiceOpeningHoursWeekTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
 
-        $channelService = new ChannelService($client);
-        $responseOpeningsHours = $channelService->openingHoursWeek(10, 20, '2020-01-02');
+        $channelService = new ChannelOpeningHoursService($client);
+        $responseOpeningsHours = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningsHours);
     }
 
@@ -35,13 +35,13 @@ class ChannelServiceOpeningHoursWeekTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getFromCacheMock(
-            'OpeningHours:ChannelService:openingHoursWeek:10:20:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:week:10:20:2020-01-02',
             $openingHours
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $responseOpeningHours = $channelService->openingHoursWeek(10, 20, '2020-01-02');
+        $responseOpeningHours = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningHours);
     }
 
@@ -53,13 +53,13 @@ class ChannelServiceOpeningHoursWeekTest extends ServiceTestBase
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getSetCacheMock(
-            'OpeningHours:ChannelService:openingHoursWeek:12:34:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:week:12:34:2020-01-02',
             $openingHours
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $channelService->openingHoursWeek(12, 34, '2020-01-02');
+        $channelService->getWeek(12, 34, '2020-01-02');
     }
 
     /**

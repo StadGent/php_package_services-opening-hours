@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\OpeningHours\Client\Configuration;
+namespace StadGent\Services\OpeningHours\Configuration;
 
 /**
  * Class Configuration

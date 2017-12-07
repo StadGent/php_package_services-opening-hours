@@ -21,7 +21,7 @@ class OpenNowHandlerTest extends HandlerTestBase
     {
         $handler = new OpenNowHandler();
         $this->assertEquals(
-            OpenNowRequest::class,
+            [OpenNowRequest::class],
             $handler->handles(),
             'Handler only handles \StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest.'
         );

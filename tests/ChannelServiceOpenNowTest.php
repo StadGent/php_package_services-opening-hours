@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursService;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
 use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 use StadGent\Services\OpeningHours\Value\OpenNow;
@@ -22,38 +22,9 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
         $openNow = $this->createOpenNow();
         $client = $this->createClientForOpenNow($openNow);
 
-        $channelService = new ChannelService($client);
-        $responseOpenNow = $channelService->openNow(10, 20);
+        $channelService = new ChannelOpeningHoursService($client);
+        $responseOpenNow = $channelService->getOpenNow(10, 20);
         $this->assertSame($openNow, $responseOpenNow);
-    }
-
-    /**
-     * Test the openNow return object from cache.
-     */
-    public function testOpenNowFromCache()
-    {
-        $openNow = $this->createOpenNow();
-        $client = $this->createClientForOpenNow($openNow);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:openNow:10:20', $openNow);
-
-        $channelService = new ChannelService($client);
-        $channelService->setCacheService($cache);
-        $responseService = $channelService->openNow(10, 20);
-        $this->assertSame($openNow, $responseService);
-    }
-
-    /**
-     * Test the getByServiceAndChannelId setCache when not yet cached.
-     */
-    public function testOpenNowSetCache()
-    {
-        $openNow = $this->createOpenNow();
-        $client = $this->createClientForOpenNow($openNow);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:openNow:12:34', $openNow);
-
-        $channelService = new ChannelService($client);
-        $channelService->setCacheService($cache);
-        $channelService->openNow(12, 34);
     }
 
     /**
@@ -64,8 +35,8 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
     public function testServiceNotFoundException()
     {
         $client = $this->getClientWithServiceNotFoundExceptionMock();
-        $channelService = new ChannelService($client);
-        $channelService->openNow(777, 666);
+        $channelService = new ChannelOpeningHoursService($client);
+        $channelService->getOpenNow(777, 666);
     }
 
     /**
@@ -76,8 +47,8 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
     public function testChannelNotFoundException()
     {
         $client = $this->getClientWithChannelNotFoundExceptionMock();
-        $channelService = new ChannelService($client);
-        $channelService->openNow(1, 666);
+        $channelService = new ChannelOpeningHoursService($client);
+        $channelService->getOpenNow(1, 666);
     }
 
     /**

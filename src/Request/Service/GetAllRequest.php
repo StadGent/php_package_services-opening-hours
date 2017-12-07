@@ -2,9 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Service\GetAllUri;
 
 /**
  * Request to get all Services.
@@ -18,10 +17,7 @@ class GetAllRequest extends RequestAbstract
      */
     public function __construct()
     {
-        parent::__construct(
-            MethodType::GET,
-            'services',
-            ['Accept' => AcceptType::JSON]
-        );
+        $uri = new GetAllUri();
+        parent::__construct($uri);
     }
 }

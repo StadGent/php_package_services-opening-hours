@@ -9,18 +9,6 @@ use StadGent\Services\OpeningHours\ChannelServiceFactory;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursDayHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursDayHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursMonthHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursMonthHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursPeriodHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursPeriodHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursWeekHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursWeekHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursYearHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursYearHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
 
 /**
@@ -40,18 +28,6 @@ class ChannelServiceFactoryTest extends TestCase
         $expectedHandlers = [
             GetAllHandler::class,
             GetByIdHandler::class,
-            OpenNowHandler::class,
-            OpenNowHtmlHandler::class,
-            OpeningHoursDayHandler::class,
-            OpeningHoursDayHtmlHandler::class,
-            OpeningHoursWeekHandler::class,
-            OpeningHoursWeekHtmlHandler::class,
-            OpeningHoursMonthHandler::class,
-            OpeningHoursMonthHtmlHandler::class,
-            OpeningHoursYearHandler::class,
-            OpeningHoursYearHtmlHandler::class,
-            OpeningHoursPeriodHandler::class,
-            OpeningHoursPeriodHtmlHandler::class,
         ];
 
         // Create the client so we can spy on the factory method.

@@ -2,16 +2,15 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\MethodType;
-use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Request\HtmlRequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Channel\OpenNowUri;
 
 /**
  * Request to get OpenNow for a Channel in HTML format.
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpenNowHtmlRequest extends RequestAbstract
+class OpenNowHtmlRequest extends HtmlRequestAbstract
 {
     /**
      * Get all channels for a service by the Service & Channel ID.
@@ -23,16 +22,7 @@ class OpenNowHtmlRequest extends RequestAbstract
      */
     public function __construct($serviceId, $channelId)
     {
-        $uri = sprintf(
-            'services/%d/channels/%d/open-now',
-            (int) $serviceId,
-            (int) $channelId
-        );
-
-        parent::__construct(
-            MethodType::GET,
-            $uri,
-            ['Accept' => AcceptType::HTML]
-        );
+        $uri = new OpenNowUri($serviceId, $channelId);
+        parent::__construct($uri);
     }
 }

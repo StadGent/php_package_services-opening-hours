@@ -3,7 +3,7 @@
 namespace StadGent\Services\Test\OpeningHours\Client;
 
 use StadGent\Services\OpeningHours\Client\Client;
-use StadGent\Services\OpeningHours\Client\Configuration\ConfigurationInterface;
+use StadGent\Services\OpeningHours\Configuration\ConfigurationInterface;
 use StadGent\Services\OpeningHours\Handler\HandlerInterface;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use GuzzleHttp\Client as GuzzleClient;
@@ -151,7 +151,7 @@ class ClientTest extends TestCase
         $handler
           ->expects($this->once())
           ->method('handles')
-          ->will($this->returnValue(get_class($request)));
+          ->will($this->returnValue([get_class($request)]));
         $handler
           ->expects($this->once())
           ->method('toResponse')

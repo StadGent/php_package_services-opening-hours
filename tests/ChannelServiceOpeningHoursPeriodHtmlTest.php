@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
 
@@ -21,8 +21,8 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
 
-        $channelService = new ChannelService($client);
-        $responseHtml = $channelService->openingHoursPeriodHtml(10, 20, '2020-01-02', '2020-04-01');
+        $channelService = new ChannelOpeningHoursHtmlService($client);
+        $responseHtml = $channelService->getPeriod(10, 20, '2020-01-02', '2020-04-01');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -34,13 +34,13 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
         $cache = $this->getFromCacheMock(
-            'OpeningHours:ChannelService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01',
+            'OpeningHours:ChannelOpeningHoursHtmlService:period:10:20:2020-01-02:2020-04-01',
             $html
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $responseHtml = $channelService->openingHoursPeriodHtml(10, 20, '2020-01-02', '2020-04-01');
+        $responseHtml = $channelService->getPeriod(10, 20, '2020-01-02', '2020-04-01');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -52,13 +52,13 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
         $cache = $this->getSetCacheMock(
-            'OpeningHours:ChannelService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01',
+            'OpeningHours:ChannelOpeningHoursHtmlService:period:10:20:2020-01-02:2020-04-01',
             $html
         );
 
-        $channelService = new ChannelService($client);
+        $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $channelService->openingHoursPeriodHtml(10, 20, '2020-01-02', '2020-04-01');
+        $channelService->getPeriod(10, 20, '2020-01-02', '2020-04-01');
     }
 
     /**

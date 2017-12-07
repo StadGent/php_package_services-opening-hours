@@ -16,6 +16,8 @@ class SearchByLabelHandler extends GetAllHandler
      */
     public function handles()
     {
-        return SearchByLabelRequest::class;
+        return [
+            SearchByLabelRequest::class,
+        ];
     }
 }

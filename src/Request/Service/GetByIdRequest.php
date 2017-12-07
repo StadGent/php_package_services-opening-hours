@@ -2,9 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\MethodType;
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Service\GetByIdUri;
 
 /**
  * Request to get a Service by its ID.
@@ -14,18 +13,14 @@ use StadGent\Services\OpeningHours\Request\RequestAbstract;
 class GetByIdRequest extends RequestAbstract
 {
     /**
-     * @inheritDoc
+     * Get a single Service by its ID.
      *
      * @param int $id
      *   The Service ID.
      */
     public function __construct($id)
     {
-        $uri = sprintf('services/%d', $id);
-        parent::__construct(
-            MethodType::GET,
-            $uri,
-            ['Accept' => AcceptType::JSON]
-        );
+        $uri = new GetByIdUri($id);
+        parent::__construct($uri);
     }
 }

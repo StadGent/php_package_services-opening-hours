@@ -2,28 +2,39 @@
 
 namespace StadGent\Services\Test\OpeningHours\Handler\Channel;
 
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursDayHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHandler;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearRequest;
 use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
 /**
- * Test the OpenNowHandler.
+ * Tests the OpeningHoursHandler.
  *
  * @package StadGent\Services\Test\OpeningHours\Handler\Service
  */
-class OpeningHoursDayHandlerTest extends HandlerTestBase
+class OpeningHoursHandlerTest extends HandlerTestBase
 {
     /**
      * Test the handles method.
      */
     public function testHandles()
     {
-        $handler = new OpeningHoursDayHandler();
-        $this->assertEquals(
+        $expectedHandles = [
             OpeningHoursDayRequest::class,
-            $handler->handles(),
-            'Handler only handles \StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest.'
+            OpeningHoursWeekRequest::class,
+            OpeningHoursMonthRequest::class,
+            OpeningHoursYearRequest::class,
+            OpeningHoursPeriodRequest::class,
+        ];
+
+        $handler = new OpeningHoursHandler();
+        $this->assertEquals(
+            $expectedHandles,
+            $handler->handles()
         );
     }
 
@@ -52,7 +63,7 @@ class OpeningHoursDayHandlerTest extends HandlerTestBase
 EOT;
         $openingHoursResponse = $this->createResponseMock(200, $body);
 
-        $handler = new OpeningHoursDayHandler();
+        $handler = new OpeningHoursHandler();
         $response = $handler->toResponse($openingHoursResponse);
 
         $this->assertInstanceOf(
