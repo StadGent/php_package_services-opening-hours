@@ -21,7 +21,7 @@ class GetAllHandlerTest extends HandlerTestBase
     {
         $handler = new GetAllHandler();
         $this->assertEquals(
-            GetAllRequest::class,
+            [GetAllRequest::class],
             $handler->handles(),
             'Handler only handles \StadGent\Services\OpeningHours\Request\Channel\GetAllByServiceIdRequest.'
         );

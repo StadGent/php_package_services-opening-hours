@@ -20,7 +20,9 @@ class OpenNowHandler extends HandlerAbstract
      */
     public function handles()
     {
-        return OpenNowRequest::class;
+        return [
+            OpenNowRequest::class,
+        ];
     }
 
     /**

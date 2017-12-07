@@ -17,6 +17,8 @@ class OpenNowHtmlHandler extends HtmlHandlerAbstract
      */
     public function handles()
     {
-        return OpenNowHtmlRequest::class;
+        return [
+            OpenNowHtmlRequest::class,
+        ];
     }
 }

@@ -17,6 +17,8 @@ class OpeningHoursYearHtmlHandler extends HtmlHandlerAbstract
      */
     public function handles()
     {
-        return OpeningHoursYearHtmlRequest::class;
+        return [
+            OpeningHoursYearHtmlRequest::class,
+        ];
     }
 }

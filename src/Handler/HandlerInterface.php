@@ -17,7 +17,8 @@ interface HandlerInterface
      *
      * eg: ServiceGetAll::Class
      *
-     * @return string
+     * @return array
+     *   Array of requests the handler supports.
      */
     public function handles();
 

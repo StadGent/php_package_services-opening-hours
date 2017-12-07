@@ -16,6 +16,8 @@ class OpeningHoursWeekHandler extends OpeningHoursAbstractHandler
      */
     public function handles()
     {
-        return OpeningHoursWeekRequest::class;
+        return [
+            OpeningHoursWeekRequest::class,
+        ];
     }
 }

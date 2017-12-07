@@ -151,7 +151,7 @@ class ClientTest extends TestCase
         $handler
           ->expects($this->once())
           ->method('handles')
-          ->will($this->returnValue(get_class($request)));
+          ->will($this->returnValue([get_class($request)]));
         $handler
           ->expects($this->once())
           ->method('toResponse')

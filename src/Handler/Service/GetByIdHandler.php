@@ -20,7 +20,9 @@ class GetByIdHandler extends HandlerAbstract
      */
     public function handles()
     {
-        return GetByIdRequest::class;
+        return [
+            GetByIdRequest::class,
+        ];
     }
 
     /**

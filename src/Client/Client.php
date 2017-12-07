@@ -82,7 +82,10 @@ class Client implements ClientInterface
      */
     public function addHandler(HandlerInterface $handler)
     {
-        $this->handlers[$handler->handles()] = $handler;
+        foreach ($handler->handles() as $requestType) {
+            $this->handlers[$requestType] = $handler;
+        }
+
         return $this;
     }
 }

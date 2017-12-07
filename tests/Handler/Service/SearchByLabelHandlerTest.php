@@ -20,7 +20,7 @@ class SearchByLabelHandlerTest extends TestCase
     {
         $handler = new SearchByLabelHandler();
         $this->assertEquals(
-            SearchByLabelRequest::class,
+            [SearchByLabelRequest::class],
             $handler->handles(),
             'Handler only handles \StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest.'
         );

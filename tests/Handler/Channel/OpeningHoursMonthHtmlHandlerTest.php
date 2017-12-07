@@ -20,7 +20,7 @@ class OpeningHoursMonthHtmlHandlerTest extends HandlerTestBase
     {
         $handler = new OpeningHoursMonthHtmlHandler();
         $this->assertEquals(
-            OpeningHoursMonthHtmlRequest::class,
+            [OpeningHoursMonthHtmlRequest::class],
             $handler->handles(),
             'Handler only handles \StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthHtmlRequest.'
         );
