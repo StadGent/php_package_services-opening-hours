@@ -89,7 +89,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursDay($serviceId, $channelId, $date)
+    public function day($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -120,7 +120,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursWeek($serviceId, $channelId, $date)
+    public function week($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -151,7 +151,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursMonth($serviceId, $channelId, $date)
+    public function month($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -182,7 +182,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursYear($serviceId, $channelId, $date)
+    public function year($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -215,7 +215,7 @@ class ChannelOpeningHoursService extends ServiceAbstract implements CacheableInt
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursPeriod($serviceId, $channelId, $dateFrom, $dateUntil)
+    public function period($serviceId, $channelId, $dateFrom, $dateUntil)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $dateFrom, $dateUntil]

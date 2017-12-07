@@ -35,7 +35,7 @@ example_print_step('Get the OpeningHours by the Service, Channel ID & period');
 example_print();
 
 try {
-    $openingHours = $service->openingHoursPeriod(
+    $openingHours = $service->period(
         $service_id,
         $channel_id,
         $openinghours_period_from,
