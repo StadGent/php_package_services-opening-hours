@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\OpeningHours;
+namespace StadGent\Services\OpeningHours\Service\Channel;
 
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
@@ -9,6 +9,7 @@ use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
+use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 
 /**
  * Service to access the get Channel(s).

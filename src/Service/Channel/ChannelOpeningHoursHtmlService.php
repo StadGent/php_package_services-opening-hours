@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\OpeningHours;
+namespace StadGent\Services\OpeningHours\Service\Channel;
 
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
@@ -13,6 +13,7 @@ use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearHtmlRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
+use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 
 /**
  * Service to access the Channel OpeningHours.

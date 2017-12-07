@@ -4,8 +4,8 @@ namespace StadGent\Services\Test\OpeningHours;
 
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlServiceFactory;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;

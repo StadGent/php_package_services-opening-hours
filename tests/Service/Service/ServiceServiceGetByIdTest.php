@@ -1,11 +1,12 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Service;
 
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
-use StadGent\Services\OpeningHours\ServiceService;
+use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 use StadGent\Services\OpeningHours\Value\Service;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
  * Tests for ServiceService::getById Method.

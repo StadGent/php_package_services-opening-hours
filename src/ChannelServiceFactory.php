@@ -6,6 +6,7 @@ use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelService;
 
 /**
  * Factory to create the ChannelService.

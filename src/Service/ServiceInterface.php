@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\OpeningHours;
+namespace StadGent\Services\OpeningHours\Service;
 
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 

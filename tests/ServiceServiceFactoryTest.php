@@ -8,7 +8,7 @@ use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
 use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
-use StadGent\Services\OpeningHours\ServiceService;
+use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 use StadGent\Services\OpeningHours\ServiceServiceFactory;
 use StadGent\Services\OpeningHours\Value\ServiceCollection;
 

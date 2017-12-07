@@ -1,11 +1,12 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\ChannelService;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelService;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Value\Channel;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
  * Tests for ServiceService::getById Method.

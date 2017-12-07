@@ -1,18 +1,19 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Service;
 
-use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
+use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
-use StadGent\Services\OpeningHours\ServiceService;
+use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 use StadGent\Services\OpeningHours\Value\ServiceCollection;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
- * Tests for ServiceService::getAll method.
+ * Tests for ServiceService::searchByLabel method.
  *
  * @package StadGent\Services\Test\OpeningHours
  */
-class ServiceServiceGetAllTest extends ServiceTestBase
+class ServiceServiceSearchByLabelTest extends ServiceTestBase
 {
     /**
      * Test the getAll return object.
@@ -23,37 +24,8 @@ class ServiceServiceGetAllTest extends ServiceTestBase
         $client = $this->createClientForServiceCollection($serviceCollection);
 
         $serviceService = new ServiceService($client);
-        $responseServiceCollection = $serviceService->getAll();
+        $responseServiceCollection = $serviceService->searchByLabel('FooBar');
         $this->assertSame($serviceCollection, $responseServiceCollection);
-    }
-
-    /**
-     * Test the getAll return object from cache.
-     */
-    public function testGetAllFromCache()
-    {
-        $serviceCollection = $this->createServiceCollection();
-        $client = $this->createClientForServiceCollection($serviceCollection);
-        $cache = $this->getFromCacheMock('OpeningHours:ServiceService:getAll', $serviceCollection);
-
-        $serviceService = new ServiceService($client);
-        $serviceService->setCacheService($cache);
-        $responseServiceCollection = $serviceService->getAll();
-        $this->assertSame($serviceCollection, $responseServiceCollection);
-    }
-
-    /**
-     * Test the getAll setCache return object without cache.
-     */
-    public function testGetAllSetCache()
-    {
-        $serviceCollection = $this->createServiceCollection();
-        $client = $this->createClientForServiceCollection($serviceCollection);
-        $cache = $this->getSetCacheMock('OpeningHours:ServiceService:getAll', $serviceCollection);
-
-        $serviceService = new ServiceService($client);
-        $serviceService->setCacheService($cache);
-        $serviceService->getAll();
     }
 
     /**
@@ -66,7 +38,7 @@ class ServiceServiceGetAllTest extends ServiceTestBase
         $response = $this->getResponseDummyMock();
         $client = $this->getClientMock($response);
         $serviceService = new ServiceService($client);
-        $serviceService->getAll();
+        $serviceService->searchByLabel('FooBar');
     }
 
     /**
@@ -89,7 +61,7 @@ class ServiceServiceGetAllTest extends ServiceTestBase
     protected function createClientForServiceCollection(ServiceCollection $serviceCollection)
     {
         $response = new ServicesResponse($serviceCollection);
-        $expectedRequest = GetAllRequest::class;
+        $expectedRequest = SearchByLabelRequest::class;
         return $this->getClientMock($response, $expectedRequest);
     }
 }

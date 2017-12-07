@@ -1,28 +1,29 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlService;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthHtmlRequest;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
- * Tests for ChannelService::openingHoursMonthHtml Method.
+ * Tests for ChannelService::openingHoursPeriodHtml Method.
  *
  * @package StadGent\Services\Test\OpeningHours
  */
-class ChannelServiceOpeningHoursMonthHtmlTest extends ServiceTestBase
+class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
 {
     /**
      * Test the HTML return string.
      */
-    public function testOpeningHoursMonthHtml()
+    public function testOpeningHoursPeriodHtml()
     {
         $html = $this->createOpeninghoursHtml();
-        $client = $this->createClientForOpeningHoursMonthHtml($html);
+        $client = $this->createClientForOpeningHoursPeriodHtml($html);
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
-        $responseHtml = $channelService->getMonth(10, 20, '2020-01-02');
+        $responseHtml = $channelService->getPeriod(10, 20, '2020-01-02', '2020-04-01');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -32,12 +33,15 @@ class ChannelServiceOpeningHoursMonthHtmlTest extends ServiceTestBase
     public function testOpenNowHtmlFromCache()
     {
         $html = $this->createOpeninghoursHtml();
-        $client = $this->createClientForOpeningHoursMonthHtml($html);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:month:10:20:2020-01-02', $html);
+        $client = $this->createClientForOpeningHoursPeriodHtml($html);
+        $cache = $this->getFromCacheMock(
+            'OpeningHours:ChannelOpeningHoursHtmlService:period:10:20:2020-01-02:2020-04-01',
+            $html
+        );
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $responseHtml = $channelService->getMonth(10, 20, '2020-01-02');
+        $responseHtml = $channelService->getPeriod(10, 20, '2020-01-02', '2020-04-01');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -47,12 +51,15 @@ class ChannelServiceOpeningHoursMonthHtmlTest extends ServiceTestBase
     public function testOpenNowHtmlSetCache()
     {
         $html = $this->createOpeninghoursHtml();
-        $client = $this->createClientForOpeningHoursMonthHtml($html);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:month:10:20:2020-01-02', $html);
+        $client = $this->createClientForOpeningHoursPeriodHtml($html);
+        $cache = $this->getSetCacheMock(
+            'OpeningHours:ChannelOpeningHoursHtmlService:period:10:20:2020-01-02:2020-04-01',
+            $html
+        );
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $channelService->getMonth(10, 20, '2020-01-02');
+        $channelService->getPeriod(10, 20, '2020-01-02', '2020-04-01');
     }
 
     /**
@@ -113,10 +120,10 @@ EOT;
      *
      * @return \StadGent\Services\OpeningHours\Client\ClientInterface
      */
-    protected function createClientForOpeningHoursMonthHtml($html)
+    protected function createClientForOpeningHoursPeriodHtml($html)
     {
         $response = new HtmlResponse($html);
-        $expectedRequest = OpeningHoursMonthHtmlRequest::class;
+        $expectedRequest = OpeningHoursPeriodHtmlRequest::class;
         return $this->getClientMock($response, $expectedRequest);
     }
 }

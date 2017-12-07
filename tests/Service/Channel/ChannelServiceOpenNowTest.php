@@ -1,11 +1,12 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\ChannelOpeningHoursService;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursService;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
 use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 use StadGent\Services\OpeningHours\Value\OpenNow;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
  * Tests for ServiceService::openNow Method.

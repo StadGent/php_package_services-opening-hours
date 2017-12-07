@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service;
 
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;

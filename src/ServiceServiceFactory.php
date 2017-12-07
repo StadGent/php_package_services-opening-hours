@@ -7,6 +7,7 @@ use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
 use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
+use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 
 /**
  * Factory to create the ServiceService.
@@ -24,7 +25,7 @@ class ServiceServiceFactory
      * @param \StadGent\Services\OpeningHours\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return \StadGent\Services\OpeningHours\ServiceService
+     * @return \StadGent\Services\OpeningHours\Service\Service\ServiceService
      */
     public static function create(ClientInterface $client, CacheInterface $cache = null)
     {

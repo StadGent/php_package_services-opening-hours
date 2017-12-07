@@ -1,10 +1,11 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\ChannelOpeningHoursHtmlService;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
  * Tests for ChannelService::openingHoursDayHtml Method.

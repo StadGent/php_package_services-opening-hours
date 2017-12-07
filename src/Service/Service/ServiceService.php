@@ -1,6 +1,6 @@
 <?php
 
-namespace StadGent\Services\OpeningHours;
+namespace StadGent\Services\OpeningHours\Service\Service;
 
 use StadGent\Services\OpeningHours\Cache\CacheableInterface;
 use StadGent\Services\OpeningHours\Cache\CacheableTrait;
@@ -10,6 +10,7 @@ use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
+use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 
 /**
  * Service to access the Service related API.

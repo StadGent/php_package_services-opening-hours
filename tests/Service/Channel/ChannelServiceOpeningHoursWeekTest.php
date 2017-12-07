@@ -1,89 +1,66 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\ChannelOpeningHoursService;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursService;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
 use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\OpeningHours\Value\OpeningHours;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
  * Tests for ChannelService::openingHoursDayHtml Method.
  *
  * @package StadGent\Services\Test\OpeningHours
  */
-class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
+class ChannelServiceOpeningHoursWeekTest extends ServiceTestBase
 {
     /**
      * Test the openNow return object.
      */
-    public function testOpeningHoursDay()
+    public function testOpeningHoursWeek()
     {
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
 
         $channelService = new ChannelOpeningHoursService($client);
-        $responseOpeningsHours = $channelService->getDay(10, 20, '2020-01-02');
+        $responseOpeningsHours = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningsHours);
     }
 
     /**
      * Test the openNow return object from cache.
      */
-    public function testOpeningHoursDayFromCache()
+    public function testOpeningHoursWeekFromCache()
     {
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getFromCacheMock(
-            'OpeningHours:ChannelOpeningHoursService:day:10:20:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:week:10:20:2020-01-02',
             $openingHours
         );
 
         $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $responseOpeningHours = $channelService->getDay(10, 20, '2020-01-02');
+        $responseOpeningHours = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningHours);
     }
 
     /**
      * Test the getByServiceAndChannelId setCache when not yet cached.
      */
-    public function testOpeningHoursDaySetCache()
+    public function testOpeningHoursWeekSetCache()
     {
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getSetCacheMock(
-            'OpeningHours:ChannelOpeningHoursService:day:12:34:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:week:12:34:2020-01-02',
             $openingHours
         );
 
         $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $channelService->getDay(12, 34, '2020-01-02');
-    }
-
-    /**
-     * Test the Service not found exception.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
-     */
-    public function testServiceNotFoundException()
-    {
-        $client = $this->getClientWithServiceNotFoundExceptionMock();
-        $channelService = new ChannelOpeningHoursService($client);
-        $channelService->getDay(777, 666, '2020-01-02');
-    }
-
-    /**
-     * Test the Channel not found exception.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     */
-    public function testChannelNotFoundException()
-    {
-        $client = $this->getClientWithChannelNotFoundExceptionMock();
-        $channelService = new ChannelOpeningHoursService($client);
-        $channelService->getDay(1, 666, '2020-01-02');
+        $channelService->getWeek(12, 34, '2020-01-02');
     }
 
     /**
@@ -98,8 +75,43 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
                 'channel' => 'fooBar',
                 'channelId' => 15,
                 'openinghours' => [
-                    '2022-04-01' => [
-                        'date' => '2022-04-01',
+                    '2022-04-02' => [
+                        'date' => '2022-04-02',
+                        'open' => false,
+                        'hours' => [],
+                    ],
+                    '2022-04-03' => [
+                        'date' => '2022-04-03',
+                        'open' => false,
+                        'hours' => [
+                            [
+                                'from' => '09:00',
+                                'until' => '12:00',
+                            ],
+                        ],
+                    ],
+                    '2022-04-04' => [
+                        'date' => '2022-04-04',
+                        'open' => false,
+                        'hours' => [],
+                    ],
+                    '2022-04-05' => [
+                        'date' => '2022-04-05',
+                        'open' => false,
+                        'hours' => [],
+                    ],
+                    '2022-04-06' => [
+                        'date' => '2022-04-06',
+                        'open' => false,
+                        'hours' => [],
+                    ],
+                    '2022-04-07' => [
+                        'date' => '2022-04-07',
+                        'open' => false,
+                        'hours' => [],
+                    ],
+                    '2022-04-08' => [
+                        'date' => '2022-04-08',
                         'open' => false,
                         'hours' => [],
                     ],
@@ -118,7 +130,7 @@ class ChannelServiceOpeningHoursDayTest extends ServiceTestBase
     protected function createClientForOpeningHours(OpeningHours $openingHours)
     {
         $response = new OpeningHoursResponse($openingHours);
-        $expectedRequest = OpeningHoursDayRequest::class;
+        $expectedRequest = OpeningHoursWeekRequest::class;
         return $this->getClientMock($response, $expectedRequest);
     }
 }

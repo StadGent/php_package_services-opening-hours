@@ -1,65 +1,66 @@
 <?php
 
-namespace StadGent\Services\Test\OpeningHours;
+namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\ChannelOpeningHoursService;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearRequest;
+use StadGent\Services\OpeningHours\Service\Channel\ChannelOpeningHoursService;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodRequest;
 use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\OpeningHours\Value\OpeningHours;
+use StadGent\Services\Test\OpeningHours\Service\ServiceTestBase;
 
 /**
- * Tests for ChannelService::openingHoursYearHtml Method.
+ * Tests for ChannelService::openingHoursPeriodHtml Method.
  *
  * @package StadGent\Services\Test\OpeningHours
  */
-class ChannelServiceOpeningHoursYearTest extends ServiceTestBase
+class ChannelServiceOpeningHoursPeriodTest extends ServiceTestBase
 {
     /**
      * Test the return object.
      */
-    public function testOpeningHoursYear()
+    public function testOpeningHoursPeriod()
     {
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
 
         $channelService = new ChannelOpeningHoursService($client);
-        $responseOpeningsHours = $channelService->getYear(10, 20, '2020-01-02');
+        $responseOpeningsHours = $channelService->getPeriod(10, 20, '2020-01-02', '2020-02-02');
         $this->assertSame($openingHours, $responseOpeningsHours);
     }
 
     /**
      * Test the return object from cache.
      */
-    public function testOpeningHoursYearFromCache()
+    public function testOpeningHoursPeriodFromCache()
     {
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getFromCacheMock(
-            'OpeningHours:ChannelOpeningHoursService:year:10:20:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:period:10:20:2020-01-02:2020-02-02',
             $openingHours
         );
 
         $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $responseOpeningHours = $channelService->getYear(10, 20, '2020-01-02');
+        $responseOpeningHours = $channelService->getPeriod(10, 20, '2020-01-02', '2020-02-02');
         $this->assertSame($openingHours, $responseOpeningHours);
     }
 
     /**
      * Test the setCache when not yet cached.
      */
-    public function testOpeningHoursYearSetCache()
+    public function testOpeningHoursPeriodSetCache()
     {
         $openingHours = $this->createOpeningHours();
         $client = $this->createClientForOpeningHours($openingHours);
         $cache = $this->getSetCacheMock(
-            'OpeningHours:ChannelOpeningHoursService:year:12:34:2020-01-02',
+            'OpeningHours:ChannelOpeningHoursService:period:12:34:2020-01-02:2020-02-02',
             $openingHours
         );
 
         $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $channelService->getYear(12, 34, '2020-01-02');
+        $channelService->getPeriod(12, 34, '2020-01-02', '2020-02-02');
     }
 
     /**
@@ -129,7 +130,7 @@ class ChannelServiceOpeningHoursYearTest extends ServiceTestBase
     protected function createClientForOpeningHours(OpeningHours $openingHours)
     {
         $response = new OpeningHoursResponse($openingHours);
-        $expectedRequest = OpeningHoursYearRequest::class;
+        $expectedRequest = OpeningHoursPeriodRequest::class;
         return $this->getClientMock($response, $expectedRequest);
     }
 }
