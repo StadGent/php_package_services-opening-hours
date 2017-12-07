@@ -7,8 +7,12 @@ use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
+use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
+use StadGent\Services\OpeningHours\Response\HtmlResponse;
+use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 
 /**
  * Service to access the Channels related API.
@@ -79,9 +83,7 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
      */
     public function getById($serviceId, $channelId)
     {
-        $cacheKey = $this->createCacheKey(
-            __FUNCTION__ . ':' . $serviceId . ':' . $channelId
-        );
+        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
 
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -104,5 +106,114 @@ class ChannelService extends ServiceAbstract implements CacheableInterface
         $this->cacheSet($cacheKey, $channel);
 
         return $channel;
+    }
+
+    /**
+     * Get the Open now status as Value object.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     *
+     * @return \StadGent\Services\OpeningHours\Value\OpenNow
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function openNow($serviceId, $channelId)
+    {
+        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
+
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        try {
+            // Get from service.
+            $response = $this->send(
+                new OpenNowRequest($serviceId, $channelId),
+                OpenNowResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
+
+        /* @var $response \StadGent\Services\OpeningHours\Response\OpenNowResponse */
+        $openNow = $response->getOpenNow();
+        $this->cacheSet($cacheKey, $openNow);
+
+        return $openNow;
+    }
+
+    /**
+     * Get the Open now status as HTML.
+     *
+     * @param int $serviceId
+     *   The Service ID.
+     * @param int $channelId
+     *   The Channel ID.
+     *
+     * @return string
+     *   The HTML.
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function openNowHtml($serviceId, $channelId)
+    {
+        $cacheKey = $this->createChannelCacheKey(__FUNCTION__, $serviceId, $channelId);
+
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        try {
+            // Get from service.
+            $response = $this->send(
+                new OpenNowHtmlRequest($serviceId, $channelId),
+                HtmlResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
+
+        /* @var $response \StadGent\Services\OpeningHours\Response\HtmlResponse */
+        $html = $response->getHtml();
+        $this->cacheSet($cacheKey, $html);
+
+        return $html;
+    }
+
+    /**
+     * Helper to create a cache key.
+     *
+     * @param string $function
+     *   The function to create a cache key for.
+     * @param int $serviceId
+     *   The Service id to create a cache key for.
+     * @param int $channelId
+     *   The channel id to create the cache key for.
+     *
+     * @return string
+     *   Prefixed cache key.
+     */
+    protected function createChannelCacheKey($function, $serviceId, $channelId)
+    {
+        return $this->createCacheKey(
+            $function . ':' . $serviceId . ':' . $channelId
+        );
     }
 }

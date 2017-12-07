@@ -9,6 +9,8 @@ use StadGent\Services\OpeningHours\ChannelServiceFactory;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
 
 /**
@@ -28,6 +30,8 @@ class ChannelServiceFactoryTest extends TestCase
         $expectedHandlers = [
             GetAllHandler::class,
             GetByIdHandler::class,
+            OpenNowHandler::class,
+            OpenNowHtmlHandler::class,
         ];
 
         // Create the client so we can spy on the factory method.

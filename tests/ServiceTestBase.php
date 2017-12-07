@@ -6,6 +6,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
+use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\ResponseInterface;
@@ -62,7 +63,7 @@ class ServiceTestBase extends TestCase
     }
 
     /**
-     * Helper to create a mock that will return a given exception.
+     * Helper to create a mocked client that will return a given exception.
      *
      * @param \Exception $exception
      *   The exception to be returned by the client.
@@ -82,6 +83,48 @@ class ServiceTestBase extends TestCase
             ->will($this->throwException($exception));
 
         return $client;
+    }
+
+    /**
+     * Helper to create a mocked client throwing a ServiceNotFound exception.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     */
+    protected function getClientWithServiceNotFoundExceptionMock()
+    {
+        $responseBody = <<<EOT
+{
+    "error": {
+        "code": "ModelNotFoundException",
+        "message": "Service model is not found with given identifier",
+        "target": "Service"
+    }
+}
+EOT;
+
+        $exceptionMock = $this->getExceptionMock(404, $responseBody);
+        return $this->getClientWithExceptionMock($exceptionMock);
+    }
+
+    /**
+     * Helper to create a mocked client throwing a ChannelNotFound exception.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     */
+    protected function getClientWithChannelNotFoundExceptionMock()
+    {
+        $responseBody = <<<EOT
+{
+    "error": {
+        "code": "ModelNotFoundException",
+        "message": "Channel model is not found with given identifier",
+        "target": "Channel"
+    }
+}
+EOT;
+
+        $exceptionMock = $this->getExceptionMock(404, $responseBody);
+        return $this->getClientWithExceptionMock($exceptionMock);
     }
 
     /**
@@ -129,5 +172,65 @@ class ServiceTestBase extends TestCase
             $requestMock,
             $responseMock
         );
+    }
+
+    /**
+     * Use this mock to test loading a cached item by its key from the cache.
+     *
+     * @param string $key
+     *   The cache key to get the cache from.
+     * @param mixed $item
+     *   The cached item.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\SimpleCache\CacheInterface
+     */
+    protected function getFromCacheMock($key, $item)
+    {
+        $cache = $this
+            ->getMockBuilder(CacheInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $cache
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo($key))
+            ->will($this->returnValue($item));
+
+        return $cache;
+    }
+
+    /**
+     * Use this mock to test saving an item to the cache by its key.
+     *
+     * @param string $key
+     *   The cache key to store the item to.
+     * @param mixed $item
+     *   The expected item to store in the cache.
+     *
+     * @return \PHPUnit_Framework_MockObject_MockObject|\Psr\SimpleCache\CacheInterface
+     */
+    protected function getSetCacheMock($key, $item)
+    {
+        $cache = $this
+            ->getMockBuilder(CacheInterface::class)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $cache
+            ->expects($this->once())
+            ->method('get')
+            ->with($this->equalTo($key))
+            ->will($this->returnValue(null));
+
+        $cache
+            ->expects($this->once())
+            ->method('set')
+            ->with(
+                $this->equalTo($key),
+                $this->equalTo($item)
+            );
+
+        return $cache;
     }
 }

@@ -3,24 +3,24 @@
 namespace StadGent\Services\OpeningHours\Handler\Channel;
 
 use StadGent\Services\OpeningHours\Handler\HandlerAbstract;
-use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
-use StadGent\Services\OpeningHours\Response\ChannelsResponse;
-use StadGent\Services\OpeningHours\Value\ChannelCollection;
+use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
+use StadGent\Services\OpeningHours\Response\OpenNowResponse;
 use Psr\Http\Message as Psr;
+use StadGent\Services\OpeningHours\Value\OpenNow;
 
 /**
- * Handler to Get All Channels.
+ * Handler to extract the OpenNow data from the response.
  *
  * @package StadGent\Services\OpeningHours\Handler\Channel
  */
-class GetAllHandler extends HandlerAbstract
+class OpenNowHandler extends HandlerAbstract
 {
     /**
      * @inheritDoc
      */
     public function handles()
     {
-        return GetAllRequest::class;
+        return OpenNowRequest::class;
     }
 
     /**
@@ -31,7 +31,7 @@ class GetAllHandler extends HandlerAbstract
     public function toResponse(Psr\ResponseInterface $response)
     {
         $data = $this->getBodyData($response);
-        $collection = ChannelCollection::fromArray($data);
-        return new ChannelsResponse($collection);
+        $openNow = OpenNow::fromArray($data);
+        return new OpenNowResponse($openNow);
     }
 }

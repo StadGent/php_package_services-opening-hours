@@ -2,7 +2,6 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\ChannelService;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
@@ -35,17 +34,7 @@ class ChannelServiceGetAllTest extends ServiceTestBase
     {
         $channelCollection = $this->createChannelCollection();
         $client = $this->createClientForChannelCollection($channelCollection);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getAll:5'))
-            ->will($this->returnValue($channelCollection));
+        $cache = $this->getFromCacheMock('OpeningHours:ChannelService:getAll:5', $channelCollection);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
@@ -61,25 +50,7 @@ class ChannelServiceGetAllTest extends ServiceTestBase
     {
         $channelCollection = $this->createChannelCollection();
         $client = $this->createClientForChannelCollection($channelCollection);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelService:getAll:6'))
-            ->will($this->returnValue(null));
-
-        $cache
-            ->expects($this->once())
-            ->method('set')
-            ->with(
-                $this->equalTo('OpeningHours:ChannelService:getAll:6'),
-                $this->equalTo($channelCollection)
-            );
+        $cache = $this->getSetCacheMock('OpeningHours:ChannelService:getAll:6', $channelCollection);
 
         $channelService = new ChannelService($client);
         $channelService->setCacheService($cache);
@@ -106,18 +77,7 @@ class ChannelServiceGetAllTest extends ServiceTestBase
      */
     public function testServiceNotFoundException()
     {
-        $responseBody = <<<EOT
-{
-    "error": {
-        "code": "ModelNotFoundException",
-        "message": "Service model is not found with given identifier",
-        "target": "Service"
-    }
-}
-EOT;
-
-        $exceptionMock = $this->getExceptionMock(404, $responseBody);
-        $client = $this->getClientWithExceptionMock($exceptionMock);
+        $client = $this->getClientWithServiceNotFoundExceptionMock();
         $channelService = new ChannelService($client);
         $channelService->getAll(777);
     }

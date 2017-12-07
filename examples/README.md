@@ -13,14 +13,21 @@ file.
 
 ## Examples
 
-* `01-Service-GetAll.php` : Get all available services.
-* `02-Service-SearchByLabel.php` : Search all services which label contains the
+### Service related
+
+* `101-Service-GetAll.php` : Get all available services.
+* `102-Service-SearchByLabel.php` : Search all services which label contains the
   given search string.
-* `03-Service-GetById.php` : Get a single Service by its Id.
-* `04-Channel-GetAll.php` : Get all channels related to a single service (by the
+* `103-Service-GetById.php` : Get a single Service by its Id.
+
+### Channel related
+
+* `201-Channel-GetAll.php` : Get all channels related to a single service (by the
   service ID).
-* `05-Channel-GetById.php` : Get a single Channel by the Service ID and the
+* `202-Channel-GetById.php` : Get a single Channel by the Service ID and the
   Channel ID.
+* `211-Channel-OpenNow.php` : Get the Open Now status as object.
+* `211-Channel-OpenNowHtml.php` : Get the Open Now status as HTML.
 
 ## Usage
 

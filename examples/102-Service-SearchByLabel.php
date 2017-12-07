@@ -28,20 +28,24 @@ $service = \StadGent\Services\OpeningHours\ServiceServiceFactory::create($client
 
 // Lookup services by their label (search string is defined in config.php.
 example_print_step('Search Services by their label.');
-$collection = $service->searchByLabel($service_label);
+example_print();
 
-if ($collection->getIterator()->count()) {
-    foreach ($collection as $item) {
-        /* @var $item \StadGent\Services\OpeningHours\Value\Service */
-        example_print();
-        example_sprintf(' Id       : %d', $item->getId());
-        example_sprintf(' Label    : %s', $item->getLabel());
-        example_sprintf(' Is Draft : %d', (int) $item->isDraft());
+try {
+    $collection = $service->searchByLabel($service_label);
+    if ($collection->getIterator()->count()) {
+        foreach ($collection as $item) {
+            /* @var $item \StadGent\Services\OpeningHours\Value\Service */
+            example_sprintf(' Id       : %d', $item->getId());
+            example_sprintf(' Label    : %s', $item->getLabel());
+            example_sprintf(' Is Draft : %d', (int) $item->isDraft());
+            example_print();
+        }
+    } else {
+        example_print(' ! No Service found.');
     }
-} else {
-    echo ' ! No Service found.' . PHP_EOL;
+} catch (\Exception $e) {
+    example_sprintf(' ! Error : %s', $e->getMessage());
 }
-
 
 
 

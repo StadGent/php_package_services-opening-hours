@@ -2,12 +2,6 @@
 
 namespace StadGent\Services\Test\OpeningHours;
 
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Psr7\Response;
-use GuzzleHttp\Psr7\Stream;
-use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\Client\ClientInterface;
-use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\ServiceService;
@@ -40,17 +34,7 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
     {
         $service = $this->createService();
         $client = $this->createClientForService($service);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getById:10'))
-            ->will($this->returnValue($service));
+        $cache = $this->getFromCacheMock('OpeningHours:ServiceService:getById:10', $service);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
@@ -65,25 +49,7 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
     {
         $service = $this->createService();
         $client = $this->createClientForService($service);
-
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $cache
-            ->expects($this->once())
-            ->method('get')
-            ->with($this->equalTo('OpeningHours:ServiceService:getById:10'))
-            ->will($this->returnValue(null));
-
-        $cache
-            ->expects($this->once())
-            ->method('set')
-            ->with(
-                $this->equalTo('OpeningHours:ServiceService:getById:10'),
-                $this->equalTo($service)
-            );
+        $cache = $this->getSetCacheMock('OpeningHours:ServiceService:getById:10', $service);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
@@ -97,18 +63,7 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
      */
     public function testServiceNotFoundException()
     {
-        $responseBody = <<<EOT
-{
-    "error": {
-        "code": "ModelNotFoundException",
-        "message": "Service model is not found with given identifier",
-        "target": "Service"
-    }
-}
-EOT;
-
-        $exceptionMock = $this->getExceptionMock(404, $responseBody);
-        $client = $this->getClientWithExceptionMock($exceptionMock);
+        $client = $this->getClientWithServiceNotFoundExceptionMock();
         $serviceService = new ServiceService($client);
         $serviceService->getById(1234);
     }
