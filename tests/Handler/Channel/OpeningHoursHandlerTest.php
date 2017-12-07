@@ -12,7 +12,7 @@ use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
 /**
- * Test the OpenNowHandler.
+ * Tests the OpeningHoursHandler.
  *
  * @package StadGent\Services\Test\OpeningHours\Handler\Service
  */
@@ -34,8 +34,7 @@ class OpeningHoursHandlerTest extends HandlerTestBase
         $handler = new OpeningHoursHandler();
         $this->assertEquals(
             $expectedHandles,
-            $handler->handles(),
-            'Handler only handles \StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest.'
+            $handler->handles()
         );
     }
 
