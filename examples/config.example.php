@@ -39,3 +39,6 @@ $openinghours_week_startdate = '';
 
 // Start date of a single month (yyy-mm-dd).
 $openinghours_month_startdate = '';
+
+// Start date of a single year (yyy-mm-dd).
+$openinghours_year_startdate = '';
