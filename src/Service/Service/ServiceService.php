@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Service\Service;
 
-use StadGent\Services\OpeningHours\Cache\CacheableInterface;
-use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
@@ -17,9 +15,8 @@ use StadGent\Services\OpeningHours\Service\ServiceAbstract;
  *
  * @package StadGent\Services\OpeningHours
  */
-class ServiceService extends ServiceAbstract implements CacheableInterface
+class ServiceService extends ServiceAbstract
 {
-    use CacheableTrait;
 
     /**
      * Get all Services.

@@ -2,6 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Service;
 
+use StadGent\Services\OpeningHours\Cache\CacheableInterface;
+use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Exception\UnexpectedResponseException;
@@ -11,8 +13,10 @@ use StadGent\Services\OpeningHours\Exception\UnexpectedResponseException;
  *
  * @package StadGent\Services\OpeningHours
  */
-abstract class ServiceAbstract implements ServiceInterface
+abstract class ServiceAbstract implements ServiceInterface, CacheableInterface
 {
+    use CacheableTrait;
+
     /**
      * @var \StadGent\Services\OpeningHours\Client\ClientInterface
      */

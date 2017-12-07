@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\Cache\CacheableInterface;
-use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
@@ -21,9 +19,8 @@ use StadGent\Services\OpeningHours\Service\ServiceAbstract;
  *
  * @package StadGent\Services\OpeningHours
  */
-class OpeningHoursService extends ServiceAbstract implements CacheableInterface
+class OpeningHoursService extends ServiceAbstract
 {
-    use CacheableTrait;
 
     /**
      * Get the Open now status as Value object.

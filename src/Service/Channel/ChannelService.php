@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
-use StadGent\Services\OpeningHours\Cache\CacheableInterface;
-use StadGent\Services\OpeningHours\Cache\CacheableTrait;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
@@ -16,9 +14,8 @@ use StadGent\Services\OpeningHours\Service\ServiceAbstract;
  *
  * @package StadGent\Services\OpeningHours
  */
-class ChannelService extends ServiceAbstract implements CacheableInterface
+class ChannelService extends ServiceAbstract
 {
-    use CacheableTrait;
 
     /**
      * Get all Channels for the given Service Id.
