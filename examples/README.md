@@ -44,6 +44,10 @@ file.
   as object.
 * `224-Channel-OpeningHoursYearHtml.php` : Get the opening hours for a single
   year as HTML.
+* `225-Channel-OpeningHoursPeriod.php` : Get the opening hours for a given
+  period as object.
+* `225-Channel-OpeningHoursPeriodHtml.php` : Get the opening hours for a given
+  period as HTML.  
 
 ## Usage
 
@@ -52,5 +56,5 @@ The scripts can only be called from command line.
 Example:
 
 ```bash
-php 01-Service-GetAll.php
+php 101-Service-GetAll.php
 ```

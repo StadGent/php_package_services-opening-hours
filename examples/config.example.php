@@ -42,3 +42,7 @@ $openinghours_month_startdate = '';
 
 // Start date of a single year (yyy-mm-dd).
 $openinghours_year_startdate = '';
+
+// Period from - until dates (yyyy-mm-dd)
+$openinghours_period_from = '';
+$openinghours_period_until = '';
