@@ -65,7 +65,7 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         return <<<EOT
 <div vocab="http://schema.org/" typeof="Library">
-    <h1>Loketten</h1>
+    <h1>FooBar</h1>
     <div property="openingHoursSpecification" typeof="OpeningHoursSpecification">
         <time property="validFrom validThrough" datetime="2020-01-02">02/01</time>:  from
         <time property="opens" content="09:00:00">09:00</time> to

@@ -4,7 +4,6 @@ namespace StadGent\Services\Test\OpeningHours\Handler\Channel;
 
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
-use StadGent\Services\OpeningHours\Response\HtmlResponse;
 use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
 /**
