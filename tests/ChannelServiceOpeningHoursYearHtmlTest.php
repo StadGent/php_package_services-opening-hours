@@ -22,7 +22,7 @@ class ChannelServiceOpeningHoursYearHtmlTest extends ServiceTestBase
         $client = $this->createClientForOpeningHoursYearHtml($html);
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
-        $responseHtml = $channelService->year(10, 20, '2020-01-02');
+        $responseHtml = $channelService->getYear(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -37,7 +37,7 @@ class ChannelServiceOpeningHoursYearHtmlTest extends ServiceTestBase
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $responseHtml = $channelService->year(10, 20, '2020-01-02');
+        $responseHtml = $channelService->getYear(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -52,7 +52,7 @@ class ChannelServiceOpeningHoursYearHtmlTest extends ServiceTestBase
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $channelService->year(10, 20, '2020-01-02');
+        $channelService->getYear(10, 20, '2020-01-02');
     }
 
     /**

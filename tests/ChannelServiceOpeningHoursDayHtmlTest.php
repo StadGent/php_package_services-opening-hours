@@ -22,7 +22,7 @@ class ChannelServiceOpeningHoursDayHtmlTest extends ServiceTestBase
         $client = $this->createClientForOpeningHoursDayHtml($html);
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
-        $responseHtml = $channelService->day(10, 20, '2020-01-02');
+        $responseHtml = $channelService->getDay(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -37,7 +37,7 @@ class ChannelServiceOpeningHoursDayHtmlTest extends ServiceTestBase
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $responseHtml = $channelService->day(10, 20, '2020-01-02');
+        $responseHtml = $channelService->getDay(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -52,7 +52,7 @@ class ChannelServiceOpeningHoursDayHtmlTest extends ServiceTestBase
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $channelService->day(10, 20, '2020-01-02');
+        $channelService->getDay(10, 20, '2020-01-02');
     }
 
     /**
@@ -64,7 +64,7 @@ class ChannelServiceOpeningHoursDayHtmlTest extends ServiceTestBase
     {
         $client = $this->getClientWithServiceNotFoundExceptionMock();
         $channelService = new ChannelOpeningHoursHtmlService($client);
-        $channelService->day(10, 20, '2020-01-02');
+        $channelService->getDay(10, 20, '2020-01-02');
     }
 
     /**
@@ -76,7 +76,7 @@ class ChannelServiceOpeningHoursDayHtmlTest extends ServiceTestBase
     {
         $client = $this->getClientWithChannelNotFoundExceptionMock();
         $channelService = new ChannelOpeningHoursHtmlService($client);
-        $channelService->day(10, 20, '2020-01-02');
+        $channelService->getDay(10, 20, '2020-01-02');
     }
 
     /**

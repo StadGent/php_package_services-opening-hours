@@ -30,7 +30,7 @@ example_print_step('Get the Open Now status by the Services & Channel ID');
 example_print();
 
 try {
-    $openNow = $service->openNow($service_id, $channel_id);
+    $openNow = $service->getOpenNow($service_id, $channel_id);
     example_sprintf(' Id      : %d', $openNow->getChannelId());
     example_sprintf(' Label   : %s', $openNow->getChannelLabel());
     example_sprintf(' Is Open : %d', (int)$openNow->isOpen());

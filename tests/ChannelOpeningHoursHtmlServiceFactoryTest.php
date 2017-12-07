@@ -101,7 +101,7 @@ class ChannelOpeningHoursHtmlServiceFactoryTest extends TestCase
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
         $service = ChannelOpeningHoursHtmlServiceFactory::create($client, $cache);
 
-        $responseCollection = $service->day(12, 34, '2020-01-02');
+        $responseCollection = $service->getDay(12, 34, '2020-01-02');
         $this->assertSame($collection, $responseCollection);
     }
 }

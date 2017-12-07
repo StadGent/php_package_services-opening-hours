@@ -23,7 +23,7 @@ class ChannelServiceOpeningHoursWeekTest extends ServiceTestBase
         $client = $this->createClientForOpeningHours($openingHours);
 
         $channelService = new ChannelOpeningHoursService($client);
-        $responseOpeningsHours = $channelService->week(10, 20, '2020-01-02');
+        $responseOpeningsHours = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningsHours);
     }
 
@@ -41,7 +41,7 @@ class ChannelServiceOpeningHoursWeekTest extends ServiceTestBase
 
         $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $responseOpeningHours = $channelService->week(10, 20, '2020-01-02');
+        $responseOpeningHours = $channelService->getWeek(10, 20, '2020-01-02');
         $this->assertSame($openingHours, $responseOpeningHours);
     }
 
@@ -59,7 +59,7 @@ class ChannelServiceOpeningHoursWeekTest extends ServiceTestBase
 
         $channelService = new ChannelOpeningHoursService($client);
         $channelService->setCacheService($cache);
-        $channelService->week(12, 34, '2020-01-02');
+        $channelService->getWeek(12, 34, '2020-01-02');
     }
 
     /**
