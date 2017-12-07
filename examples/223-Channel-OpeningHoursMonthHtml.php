@@ -34,7 +34,7 @@ example_print_step('Get the OpeningHours by the Service, Channel ID & start date
 example_print();
 
 try {
-    $html = $service->openingHoursMonthHtml($service_id, $channel_id, $openinghours_month_startdate);
+    $html = $service->month($service_id, $channel_id, $openinghours_month_startdate);
     example_print_html($html);
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_sprintf(' ! No Service found for Service ID : %d', $service_id);

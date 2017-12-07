@@ -22,7 +22,7 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
-        $responseHtml = $channelService->openingHoursPeriodHtml(10, 20, '2020-01-02', '2020-04-01');
+        $responseHtml = $channelService->period(10, 20, '2020-01-02', '2020-04-01');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -34,13 +34,13 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
         $cache = $this->getFromCacheMock(
-            'OpeningHours:ChannelOpeningHoursHtmlService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01',
+            'OpeningHours:ChannelOpeningHoursHtmlService:period:10:20:2020-01-02:2020-04-01',
             $html
         );
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $responseHtml = $channelService->openingHoursPeriodHtml(10, 20, '2020-01-02', '2020-04-01');
+        $responseHtml = $channelService->period(10, 20, '2020-01-02', '2020-04-01');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -52,13 +52,13 @@ class ChannelServiceOpeningHoursPeriodHtmlTest extends ServiceTestBase
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursPeriodHtml($html);
         $cache = $this->getSetCacheMock(
-            'OpeningHours:ChannelOpeningHoursHtmlService:openingHoursPeriodHtml:10:20:2020-01-02:2020-04-01',
+            'OpeningHours:ChannelOpeningHoursHtmlService:period:10:20:2020-01-02:2020-04-01',
             $html
         );
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $channelService->openingHoursPeriodHtml(10, 20, '2020-01-02', '2020-04-01');
+        $channelService->period(10, 20, '2020-01-02', '2020-04-01');
     }
 
     /**

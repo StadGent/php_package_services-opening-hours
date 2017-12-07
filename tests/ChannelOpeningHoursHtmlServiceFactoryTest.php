@@ -95,13 +95,13 @@ class ChannelOpeningHoursHtmlServiceFactoryTest extends TestCase
         $cache
             ->expects($this->once())
             ->method('get')
-            ->with($this->equalTo('OpeningHours:ChannelOpeningHoursHtmlService:openingHoursDayHtml:12:34:2020-01-02'))
+            ->with($this->equalTo('OpeningHours:ChannelOpeningHoursHtmlService:day:12:34:2020-01-02'))
             ->will($this->returnValue($collection));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
         $service = ChannelOpeningHoursHtmlServiceFactory::create($client, $cache);
 
-        $responseCollection = $service->openingHoursDayHtml(12, 34, '2020-01-02');
+        $responseCollection = $service->day(12, 34, '2020-01-02');
         $this->assertSame($collection, $responseCollection);
     }
 }

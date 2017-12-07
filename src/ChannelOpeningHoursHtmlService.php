@@ -49,7 +49,7 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openNowHtml($serviceId, $channelId)
+    public function openNow($serviceId, $channelId)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId]
@@ -98,7 +98,7 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursDayHtml($serviceId, $channelId, $date)
+    public function day($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -130,7 +130,7 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursWeekHtml($serviceId, $channelId, $date)
+    public function week($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -162,7 +162,7 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursMonthHtml($serviceId, $channelId, $date)
+    public function month($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -194,7 +194,7 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursYearHtml($serviceId, $channelId, $date)
+    public function year($serviceId, $channelId, $date)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $date]
@@ -228,7 +228,7 @@ class ChannelOpeningHoursHtmlService extends ServiceAbstract implements Cacheabl
      * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function openingHoursPeriodHtml($serviceId, $channelId, $dateFrom, $dateUntil)
+    public function period($serviceId, $channelId, $dateFrom, $dateUntil)
     {
         $cacheKey = $this->createCacheKeyFromArray(
             [__FUNCTION__, $serviceId, $channelId, $dateFrom, $dateUntil]

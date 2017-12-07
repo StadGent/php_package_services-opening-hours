@@ -22,7 +22,7 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
         $client = $this->createClientForOpeningHoursWeekHtml($html);
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
-        $responseHtml = $channelService->openingHoursWeekHtml(10, 20, '2020-01-02');
+        $responseHtml = $channelService->week(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -33,11 +33,11 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
-        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:openingHoursWeekHtml:10:20:2020-01-02', $html);
+        $cache = $this->getFromCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:week:10:20:2020-01-02', $html);
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $responseHtml = $channelService->openingHoursWeekHtml(10, 20, '2020-01-02');
+        $responseHtml = $channelService->week(10, 20, '2020-01-02');
         $this->assertSame($html, $responseHtml);
     }
 
@@ -48,11 +48,11 @@ class ChannelServiceOpeningHoursWeekHtmlTest extends ServiceTestBase
     {
         $html = $this->createOpeninghoursHtml();
         $client = $this->createClientForOpeningHoursWeekHtml($html);
-        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:openingHoursWeekHtml:10:20:2020-01-02', $html);
+        $cache = $this->getSetCacheMock('OpeningHours:ChannelOpeningHoursHtmlService:week:10:20:2020-01-02', $html);
 
         $channelService = new ChannelOpeningHoursHtmlService($client);
         $channelService->setCacheService($cache);
-        $channelService->openingHoursWeekHtml(10, 20, '2020-01-02');
+        $channelService->week(10, 20, '2020-01-02');
     }
 
     /**

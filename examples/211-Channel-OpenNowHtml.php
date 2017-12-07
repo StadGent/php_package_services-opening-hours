@@ -30,7 +30,7 @@ example_print_step('Get the Open Now status by the Services & Channel ID');
 example_print();
 
 try {
-    $html = $service->openNowHtml($service_id, $channel_id);
+    $html = $service->openNow($service_id, $channel_id);
     example_print_html($html);
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_sprintf(' ! No Service found for Service ID : %d', $service_id);
