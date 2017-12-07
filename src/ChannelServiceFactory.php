@@ -6,12 +6,8 @@ use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursDayHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursMonthHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursPeriodHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursWeekHtmlHandler;
-use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursYearHtmlHandler;
+use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 
@@ -41,11 +37,7 @@ class ChannelServiceFactory
             ->addHandler(new OpenNowHandler())
             ->addHandler(new OpenNowHtmlHandler())
             ->addHandler(new OpeningHoursHandler())
-            ->addHandler(new OpeningHoursDayHtmlHandler())
-            ->addHandler(new OpeningHoursWeekHtmlHandler())
-            ->addHandler(new OpeningHoursMonthHtmlHandler())
-            ->addHandler(new OpeningHoursYearHtmlHandler())
-            ->addHandler(new OpeningHoursPeriodHtmlHandler())
+            ->addHandler(new OpeningHoursHtmlHandler())
         ;
 
         $service = new ChannelService($client);
