@@ -6,11 +6,11 @@ use GuzzleHttp\Psr7\Request;
 use StadGent\Services\OpeningHours\Uri\UriInterface;
 
 /**
- * Abstract request requesting JSON response.
+ * Abstract request requesting HTML response.
  *
  * @package Gent\Services\MailingList\Request
  */
-abstract class RequestAbstract extends Request implements RequestInterface
+abstract class HtmlRequestAbstract extends Request implements RequestInterface
 {
     /**
      * Constructor.
@@ -23,7 +23,7 @@ abstract class RequestAbstract extends Request implements RequestInterface
         parent::__construct(
             MethodType::GET,
             $uri->getUri(),
-            ['Accept' => AcceptType::JSON]
+            ['Accept' => AcceptType::HTML]
         );
     }
 }

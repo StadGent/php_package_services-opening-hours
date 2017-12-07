@@ -3,6 +3,7 @@
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Channel\OpenNowUri;
 
 /**
  * Request to get OpenNow for a Channel in JSON format.
@@ -21,12 +22,7 @@ class OpenNowRequest extends RequestAbstract
      */
     public function __construct($serviceId, $channelId)
     {
-        $uri = sprintf(
-            'services/%d/channels/%d/open-now',
-            (int) $serviceId,
-            (int) $channelId
-        );
-
+        $uri = new OpenNowUri($serviceId, $channelId);
         parent::__construct($uri);
     }
 }

@@ -3,6 +3,7 @@
 namespace StadGent\Services\OpeningHours\Request\Service;
 
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Service\SearchByLabelUri;
 
 /**
  * Request to Search services by (partial) label.
@@ -19,7 +20,7 @@ class SearchByLabelRequest extends RequestAbstract
      */
     public function __construct($label)
     {
-        $uri = sprintf('services?label=%s', $label);
+        $uri = new SearchByLabelUri($label);
         parent::__construct($uri);
     }
 }

@@ -2,19 +2,29 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
+use StadGent\Services\OpeningHours\Request\HtmlRequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursDayUri;
 
 /**
  * Get the OpeningHours for a single day as HTML.
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursDayHtmlRequest extends OpeningHoursDayRequest
+class OpeningHoursDayHtmlRequest extends HtmlRequestAbstract
 {
     /**
-     * The accept header when creating the request.
+     * Get the OpeningHours for a single day by the Service & Channel ID.
      *
-     * @var string
+     * @param int $serviceId
+     *   The Service ID to get the channel for.
+     * @param int $channelId
+     *   The Channel ID to get.
+     * @param string $date
+     *   The day (date in Y-m-d format) to get the opening hours for.
      */
-    protected $headerAccept = AcceptType::HTML;
+    public function __construct($serviceId, $channelId, $date)
+    {
+        $uri = new OpeningHoursDayUri($serviceId, $channelId, $date);
+        parent::__construct($uri);
+    }
 }

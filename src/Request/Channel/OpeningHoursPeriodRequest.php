@@ -3,6 +3,7 @@
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
 use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursPeriodUri;
 
 /**
  * Get the OpeningHours for a given period as JSON.
@@ -25,14 +26,7 @@ class OpeningHoursPeriodRequest extends RequestAbstract
      */
     public function __construct($serviceId, $channelId, $dateFrom, $dateUntil)
     {
-        $uri = sprintf(
-            'services/%d/channels/%d/openinghours?from=%s&until=%s',
-            (int) $serviceId,
-            (int) $channelId,
-            $dateFrom,
-            $dateUntil
-        );
-
+        $uri = new OpeningHoursPeriodUri($serviceId, $channelId, $dateFrom, $dateUntil);
         parent::__construct($uri);
     }
 }
