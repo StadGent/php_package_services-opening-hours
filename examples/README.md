@@ -32,6 +32,10 @@ file.
   object.
 * `221-Channel-OpeningHoursDayHtml.php` : Get the opening hours for a single day
   as HTML.
+* `222-Channel-OpeningHoursWeek.php` : Get the opening hours for a single week
+  as object.
+* `222-Channel-OpeningHoursWeekHtml.php` : Get the opening hours for a single
+  week as HTML.
 
 ## Usage
 
