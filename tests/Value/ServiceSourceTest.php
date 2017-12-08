@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests the ServiceSource value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class ServiceSourceTest extends TestCase
 {
@@ -32,12 +32,12 @@ class ServiceSourceTest extends TestCase
     public function testFromArray()
     {
         $data = [
-            'identifier' => '654-987-321',
+            'sourceIdentifier' => '654-987-321',
             'source' => 'foobar',
         ];
         $source = ServiceSource::fromArray($data);
 
-        $this->assertEquals($data['identifier'], $source->getId());
+        $this->assertEquals($data['sourceIdentifier'], $source->getId());
         $this->assertEquals($data['source'], $source->getName());
     }
 
@@ -47,7 +47,7 @@ class ServiceSourceTest extends TestCase
     public function testSameValueAs()
     {
         $data = [
-            'identifier' => '654-987-321',
+            'sourceIdentifier' => '654-987-321',
             'source' => 'foobar',
         ];
         $source = ServiceSource::fromArray($data);
@@ -62,7 +62,7 @@ class ServiceSourceTest extends TestCase
 
         $sourceNotSame = ServiceSource::fromArray(
             [
-                'identifier' => 'abc-def-ghj',
+                'sourceIdentifier' => 'abc-def-ghj',
                 'source' => 'fizzbuzz',
             ]
         );

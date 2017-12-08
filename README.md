@@ -26,7 +26,8 @@ composer require stadgent/services-opening-hours
 
 ## Usage
 
-Explain how to use the project/package/module. Add some code examples.
+See the [code examples documentation](examples/README.md) included in this
+package.
 
 ## Change log
 
@@ -38,7 +39,7 @@ recently.
 Run all tests:
 
 ```bash
-composer test
+vendor/bin/phpunit
 ```
 
 ## Contributing
@@ -76,13 +77,13 @@ with open arms! We are committed to creating and maintaining open source
 projects. Questions about our approach can be asked through the issue queue
 (except for security issues).
 
-[ico-version]: https://poser.pugx.org/stadgent/services-opening-hours/v/stable
-[ico-version-unstable]: https://poser.pugx.org/stadgent/services-opening-hours/v/unstable
-[ico-license]: https://poser.pugx.org/StadGent/php_package_services-opening-hours/license
-[ico-downloads]: https://poser.pugx.org/StadGent/php_package_services-opening-hours/downloads
-[ico-travis]: https://travis-ci.org/StadGent/php_package_services-opening-hours.svg?branch=develop
-[ico-maintainability]: https://api.codeclimate.com/v1/badges/dac41e1c27f734926200/maintainability
-[ico-test-coverage]: https://api.codeclimate.com/v1/badges/dac41e1c27f734926200/test_coverage
+[ico-version]: https://img.shields.io/packagist/v/stadgent/services-opening-hours.svg?style=flat-square
+[ico-version-unstable]: https://img.shields.io/packagist/vpre/stadgent/services-opening-hours.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/stadgent/services-opening-hours.svg?style=flat-square
+[ico-license]: https://img.shields.io/github/license/StadGent/php_package_services-opening-hours.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/StadGent/php_package_services-opening-hours/master.svg?style=flat-square
+[ico-maintainability]: https://img.shields.io/codeclimate/maintainability/StadGent/php_package_services-opening-hours.svg?style=flat-square
+[ico-test-coverage]: https://img.shields.io/codeclimate/c/StadGent/php_package_services-opening-hours.svg?style=flat-square
 [ico-php7]: https://php7ready.timesplinter.ch/StadGent/php_package_services-opening-hours/master/badge.svg
 
 [link-packagist]: https://packagist.org/packages/stadgent/services-opening-hours

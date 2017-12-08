@@ -4,6 +4,8 @@ namespace StadGent\Services\OpeningHours\Value;
 
 /**
  * Object value representing a collection of items.
+ *
+ * @package StadGent\Services\OpeningHours\Value
  */
 abstract class CollectionAbstract extends ValueAbstract implements \IteratorAggregate
 {

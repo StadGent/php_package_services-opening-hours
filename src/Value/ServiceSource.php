@@ -36,7 +36,7 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
      * Create a new Service from an array of data.
      *
      * The array may contain following data:
-     * - identifier (string) : The source identifier of the service.
+     * - sourceIdentifier (string) : The source identifier of the service.
      * - source (string) : The source of the service.
      *
      * @param array $data
@@ -49,8 +49,8 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
     {
         $service = new static();
 
-        if (!empty($data['identifier'])) {
-            $service->id = $data['identifier'];
+        if (!empty($data['sourceIdentifier'])) {
+            $service->id = $data['sourceIdentifier'];
         }
         if (!empty($data['source'])) {
             $service->name = $data['source'];

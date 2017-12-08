@@ -2,7 +2,6 @@
 
 namespace StadGent\Services\Test\OpeningHours\Value;
 
-use StadGent\Services\OpeningHours\Value\Boolean;
 use StadGent\Services\OpeningHours\Value\DateAttributes;
 use StadGent\Services\OpeningHours\Value\Service;
 use StadGent\Services\OpeningHours\Value\ServiceSource;
@@ -12,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * Tests the Service value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class ServiceTest extends TestCase
 {
@@ -23,8 +22,8 @@ class ServiceTest extends TestCase
     public function testFromEmptyArray()
     {
         $data = [
-            'created_at' => '2134-12-24T12:34:56+01:00',
-            'updated_at' => '2134-12-24T12:34:56+01:00',
+            'createdAt' => '2134-12-24T12:34:56+01:00',
+            'updatedAt' => '2134-12-24T12:34:56+01:00',
         ];
         $service = Service::fromArray($data);
 
@@ -41,7 +40,6 @@ class ServiceTest extends TestCase
         $this->assertFalse($service->hasSource());
 
         $this->assertFalse($service->isDraft());
-        $this->assertEquals(0, $service->getCountChannels());
     }
 
     /**
@@ -54,12 +52,11 @@ class ServiceTest extends TestCase
             'uri' => 'https://foo.bar/item/5',
             'label' => 'FooBar Label',
             'description' => 'Description FooBar',
-            'created_at' => '2345-11-05T12:45:00+01:00',
-            'updated_at' => '2345-11-12T14:12:11+01:00',
-            'identifier' => '654-987-321',
+            'createdAt' => '2345-11-05T12:45:00+01:00',
+            'updatedAt' => '2345-11-12T14:12:11+01:00',
+            'sourceIdentifier' => '654-987-321',
             'source' => 'foobar',
             'isDraft' => 1,
-            'countChannels' => 5,
         ];
         $service = Service::fromArray($data);
 
@@ -67,7 +64,6 @@ class ServiceTest extends TestCase
         $this->assertEquals($data['uri'], $service->getUri());
         $this->assertEquals($data['label'], $service->getLabel());
         $this->assertEquals($data['description'], $service->getDescription());
-        $this->assertEquals($data['countChannels'], $service->getCountChannels());
 
         $source = ServiceSource::fromArray($data);
         $this->assertTrue($source->sameValueAs($service->getSource()));
@@ -86,12 +82,11 @@ class ServiceTest extends TestCase
             'uri' => 'https://foo.bar/item/5',
             'label' => 'FooBar Label',
             'description' => 'Description FooBar',
-            'created_at' => '2345-11-05T12:45:00+01:00',
-            'updated_at' => '2345-11-12T14:12:11+01:00',
-            'identifier' => '654-987-321',
+            'createdAt' => '2345-11-05T12:45:00+01:00',
+            'updatedAt' => '2345-11-12T14:12:11+01:00',
+            'sourceIdentifier' => '654-987-321',
             'source' => 'foobar',
             'isDraft' => 1,
-            'countChannels' => 5,
         ];
         $service = Service::fromArray($data);
         $notService = $this
@@ -107,8 +102,8 @@ class ServiceTest extends TestCase
             [
                 'id' => 10,
                 'label' => 'FizzBazz label',
-                'created_at' => '2345-11-05T12:45:00+01:00',
-                'updated_at' => '2345-11-12T14:12:11+01:00',
+                'createdAt' => '2345-11-05T12:45:00+01:00',
+                'updatedAt' => '2345-11-12T14:12:11+01:00',
             ]
         );
         $this->assertFalse(
@@ -130,8 +125,8 @@ class ServiceTest extends TestCase
     {
         $service = Service::fromArray(
             [
-                'created_at' => '2134-12-24T12:34:56+01:00',
-                'updated_at' => '2134-12-24T12:34:56+01:00',
+                'createdAt' => '2134-12-24T12:34:56+01:00',
+                'updatedAt' => '2134-12-24T12:34:56+01:00',
             ]
         );
         $this->assertEquals('', (string) $service);
@@ -139,8 +134,8 @@ class ServiceTest extends TestCase
         $service = Service::fromArray(
             [
                 'label' => 'fooBar',
-                'created_at' => '2134-12-24T12:34:56+01:00',
-                'updated_at' => '2134-12-24T12:34:56+01:00',
+                'createdAt' => '2134-12-24T12:34:56+01:00',
+                'updatedAt' => '2134-12-24T12:34:56+01:00',
             ]
         );
         $this->assertEquals('fooBar', (string) $service);

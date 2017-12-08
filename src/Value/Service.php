@@ -59,13 +59,6 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     protected $isDraft;
 
     /**
-     * The number of channels linked to this service.
-     *
-     * @param int
-     */
-    protected $countChannels = 0;
-
-    /**
      * Use only the named constructors.
      */
     protected function __construct()
@@ -82,19 +75,18 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      * - uri (string) : The service URI.
      * - label (string) : The service label (name).
      * - description (string) : Description of the service.
-     * - created_at (string) : The creation date of the service.
-     * - updated_at (string) : The last update date of the service.
-     * - identifier (string) : The source identifier of the service.
+     * - createdAt (string) : The creation date of the service.
+     * - updatedAt (string) : The last update date of the service.
+     * - sourceIdentifier (string) : The source identifier of the service.
      * - source (string) : The source of the service.
-     * - draft (0/1) : Has the service the draft status.
-     * - countChannels (int) : The number of channels linked to the service.
+     * - draft (bool) : Has the service the draft status.
      *
      * @inheritdoc
      *
      * @return \StadGent\Services\OpeningHours\Value\Service
      *
      * @throws \InvalidArgumentException
-     *   If the created_at/update_at are empty.
+     *   If the createdAt/updateAt are empty.
      */
     public static function fromArray(array $data)
     {
@@ -111,9 +103,6 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
         }
         if (!empty($data['description'])) {
             $service->description = $data['description'];
-        }
-        if (!empty($data['countChannels'])) {
-            $service->countChannels = (int) $data['countChannels'];
         }
 
         $service->source = ServiceSource::fromArray($data);
@@ -206,16 +195,6 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Get the number of channels this service has.
-     *
-     * @return int
-     */
-    public function getCountChannels()
-    {
-        return $this->countChannels;
-    }
-
-    /**
      * Check if the given value object is the same as this.
      *
      * @param \StadGent\Services\OpeningHours\Value\ValueInterface $object
@@ -236,7 +215,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
             && $this->getDateAttributes()->sameValueAs($object->getDateAttributes())
             && $this->getSource()->sameValueAs($object->getSource())
             && $this->isDraft() === $object->isDraft()
-            && $this->getCountChannels() === $object->getCountChannels();
+            ;
     }
 
     public function __toString()

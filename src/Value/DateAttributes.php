@@ -33,11 +33,11 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
     }
 
     /**
-     * Create a new Service from an array of data.
+     * Create a new DateAttribute from an array of data.
      *
-     * The array may contain following data:
-     * - identifier (string) : The source identifier of the service.
-     * - source (string) : The source of the service.
+     * The array must contain following data:
+     * - createdAt (string) : The creation date of the service.
+     * - updatedAt (string) : The last update date of the service.
      *
      * @param array $data
      *   An array containing the service data.
@@ -46,20 +46,21 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      *   The Date Attributes object.
      *
      * @throws \InvalidArgumentException
+     *   If the array does not contains "createdAt" or "updatedAt" values.
      */
     public static function fromArray(array $data)
     {
         $attributes = new static();
 
-        if (!array_key_exists('created_at', $data)) {
-            throw new \InvalidArgumentException('The array should contain a "created_at" value.');
+        if (!array_key_exists('createdAt', $data)) {
+            throw new \InvalidArgumentException('The array should contain a "createdAt" value.');
         }
-        if (!array_key_exists('updated_at', $data)) {
-            throw new \InvalidArgumentException('The array should contain an "updated_at" value.');
+        if (!array_key_exists('updatedAt', $data)) {
+            throw new \InvalidArgumentException('The array should contain an "updatedAt" value.');
         }
 
-        $attributes->createdAt = new DateTime($data['created_at']);
-        $attributes->updatedAt = new DateTime($data['updated_at']);
+        $attributes->createdAt = new DateTime($data['createdAt']);
+        $attributes->updatedAt = new DateTime($data['updatedAt']);
 
         return $attributes;
     }

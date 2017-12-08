@@ -7,9 +7,9 @@ use StadGent\Services\OpeningHours\Value\ValueInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Tests for the Room collection value object.
+ * Tests for the ServiceCollection value object.
  *
- * @package Gent\Zalenzoeker\Tests\Value
+ * @package StadGent\Services\Test\OpeningHours\Value
  */
 class ServiceCollectionTest extends TestCase
 {
@@ -31,14 +31,14 @@ class ServiceCollectionTest extends TestCase
             [
                 'id' => 11,
                 'label' => 'FooBar',
-                'created_at' => '2022-11-12T13:14:15+05:00',
-                'updated_at' => '2022-11-12T13:14:15+05:00',
+                'createdAt' => '2022-11-12T13:14:15+05:00',
+                'updatedAt' => '2022-11-12T13:14:15+05:00',
             ],
             [
                 'id' => 11,
                 'label' => 'FizzBuzz',
-                'created_at' => '2023-11-12T13:14:15+05:00',
-                'updated_at' => '2023-11-12T13:14:15+05:00',
+                'createdAt' => '2023-11-12T13:14:15+05:00',
+                'updatedAt' => '2023-11-12T13:14:15+05:00',
             ],
         ];
         $collection = ServiceCollection::fromArray($data);
@@ -73,14 +73,14 @@ class ServiceCollectionTest extends TestCase
                 [
                     'id' => 11,
                     'label' => 'FooBar',
-                    'created_at' => '2022-11-12T13:14:15+05:00',
-                    'updated_at' => '2022-11-12T13:14:15+05:00',
+                    'createdAt' => '2022-11-12T13:14:15+05:00',
+                    'updatedAt' => '2022-11-12T13:14:15+05:00',
                 ],
                 [
                     'id' => 12,
                     'label' => 'FizzBuzz',
-                    'created_at' => '2023-11-12T13:14:15+05:00',
-                    'updated_at' => '2023-11-12T13:14:15+05:00',
+                    'createdAt' => '2023-11-12T13:14:15+05:00',
+                    'updatedAt' => '2023-11-12T13:14:15+05:00',
                 ],
             ]
         );
@@ -90,8 +90,8 @@ class ServiceCollectionTest extends TestCase
                 [
                     'id' => 11,
                     'label' => 'FooBar',
-                    'created_at' => '2022-11-12T13:14:15+05:00',
-                    'updated_at' => '2022-11-12T13:14:15+05:00',
+                    'createdAt' => '2022-11-12T13:14:15+05:00',
+                    'updatedAt' => '2022-11-12T13:14:15+05:00',
                 ],
             ]
         );
@@ -112,14 +112,14 @@ class ServiceCollectionTest extends TestCase
                 [
                     'id' => 11,
                     'label' => 'FooBar',
-                    'created_at' => '2022-11-12T13:14:15+05:00',
-                    'updated_at' => '2022-11-12T13:14:15+05:00',
+                    'createdAt' => '2022-11-12T13:14:15+05:00',
+                    'updatedAt' => '2022-11-12T13:14:15+05:00',
                 ],
                 [
                     'id' => 12,
                     'label' => 'FizzBuzz',
-                    'created_at' => '2023-11-12T13:14:15+05:00',
-                    'updated_at' => '2023-11-12T13:14:15+05:00',
+                    'createdAt' => '2023-11-12T13:14:15+05:00',
+                    'updatedAt' => '2023-11-12T13:14:15+05:00',
                 ],
             ]
         );
@@ -129,14 +129,14 @@ class ServiceCollectionTest extends TestCase
                 3 => [
                     'id' => 12,
                     'label' => 'FizzBuzz',
-                    'created_at' => '2023-11-12T13:14:15+05:00',
-                    'updated_at' => '2023-11-12T13:14:15+05:00',
+                    'createdAt' => '2023-11-12T13:14:15+05:00',
+                    'updatedAt' => '2023-11-12T13:14:15+05:00',
                 ],
                 4 => [
                     'id' => 11,
                     'label' => 'FooBar',
-                    'created_at' => '2022-11-12T13:14:15+05:00',
-                    'updated_at' => '2022-11-12T13:14:15+05:00',
+                    'createdAt' => '2022-11-12T13:14:15+05:00',
+                    'updatedAt' => '2022-11-12T13:14:15+05:00',
                 ],
 
             ]
@@ -157,14 +157,14 @@ class ServiceCollectionTest extends TestCase
             [
                 'id' => 11,
                 'label' => 'FooBar',
-                'created_at' => '2022-11-12T13:14:15+05:00',
-                'updated_at' => '2022-11-12T13:14:15+05:00',
+                'createdAt' => '2022-11-12T13:14:15+05:00',
+                'updatedAt' => '2022-11-12T13:14:15+05:00',
             ],
             [
                 'id' => 12,
                 'label' => 'FizzBuzz',
-                'created_at' => '2023-11-12T13:14:15+05:00',
-                'updated_at' => '2023-11-12T13:14:15+05:00',
+                'createdAt' => '2023-11-12T13:14:15+05:00',
+                'updatedAt' => '2023-11-12T13:14:15+05:00',
             ],
         ];
 
@@ -186,14 +186,14 @@ class ServiceCollectionTest extends TestCase
             [
                 'id' => 11,
                 'label' => 'FooBar',
-                'created_at' => '2022-11-12T13:14:15+05:00',
-                'updated_at' => '2022-11-12T13:14:15+05:00',
+                'createdAt' => '2022-11-12T13:14:15+05:00',
+                'updatedAt' => '2022-11-12T13:14:15+05:00',
             ],
             [
                 'id' => 12,
                 'label' => 'FizzBuzz',
-                'created_at' => '2023-11-12T13:14:15+05:00',
-                'updated_at' => '2023-11-12T13:14:15+05:00',
+                'createdAt' => '2023-11-12T13:14:15+05:00',
+                'updatedAt' => '2023-11-12T13:14:15+05:00',
             ],
         ];
 
