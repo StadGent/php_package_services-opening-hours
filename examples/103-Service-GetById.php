@@ -24,16 +24,16 @@ example_print_step('Create the HTTP client.');
 $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);
 
 example_print_step('Get the ServiceService.');
-$serviceService = \StadGent\Services\OpeningHours\ServiceServiceFactory::create($client);
+$service = \StadGent\Services\OpeningHours\Service::create($client);
 
 example_print_step('Search Services GetById');
 example_print();
 
 try {
-    $service = $serviceService->getById($service_id);
-    example_sprintf(' Id       : %d', $service->getId());
-    example_sprintf(' Label    : %s', $service->getLabel());
-    example_sprintf(' Is Draft : %d', (int) $service->isDraft());
+    $serviceItem = $service->getById($service_id);
+    example_sprintf(' Id       : %d', $serviceItem->getId());
+    example_sprintf(' Label    : %s', $serviceItem->getLabel());
+    example_sprintf(' Is Draft : %d', (int) $serviceItem->isDraft());
 } catch (\StadGent\Services\OpeningHours\Exception\ServiceNotFoundException $e) {
     example_sprintf(' ! No Service found for id : %d', $service_id);
 } catch (\Exception $e) {

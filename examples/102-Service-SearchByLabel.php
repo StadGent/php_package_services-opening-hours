@@ -24,7 +24,7 @@ example_print_step('Create the HTTP client.');
 $client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);
 
 example_print_step('Get the ServiceService.');
-$service = \StadGent\Services\OpeningHours\ServiceServiceFactory::create($client);
+$service = \StadGent\Services\OpeningHours\Service::create($client);
 
 // Lookup services by their label (search string is defined in config.php.
 example_print_step('Search Services by their label.');

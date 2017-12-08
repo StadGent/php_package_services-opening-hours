@@ -112,8 +112,6 @@ trait CacheableTrait
      */
     protected function createCacheKey($key)
     {
-        preg_match('/([^\\\]+)$/', __CLASS__, $matches);
-        $className = $matches[0];
-        return sprintf('OpeningHours:%s:%s', $className, $key);
+        return sprintf('OpeningHours:%s', $key);
     }
 }
