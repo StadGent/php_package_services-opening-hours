@@ -2,7 +2,10 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
-## [Unreleased]
+## [0.1.0]
+
+Initial release providing API to get Services & Channels + access the opening
+hours for a Channel.
 
 ### Added
 
@@ -25,4 +28,5 @@ All Notable changes to `gent/services-opening-hours` package.
 * DMOH-17: Added the OpeningHoursPeriod & OpeningHoursPeriodHTML methods to the
   ChannelService.
 
+[0.1.0]: https://github.com/StadGent/php_package_services-opening-hours/releases/tag/0.1.0
 [Unreleased]: https://github.com/StadGent/php_package_services-opening-hours/compare/master...develop
