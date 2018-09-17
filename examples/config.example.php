@@ -20,6 +20,9 @@ $service_id = '';
 // Service to load by its uri.
 $service_uri = '';
 
+// Service to load by its Vesta ID.
+$service_vesta_id = '';
+
 
 
 

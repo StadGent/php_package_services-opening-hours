@@ -161,6 +161,25 @@ class ServiceService extends ServiceAbstract
     }
 
     /**
+     * Get a service by its Vesta Id.
+     *
+     * @param string $vestaId
+     *
+     * @return \StadGent\Services\OpeningHours\Value\Service
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function getByVestaId($vestaId)
+    {
+        $uri = sprintf('https://stad.gent/id/agents/%s', $vestaId);
+        return $this->getByOpenDataUri($uri);
+    }
+
+    /**
      * Helper to create a cache key.
      *
      * @param array $parts
