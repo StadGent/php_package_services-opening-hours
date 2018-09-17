@@ -17,6 +17,9 @@ $service_label = '';
 // This id will also be used to lookup channels and opening hours.
 $service_id = '';
 
+// Service to load by its uri.
+$service_uri = '';
+
 
 
 

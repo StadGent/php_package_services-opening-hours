@@ -6,6 +6,7 @@ use StadGent\Services\OpeningHours\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
+use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
 use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 
@@ -32,6 +33,7 @@ class Service
         $client
             ->addHandler(new GetAllHandler())
             ->addHandler(new GetByIdHandler())
+            ->addHandler(new GetByOpenDataUriHandler())
             ->addHandler(new SearchByLabelHandler())
         ;
 
