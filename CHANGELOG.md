@@ -2,6 +2,13 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Added
+
+* DMOH-43: Added method to get a Service by its URI.
+* DMOH-43: Added method to get a Service by its Vesta ID.
+
 ## [0.1.0]
 
 Initial release providing API to get Services & Channels + access the opening

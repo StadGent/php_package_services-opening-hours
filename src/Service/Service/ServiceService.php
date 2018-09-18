@@ -5,6 +5,7 @@ namespace StadGent\Services\OpeningHours\Service\Service;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
+use StadGent\Services\OpeningHours\Request\Service\GetByOpenDataUriRequest;
 use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
@@ -73,7 +74,6 @@ class ServiceService extends ServiceAbstract
         return $response->getServices();
     }
 
-
     /**
      * Get a single Service by its ID.
      *
@@ -115,6 +115,68 @@ class ServiceService extends ServiceAbstract
         $this->cacheSet($cacheKey, $service);
 
         return $service;
+    }
+
+    /**
+     * Get a single Service by its open data uri.
+     *
+     * @param string $openDataUri
+     *   The Service open data uri.
+     *
+     * @return \StadGent\Services\OpeningHours\Value\Service
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function getByOpenDataUri($openDataUri)
+    {
+        $cacheKey = $this->createCacheKeyFromArray(
+            ['uri', $openDataUri]
+        );
+
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        try {
+            // Get from service.
+            $response = $this->send(
+                new GetByOpenDataUriRequest($openDataUri),
+                ServiceResponse::class
+            );
+        } catch (\Exception $e) {
+            ExceptionFactory::fromException($e);
+        }
+
+        /* @var $response \StadGent\Services\OpeningHours\Response\ServiceResponse */
+        $service = $response->getService();
+        $this->cacheSet($cacheKey, $service);
+
+        return $service;
+    }
+
+    /**
+     * Get a service by its Vesta Id.
+     *
+     * @param string $vestaId
+     *
+     * @return \StadGent\Services\OpeningHours\Value\Service
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \Psr\SimpleCache\InvalidArgumentException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function getByVestaId($vestaId)
+    {
+        $uri = sprintf('https://stad.gent/id/agents/%s', $vestaId);
+        return $this->getByOpenDataUri($uri);
     }
 
     /**
