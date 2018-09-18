@@ -15,6 +15,8 @@ use StadGent\Services\OpeningHours\Value\ChannelCollection;
  * Tests the ChannelOpeningHoursServiceFactory.
  *
  * @package StadGent\Services\Test\OpeningHours
+ *
+ * @covers \StadGent\Services\OpeningHours\ChannelOpeningHours
  */
 class ChannelOpeningHoursTest extends TestCase
 {
@@ -31,10 +33,7 @@ class ChannelOpeningHoursTest extends TestCase
         ];
 
         // Create the client so we can spy on the factory method.
-        $client = $this
-            ->getMockBuilder(ClientInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = $this->createMock(ClientInterface::class);
 
         // Inject a spy so we can validate the injected handlers.
         $spy = $this->any();
@@ -63,12 +62,16 @@ class ChannelOpeningHoursTest extends TestCase
         // Validate the added handlers.
         $invocations = $spy->getInvocations();
         foreach ($invocations as $invocation) {
-             /** @noinspection PhpUndefinedFieldInspection */
-             $handler = get_class($invocation->parameters[0]);
-             $this->assertTrue(
-                 in_array($handler, $expectedHandlers, true),
-                 sprintf('Handler "%s" is added by the factory.', $handler)
-             );
+            // PHPUNIT for PHP 5.6 has no getParameters() method.
+            $parameters = version_compare(PHP_VERSION, 7) < 0
+                ? $invocation->parameters
+                : $invocation->getParameters();
+            $handler = get_class($parameters[0]);
+            $this->assertContains(
+                $handler,
+                $expectedHandlers,
+                sprintf('Handler "%s" is added by the factory.', $handler)
+            );
         }
     }
 
@@ -79,19 +82,13 @@ class ChannelOpeningHoursTest extends TestCase
     {
         $collection = ChannelCollection::fromArray([]);
 
-        $client = $this
-            ->getMockBuilder(ClientInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = $this->createMock(ClientInterface::class);
         $client
             ->expects($this->any())
             ->method('addHandler')
             ->will($this->returnValue($client));
 
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $cache = $this->createMock(CacheInterface::class);
         $cache
             ->expects($this->once())
             ->method('get')
