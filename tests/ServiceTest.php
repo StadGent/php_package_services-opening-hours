@@ -17,6 +17,8 @@ use StadGent\Services\OpeningHours\Value\ServiceCollection;
  * Class RoomServiceFactoryTest
  *
  * @package Gent\Zalenzoeker\Tests\Services\Room
+ *
+ * @covers \StadGent\Services\OpeningHours\Service
  */
 class ServiceTest extends TestCase
 {
@@ -35,10 +37,7 @@ class ServiceTest extends TestCase
         ];
 
         // Create the client so we can spy on the factory method.
-        $client = $this
-            ->getMockBuilder(ClientInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = $this->createMock(ClientInterface::class);
 
         // Inject a spy so we can validate the injected handlers.
         $spy = $this->any();
@@ -67,13 +66,16 @@ class ServiceTest extends TestCase
         // Validate the added handlers.
         $invocations = $spy->getInvocations();
         foreach ($invocations as $invocation) {
-             /** @noinspection PhpUndefinedFieldInspection */
-             $handler = get_class($invocation->parameters[0]);
-             $this->assertContains(
-                 $handler,
-                 $expectedHandlers,
-                 sprintf('Handler "%s" is added by the factory.', $handler)
-             );
+            // PHPUNIT for PHP 5.6 has no getParameters() method.
+            $parameters = version_compare(PHP_VERSION, 7) < 0
+                ? $invocation->parameters
+                : $invocation->getParameters();
+            $handler = get_class($parameters[0]);
+            $this->assertContains(
+                $handler,
+                $expectedHandlers,
+                sprintf('Handler "%s" is added by the factory.', $handler)
+            );
         }
     }
 
