@@ -2,6 +2,12 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Added
+
+* Added PHP 7.2 support.
+
 ## [0.2.0]
 
 ### Added
