@@ -1,4 +1,6 @@
-engines:
+version: "2"
+
+plugins:
   phpcodesniffer:
     enabled: true
     config:
@@ -20,13 +22,7 @@ engines:
       MD024:
         enabled: false
 
-
-ratings:
-  paths:
-  - "**.php"
-  - "**.md"
-
-exclude_paths:
+exclude_patterns:
 - ".github"
 - "**/vendor/**/*"
 - "examples/"

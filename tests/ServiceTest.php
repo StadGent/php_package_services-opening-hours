@@ -7,6 +7,7 @@ use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
+use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
 use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
 use StadGent\Services\OpeningHours\Service;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
@@ -29,6 +30,7 @@ class ServiceTest extends TestCase
         $expectedHandlers = [
             GetAllHandler::class,
             GetByIdHandler::class,
+            GetByOpenDataUriHandler::class,
             SearchByLabelHandler::class,
         ];
 
@@ -67,8 +69,9 @@ class ServiceTest extends TestCase
         foreach ($invocations as $invocation) {
              /** @noinspection PhpUndefinedFieldInspection */
              $handler = get_class($invocation->parameters[0]);
-             $this->assertTrue(
-                 in_array($handler, $expectedHandlers, true),
+             $this->assertContains(
+                 $handler,
+                 $expectedHandlers,
                  sprintf('Handler "%s" is added by the factory.', $handler)
              );
         }
@@ -81,19 +84,13 @@ class ServiceTest extends TestCase
     {
         $collection = ServiceCollection::fromArray([]);
 
-        $client = $this
-            ->getMockBuilder(ClientInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $client = $this->createMock(ClientInterface::class);
         $client
             ->expects($this->any())
             ->method('addHandler')
             ->will($this->returnValue($client));
 
-        $cache = $this
-            ->getMockBuilder(CacheInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $cache = $this->createMock(CacheInterface::class);
         $cache
             ->expects($this->once())
             ->method('get')
