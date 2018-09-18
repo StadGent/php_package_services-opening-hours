@@ -3,13 +3,13 @@
 /**
  * StadGent\Services\OpeningHours Examples.
  *
- * Example how load a single Service by its id.
+ * Example how to load a single Service by its id.
  */
 
 require_once __DIR__ . '/bootstrap.php';
 
 
-example_print_header('Example how load a single Service by its id.');
+example_print_header('Example how to load a single Service by its id.');
 
 
 
