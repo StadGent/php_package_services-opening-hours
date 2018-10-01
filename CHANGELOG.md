@@ -2,6 +2,10 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [1.0.1]
+
+* Fixed OpenDataURI Handler.
+
 ## [1.0.0]
 
 ### Added

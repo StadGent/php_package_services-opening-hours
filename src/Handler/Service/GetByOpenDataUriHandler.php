@@ -33,7 +33,10 @@ class GetByOpenDataUriHandler extends HandlerAbstract
     public function toResponse(Psr\ResponseInterface $response)
     {
         $all = $this->getBodyData($response);
-        $data = reset($all);
+        $data = $all;
+        if (!empty($all)) {
+            $data = reset($all);
+        }
         $service = Service::fromArray($data);
         return new ServiceResponse($service);
     }
