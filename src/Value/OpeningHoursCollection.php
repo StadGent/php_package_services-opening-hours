@@ -2,6 +2,9 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DigipolisGent\Value\CollectionAbstract;
+use DigipolisGent\Value\ValueFromArrayInterface;
+
 /**
  * Object describing a collection of OpeningHours.
  *
@@ -27,7 +30,7 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * @param array
      *   Array of OpeningHours data.
      *
-     * @returns \StadGent\Services\OpeningHours\Value\OpeningHoursCollection
+     * @return \StadGent\Services\OpeningHours\Value\OpeningHoursCollection
      *
      * @throws \InvalidArgumentException
      *   If one of the items does not have a date.

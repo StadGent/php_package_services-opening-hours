@@ -2,6 +2,9 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DigipolisGent\Value\CollectionAbstract;
+use DigipolisGent\Value\ValueFromArrayInterface;
+
 /**
  * Object describing a collection of Hours.
  *
@@ -27,7 +30,7 @@ class HoursCollection extends CollectionAbstract implements ValueFromArrayInterf
      * @param array $data
      *   The array to extract the collection from.
      *
-     * @returns \StadGent\Services\OpeningHours\Value\HoursCollection
+     * @return \StadGent\Services\OpeningHours\Value\HoursCollection
      *
      * @throws \InvalidArgumentException
      *   If the data does not contain a "channel" value.

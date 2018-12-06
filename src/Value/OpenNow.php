@@ -2,6 +2,10 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DigipolisGent\Value\ValueAbstract;
+use DigipolisGent\Value\ValueFromArrayInterface;
+use DigipolisGent\Value\ValueInterface;
+
 /**
  * Object describing OpenNow status for a Channel.
  *
@@ -106,7 +110,7 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Check if the given value object is the same as this.
      *
-     * @param \StadGent\Services\OpeningHours\Value\ValueInterface $object
+     * @param \DigipolisGent\Value\ValueInterface|\StadGent\Services\OpeningHours\Value\OpenNow $object
      *
      * @return bool
      */

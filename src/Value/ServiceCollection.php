@@ -2,6 +2,9 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DigipolisGent\Value\CollectionAbstract;
+use DigipolisGent\Value\ValueFromArrayInterface;
+
 /**
  * Object describing a collection of Services.
  *
@@ -27,7 +30,7 @@ class ServiceCollection extends CollectionAbstract implements ValueFromArrayInte
      * @param array $data
      *   The array to extract the collection from.
      *
-     * @returns \StadGent\Services\OpeningHours\Value\ServiceCollection
+     * @return \StadGent\Services\OpeningHours\Value\ServiceCollection
      *
      * @throws \InvalidArgumentException
      *   If the createdAt/updateAt are empty.

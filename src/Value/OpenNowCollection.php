@@ -2,6 +2,9 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DigipolisGent\Value\CollectionAbstract;
+use DigipolisGent\Value\ValueFromArrayInterface;
+
 /**
  * Object describing a collection of OpenNow value objects.
  *
@@ -27,7 +30,7 @@ class OpenNowCollection extends CollectionAbstract implements ValueFromArrayInte
      * @param array
      *   Array of OpenNow data.
      *
-     * @returns \StadGent\Services\OpeningHours\Value\OpenNowCollection
+     * @return \StadGent\Services\OpeningHours\Value\OpenNowCollection
      *
      * @throws \InvalidArgumentException
      *   If the data does not contain a "channel" value.
