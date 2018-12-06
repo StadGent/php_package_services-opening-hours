@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
  * Tests for the HoursCollection value object.
  *
  * @package StadGent\Services\Test\OpeningHours\Value
+ *
+ * @covers \StadGent\Services\OpeningHours\Value\HoursCollection
  */
 class HoursCollectionTest extends TestCase
 {
@@ -38,31 +40,6 @@ class HoursCollectionTest extends TestCase
         ];
         $collection = HoursCollection::fromArray($data);
         $this->assertEquals(2, $collection->getIterator()->count());
-    }
-
-    /**
-     * Test comparing 2 equal collections.
-     */
-    public function testSameValueAs()
-    {
-        $data = [
-            [
-                'from' => '10:00',
-                'until' => '12:00',
-            ],
-            [
-                'from' => '12:30',
-                'until' => '18:00',
-            ],
-        ];
-
-        $collection = HoursCollection::fromArray($data);
-        $sameCollection = HoursCollection::fromArray($data);
-
-        $this->assertTrue(
-            $collection->sameValueAs($sameCollection),
-            'Collections are the same.'
-        );
     }
 
     /**

@@ -2,14 +2,16 @@
 
 namespace StadGent\Services\Test\OpeningHours\Value;
 
+use DigipolisGent\Value\ValueInterface;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
-use StadGent\Services\OpeningHours\Value\ValueInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests for the ChannelCollection value object.
  *
  * @package StadGent\Services\Test\OpeningHours\Value
+ *
+ * @covers \StadGent\Services\OpeningHours\Value\ChannelCollection
  */
 class ChannelCollectionTest extends TestCase
 {
@@ -43,138 +45,6 @@ class ChannelCollectionTest extends TestCase
         ];
         $collection = ChannelCollection::fromArray($data);
         $this->assertEquals(2, $collection->getIterator()->count());
-    }
-
-    /**
-     * Not the same value if the class is not the same.
-     */
-    public function testNotSameValueIfDifferentType()
-    {
-        $collection = ChannelCollection::fromArray([]);
-
-        $notCollection = $this
-            ->getMockBuilder(ValueInterface::class)
-            ->getMock();
-
-        /* @var $notCollection ValueInterface */
-        $this->assertFalse(
-            $collection->sameValueAs($notCollection),
-            'Collections are not the same if they are not of the same class.'
-        );
-    }
-
-    /**
-     * Not the same if not equal amount of items.
-     */
-    public function testNotSameValueIfDifferentCount()
-    {
-        $collection = ChannelCollection::fromArray(
-            [
-                [
-                    'id' => 11,
-                    'label' => 'FooBar',
-                    'createdAt' => '2022-11-12T13:14:15+05:00',
-                    'updatedAt' => '2022-11-12T13:14:15+05:00',
-                ],
-                [
-                    'id' => 12,
-                    'label' => 'FizzBuzz',
-                    'createdAt' => '2023-11-12T13:14:15+05:00',
-                    'updatedAt' => '2023-11-12T13:14:15+05:00',
-                ],
-            ]
-        );
-
-        $notSameCollection = ChannelCollection::fromArray(
-            [
-                [
-                    'id' => 11,
-                    'label' => 'FooBar',
-                    'createdAt' => '2022-11-12T13:14:15+05:00',
-                    'updatedAt' => '2022-11-12T13:14:15+05:00',
-                ],
-            ]
-        );
-
-        $this->assertFalse(
-            $collection->sameValueAs($notSameCollection),
-            'Collections must have equal amount of items.'
-        );
-    }
-
-    /**
-     * Not the same if not the same array keys.
-     */
-    public function testNotSameValueIfDifferentKeys()
-    {
-        $collection = ChannelCollection::fromArray(
-            [
-                [
-                    'id' => 11,
-                    'label' => 'FooBar',
-                    'createdAt' => '2022-11-12T13:14:15+05:00',
-                    'updatedAt' => '2022-11-12T13:14:15+05:00',
-                ],
-                [
-                    'id' => 12,
-                    'label' => 'FizzBuzz',
-                    'createdAt' => '2023-11-12T13:14:15+05:00',
-                    'updatedAt' => '2023-11-12T13:14:15+05:00',
-                ],
-            ]
-        );
-
-        $notSameCollection = ChannelCollection::fromArray(
-            [
-                3 => [
-                    'id' => 12,
-                    'label' => 'FizzBuzz',
-                    'createdAt' => '2023-11-12T13:14:15+05:00',
-                    'updatedAt' => '2023-11-12T13:14:15+05:00',
-                ],
-                4 => [
-                    'id' => 11,
-                    'label' => 'FooBar',
-                    'createdAt' => '2022-11-12T13:14:15+05:00',
-                    'updatedAt' => '2022-11-12T13:14:15+05:00',
-                ],
-
-            ]
-        );
-
-        $this->assertFalse(
-            $collection->sameValueAs($notSameCollection),
-            'Collections must have the same keys.'
-        );
-    }
-
-    /**
-     * Test comparing 2 equal collections.
-     */
-    public function testSameValueAs()
-    {
-        $data = [
-            [
-                'id' => 11,
-                'label' => 'FooBar',
-                'createdAt' => '2022-11-12T13:14:15+05:00',
-                'updatedAt' => '2022-11-12T13:14:15+05:00',
-            ],
-            [
-                'id' => 12,
-                'label' => 'FizzBuzz',
-                'createdAt' => '2023-11-12T13:14:15+05:00',
-                'updatedAt' => '2023-11-12T13:14:15+05:00',
-            ],
-        ];
-
-        $collection = ChannelCollection::fromArray($data);
-        $sameCollection = ChannelCollection::fromArray($data);
-
-        $this->assertTrue(
-            $collection->sameValueAs($sameCollection),
-            'Collections are the same.'
-        );
     }
 
     /**

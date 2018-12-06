@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
  * Tests for the DaysCollection value object.
  *
  * @package StadGent\Services\Test\OpeningHours\Value
+ *
+ * @covers \StadGent\Services\OpeningHours\Value\DayCollection
  */
 class DayCollectionTest extends TestCase
 {
@@ -45,38 +47,6 @@ class DayCollectionTest extends TestCase
         ];
         $collection = DayCollection::fromArray($data);
         $this->assertEquals(2, $collection->getIterator()->count());
-    }
-
-    /**
-     * Test comparing 2 equal collections.
-     */
-    public function testSameValueAs()
-    {
-        $data = [
-            [
-                'date' => '2020-03-01',
-                'isOpen' => false,
-                'hours' => [],
-            ],
-            [
-                'date' => '2020-03-02',
-                'isOpen' => true,
-                'hours' => [
-                    [
-                        'from' => '10:00',
-                        'until' => '18:00'
-                    ],
-                ],
-            ],
-        ];
-
-        $collection = DayCollection::fromArray($data);
-        $sameCollection = DayCollection::fromArray($data);
-
-        $this->assertTrue(
-            $collection->sameValueAs($sameCollection),
-            'Collections are the same.'
-        );
     }
 
     /**

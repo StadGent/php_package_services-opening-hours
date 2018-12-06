@@ -2,7 +2,16 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Changed
+
+* DMOH-49: Changed the base value objects to those of the digipolisgent/value
+  package.
+
 ## [1.0.1]
+
+### Fixed
 
 * Fixed OpenDataURI Handler.
 

@@ -2,6 +2,9 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DigipolisGent\Value\CollectionAbstract;
+use DigipolisGent\Value\ValueFromArrayInterface;
+
 /**
  * Object describing a collection of Days.
  *
@@ -27,7 +30,7 @@ class DayCollection extends CollectionAbstract implements ValueFromArrayInterfac
      * @param array
      *   Array of days data.
      *
-     * @returns \StadGent\Services\OpeningHours\Value\DayCollection
+     * @return \StadGent\Services\OpeningHours\Value\DayCollection
      *
      * @throws \InvalidArgumentException
      *   If one of the items does not have a date.
