@@ -17,12 +17,34 @@ use Psr\Http\Message\ResponseInterface;
  */
 class ClientTest extends TestCase
 {
+
+    /**
+     * API Key is send as header.
+     */
+    public function apiKeyIsSendAsHeader()
+    {
+        $key = 'fiz-baz-key';
+        $config = $this->getConfigMock($key);
+        $request = $this->getRequestMock();
+        $response = $this->getResponseMock();
+        $guzzle = $this->getGuzzleClientMock($request, $response);
+        $handler = $this->getHandlerMock($request, $response, 'Success');
+
+        $client = new Client($guzzle, $config);
+        $client->addHandler($handler);
+        $this->assertEquals(
+            'Success',
+            $client->send($request)
+        );
+    }
+
     /**
      * Test the send method.
      */
     public function testSend()
     {
-        $config = $this->getConfigMock();
+        $key = 'fiz-baz-key';
+        $config = $this->getConfigMock($key);
         $request = $this->getRequestMock();
         $response = $this->getResponseMock();
         $guzzle = $this->getGuzzleClientMock($request, $response);
@@ -44,7 +66,8 @@ class ClientTest extends TestCase
      */
     public function testSendExceptionWhenNoHandlerSupportsRequest()
     {
-        $config = $this->getConfigMock();
+        $key = 'fiz-baz-key';
+        $config = $this->getConfigMock($key);
         $request = $this->getRequestMock();
         $response = $this->getResponseMock();
         $guzzle = $this->getGuzzleClientMock($request, $response);
@@ -66,12 +89,7 @@ class ClientTest extends TestCase
      */
     protected function getRequestMock()
     {
-        $request = $this
-          ->getMockBuilder(RequestInterface::class)
-          ->disableOriginalConstructor()
-          ->getMock();
-
-        return $request;
+        return $this->createMock(RequestInterface::class);
     }
 
     /**
@@ -81,12 +99,7 @@ class ClientTest extends TestCase
      */
     protected function getResponseMock()
     {
-        $response = $this
-          ->getMockBuilder(ResponseInterface::class)
-          ->disableOriginalConstructor()
-          ->getMock();
-
-        return $response;
+        return $this->createMock(ResponseInterface::class);
     }
 
     /**
@@ -101,10 +114,7 @@ class ClientTest extends TestCase
      */
     protected function getGuzzleClientMock(RequestInterface $request, ResponseInterface $response)
     {
-        $guzzle = $this
-          ->getMockBuilder(GuzzleClient::class)
-          ->disableOriginalConstructor()
-          ->getMock();
+        $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
           ->expects($this->once())
           ->method('send')
@@ -117,14 +127,19 @@ class ClientTest extends TestCase
     /**
      * Get the Configuration mock.
      *
+     * @param $key
+     *   The api key.
+     *
      * @return \PHPUnit_Framework_MockObject_MockObject|ConfigurationInterface
      */
-    protected function getConfigMock()
+    protected function getConfigMock($key)
     {
-        $config = $this
-          ->getMockBuilder(ConfigurationInterface::class)
-          ->disableOriginalConstructor()
-          ->getMock();
+        $config = $this->createMock(ConfigurationInterface::class);
+
+        $config
+            ->expects($this->once())
+            ->method('getKey')
+            ->willReturn($key);
 
         return $config;
     }
@@ -144,14 +159,11 @@ class ClientTest extends TestCase
      */
     protected function getHandlerMock(RequestInterface $request, ResponseInterface $response, $value)
     {
-        $handler = $this
-          ->getMockBuilder(HandlerInterface::class)
-          ->disableOriginalConstructor()
-          ->getMock();
+        $handler = $this->createMock(HandlerInterface::class);
         $handler
           ->expects($this->once())
           ->method('handles')
-          ->will($this->returnValue([get_class($request)]));
+          ->willReturn([get_class($request)]);
         $handler
           ->expects($this->once())
           ->method('toResponse')

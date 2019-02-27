@@ -8,6 +8,10 @@ All Notable changes to `gent/services-opening-hours` package.
 
 * DMOH-49: Changed the base value objects to those of the digipolisgent/value
   package.
+* DMOH-55: Changed the config object so it contains the required API key.
+  The api endpoint has changed and requires from now on an API key.
+  See API documentation for more info:
+  https://developer.gent.be/docs/dataset?service_id=openingsuren_service
 
 ## [1.0.1]
 
