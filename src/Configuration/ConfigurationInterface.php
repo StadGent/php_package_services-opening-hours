@@ -14,10 +14,12 @@ interface ConfigurationInterface
      *
      * @param string $endPointUri
      *   The endpoint URI.
+     * @param string $name
+     *   The API key.
      * @param array $options
      *   Optional options about the service.
      */
-    public function __construct($endPointUri, array $options = []);
+    public function __construct($endPointUri, $name, array $options = []);
 
     /**
      * Get the endpoint URI.
@@ -26,6 +28,14 @@ interface ConfigurationInterface
      *   The endpoint URI.
      */
     public function getUri();
+
+    /**
+     * Get the API key.
+     *
+     * @return string
+     *   The API key.
+     */
+    public function getKey();
 
     /**
      * Get the timeout when calling the endpoint.

@@ -18,9 +18,11 @@ class ConfigurationTest extends TestCase
     public function testConstructorWithoutOptions()
     {
         $uri = 'https://test-endpoint.stad.gent';
-        $configuration = new Configuration($uri);
+        $key = 'whatever-key';
+        $configuration = new Configuration($uri, $key);
 
         $this->assertEquals($uri, $configuration->getUri(), 'Uri is set.');
+        $this->assertEquals($key, $configuration->getKey(), 'Key is set.');
 
         // Default options
         $this->assertEquals(
@@ -40,6 +42,7 @@ class ConfigurationTest extends TestCase
         ];
         $configuration = new Configuration(
             'https://foo.com',
+            'whatever-key',
             $options
         );
 
