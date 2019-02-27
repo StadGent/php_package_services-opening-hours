@@ -16,6 +16,9 @@ objects.
 This package allows to consume the [Opening Hours Platform] API to lookup
 services, their channels and their opening hours data.
 
+See [OpeningHours API documentation][link-api-docs] about the endpoints and how
+to get an API key to access the service.
+
 ## Install
 
 Via Composer:
@@ -95,4 +98,6 @@ projects. Questions about our approach can be asked through the issue queue
 [link-author-stadgent]: https://github.com/stadgent
 [link-author-digipolisgent]: https://github.com/digipolisgent
 [link-contributors]: ../../contributors
+
 [Opening Hours platform]: https://github.com/StadGent/laravel_site_opening-hours
+[link-api-docs]: https://developer.gent.be/docs/dataset?service_id=openingsuren_service

@@ -2,14 +2,16 @@
 
 namespace StadGent\Services\Test\OpeningHours\Value;
 
+use DigipolisGent\Value\ValueInterface;
 use StadGent\Services\OpeningHours\Value\Hours;
-use StadGent\Services\OpeningHours\Value\ValueInterface;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Tests the Hours value object.
  *
  * @package StadGent\Services\Test\OpeningHours\Value
+ *
+ * @covers \StadGent\Services\OpeningHours\Value\Hours
  */
 class HoursTest extends TestCase
 {

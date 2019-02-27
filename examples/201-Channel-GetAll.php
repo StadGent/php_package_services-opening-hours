@@ -6,25 +6,26 @@
  * Example how to get a list of all available Channels.
  */
 
-require_once __DIR__ . '/bootstrap.php';
+use GuzzleHttp\Client as GuzzleClient;
+use StadGent\Services\OpeningHours\Configuration\Configuration;
+use StadGent\Services\OpeningHours\Client\Client;
+use StadGent\Services\OpeningHours\Channel;
 
+require_once __DIR__ . '/bootstrap.php';
 
 example_print_header('Example how to get a list of all available Channels.');
 
-
-
-
 example_print_step('Create the API client configuration.');
-$configuration = new \StadGent\Services\OpeningHours\Configuration\Configuration($apiEndpoint);
+$configuration = new Configuration($apiEndpoint, $apiKey);
 
 example_print_step('Create the Guzzle client.');
-$guzzleClient = new \GuzzleHttp\Client(['base_uri' => $configuration->getUri()]);
+$guzzleClient = new GuzzleClient(['base_uri' => $configuration->getUri()]);
 
 example_print_step('Create the HTTP client.');
-$client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);
+$client = new Client($guzzleClient, $configuration);
 
 example_print_step('Get the ChannelService.');
-$service = \StadGent\Services\OpeningHours\Channel::create($client);
+$service = Channel::create($client);
 
 example_print_step('Get all Channels for a single service.');
 example_print();
@@ -48,8 +49,5 @@ try {
 } catch (\Exception $e) {
     example_sprintf(' ! Error : %s', $e->getMessage());
 }
-
-
-
 
 example_print_footer();

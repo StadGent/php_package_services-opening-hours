@@ -50,7 +50,7 @@ class Client implements ClientInterface
      */
     public function send(RequestInterface $request)
     {
-        $psrResponse = $this->guzzle->send($request);
+        $psrResponse = $this->guzzle->send($request, $this->getOptions());
         $handler = $this->getHandler($request);
         return $handler->toResponse($psrResponse);
     }
@@ -87,5 +87,20 @@ class Client implements ClientInterface
         }
 
         return $this;
+    }
+
+    /**
+     * Get the send options.
+     *
+     * @return array
+     *   The options array.
+     */
+    protected function getOptions()
+    {
+        return [
+            'headers' => [
+                'user-key' => $this->configuration->getKey(),
+            ],
+        ];
     }
 }

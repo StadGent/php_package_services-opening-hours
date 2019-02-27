@@ -2,7 +2,20 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [1.1.0]
+
+### Changed
+
+* DMOH-49: Changed the base value objects to those of the digipolisgent/value
+  package.
+* DMOH-55: Changed the config object so it contains the required API key.
+  The api endpoint has changed and requires from now on an API key.
+  See API documentation for more info:
+  https://developer.gent.be/docs/dataset?service_id=openingsuren_service
+
 ## [1.0.1]
+
+### Fixed
 
 * Fixed OpenDataURI Handler.
 
@@ -45,6 +58,8 @@ hours for a Channel.
 * DMOH-17: Added the OpeningHoursPeriod & OpeningHoursPeriodHTML methods to the
   ChannelService.
 
+[1.1.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.0.1...1.1.0
+[1.0.1]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/0.2.0...1.0.0
 [0.2.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/StadGent/php_package_services-opening-hours/releases/tag/0.1.0

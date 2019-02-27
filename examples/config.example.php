@@ -7,6 +7,9 @@
 // The API endpoint URL without the /service... part.
 $apiEndpoint = '';
 
+// The API Key.
+$apiKey = '';
+
 
 // Service Data to lookup data for --------------------------------------------
 

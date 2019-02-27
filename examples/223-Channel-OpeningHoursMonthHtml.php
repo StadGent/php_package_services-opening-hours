@@ -6,8 +6,12 @@
  * Example how to get the OpeningHours HTML for a single day by the Service and Channel ID.
  */
 
-require_once __DIR__ . '/bootstrap.php';
+use GuzzleHttp\Client as GuzzleClient;
+use StadGent\Services\OpeningHours\Configuration\Configuration;
+use StadGent\Services\OpeningHours\Client\Client;
+use StadGent\Services\OpeningHours\ChannelOpeningHoursHtml;
 
+require_once __DIR__ . '/bootstrap.php';
 
 example_print_header(
     'Example how to get the OpeningHours HTML for a single month'
@@ -15,20 +19,17 @@ example_print_header(
     . ' by the Service, Channel ID and month start date.'
 );
 
-
-
-
 example_print_step('Create the API client configuration.');
-$configuration = new \StadGent\Services\OpeningHours\Configuration\Configuration($apiEndpoint);
+$configuration = new Configuration($apiEndpoint, $apiKey);
 
 example_print_step('Create the Guzzle client.');
-$guzzleClient = new \GuzzleHttp\Client(['base_uri' => $configuration->getUri()]);
+$guzzleClient = new GuzzleClient(['base_uri' => $configuration->getUri()]);
 
 example_print_step('Create the HTTP client.');
-$client = new \StadGent\Services\OpeningHours\Client\Client($guzzleClient, $configuration);
+$client = new Client($guzzleClient, $configuration);
 
 example_print_step('Get the ChannelService.');
-$service = \StadGent\Services\OpeningHours\ChannelOpeningHoursHtml::create($client);
+$service = ChannelOpeningHoursHtml::create($client);
 
 example_print_step('Get the OpeningHours by the Service, Channel ID & start date');
 example_print();
@@ -43,8 +44,5 @@ try {
 } catch (\Exception $e) {
     example_sprintf(' ! Error : %s', $e->getMessage());
 }
-
-
-
 
 example_print_footer();

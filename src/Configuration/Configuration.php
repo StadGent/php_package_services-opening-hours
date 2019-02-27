@@ -17,6 +17,13 @@ class Configuration implements ConfigurationInterface
     private $endpointUri;
 
     /**
+     * The API key.
+     *
+     * @var string
+     */
+    private $key;
+
+    /**
      * The configuration options.
      *
      * @var array
@@ -28,13 +35,14 @@ class Configuration implements ConfigurationInterface
     /**
      * @inheritDoc
      */
-    public function __construct($endpointUri, array $options = [])
+    public function __construct($endpointUri, $key, array $options = [])
     {
         $this->endpointUri = $endpointUri;
+        $this->key = $key;
 
-        foreach ($options as $key => $value) {
-            if (array_key_exists($key, $this->options)) {
-                $this->options[$key] = $value;
+        foreach ($options as $name => $value) {
+            if (array_key_exists($name, $this->options)) {
+                $this->options[$name] = $value;
             }
         }
     }
@@ -46,6 +54,12 @@ class Configuration implements ConfigurationInterface
     {
         return $this->endpointUri;
     }
+
+    public function getKey()
+    {
+        return $this->key;
+    }
+
 
     /**
      * @inheritDoc

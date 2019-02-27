@@ -2,6 +2,9 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DigipolisGent\Value\ValueAbstract;
+use DigipolisGent\Value\ValueInterface;
+
 /**
  * DateTime value object.
  *
@@ -45,7 +48,7 @@ class DateTime extends ValueAbstract
     /**
      * Compare this Date with another given Date object.
      *
-     * @param ValueInterface|DateTime $object
+     * @param \DigipolisGent\Value\ValueInterface|\StadGent\Services\OpeningHours\Value\DateTime $object
      *
      * @return bool
      */
