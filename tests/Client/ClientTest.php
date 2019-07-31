@@ -77,8 +77,8 @@ class ClientTest extends TestCase
             ->willReturnSelf();
         $guzzle = $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
-          ->expects($this->never())
-          ->method('send');
+            ->expects($this->never())
+            ->method('send');
 
         $client = new Client($guzzle, $config);
         $client->send($request);
