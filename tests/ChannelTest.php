@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Service\Channel\ChannelService;
 use StadGent\Services\OpeningHours\Channel;
-use StadGent\Services\OpeningHours\Client\ClientInterface;
+use DigipolisGent\API\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;

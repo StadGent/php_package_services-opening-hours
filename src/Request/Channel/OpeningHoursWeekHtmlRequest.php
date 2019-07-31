@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\HtmlRequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractHtmlRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursWeekUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursWeekUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursWeekHtmlRequest extends HtmlRequestAbstract
+class OpeningHoursWeekHtmlRequest extends AbstractHtmlRequest
 {
     /**
      * Get the OpeningHours for a single week by the Service & Channel ID.

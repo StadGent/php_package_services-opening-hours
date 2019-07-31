@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\HtmlRequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractHtmlRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpenNowUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpenNowUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpenNowHtmlRequest extends HtmlRequestAbstract
+class OpenNowHtmlRequest extends AbstractHtmlRequest
 {
     /**
      * Get all channels for a service by the Service & Channel ID.

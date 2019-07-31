@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractRequest;
 use StadGent\Services\OpeningHours\Uri\Service\GetAllUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Service\GetAllUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class GetAllRequest extends RequestAbstract
+class GetAllRequest extends AbstractRequest
 {
     /**
      * @inheritDoc

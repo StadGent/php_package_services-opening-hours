@@ -98,7 +98,7 @@ class ChannelServiceGetAllTest extends ServiceTestBase
      *
      * @param \StadGent\Services\OpeningHours\Value\ChannelCollection $channelCollection
      *
-     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \DigipolisGent\API\Client\ClientInterface
      */
     protected function createClientForChannelCollection(ChannelCollection $channelCollection)
     {

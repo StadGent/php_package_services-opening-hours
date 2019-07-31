@@ -2,6 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
+use StadGent\Services\OpeningHours\Service\ServiceAbstract;
+use Psr\Http\Message\RequestInterface;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursMonthRequest;
@@ -9,10 +11,8 @@ use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursPeriodRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursWeekRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearRequest;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowRequest;
-use StadGent\Services\OpeningHours\Request\RequestInterface;
 use StadGent\Services\OpeningHours\Response\OpeningHoursResponse;
 use StadGent\Services\OpeningHours\Response\OpenNowResponse;
-use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 
 /**
  * Service to access the Channel OpeningHours.
@@ -217,7 +217,7 @@ class OpeningHoursService extends ServiceAbstract
      *
      * @param string $cacheKey
      *   The cache key to retrieve & store the result.
-     * @param \StadGent\Services\OpeningHours\Request\RequestInterface $request
+     * @param \Psr\Http\Message\RequestInterface $request
      *   The request to send.
      *
      * @return \StadGent\Services\OpeningHours\Value\OpeningHours

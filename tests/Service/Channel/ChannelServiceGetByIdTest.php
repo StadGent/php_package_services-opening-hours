@@ -104,7 +104,7 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
      *
      * @param \StadGent\Services\OpeningHours\Value\Channel $channel
      *
-     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \DigipolisGent\API\Client\ClientInterface
      */
     protected function createClientForChannel(Channel $channel)
     {

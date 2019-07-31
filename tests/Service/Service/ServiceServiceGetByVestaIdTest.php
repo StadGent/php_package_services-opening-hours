@@ -55,7 +55,7 @@ class ServiceServiceGetByVestaIdTest extends ServiceTestBase
      *
      * @param \StadGent\Services\OpeningHours\Value\Service $service
      *
-     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \DigipolisGent\API\Client\ClientInterface
      */
     protected function createClientForService(Service $service)
     {

@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Uri\Channel;
 
-use StadGent\Services\OpeningHours\Uri\Uri;
+use DigipolisGent\API\Client\Uri\Uri;
 
 /**
  * Uri to get open status for now.

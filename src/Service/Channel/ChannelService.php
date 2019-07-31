@@ -2,12 +2,12 @@
 
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
+use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
-use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 
 /**
  * Service to access the get Channel(s).

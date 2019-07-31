@@ -112,7 +112,7 @@ EOT;
      * @param string $html
      *   The HTML string to return.
      *
-     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \DigipolisGent\API\Client\ClientInterface
      */
     protected function createClientForOpeningHoursWeekHtml($html)
     {
