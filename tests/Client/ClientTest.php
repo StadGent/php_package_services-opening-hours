@@ -124,10 +124,10 @@ class ClientTest extends TestCase
     {
         $guzzle = $this->createMock(GuzzleClient::class);
         $guzzle
-          ->expects($this->once())
-          ->method('send')
-          ->with($this->equalTo($request))
-          ->willReturn($response);
+            ->expects($this->once())
+            ->method('send')
+            ->with($this->equalTo($request))
+            ->willReturn($response);
 
         return $guzzle;
     }
@@ -169,14 +169,14 @@ class ClientTest extends TestCase
     {
         $handler = $this->createMock(HandlerInterface::class);
         $handler
-          ->expects($this->once())
-          ->method('handles')
-          ->willReturn([get_class($request)]);
+            ->expects($this->once())
+            ->method('handles')
+            ->willReturn([get_class($request)]);
         $handler
-          ->expects($this->once())
-          ->method('toResponse')
-          ->with($this->equalTo($response))
-          ->willReturn($value);
+            ->expects($this->once())
+            ->method('toResponse')
+            ->with($this->equalTo($response))
+            ->willReturn($value);
 
         return $handler;
     }

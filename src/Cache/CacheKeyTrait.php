@@ -2,8 +2,6 @@
 
 namespace StadGent\Services\OpeningHours\Cache;
 
-use Psr\SimpleCache\CacheInterface;
-
 /**
  * Class CacheKeyTrait.
  *
