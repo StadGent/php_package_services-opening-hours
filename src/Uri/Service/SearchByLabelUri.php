@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Uri\Service;
 
-use StadGent\Services\OpeningHours\Uri\Uri;
+use DigipolisGent\API\Client\Uri\Uri;
 
 /**
  * Uri to get all Services by their (partial) label.

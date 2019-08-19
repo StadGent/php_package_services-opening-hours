@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursMonthUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursMonthUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursMonthRequest extends RequestAbstract
+class OpeningHoursMonthRequest extends AbstractRequest
 {
     /**
      * Get the OpeningHours for a single month by the Service & Channel ID.

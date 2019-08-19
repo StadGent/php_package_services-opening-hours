@@ -2,14 +2,14 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service;
 
+use DigipolisGent\API\Client\ClientInterface;
+use DigipolisGent\API\Client\Response\ResponseInterface;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\RequestInterface;
 use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\Client\ClientInterface;
-use StadGent\Services\OpeningHours\Request\RequestInterface;
-use StadGent\Services\OpeningHours\Response\ResponseInterface;
 
 /**
  * Base test class to test the Service classes.
@@ -21,8 +21,8 @@ class ServiceTestBase extends TestCase
     /**
      * Helper to create a Client mock with given response.
      *
-     * @param \StadGent\Services\OpeningHours\Response\ResponseInterface|null $response
-     * @param \StadGent\Services\OpeningHours\Request\RequestInterface $expectedRequest
+     * @param \DigipolisGent\API\Client\Response\ResponseInterface|null $response
+     * @param \Psr\Http\Message\RequestInterface $expectedRequest
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|ClientInterface
      */
@@ -68,7 +68,7 @@ class ServiceTestBase extends TestCase
      * @param \Exception $exception
      *   The exception to be returned by the client.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\DigipolisGent\API\Client\ClientInterface
      */
     protected function getClientWithExceptionMock(\Exception $exception)
     {
@@ -88,7 +88,7 @@ class ServiceTestBase extends TestCase
     /**
      * Helper to create a mocked client throwing a ServiceNotFound exception.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\DigipolisGent\API\Client\ClientInterface
      */
     protected function getClientWithServiceNotFoundExceptionMock()
     {
@@ -109,7 +109,7 @@ EOT;
     /**
      * Helper to create a mocked client throwing a ChannelNotFound exception.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|\StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \PHPUnit_Framework_MockObject_MockObject|\DigipolisGent\API\Client\ClientInterface
      */
     protected function getClientWithChannelNotFoundExceptionMock()
     {

@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursPeriodUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursPeriodUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursPeriodRequest extends RequestAbstract
+class OpeningHoursPeriodRequest extends AbstractRequest
 {
     /**
      * Get the OpeningHours for a given period by the Service & Channel ID.

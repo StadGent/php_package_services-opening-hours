@@ -2,19 +2,15 @@
 
 namespace StadGent\Services\OpeningHours\Configuration;
 
+use DigipolisGent\API\Client\Configuration\Configuration as BaseConfiguration;
+
 /**
  * Class Configuration
  *
  * @package StadGent\Services\OpeningHours\Client\Configuration
  */
-class Configuration implements ConfigurationInterface
+class Configuration extends BaseConfiguration implements ConfigurationInterface
 {
-    /**
-     * Endpoint URI for the service.
-     *
-     * @var string
-     */
-    private $endpointUri;
 
     /**
      * The API key.
@@ -24,48 +20,16 @@ class Configuration implements ConfigurationInterface
     private $key;
 
     /**
-     * The configuration options.
-     *
-     * @var array
-     */
-    private $options = [
-        'timeout' => 20,
-    ];
-
-    /**
      * @inheritDoc
      */
     public function __construct($endpointUri, $key, array $options = [])
     {
-        $this->endpointUri = $endpointUri;
+        parent::__construct($endpointUri, $options);
         $this->key = $key;
-
-        foreach ($options as $name => $value) {
-            if (array_key_exists($name, $this->options)) {
-                $this->options[$name] = $value;
-            }
-        }
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getUri()
-    {
-        return $this->endpointUri;
     }
 
     public function getKey()
     {
         return $this->key;
-    }
-
-
-    /**
-     * @inheritDoc
-     */
-    public function getTimeout()
-    {
-        return $this->options['timeout'];
     }
 }

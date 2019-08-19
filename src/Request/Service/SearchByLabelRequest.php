@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractRequest;
 use StadGent\Services\OpeningHours\Uri\Service\SearchByLabelUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Service\SearchByLabelUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class SearchByLabelRequest extends RequestAbstract
+class SearchByLabelRequest extends AbstractRequest
 {
     /**
      * Request to search services by the (partial) label.

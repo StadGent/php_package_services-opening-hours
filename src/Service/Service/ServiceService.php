@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Service\Service;
 
+use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
@@ -9,7 +10,6 @@ use StadGent\Services\OpeningHours\Request\Service\GetByOpenDataUriRequest;
 use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
-use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 
 /**
  * Service to access the Service related API.

@@ -2,6 +2,13 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Changed
+
+* Adapted implementation to use
+  [digipolisgent/api-client](https://github.com/digipolisgent/php_package_dg-api-client).
+
 ## [1.1.0]
 
 ### Changed

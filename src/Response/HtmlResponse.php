@@ -2,6 +2,8 @@
 
 namespace StadGent\Services\OpeningHours\Response;
 
+use DigipolisGent\API\Client\Response\ResponseInterface;
+
 /**
  * Object containing the HTML response from the API.
  *

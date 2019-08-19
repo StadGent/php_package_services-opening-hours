@@ -85,7 +85,7 @@ class ServiceServiceGetAllTest extends ServiceTestBase
      *
      * @param \StadGent\Services\OpeningHours\Value\ServiceCollection $serviceCollection
      *
-     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \DigipolisGent\API\Client\ClientInterface
      */
     protected function createClientForServiceCollection(ServiceCollection $serviceCollection)
     {

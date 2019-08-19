@@ -2,13 +2,13 @@
 
 namespace StadGent\Services\Test\OpeningHours\Client;
 
-use StadGent\Services\OpeningHours\Client\Client;
-use StadGent\Services\OpeningHours\Configuration\ConfigurationInterface;
-use StadGent\Services\OpeningHours\Handler\HandlerInterface;
-use StadGent\Services\OpeningHours\Request\RequestInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
+use StadGent\Services\OpeningHours\Client\Client;
+use StadGent\Services\OpeningHours\Configuration\ConfigurationInterface;
+use DigipolisGent\API\Client\Handler\HandlerInterface;
 
 /**
  * Test the Client object.
@@ -46,6 +46,9 @@ class ClientTest extends TestCase
         $key = 'fiz-baz-key';
         $config = $this->getConfigMock($key);
         $request = $this->getRequestMock();
+        $request->expects($this->any())
+            ->method('withHeader')
+            ->willReturnSelf();
         $response = $this->getResponseMock();
         $guzzle = $this->getGuzzleClientMock($request, $response);
         $handler = $this->getHandlerMock($request, $response, 'Success');
@@ -61,16 +64,21 @@ class ClientTest extends TestCase
     /**
      * Test Exception when no handler supports the request.
      *
-     * @expectedException \StadGent\Services\OpeningHours\Handler\Exception\NoHandlerException
-     * @expectedExceptionMessageRegExp /No handler found that supports request ".+"\./
+     * @expectedException \DigipolisGent\API\Client\Exception\HandlerNotFound
+     * @expectedExceptionMessageRegExp /No handler was registered for .+/
      */
     public function testSendExceptionWhenNoHandlerSupportsRequest()
     {
         $key = 'fiz-baz-key';
         $config = $this->getConfigMock($key);
         $request = $this->getRequestMock();
-        $response = $this->getResponseMock();
-        $guzzle = $this->getGuzzleClientMock($request, $response);
+        $request->expects($this->any())
+            ->method('withHeader')
+            ->willReturnSelf();
+        $guzzle = $this->createMock(GuzzleClient::class);
+        $guzzle
+            ->expects($this->never())
+            ->method('send');
 
         $client = new Client($guzzle, $config);
         $client->send($request);

@@ -2,10 +2,10 @@
 
 namespace StadGent\Services\OpeningHours\Service;
 
-use StadGent\Services\OpeningHours\Cache\CacheableInterface;
-use StadGent\Services\OpeningHours\Cache\CacheableTrait;
-use StadGent\Services\OpeningHours\Client\ClientInterface;
-use StadGent\Services\OpeningHours\Request\RequestInterface;
+use DigipolisGent\API\Client\Response\ResponseInterface;
+use DigipolisGent\API\Service\ServiceAbstract as BaseServiceAbstract;
+use Psr\Http\Message\RequestInterface;
+use StadGent\Services\OpeningHours\Cache\CacheKeyTrait;
 use StadGent\Services\OpeningHours\Exception\UnexpectedResponseException;
 
 /**
@@ -13,32 +13,19 @@ use StadGent\Services\OpeningHours\Exception\UnexpectedResponseException;
  *
  * @package StadGent\Services\OpeningHours
  */
-abstract class ServiceAbstract implements ServiceInterface, CacheableInterface
+abstract class ServiceAbstract extends BaseServiceAbstract
 {
-    use CacheableTrait;
-
-    /**
-     * @var \StadGent\Services\OpeningHours\Client\ClientInterface
-     */
-    protected $client;
-
-    /**
-     * @inheritdoc
-     */
-    public function __construct(ClientInterface $client)
-    {
-        $this->client = $client;
-    }
+    use CacheKeyTrait;
 
     /**
      * Send the request using the client and validate the response object.
      *
-     * @param \StadGent\Services\OpeningHours\Request\RequestInterface $request
+     * @param RequestInterface $request
      *   The request object to send trough the client.
      * @param string $expectedResponseClassName
      *   The expected response class.
      *
-     * @return \StadGent\Services\OpeningHours\Response\ResponseInterface
+     * @return ResponseInterface
      *
      * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */

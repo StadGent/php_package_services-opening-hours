@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours;
 
-use StadGent\Services\OpeningHours\Client\ClientInterface;
+use DigipolisGent\API\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\GetByIdHandler;
@@ -21,7 +21,7 @@ class Channel
      * Will add the package handlers and inject the client and optional cache
      * into the ServiceService.
      *
-     * @param \StadGent\Services\OpeningHours\Client\ClientInterface $client
+     * @param \DigipolisGent\API\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
      * @return \StadGent\Services\OpeningHours\Service\Channel\ChannelService

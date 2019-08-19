@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\HtmlRequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractHtmlRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursYearUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursYearUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursYearHtmlRequest extends HtmlRequestAbstract
+class OpeningHoursYearHtmlRequest extends AbstractHtmlRequest
 {
     /**
      * Get the OpeningHours for a single year by the Service & Channel ID.

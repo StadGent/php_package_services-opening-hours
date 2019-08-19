@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractRequest;
 use StadGent\Services\OpeningHours\Uri\Service\GetByIdUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Service\GetByIdUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class GetByIdRequest extends RequestAbstract
+class GetByIdRequest extends AbstractRequest
 {
     /**
      * Get a single Service by its ID.

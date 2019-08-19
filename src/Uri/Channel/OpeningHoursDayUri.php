@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Uri\Channel;
 
-use StadGent\Services\OpeningHours\Uri\Uri;
+use DigipolisGent\API\Client\Uri\Uri;
 
 /**
  * Uri to get openinghours for a given day (date).

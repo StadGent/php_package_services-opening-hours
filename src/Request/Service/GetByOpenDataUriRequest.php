@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use StadGent\Services\OpeningHours\Request\RequestAbstract;
+use DigipolisGent\API\Client\Request\AbstractRequest;
 use StadGent\Services\OpeningHours\Uri\Service\GetByOpenDataUriUri;
 
 /**
@@ -10,7 +10,7 @@ use StadGent\Services\OpeningHours\Uri\Service\GetByOpenDataUriUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class GetByOpenDataUriRequest extends RequestAbstract
+class GetByOpenDataUriRequest extends AbstractRequest
 {
     /**
      * Get a single Service by its open data URI.

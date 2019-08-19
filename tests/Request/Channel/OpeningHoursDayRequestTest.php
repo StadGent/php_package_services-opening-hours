@@ -2,10 +2,10 @@
 
 namespace StadGent\Services\Test\OpeningHours\Request\Channel;
 
-use StadGent\Services\OpeningHours\Request\AcceptType;
-use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
-use StadGent\Services\OpeningHours\Request\MethodType;
+use DigipolisGent\API\Client\Request\AcceptType;
+use DigipolisGent\API\Client\Request\MethodType;
 use PHPUnit\Framework\TestCase;
+use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursDayRequest;
 
 /**
  * Test the OpeningHoursDayRequest object.
