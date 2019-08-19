@@ -125,7 +125,7 @@ class ChannelServiceOpeningHoursYearTest extends ServiceTestBase
      *
      * @param \StadGent\Services\OpeningHours\Value\OpeningHours $openingHours
      *
-     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \DigipolisGent\API\Client\ClientInterface
      */
     protected function createClientForOpeningHours(OpeningHours $openingHours)
     {

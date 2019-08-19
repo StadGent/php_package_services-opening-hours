@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Response;
 
+use DigipolisGent\API\Client\Response\ResponseInterface;
 use StadGent\Services\OpeningHours\Value\ServiceCollection;
 
 /**

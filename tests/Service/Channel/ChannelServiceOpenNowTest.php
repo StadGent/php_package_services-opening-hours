@@ -76,7 +76,7 @@ class ChannelServiceOpenNowTest extends ServiceTestBase
      *
      * @param \StadGent\Services\OpeningHours\Value\OpenNow $openNow
      *
-     * @return \StadGent\Services\OpeningHours\Client\ClientInterface
+     * @return \DigipolisGent\API\Client\ClientInterface
      */
     protected function createClientForOpenNow(OpenNow $openNow)
     {

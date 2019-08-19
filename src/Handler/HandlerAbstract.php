@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Handler;
 
+use DigipolisGent\API\Client\Handler\HandlerInterface;
 use Psr\Http\Message as Psr;
 
 /**

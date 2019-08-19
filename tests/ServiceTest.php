@@ -4,7 +4,7 @@ namespace StadGent\Services\Test\OpeningHours;
 
 use PHPUnit\Framework\TestCase;
 use Psr\SimpleCache\CacheInterface;
-use StadGent\Services\OpeningHours\Client\ClientInterface;
+use DigipolisGent\API\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
