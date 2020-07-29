@@ -2,7 +2,9 @@
 
 namespace StadGent\Services\Test\OpeningHours\Client;
 
+use DigipolisGent\API\Client\Exception\HandlerNotFound;
 use GuzzleHttp\Client as GuzzleClient;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -63,12 +65,11 @@ class ClientTest extends TestCase
 
     /**
      * Test Exception when no handler supports the request.
-     *
-     * @expectedException \DigipolisGent\API\Client\Exception\HandlerNotFound
-     * @expectedExceptionMessageRegExp /No handler was registered for .+/
      */
     public function testSendExceptionWhenNoHandlerSupportsRequest()
     {
+        $this->expectException(HandlerNotFound::class);
+        $this->expectExceptionMessageMatches('/No handler was registered for .+/');
         $key = 'fiz-baz-key';
         $config = $this->getConfigMock($key);
         $request = $this->getRequestMock();
@@ -93,7 +94,7 @@ class ClientTest extends TestCase
      * Don't forget to add a new mock for each withHeader() call added to the
      * Client::injectHeaders() method.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|RequestInterface
+     * @return MockObject|RequestInterface
      */
     protected function getRequestMock()
     {
@@ -103,7 +104,7 @@ class ClientTest extends TestCase
     /**
      * Get the response mock.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|ResponseInterface
+     * @return MockObject|ResponseInterface
      */
     protected function getResponseMock()
     {
@@ -118,7 +119,7 @@ class ClientTest extends TestCase
      * @param ResponseInterface $response
      *   The response mock that should be returned by the GuzzleClient.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|GuzzleClient
+     * @return MockObject|GuzzleClient
      */
     protected function getGuzzleClientMock(RequestInterface $request, ResponseInterface $response)
     {
@@ -138,7 +139,7 @@ class ClientTest extends TestCase
      * @param $key
      *   The api key.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|ConfigurationInterface
+     * @return MockObject|ConfigurationInterface
      */
     protected function getConfigMock($key)
     {
@@ -163,7 +164,7 @@ class ClientTest extends TestCase
      *   The value the Handler will return when its toResponse() method is
      *   called.
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|HandlerInterface
+     * @return MockObject|HandlerInterface
      */
     protected function getHandlerMock(RequestInterface $request, ResponseInterface $response, $value)
     {

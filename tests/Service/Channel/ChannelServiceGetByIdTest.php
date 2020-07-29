@@ -2,6 +2,8 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
+use StadGent\Services\OpeningHours\Exception\ChannelNotFoundException;
+use StadGent\Services\OpeningHours\Exception\ServiceNotFoundException;
 use StadGent\Services\OpeningHours\Service\Channel\ChannelService;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
@@ -59,11 +61,10 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
 
     /**
      * Test the Service not found exception.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function testServiceNotFoundException()
     {
+        $this->expectException(ServiceNotFoundException::class);
         $client = $this->getClientWithServiceNotFoundExceptionMock();
         $channelService = new ChannelService($client);
         $channelService->getById(777, 666);
@@ -71,11 +72,10 @@ class ChannelServiceGetByIdTest extends ServiceTestBase
 
     /**
      * Test the Channel not found exception.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      */
     public function testChannelNotFoundException()
     {
+        $this->expectException(ChannelNotFoundException::class);
         $client = $this->getClientWithChannelNotFoundExceptionMock();
         $channelService = new ChannelService($client);
         $channelService->getById(1, 666);

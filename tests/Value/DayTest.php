@@ -3,6 +3,7 @@
 namespace StadGent\Services\Test\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 use StadGent\Services\OpeningHours\Value\Date;
 use StadGent\Services\OpeningHours\Value\Day;
 use StadGent\Services\OpeningHours\Value\HoursCollection;
@@ -20,12 +21,11 @@ class DayTest extends TestCase
 
     /**
      * Test exception when no date value in the array.
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain a "date" value.
      */
     public function testExceptionWhenNoDateInArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The array should contain a "date" value.');
         $data = [];
         Day::fromArray($data);
     }

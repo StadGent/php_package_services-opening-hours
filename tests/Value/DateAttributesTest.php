@@ -3,6 +3,7 @@
 namespace StadGent\Services\Test\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 use StadGent\Services\OpeningHours\Value\DateAttributes;
 use PHPUnit\Framework\TestCase;
 
@@ -18,24 +19,22 @@ class DateAttributesTest extends TestCase
 
     /**
      * Test exception when no createdAt value in the array.
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain a "createdAt" value.
      */
     public function testExceptionWhenNoCreatedAtInArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The array should contain a "createdAt" value.');
         $data = [];
         DateAttributes::fromArray($data);
     }
 
     /**
      * Test exception when no updatedAt value in the array.
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain an "updatedAt" value.
      */
     public function testExceptionWhenNoUpdatedAtInArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The array should contain an "updatedAt" value.');
         $data = [
             'createdAt' => '2123-12-24T12:13:14+01:00'
         ];
