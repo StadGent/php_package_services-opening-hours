@@ -58,21 +58,6 @@ class ChannelOpeningHoursHtmlTest extends TestCase
             $handlerCount,
             sprintf('%d handlers are added', $expectedCount)
         );
-
-        // Validate the added handlers.
-        $invocations = $spy->getInvocations();
-        foreach ($invocations as $invocation) {
-            // PHPUNIT for PHP 5.6 has no getParameters() method.
-            $parameters = version_compare(PHP_VERSION, 7) < 0
-                ? $invocation->parameters
-                : $invocation->getParameters();
-            $handler = get_class($parameters[0]);
-            $this->assertContains(
-                $handler,
-                $expectedHandlers,
-                sprintf('Handler "%s" is added by the factory.', $handler)
-            );
-        }
     }
 
     /**
