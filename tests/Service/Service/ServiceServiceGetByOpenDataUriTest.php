@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Service;
 
+use StadGent\Services\OpeningHours\Exception\ServiceNotFoundException;
 use StadGent\Services\OpeningHours\Request\Service\GetByOpenDataUriRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
@@ -61,11 +62,10 @@ class ServiceServiceGetByOpenDataUriTest extends ServiceTestBase
 
     /**
      * Test the exception when the Open data URI does not exists.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function testServiceNotFoundException()
     {
+        $this->expectException(ServiceNotFoundException::class);
         $client = $this->getClientWithServiceNotFoundExceptionMock();
         $serviceService = new ServiceService($client);
         $serviceService->getByOpenDataUri('http://foo.bar/123');

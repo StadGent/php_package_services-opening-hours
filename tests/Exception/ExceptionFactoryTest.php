@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Exception;
 
+use Exception;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
@@ -21,25 +22,23 @@ class ExceptionFactoryTest extends TestCase
 {
     /**
      * Test the fromException() method with a non RequestException.
-     *
-     * @expectedException \Exception
-     * @expectedExceptionMessage Test me now.
      */
     public function testFromNonRequestException()
     {
-        $e = new \Exception('Test me now.');
+        $this->expectException(Exception::class);
+        $this->expectExceptionMessage('Test me now.');
+        $e = new Exception('Test me now.');
         ExceptionFactory::fromException($e);
     }
 
     /**
      * Test if the exception is returned if no special one.
-     *
-     * @expectedException \GuzzleHttp\Exception\RequestException
-     * @expectedExceptionCode 9999
-     * @expectedExceptionMessage FooBar
      */
     public function testFromFallbackResponseException()
     {
+        $this->expectException(RequestException::class);
+        $this->expectExceptionCode(9999);
+        $this->expectExceptionMessage('FooBar');
         $requestMock = $this
             ->getMockBuilder(RequestInterface::class)
             ->disableOriginalConstructor()
@@ -65,12 +64,11 @@ class ExceptionFactoryTest extends TestCase
 
     /**
      * Test the NotFoundException when the response body has no error target.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @expectedExceptionCode 404
      */
     public function testFromServiceResponseWithoutTargetException()
     {
+        $this->expectException(NotFoundException::class);
+        $this->expectExceptionCode(404);
         $exceptionMock = $this->createExceptionMock(404, '{}');
         ExceptionFactory::fromException($exceptionMock);
     }
@@ -90,7 +88,7 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // No catch specific code.
         }
 
@@ -114,7 +112,7 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // No catch specific code.
         }
 
@@ -138,7 +136,7 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // No catch specific code.
         }
 
@@ -162,7 +160,7 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // No catch specific code.
         }
 
@@ -186,7 +184,7 @@ class ExceptionFactoryTest extends TestCase
 
         try {
             ExceptionFactory::fromException($exceptionMock);
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             // No catch specific code.
         }
 
