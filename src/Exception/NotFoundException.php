@@ -9,19 +9,19 @@ use GuzzleHttp\Exception\RequestException;
  *
  * @package StadGent\Services\OpeningHours\Response\Exception
  */
-class NotFoundException extends ExceptionWithResponseAbstract
+final class NotFoundException extends ExceptionWithResponseAbstract
 {
     /**
      * @inheritdoc
      */
-    public static function fromException(RequestException $e)
+    public static function fromException(RequestException $exception)
     {
-        $exception = new static(
+        $result = new static(
             'The requested item was not found.',
             404,
-            $e
+            $exception
         );
-        $exception->setResponse($e->getResponse());
-        return $exception;
+        $result->setResponse($exception->getResponse());
+        return $result;
     }
 }

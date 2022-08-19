@@ -5,6 +5,7 @@ namespace StadGent\Services\OpeningHours\Value;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 
 /**
  * Object describing a single from - until hours.
@@ -53,10 +54,10 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
     public static function fromArray(array $data)
     {
         if (empty($data['from'])) {
-            throw new \InvalidArgumentException('The array should contain a "from" value.');
+            throw new InvalidArgumentException('The array should contain a "from" value.');
         }
         if (empty($data['until'])) {
-            throw new \InvalidArgumentException('The array should contain an "until" value.');
+            throw new InvalidArgumentException('The array should contain an "until" value.');
         }
 
         return static::fromHours($data['from'], $data['until']);
@@ -74,7 +75,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      */
     public static function fromHours($from, $until)
     {
-        $hours = new static();
+        $hours = new self();
         $hours->from = $from;
         $hours->until = $until;
         return $hours;
@@ -83,7 +84,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the start hour of an open period.
      *
-     * @return int
+     * @return string
      */
     public function getFromHour()
     {
@@ -109,11 +110,10 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof Hours) {
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\Hours */
         return $this->getFromHour() === $object->getFromHour()
             && $this->getUntilHour() === $object->getUntilHour()
             ;

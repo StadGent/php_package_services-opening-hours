@@ -16,7 +16,6 @@ use StadGent\Services\OpeningHours\Response\ChannelsResponse;
  */
 class ChannelService extends ServiceAbstract
 {
-
     /**
      * Get all Channels for the given Service Id.
      *

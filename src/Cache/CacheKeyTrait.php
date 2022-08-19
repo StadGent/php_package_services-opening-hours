@@ -11,7 +11,6 @@ namespace StadGent\Services\OpeningHours\Cache;
  */
 trait CacheKeyTrait
 {
-
     /**
      * Helper to create a cache key.
      *

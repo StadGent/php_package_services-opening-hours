@@ -18,7 +18,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DayTest extends TestCase
 {
-
     /**
      * Test exception when no date value in the array.
      */

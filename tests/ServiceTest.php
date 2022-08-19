@@ -22,7 +22,6 @@ use StadGent\Services\OpeningHours\Value\ServiceCollection;
  */
 class ServiceTest extends TestCase
 {
-
     /**
      * Test the create factory method.
      */

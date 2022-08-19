@@ -20,7 +20,6 @@ use StadGent\Services\OpeningHours\Value\ChannelCollection;
  */
 class ChannelOpeningHoursTest extends TestCase
 {
-
     /**
      * Test creating the ChannelService.
      */

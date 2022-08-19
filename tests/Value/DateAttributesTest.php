@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DateAttributesTest extends TestCase
 {
-
     /**
      * Test exception when no createdAt value in the array.
      */

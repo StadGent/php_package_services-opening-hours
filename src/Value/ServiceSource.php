@@ -51,7 +51,7 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
      */
     public static function fromArray(array $data)
     {
-        $service = new static();
+        $service = new self();
 
         if (!empty($data['sourceIdentifier'])) {
             $service->id = $data['sourceIdentifier'];
@@ -92,11 +92,10 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof ServiceSource) {
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\ServiceSource */
         return $this->getId() === $object->getId()
             && $this->getName() === $object->getName();
     }

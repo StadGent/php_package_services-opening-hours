@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class HoursTest extends TestCase
 {
-
     /**
      * Test exception when no created_at value in the array.
      */

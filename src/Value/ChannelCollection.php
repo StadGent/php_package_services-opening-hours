@@ -37,7 +37,7 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
      */
     public static function fromArray(array $data)
     {
-        $collection = new static();
+        $collection = new self();
 
         foreach ($data as $key => $item) {
             $collection->values[$key] = Channel::fromArray($item);
@@ -53,8 +53,9 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
     {
         $labels = [];
         foreach ($this->values as $value) {
-            /* @var $value \StadGent\Services\OpeningHours\Value\Channel */
-            $labels[] = $value->getLabel();
+            if ($value instanceof Channel) {
+                $labels[] = $value->getLabel();
+            }
         }
 
         return (string) implode(', ', $labels);
