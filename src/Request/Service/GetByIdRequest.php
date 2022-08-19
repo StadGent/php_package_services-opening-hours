@@ -15,12 +15,12 @@ class GetByIdRequest extends AbstractRequest
     /**
      * Get a single Service by its ID.
      *
-     * @param int $service_id
+     * @param int $serviceId
      *   The Service ID.
      */
-    public function __construct($service_id)
+    public function __construct($serviceId)
     {
-        $uri = new GetByIdUri($service_id);
+        $uri = new GetByIdUri($serviceId);
         parent::__construct($uri);
     }
 }

@@ -31,7 +31,7 @@ class ChannelService extends ServiceAbstract
      * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function getAll($serviceId)
+    public function getAll(int $serviceId)
     {
         $cacheKey = $this->createCacheKeyFromArray(['all', $serviceId]);
 
