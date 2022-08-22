@@ -15,4 +15,5 @@
 /cghooks.lock
 
 # QA files.
+/*.local.*
 /*.qa-php.*
