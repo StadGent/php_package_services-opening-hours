@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Service;
 
+use StadGent\Services\OpeningHours\Exception\UnexpectedResponseException;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
@@ -59,11 +60,10 @@ class ServiceServiceGetAllTest extends ServiceTestBase
 
     /**
      * Test the GetAll method UnexpectedResponseException.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
     public function testUnexpectedResponseException()
     {
+        $this->expectException(UnexpectedResponseException::class);
         $response = $this->getResponseDummyMock();
         $client = $this->getClientMock($response);
         $serviceService = new ServiceService($client);

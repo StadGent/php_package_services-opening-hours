@@ -21,7 +21,6 @@ use StadGent\Services\OpeningHours\Response\OpenNowResponse;
  */
 class OpeningHoursService extends ServiceAbstract
 {
-
     /**
      * Get the Open now status as Value object.
      *

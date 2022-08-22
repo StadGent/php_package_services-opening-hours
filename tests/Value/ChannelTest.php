@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ChannelTest extends TestCase
 {
-
     /**
      * Test from array with no source values in the array.
      */

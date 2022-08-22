@@ -2,7 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Exception;
 
-use \Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\ResponseInterface;
 
 /**
  * Response Exception.

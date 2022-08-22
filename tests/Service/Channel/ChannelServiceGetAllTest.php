@@ -2,6 +2,8 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
+use StadGent\Services\OpeningHours\Exception\ServiceNotFoundException;
+use StadGent\Services\OpeningHours\Exception\UnexpectedResponseException;
 use StadGent\Services\OpeningHours\Service\Channel\ChannelService;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
@@ -60,11 +62,10 @@ class ChannelServiceGetAllTest extends ServiceTestBase
 
     /**
      * Test the GetAll method UnexpectedResponseException.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
     public function testUnexpectedResponseException()
     {
+        $this->expectException(UnexpectedResponseException::class);
         $response = $this->getResponseDummyMock();
         $client = $this->getClientMock($response);
         $channelService = new ChannelService($client);
@@ -73,11 +74,10 @@ class ChannelServiceGetAllTest extends ServiceTestBase
 
     /**
      * Test the Service not found exception.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function testServiceNotFoundException()
     {
+        $this->expectException(ServiceNotFoundException::class);
         $client = $this->getClientWithServiceNotFoundExceptionMock();
         $channelService = new ChannelService($client);
         $channelService->getAll(777);

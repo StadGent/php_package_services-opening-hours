@@ -5,6 +5,7 @@ namespace StadGent\Services\OpeningHours\Value;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 
 /**
  * Object describing the date attributes (created & updated) of a record.
@@ -54,13 +55,13 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      */
     public static function fromArray(array $data)
     {
-        $attributes = new static();
+        $attributes = new self();
 
         if (!array_key_exists('createdAt', $data)) {
-            throw new \InvalidArgumentException('The array should contain a "createdAt" value.');
+            throw new InvalidArgumentException('The array should contain a "createdAt" value.');
         }
         if (!array_key_exists('updatedAt', $data)) {
-            throw new \InvalidArgumentException('The array should contain an "updatedAt" value.');
+            throw new InvalidArgumentException('The array should contain an "updatedAt" value.');
         }
 
         $attributes->createdAt = new DateTime($data['createdAt']);
@@ -100,11 +101,10 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof DateAttributes) {
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\DateAttributes */
         return $this->getCreatedAt()->sameValueAs($object->getCreatedAt())
             && $this->getUpdatedAt()->sameValueAs($object->getUpdatedAt());
     }

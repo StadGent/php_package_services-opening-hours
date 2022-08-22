@@ -18,7 +18,6 @@ use StadGent\Services\OpeningHours\Response\ServicesResponse;
  */
 class ServiceService extends ServiceAbstract
 {
-
     /**
      * Get all Services.
      *

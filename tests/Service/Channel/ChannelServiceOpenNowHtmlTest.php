@@ -2,6 +2,8 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Channel;
 
+use StadGent\Services\OpeningHours\Exception\ChannelNotFoundException;
+use StadGent\Services\OpeningHours\Exception\ServiceNotFoundException;
 use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlService;
 use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
 use StadGent\Services\OpeningHours\Response\HtmlResponse;
@@ -29,11 +31,10 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
 
     /**
      * Test the Service not found exception.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function testServiceNotFoundException()
     {
+        $this->expectException(ServiceNotFoundException::class);
         $client = $this->getClientWithServiceNotFoundExceptionMock();
         $channelService = new OpeningHoursHtmlService($client);
         $channelService->getOpenNow(777, 666);
@@ -41,11 +42,10 @@ class ChannelServiceOpenNowHtmlTest extends ServiceTestBase
 
     /**
      * Test the Channel not found exception.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
      */
     public function testChannelNotFoundException()
     {
+        $this->expectException(ChannelNotFoundException::class);
         $client = $this->getClientWithChannelNotFoundExceptionMock();
         $channelService = new OpeningHoursHtmlService($client);
         $channelService->getOpenNow(1, 666);

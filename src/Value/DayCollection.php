@@ -27,7 +27,7 @@ class DayCollection extends CollectionAbstract implements ValueFromArrayInterfac
      * The array may contain a set of Day array data keyed by the day date.
      * @see \StadGent\Services\OpeningHours\Value\Day.
      *
-     * @param array
+     * @param array $data
      *   Array of days data.
      *
      * @return \StadGent\Services\OpeningHours\Value\DayCollection
@@ -37,7 +37,7 @@ class DayCollection extends CollectionAbstract implements ValueFromArrayInterfac
      */
     public static function fromArray(array $data)
     {
-        $collection = new static();
+        $collection = new self();
 
         foreach ($data as $key => $item) {
             $collection->values[$key] = Day::fromArray($item);

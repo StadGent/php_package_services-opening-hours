@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\OpeningHours\Value;
 
+use DateTimeImmutable;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueInterface;
 
@@ -12,7 +13,6 @@ use DigipolisGent\Value\ValueInterface;
  */
 class DateTime extends ValueAbstract
 {
-
     /**
      * The dateTime
      *
@@ -27,7 +27,7 @@ class DateTime extends ValueAbstract
      */
     public function __construct($dateTime)
     {
-        $this->dateTime = new \DateTimeImmutable($dateTime);
+        $this->dateTime = new DateTimeImmutable($dateTime);
     }
 
     /**
@@ -54,7 +54,7 @@ class DateTime extends ValueAbstract
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof DateTime) {
             return false;
         }
 

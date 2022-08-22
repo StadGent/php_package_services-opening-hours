@@ -27,7 +27,7 @@ class OpenNowCollection extends CollectionAbstract implements ValueFromArrayInte
      * The array may contain a set of OpeningHours array data.
      * @see \StadGent\Services\OpeningHours\Value\OpenNow.
      *
-     * @param array
+     * @param array $data
      *   Array of OpenNow data.
      *
      * @return \StadGent\Services\OpeningHours\Value\OpenNowCollection
@@ -39,7 +39,7 @@ class OpenNowCollection extends CollectionAbstract implements ValueFromArrayInte
      */
     public static function fromArray(array $data)
     {
-        $collection = new static();
+        $collection = new self();
 
         foreach ($data as $key => $item) {
             $collection->values[$key] = OpenNow::fromArray($item);

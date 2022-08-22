@@ -32,7 +32,7 @@ function example_sprintf($text, ...$replacements)
 /**
  * Helper to print a step output.
  *
- * @param string
+ * @param string $text
  *   The step text.
  */
 function example_print_step($text)

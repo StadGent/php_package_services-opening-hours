@@ -3,6 +3,7 @@
 namespace StadGent\Services\Test\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 use StadGent\Services\OpeningHours\Value\Hours;
 use PHPUnit\Framework\TestCase;
 
@@ -15,27 +16,24 @@ use PHPUnit\Framework\TestCase;
  */
 class HoursTest extends TestCase
 {
-
     /**
      * Test exception when no created_at value in the array.
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain a "from" value.
      */
     public function testExceptionWhenNoFromInArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The array should contain a "from" value.');
         $data = [];
         Hours::fromArray($data);
     }
 
     /**
      * Test exception when no updated_at value in the array.
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain an "until" value.
      */
     public function testExceptionWhenNoUpdatedAtInArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The array should contain an "until" value.');
         $data = [
             'from' => '12:13'
         ];

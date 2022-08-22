@@ -5,6 +5,7 @@ namespace StadGent\Services\OpeningHours\Value;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 
 /**
  * Object describing OpenNow status for a Channel.
@@ -63,13 +64,13 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
     public static function fromArray(array $data)
     {
         if (empty($data['channel'])) {
-            throw new \InvalidArgumentException('The array should contain a "channel" value.');
+            throw new InvalidArgumentException('The array should contain a "channel" value.');
         }
         if (empty($data['channelId'])) {
-            throw new \InvalidArgumentException('The array should contain a "channelId" value.');
+            throw new InvalidArgumentException('The array should contain a "channelId" value.');
         }
 
-        $openNow = new static();
+        $openNow = new self();
         $openNow->channelLabel = $data['channel'];
         $openNow->channelId = (int) $data['channelId'];
         $openNow->isOpen = !empty($data['openNow']['status']);
@@ -116,11 +117,10 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof OpenNow) {
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\OpenNow */
         return $this->getChannelId() === $object->getChannelId()
             && $this->getChannelLabel() === $object->getChannelLabel()
             && $this->isOpen() === $object->isOpen()

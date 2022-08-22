@@ -20,7 +20,6 @@ use StadGent\Services\OpeningHours\Response\HtmlResponse;
  */
 class OpeningHoursHtmlService extends ServiceAbstract
 {
-
     /**
      * Get the Open now status as HTML.
      *

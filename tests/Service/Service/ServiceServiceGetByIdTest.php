@@ -2,6 +2,7 @@
 
 namespace StadGent\Services\Test\OpeningHours\Service\Service;
 
+use StadGent\Services\OpeningHours\Exception\ServiceNotFoundException;
 use StadGent\Services\OpeningHours\Request\Service\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
@@ -59,11 +60,10 @@ class ServiceServiceGetByIdTest extends ServiceTestBase
 
     /**
      * Test the exception when the ServiceId does not exists.
-     *
-     * @expectedException \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function testServiceNotFoundException()
     {
+        $this->expectException(ServiceNotFoundException::class);
         $client = $this->getClientWithServiceNotFoundExceptionMock();
         $serviceService = new ServiceService($client);
         $serviceService->getById(1234);

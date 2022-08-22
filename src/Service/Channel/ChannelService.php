@@ -16,7 +16,6 @@ use StadGent\Services\OpeningHours\Response\ChannelsResponse;
  */
 class ChannelService extends ServiceAbstract
 {
-
     /**
      * Get all Channels for the given Service Id.
      *
@@ -32,7 +31,7 @@ class ChannelService extends ServiceAbstract
      * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function getAll($serviceId)
+    public function getAll(int $serviceId)
     {
         $cacheKey = $this->createCacheKeyFromArray(['all', $serviceId]);
 

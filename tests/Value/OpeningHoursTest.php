@@ -3,6 +3,7 @@
 namespace StadGent\Services\Test\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 use StadGent\Services\OpeningHours\Value\DayCollection;
 use StadGent\Services\OpeningHours\Value\OpeningHours;
 use PHPUnit\Framework\TestCase;
@@ -16,27 +17,24 @@ use PHPUnit\Framework\TestCase;
  */
 class OpeningHoursTest extends TestCase
 {
-
     /**
      * Test exception when no channel value in the array.
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain a "channel" value.
      */
     public function testExceptionWhenNoChannelInArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The array should contain a "channel" value.');
         $data = [];
         OpeningHours::fromArray($data);
     }
 
     /**
      * Test exception when no channelId value in the array.
-     *
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage The array should contain a "channelId" value.
      */
     public function testExceptionWhenNoChannelIdInArray()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('The array should contain a "channelId" value.');
         $data = [
             'channel' => 'fooBar',
         ];

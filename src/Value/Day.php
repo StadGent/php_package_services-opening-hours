@@ -5,6 +5,7 @@ namespace StadGent\Services\OpeningHours\Value;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 
 /**
  * Object describing a single Opening Hours Day.
@@ -13,7 +14,6 @@ use DigipolisGent\Value\ValueInterface;
  */
 class Day extends ValueAbstract implements ValueFromArrayInterface
 {
-
     /**
      * The Days date.
      *
@@ -62,10 +62,10 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
     public static function fromArray(array $data)
     {
         if (empty($data['date'])) {
-            throw new \InvalidArgumentException('The array should contain a "date" value.');
+            throw new InvalidArgumentException('The array should contain a "date" value.');
         }
 
-        $day = new static();
+        $day = new self();
         $day->date = new Date($data['date']);
         $day->isOpen = !empty($data['open']);
 
@@ -90,7 +90,7 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Has the day an open state.
      *
-     * @return string
+     * @return bool
      */
     public function isOpen()
     {
@@ -116,11 +116,10 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof Day) {
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\Day */
         return $this->getDate()->sameValueAs($object->getDate())
             && $this->isOpen() === $object->isOpen()
             && $this->getHours()->sameValueAs($object->getHours())
