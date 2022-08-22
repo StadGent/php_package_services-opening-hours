@@ -19,7 +19,6 @@ use DigipolisGent\API\Client\Handler\HandlerInterface;
  */
 class ClientTest extends TestCase
 {
-
     /**
      * API Key is send as header.
      */

@@ -39,7 +39,7 @@ class HoursCollection extends CollectionAbstract implements ValueFromArrayInterf
      */
     public static function fromArray(array $data)
     {
-        $collection = new static();
+        $collection = new self();
 
         foreach ($data as $key => $item) {
             $collection->values[$key] = Hours::fromArray($item);

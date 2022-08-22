@@ -94,7 +94,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      */
     public static function fromArray(array $data)
     {
-        $service = new static();
+        $service = new self();
 
         if (!empty($data['id'])) {
             $service->id = (int) $data['id'];
@@ -207,11 +207,10 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof Service) {
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\Service */
         return $this->getId() === $object->getId()
             && $this->getUri() === $object->getUri()
             && $this->getLabel() === $object->getLabel()

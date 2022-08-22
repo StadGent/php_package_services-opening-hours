@@ -5,6 +5,7 @@ namespace StadGent\Services\OpeningHours\Value;
 use DigipolisGent\Value\ValueAbstract;
 use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
+use InvalidArgumentException;
 
 /**
  * Object describing the set of Opening Hours for a Channel.
@@ -60,13 +61,13 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
     public static function fromArray(array $data)
     {
         if (empty($data['channel'])) {
-            throw new \InvalidArgumentException('The array should contain a "channel" value.');
+            throw new InvalidArgumentException('The array should contain a "channel" value.');
         }
         if (empty($data['channelId'])) {
-            throw new \InvalidArgumentException('The array should contain a "channelId" value.');
+            throw new InvalidArgumentException('The array should contain a "channelId" value.');
         }
 
-        $openingHours = new static();
+        $openingHours = new self();
         $openingHours->channelLabel = $data['channel'];
         $openingHours->channelId = (int) $data['channelId'];
 
@@ -115,7 +116,7 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof OpeningHours) {
             return false;
         }
 

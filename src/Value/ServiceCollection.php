@@ -37,7 +37,7 @@ class ServiceCollection extends CollectionAbstract implements ValueFromArrayInte
      */
     public static function fromArray(array $data)
     {
-        $collection = new static();
+        $collection = new self();
 
         foreach ($data as $key => $item) {
             $collection->values[$key] = Service::fromArray($item);
@@ -53,8 +53,9 @@ class ServiceCollection extends CollectionAbstract implements ValueFromArrayInte
     {
         $labels = [];
         foreach ($this->values as $value) {
-            /* @var $value \StadGent\Services\OpeningHours\Value\Service */
-            $labels[] = $value->getLabel();
+            if ($value instanceof Service) {
+                $labels[] = $value->getLabel();
+            }
         }
 
         return (string) implode(', ', $labels);

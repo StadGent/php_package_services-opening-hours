@@ -12,7 +12,6 @@ use Psr\Http\Message\RequestInterface;
  */
 class Client extends AbstractClient
 {
-
     /**
      * {@inheritdoc}
      */

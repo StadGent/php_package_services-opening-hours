@@ -16,7 +16,6 @@ use PHPUnit\Framework\TestCase;
  */
 class OpenNowTest extends TestCase
 {
-
     /**
      * Test exception when no channel value in the array.
      */

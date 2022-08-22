@@ -7,7 +7,7 @@ namespace StadGent\Services\OpeningHours\Exception;
  *
  * @package StadGent\Services\OpeningHours\Exception
  */
-class UnexpectedResponseException extends \Exception
+final class UnexpectedResponseException extends \Exception
 {
     /**
      * Generates exception with certain message

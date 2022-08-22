@@ -27,7 +27,7 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * The array may contain a set of OpeningHours array data.
      * @see \StadGent\Services\OpeningHours\Value\OpeningHours.
      *
-     * @param array
+     * @param array $data
      *   Array of OpeningHours data.
      *
      * @return \StadGent\Services\OpeningHours\Value\OpeningHoursCollection
@@ -37,7 +37,7 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      */
     public static function fromArray(array $data)
     {
-        $collection = new static();
+        $collection = new self();
 
         foreach ($data as $key => $item) {
             $collection->values[$key] = OpeningHours::fromArray($item);

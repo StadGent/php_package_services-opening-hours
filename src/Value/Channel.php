@@ -69,7 +69,7 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
      */
     public static function fromArray(array $data)
     {
-        $channel = new static();
+        $channel = new self();
 
         if (!empty($data['id'])) {
             $channel->id = (int) $data['id'];
@@ -136,11 +136,10 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
      */
     public function sameValueAs(ValueInterface $object)
     {
-        if (!$this->sameValueTypeAs($object)) {
+        if (!$this->sameValueTypeAs($object) || !$object instanceof Channel) {
             return false;
         }
 
-        /* @var $object \StadGent\Services\OpeningHours\Value\Channel */
         return $this->getId() === $object->getId()
             && $this->getLabel() === $object->getLabel()
             && $this->getServiceId() === $object->getServiceId()

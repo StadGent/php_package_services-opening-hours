@@ -9,7 +9,7 @@ use GuzzleHttp\Exception\RequestException;
  *
  * @package StadGent\Services\OpeningHours\Exception
  */
-class ExceptionFactory
+final class ExceptionFactory
 {
     /**
      * Create a new Exception (if required) for the given Exception.

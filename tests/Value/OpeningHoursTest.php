@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
  */
 class OpeningHoursTest extends TestCase
 {
-
     /**
      * Test exception when no channel value in the array.
      */

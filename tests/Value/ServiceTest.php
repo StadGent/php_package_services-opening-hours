@@ -17,7 +17,6 @@ use PHPUnit\Framework\TestCase;
  */
 class ServiceTest extends TestCase
 {
-
     /**
      * Test from array with no source values in the array.
      */
