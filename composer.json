@@ -60,5 +60,5 @@
         "phpmd": "vendor/bin/grumphp run --tasks=phpmd",
         "phpstan": "vendor/bin/grumphp run --tasks=phpstan",
         "phpunit": "vendor/bin/phpunit --configuration=phpunit.qa-php.xml"
-    },
+    }
 }
