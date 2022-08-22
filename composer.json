@@ -17,8 +17,8 @@
     "homepage": "https://github.com/StadGent/php_package_services-opening-hours",
     "require": {
         "php": "^7.4 || ^8.1",
-        "digipolisgent/api-client": "^1.1.0",
         "ext-json": "*",
+        "digipolisgent/api-client": "^1.1.0",
         "digipolisgent/value": "^1.1",
         "guzzlehttp/guzzle": "^6.2",
         "psr/http-message": "^1.0",
