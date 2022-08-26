@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use DigipolisGent\API\Client\Request\AbstractRequest;
+use DigipolisGent\API\Client\Request\AbstractJsonRequest;
 use StadGent\Services\OpeningHours\Uri\Service\SearchByLabelUri;
 
 /**
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Service\SearchByLabelUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class SearchByLabelRequest extends AbstractRequest
+final class SearchByLabelRequest extends AbstractJsonRequest
 {
     /**
      * Request to search services by the (partial) label.
@@ -18,7 +20,7 @@ class SearchByLabelRequest extends AbstractRequest
      * @param string $label
      *   The (partial) Service label.
      */
-    public function __construct($label)
+    public function __construct(string $label)
     {
         $uri = new SearchByLabelUri($label);
         parent::__construct($uri);

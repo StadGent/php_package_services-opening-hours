@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DateTimeImmutable;
@@ -11,21 +13,23 @@ use DigipolisGent\Value\ValueInterface;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class DateTime extends ValueAbstract
+final class DateTime extends ValueAbstract
 {
     /**
      * The dateTime
      *
      * @var \DateTimeImmutable
      */
-    protected $dateTime;
+    private DateTimeImmutable $dateTime;
 
     /**
      * Date constructor.
      *
      * @param string $dateTime
+     *
+     * @throws \Exception
      */
-    public function __construct($dateTime)
+    public function __construct(string $dateTime)
     {
         $this->dateTime = new DateTimeImmutable($dateTime);
     }
@@ -40,7 +44,7 @@ class DateTime extends ValueAbstract
      * @return string
      *   The formatted date as string.
      */
-    public function format($format)
+    public function format(string $format): string
     {
         return $this->dateTime->format($format);
     }
@@ -52,20 +56,19 @@ class DateTime extends ValueAbstract
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof DateTime) {
-            return false;
-        }
-
-        return $this->dateTime->getTimestamp() === $object->dateTime->getTimestamp();
+        /** @var \StadGent\Services\OpeningHours\Value\DateTime $object */
+        return
+            $this->sameValueTypeAs($object)
+            && $this->dateTime->getTimestamp() === $object->dateTime->getTimestamp();
     }
 
     /**
      * @inheritdoc
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return (string) $this->format(DATE_ATOM);
+        return $this->format(DATE_ATOM);
     }
 }

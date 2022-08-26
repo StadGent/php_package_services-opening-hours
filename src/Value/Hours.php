@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 use InvalidArgumentException;
 
@@ -12,26 +13,26 @@ use InvalidArgumentException;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class Hours extends ValueAbstract implements ValueFromArrayInterface
+final class Hours extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The from hour.
      *
      * @var string
      */
-    protected $from;
+    private string $from;
 
     /**
      * The until hour.
      *
      * @var string
      */
-    protected $until;
+    private string $until;
 
     /**
      * Use only the named constructors.
      */
-    protected function __construct()
+    private function __construct()
     {
         // The constructor is protected:
         // Create the object using the named constructors.
@@ -51,7 +52,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      * @throws \InvalidArgumentException
      *   If the data does not contain a "from" or "until" value.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): Hours
     {
         if (empty($data['from'])) {
             throw new InvalidArgumentException('The array should contain a "from" value.');
@@ -60,7 +61,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
             throw new InvalidArgumentException('The array should contain an "until" value.');
         }
 
-        return static::fromHours($data['from'], $data['until']);
+        return self::fromHours($data['from'], $data['until']);
     }
 
     /**
@@ -73,7 +74,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\Hours
      */
-    public static function fromHours($from, $until)
+    public static function fromHours(string $from, string $until): Hours
     {
         $hours = new self();
         $hours->from = $from;
@@ -86,7 +87,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return string
      */
-    public function getFromHour()
+    public function getFromHour(): string
     {
         return $this->from;
     }
@@ -96,7 +97,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return string
      */
-    public function getUntilHour()
+    public function getUntilHour(): string
     {
         return $this->until;
     }
@@ -108,13 +109,11 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof Hours) {
-            return false;
-        }
-
-        return $this->getFromHour() === $object->getFromHour()
+        /** @var \StadGent\Services\OpeningHours\Value\Hours $object */
+        return $this->sameValueTypeAs($object)
+            && $this->getFromHour() === $object->getFromHour()
             && $this->getUntilHour() === $object->getUntilHour()
             ;
     }
@@ -126,7 +125,7 @@ class Hours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return sprintf('%s > %s', $this->getFromHour(), $this->getUntilHour());
     }

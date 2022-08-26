@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Handler\Channel;
 
 use StadGent\Services\OpeningHours\Handler\HtmlHandlerAbstract;
@@ -10,12 +12,12 @@ use StadGent\Services\OpeningHours\Request\Channel\OpenNowHtmlRequest;
  *
  * @package StadGent\Services\OpeningHours\Handler\Channel
  */
-class OpenNowHtmlHandler extends HtmlHandlerAbstract
+final class OpenNowHtmlHandler extends HtmlHandlerAbstract
 {
     /**
      * @inheritDoc
      */
-    public function handles()
+    public function handles(): array
     {
         return [
             OpenNowHtmlRequest::class,

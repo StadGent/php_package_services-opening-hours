@@ -1,37 +1,32 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
+use Exception;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
 use StadGent\Services\OpeningHours\Request\Channel\GetByIdRequest;
 use StadGent\Services\OpeningHours\Response\ChannelResponse;
 use StadGent\Services\OpeningHours\Response\ChannelsResponse;
+use StadGent\Services\OpeningHours\Value\Channel;
+use StadGent\Services\OpeningHours\Value\ChannelCollection;
 
 /**
  * Service to access the get Channel(s).
  *
  * @package StadGent\Services\OpeningHours
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class ChannelService extends ServiceAbstract
+final class ChannelService extends ServiceAbstract implements ChannelServiceInterface
 {
     /**
-     * Get all Channels for the given Service Id.
-     *
-     * @param int $serviceId
-     *   The ID of the Service to get all Channels for.
-     *
-     * @return \StadGent\Services\OpeningHours\Value\ChannelCollection
-     *   The Channels linked to the Service.
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getAll(int $serviceId)
+    public function getAll(int $serviceId): ChannelCollection
     {
         $cacheKey = $this->createCacheKeyFromArray(['all', $serviceId]);
 
@@ -43,13 +38,13 @@ class ChannelService extends ServiceAbstract
 
         // Get from service.
         try {
-            /* @var $response \StadGent\Services\OpeningHours\Response\ChannelsResponse */
+            /** @var \StadGent\Services\OpeningHours\Response\ChannelsResponse $response */
             $response = $this->send(
                 new GetAllRequest($serviceId),
                 ChannelsResponse::class
             );
-        } catch (\Exception $e) {
-            ExceptionFactory::fromException($e);
+        } catch (Exception $e) {
+            throw ExceptionFactory::fromException($e);
         }
 
         $channels = $response->getChannels();
@@ -58,23 +53,9 @@ class ChannelService extends ServiceAbstract
     }
 
     /**
-     * Get a single Channel by its Service & Channel ID.
-     *
-     * @param int $serviceId
-     *   The Service ID.
-     * @param int $channelId
-     *   The Channel ID.
-     *
-     * @return \StadGent\Services\OpeningHours\Value\Channel
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getById($serviceId, $channelId)
+    public function getById(int $serviceId, int $channelId): Channel
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['id', $serviceId, $channelId]
@@ -87,16 +68,15 @@ class ChannelService extends ServiceAbstract
         }
 
         try {
-            // Get from service.
+            /** @var \StadGent\Services\OpeningHours\Response\ChannelResponse $response */
             $response = $this->send(
                 new GetByIdRequest($serviceId, $channelId),
                 ChannelResponse::class
             );
-        } catch (\Exception $e) {
-            ExceptionFactory::fromException($e);
+        } catch (Exception $e) {
+            throw ExceptionFactory::fromException($e);
         }
 
-        /* @var $response \StadGent\Services\OpeningHours\Response\ChannelResponse */
         $channel = $response->getChannel();
         $this->cacheSet($cacheKey, $channel);
 
@@ -112,7 +92,7 @@ class ChannelService extends ServiceAbstract
      * @return string
      *   Prefixed cache key.
      */
-    protected function createCacheKeyFromArray(array $parts)
+    protected function createCacheKeyFromArray(array $parts): string
     {
         $key = 'channel:value:' . implode(':', $parts);
         return $this->createCacheKey($key);

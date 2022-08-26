@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Service;
 
 use DigipolisGent\API\Client\Response\ResponseInterface;
@@ -20,24 +22,24 @@ abstract class ServiceAbstract extends BaseServiceAbstract
     /**
      * Send the request using the client and validate the response object.
      *
-     * @param RequestInterface $request
+     * @param \Psr\Http\Message\RequestInterface $request
      *   The request object to send trough the client.
-     * @param string $expectedResponseClassName
+     * @param string $expectedClass
      *   The expected response class.
      *
-     * @return ResponseInterface
+     * @return \DigipolisGent\API\Client\Response\ResponseInterface
      *
      * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
-    protected function send(RequestInterface $request, $expectedResponseClassName)
+    protected function send(RequestInterface $request, string $expectedClass): ResponseInterface
     {
         // Get from service.
-        $response = $this->client->send($request);
+        $response = $this->client()->send($request);
 
-        if (!$response instanceof $expectedResponseClassName) {
+        if (!$response instanceof $expectedClass) {
             throw UnexpectedResponseException::fromClass(
                 get_class($response),
-                $expectedResponseClassName
+                $expectedClass
             );
         }
 

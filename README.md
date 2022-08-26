@@ -8,7 +8,6 @@
 [![Build Status][ico-travis]][link-travis]
 [![Maintainability][ico-maintainability]][link-maintainability]
 [![Test Coverage][ico-test-coverage]][link-test-coverage]
-[![PHP 7 ready][ico-php7]][link-php7]
 
 PHP package to access the Opening Hours API and wrap the responses in value
 objects.
@@ -80,21 +79,21 @@ with open arms! We are committed to creating and maintaining open source
 projects. Questions about our approach can be asked through the issue queue
 (except for security issues).
 
-[ico-version]: https://img.shields.io/packagist/v/stadgent/services-opening-hours.svg?style=flat-square
-[ico-version-unstable]: https://img.shields.io/packagist/vpre/stadgent/services-opening-hours.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/stadgent/services-opening-hours.svg?style=flat-square
-[ico-license]: https://img.shields.io/github/license/StadGent/php_package_services-opening-hours.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/StadGent/php_package_services-opening-hours/master.svg?style=flat-square
-[ico-maintainability]: https://img.shields.io/codeclimate/maintainability/StadGent/php_package_services-opening-hours.svg?style=flat-square
-[ico-test-coverage]: https://img.shields.io/codeclimate/c/StadGent/php_package_services-opening-hours.svg?style=flat-square
-[ico-php7]: https://php7ready.timesplinter.ch/StadGent/php_package_services-opening-hours/master/badge.svg
+[![Test Coverage](https://api.codeclimate.com/v1/badges/84475b0bcdae04464dd8/test_coverage)](https://codeclimate.com/github/StadGent/php_package_services-opening-hours/test_coverage)
+
+[ico-version]: https://img.shields.io/packagist/v/stadgent/services-opening-hours.svg
+[ico-version-unstable]: https://img.shields.io/packagist/vpre/stadgent/services-opening-hours.svg
+[ico-downloads]: https://img.shields.io/packagist/dt/stadgent/services-opening-hours.svg
+[ico-license]: https://img.shields.io/github/license/StadGent/php_package_services-opening-hours.svg
+[ico-travis]: https://img.shields.io/travis/StadGent/php_package_services-opening-hours/master.svg
+[ico-maintainability]: https://api.codeclimate.com/v1/badges/84475b0bcdae04464dd8/maintainability
+[ico-test-coverage]: https://api.codeclimate.com/v1/badges/84475b0bcdae04464dd8/test_coverage
 
 [link-packagist]: https://packagist.org/packages/stadgent/services-opening-hours
 [link-license]: LICENSE.md
 [link-travis]: https://travis-ci.org/StadGent/php_package_services-opening-hours
 [link-maintainability]: https://codeclimate.com/github/StadGent/php_package_services-opening-hours/maintainability
 [link-test-coverage]: https://codeclimate.com/github/StadGent/php_package_services-opening-hours/test_coverage
-[link-php7]: https://travis-ci.org/StadGent/php_package_services-opening-hours
 [link-author-stadgent]: https://github.com/stadgent
 [link-author-digipolisgent]: https://github.com/digipolisgent
 [link-contributors]: ../../contributors

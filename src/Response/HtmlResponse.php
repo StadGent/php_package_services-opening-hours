@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Response;
 
 use DigipolisGent\API\Client\Response\ResponseInterface;
@@ -9,21 +11,21 @@ use DigipolisGent\API\Client\Response\ResponseInterface;
  *
  * @package StadGent\Services\OpeningHours\Response
  */
-class HtmlResponse implements ResponseInterface
+final class HtmlResponse implements ResponseInterface
 {
     /**
      * The HTML in the response.
      *
      * @var string
      */
-    private $html;
+    private string $html;
 
     /**
      * HtmlResponse constructor.
      *
      * @param string $html
      */
-    public function __construct($html)
+    public function __construct(string $html)
     {
         $this->html = $html;
     }
@@ -34,7 +36,7 @@ class HtmlResponse implements ResponseInterface
      * @return string
      *   The HTML string.
      */
-    public function getHtml()
+    public function getHtml(): string
     {
         return $this->html;
     }

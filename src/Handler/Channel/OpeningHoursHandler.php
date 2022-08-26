@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Handler\Channel;
 
 use Psr\Http\Message as Psr;
@@ -17,12 +19,12 @@ use StadGent\Services\OpeningHours\Value\OpeningHours;
  *
  * @package StadGent\Services\OpeningHours\Handler\Channel
  */
-class OpeningHoursHandler extends HandlerAbstract
+final class OpeningHoursHandler extends HandlerAbstract
 {
     /**
      * @inheritDoc
      */
-    public function handles()
+    public function handles(): array
     {
         return [
             OpeningHoursDayRequest::class,
@@ -35,10 +37,8 @@ class OpeningHoursHandler extends HandlerAbstract
 
     /**
      * @inheritDoc
-     *
-     * @throws \InvalidArgumentException
      */
-    public function toResponse(Psr\ResponseInterface $response)
+    public function toResponse(Psr\ResponseInterface $response): OpeningHoursResponse
     {
         $data = $this->getBodyData($response);
         $openingHours = OpeningHours::fromArray($data);

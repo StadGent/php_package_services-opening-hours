@@ -2,6 +2,23 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Added
+
+- Add strong typing to values & services.
+- Add missing interfaces.
+
+### Fixed
+
+- Fix found code issues.
+
+### Updated
+
+- Update qa-php.
+- Update digipolisgent/api-client to 3.x.
+- Update digipolisgent/value to 3.x.
+
 ## [1.2.0]
 
 ### Changed

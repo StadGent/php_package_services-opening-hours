@@ -10,6 +10,7 @@ use DigipolisGent\API\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHandler;
 use StadGent\Services\OpeningHours\Value\ChannelCollection;
+use StadGent\Services\OpeningHours\Value\OpeningHours;
 
 /**
  * Tests the ChannelOpeningHoursServiceFactory.
@@ -64,7 +65,10 @@ class ChannelOpeningHoursTest extends TestCase
      */
     public function testCreateWithCache()
     {
-        $collection = ChannelCollection::fromArray([]);
+        $openingHours = OpeningHours::fromArray([
+            'channelId' => '123',
+            'channel' => 'Channel',
+        ]);
 
         $client = $this->createMock(ClientInterface::class);
         $client
@@ -77,12 +81,14 @@ class ChannelOpeningHoursTest extends TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->equalTo('OpeningHours:channel:value:day:12:34:2020-01-02'))
-            ->will($this->returnValue($collection));
+            ->will($this->returnValue($openingHours));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
         $service = ChannelOpeningHours::create($client, $cache);
 
-        $responseCollection = $service->getDay(12, 34, '2020-01-02');
-        $this->assertSame($collection, $responseCollection);
+        $this->assertSame(
+            $openingHours,
+            $service->getDay(12, 34, '2020-01-02')
+        );
     }
 }

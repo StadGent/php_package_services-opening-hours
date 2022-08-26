@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Exception;
 
+use Exception;
 use GuzzleHttp\Exception\RequestException;
 
 /**
@@ -19,24 +22,20 @@ final class ExceptionFactory
      * @param \Exception $exception
      *   The exception to check and optionally transform.
      *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @return \Exception
      */
-    public static function fromException(\Exception $exception)
+    public static function fromException(Exception $exception): Exception
     {
         if (!($exception instanceof RequestException)) {
-            throw $exception;
+            return $exception;
         }
 
-        $factory = new static();
+        $factory = new self();
         if ($factory->isNotFound($exception)) {
-            $factory->throwNotFound($exception);
+            return $factory->throwNotFound($exception);
         }
 
-        throw $exception;
+        return $exception;
     }
 
     /**
@@ -48,7 +47,7 @@ final class ExceptionFactory
      * @return bool
      *   Is Not Found.
      */
-    protected function isNotFound(RequestException $exception)
+    protected function isNotFound(RequestException $exception): bool
     {
         $codes = [404, 422];
         return in_array($exception->getCode(), $codes, true);
@@ -60,26 +59,34 @@ final class ExceptionFactory
      * @param \GuzzleHttp\Exception\RequestException $exception
      *   The Exception to create the NotFound from.
      *
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
+     * @return Exception
      */
-    protected function throwNotFound(RequestException $exception)
+    protected function throwNotFound(RequestException $exception): Exception
     {
-        $body = json_decode($exception->getResponse()->getBody()->getContents());
+        $response = $exception->getResponse();
+        if (!$response) {
+            return NotFoundException::fromException($exception);
+        }
+
+        $body = json_decode(
+            $response->getBody()->getContents(),
+            false,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
         if (!isset($body->error->target)) {
-            throw NotFoundException::fromException($exception);
+            return NotFoundException::fromException($exception);
         }
 
         if ($body->error->target === 'Service') {
-            throw ServiceNotFoundException::fromException($exception);
+            return ServiceNotFoundException::fromException($exception);
         }
 
         if ($body->error->target === 'Channel') {
-            throw ChannelNotFoundException::fromException($exception);
+            return ChannelNotFoundException::fromException($exception);
         }
 
-        throw NotFoundException::fromException($exception);
+        return NotFoundException::fromException($exception);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Handler;
 
 use DigipolisGent\API\Client\Handler\HandlerInterface;
@@ -18,10 +20,12 @@ abstract class HandlerAbstract implements HandlerInterface
      * @param \Psr\Http\Message\ResponseInterface $response
      *
      * @return array
+     *
+     * @throws \JsonException
      */
-    protected function getBodyData(Psr\ResponseInterface $response)
+    protected function getBodyData(Psr\ResponseInterface $response): array
     {
         $raw = (string) $response->getBody();
-        return json_decode($raw, true);
+        return json_decode($raw, true, 512, JSON_THROW_ON_ERROR);
     }
 }

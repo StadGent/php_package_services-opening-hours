@@ -4,6 +4,9 @@
  * StadGent\Services\OpeningHours Examples.
  *
  * Example how to get a list of all available Services.
+ *
+ * @var string $apiEndpoint
+ * @var string $apiKey
  */
 
 use GuzzleHttp\Client as GuzzleClient;

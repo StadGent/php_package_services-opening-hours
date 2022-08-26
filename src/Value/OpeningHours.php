@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 use InvalidArgumentException;
 
@@ -12,33 +13,33 @@ use InvalidArgumentException;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
+final class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The Channel ID.
      *
      * @var int
      */
-    protected $channelId;
+    private int $channelId;
 
     /**
      * The Channel label.
      *
      * @var string
      */
-    protected $channelLabel;
+    private string $channelLabel;
 
     /**
      * The opening hours days.
      *
      * @var \StadGent\Services\OpeningHours\Value\DayCollection.
      */
-    protected $days;
+    private DayCollection $days;
 
     /**
      * Use only the named constructors.
      */
-    protected function __construct()
+    private function __construct()
     {
         // The constructor is protected:
         // Create the object using the named constructors.
@@ -56,9 +57,10 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\OpeningHours
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If the data does not contain a "channel" or "channelId" value.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): OpeningHours
     {
         if (empty($data['channel'])) {
             throw new InvalidArgumentException('The array should contain a "channel" value.');
@@ -84,7 +86,7 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return int
      */
-    public function getChannelId()
+    public function getChannelId(): int
     {
         return $this->channelId;
     }
@@ -94,7 +96,7 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return string
      */
-    public function getChannelLabel()
+    public function getChannelLabel(): string
     {
         return $this->channelLabel;
     }
@@ -102,7 +104,7 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
     /**
      * @return \StadGent\Services\OpeningHours\Value\DayCollection
      */
-    public function getDays()
+    public function getDays(): DayCollection
     {
         return $this->days;
     }
@@ -114,21 +116,21 @@ class OpeningHours extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof OpeningHours) {
-            return false;
-        }
-
-        /* @var $object \StadGent\Services\OpeningHours\Value\OpeningHours */
-        return $this->getChannelId() === $object->getChannelId()
+        /** @var \StadGent\Services\OpeningHours\Value\OpeningHours $object */
+        return $this->sameValueTypeAs($object)
+            && $this->getChannelId() === $object->getChannelId()
             && $this->getChannelLabel() === $object->getChannelLabel()
             && $this->getDays()->sameValueAs($object->getDays())
             ;
     }
 
-    public function __toString()
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
     {
-        return (string) $this->getChannelLabel();
+        return $this->getChannelLabel();
     }
 }

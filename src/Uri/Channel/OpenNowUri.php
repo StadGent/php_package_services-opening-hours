@@ -2,14 +2,14 @@
 
 namespace StadGent\Services\OpeningHours\Uri\Channel;
 
-use DigipolisGent\API\Client\Uri\Uri;
+use StadGent\Services\OpeningHours\Uri\BaseUri;
 
 /**
  * Uri to get open status for now.
  *
  * @package StadGent\Services\OpeningHours\Uri\Channel
  */
-class OpenNowUri extends Uri
+final class OpenNowUri extends BaseUri
 {
     /**
      * Construct the OpenNow URI.
@@ -19,13 +19,12 @@ class OpenNowUri extends Uri
      * @param int $channelId
      *   The Channel ID to get.
      */
-    public function __construct($serviceId, $channelId)
+    public function __construct(int $serviceId, int $channelId)
     {
-        $uri = sprintf(
+        $this->uri = sprintf(
             'services/%d/channels/%d/open-now',
-            (int) $serviceId,
-            (int) $channelId
+            $serviceId,
+            $channelId
         );
-        parent::__construct($uri);
     }
 }

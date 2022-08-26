@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use DigipolisGent\API\Client\Request\AbstractRequest;
+use DigipolisGent\API\Client\Request\AbstractJsonRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpenNowUri;
 
 /**
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpenNowUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpenNowRequest extends AbstractRequest
+final class OpenNowRequest extends AbstractJsonRequest
 {
     /**
      * Get all channels for a service by the Service & Channel ID.
@@ -20,7 +22,7 @@ class OpenNowRequest extends AbstractRequest
      * @param int $channelId
      *   The Channel ID to get.
      */
-    public function __construct($serviceId, $channelId)
+    public function __construct(int $serviceId, int $channelId)
     {
         $uri = new OpenNowUri($serviceId, $channelId);
         parent::__construct($uri);

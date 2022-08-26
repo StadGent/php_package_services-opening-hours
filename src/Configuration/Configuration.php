@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Configuration;
 
 use DigipolisGent\API\Client\Configuration\Configuration as BaseConfiguration;
@@ -9,25 +11,28 @@ use DigipolisGent\API\Client\Configuration\Configuration as BaseConfiguration;
  *
  * @package StadGent\Services\OpeningHours\Client\Configuration
  */
-class Configuration extends BaseConfiguration implements ConfigurationInterface
+final class Configuration extends BaseConfiguration implements ConfigurationInterface
 {
     /**
      * The API key.
      *
      * @var string
      */
-    private $key;
+    private string $key;
 
     /**
      * @inheritDoc
      */
-    public function __construct($endpointUri, $key, array $options = [])
+    public function __construct(string $endpointUri, string $key, array $options = [])
     {
         parent::__construct($endpointUri, $options);
         $this->key = $key;
     }
 
-    public function getKey()
+    /**
+     * @inheritDoc
+     */
+    public function getKey(): string
     {
         return $this->key;
     }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Exception;
 
 use GuzzleHttp\Exception\RequestException;
@@ -14,9 +16,9 @@ final class ChannelNotFoundException extends ExceptionWithResponseAbstract
     /**
      * @inheritdoc
      */
-    public static function fromException(RequestException $exception)
+    public static function fromException(RequestException $exception): ChannelNotFoundException
     {
-        $result = new static(
+        $result = new self(
             'The requested Channel was not found.',
             404,
             $exception

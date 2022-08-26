@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use DigipolisGent\API\Client\Request\AbstractRequest;
+use DigipolisGent\API\Client\Request\AbstractJsonRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursMonthUri;
 
 /**
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursMonthUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursMonthRequest extends AbstractRequest
+final class OpeningHoursMonthRequest extends AbstractJsonRequest
 {
     /**
      * Get the OpeningHours for a single month by the Service & Channel ID.
@@ -22,7 +24,7 @@ class OpeningHoursMonthRequest extends AbstractRequest
      * @param string $date
      *   The first day (date in Y-m-d format) to get the month overview for.
      */
-    public function __construct($serviceId, $channelId, $date)
+    public function __construct(int $serviceId, int $channelId, string $date)
     {
         $uri = new OpeningHoursMonthUri($serviceId, $channelId, $date);
         parent::__construct($uri);

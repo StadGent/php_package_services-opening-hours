@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Uri\Channel;
 
-use DigipolisGent\API\Client\Uri\Uri;
+use StadGent\Services\OpeningHours\Uri\BaseUri;
 
 /**
  * Uri to get openinghours for a given period.
  *
  * @package StadGent\Services\OpeningHours\Uri\Channel
  */
-class OpeningHoursPeriodUri extends Uri
+final class OpeningHoursPeriodUri extends BaseUri
 {
     /**
      * Construct the Month URI.
@@ -23,15 +25,14 @@ class OpeningHoursPeriodUri extends Uri
      * @param string $dateUntil
      *   The end date (in Y-m-d format) of the period.
      */
-    public function __construct($serviceId, $channelId, $dateFrom, $dateUntil)
+    public function __construct(int $serviceId, int $channelId, string $dateFrom, string $dateUntil)
     {
-        $uri = sprintf(
+        $this->uri = sprintf(
             'services/%d/channels/%d/openinghours?from=%s&until=%s',
-            (int) $serviceId,
-            (int) $channelId,
+            $serviceId,
+            $channelId,
             $dateFrom,
             $dateUntil
         );
-        parent::__construct($uri);
     }
 }

@@ -4,6 +4,10 @@
  * StadGent\Services\OpeningHours Examples.
  *
  * Example how to get a single service by its open data URI.
+ *
+ * @var string $apiEndpoint
+ * @var string $apiKey
+ * @var string $service_uri
  */
 
 use GuzzleHttp\Client as GuzzleClient;

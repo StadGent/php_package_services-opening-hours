@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Response;
 
 use DigipolisGent\API\Client\Response\ResponseInterface;
@@ -10,14 +12,14 @@ use StadGent\Services\OpeningHours\Value\OpenNow;
  *
  * @package StadGent\Services\OpeningHours\Response
  */
-class OpenNowResponse implements ResponseInterface
+final class OpenNowResponse implements ResponseInterface
 {
     /**
      * The OpenNow object in the response.
      *
      * @var \StadGent\Services\OpeningHours\Value\OpenNow
      */
-    private $openNow;
+    private OpenNow $openNow;
 
     /**
      * OpenNowResponse constructor.
@@ -34,7 +36,7 @@ class OpenNowResponse implements ResponseInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\OpenNow
      */
-    public function getOpenNow()
+    public function getOpenNow(): OpenNow
     {
         return $this->openNow;
     }

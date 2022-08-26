@@ -7,7 +7,9 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Psr7\Response;
 use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use StadGent\Services\OpeningHours\Exception\ChannelNotFoundException;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Exception\NotFoundException;
@@ -20,15 +22,18 @@ use StadGent\Services\OpeningHours\Exception\ServiceNotFoundException;
  */
 class ExceptionFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * Test the fromException() method with a non RequestException.
      */
     public function testFromNonRequestException()
     {
-        $this->expectException(Exception::class);
-        $this->expectExceptionMessage('Test me now.');
-        $e = new Exception('Test me now.');
-        ExceptionFactory::fromException($e);
+        $exception = new Exception('Test me now.');
+        self::assertEquals(
+            $exception,
+            ExceptionFactory::fromException($exception)
+        );
     }
 
     /**
@@ -36,30 +41,21 @@ class ExceptionFactoryTest extends TestCase
      */
     public function testFromFallbackResponseException()
     {
-        $this->expectException(RequestException::class);
-        $this->expectExceptionCode(9999);
-        $this->expectExceptionMessage('FooBar');
-        $requestMock = $this
-            ->getMockBuilder(RequestInterface::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-
-        $responseMock = $this
-            ->getMockBuilder(Response::class)
-            ->disableOriginalConstructor()
-            ->getMock();
-        $responseMock
-            ->expects($this->once())
-            ->method('getStatusCode')
-            ->will($this->returnValue(9999));
+        $request = $this->prophesize(RequestInterface::class)->reveal();
+        $responseMock = $this->prophesize(ResponseInterface::class);
+        $responseMock->getStatusCode()->willReturn(9999);
+        $response = $responseMock->reveal();
 
         $exceptionMock = new RequestException(
             'FooBar',
-            $requestMock,
-            $responseMock
+            $request,
+            $response
         );
 
-        ExceptionFactory::fromException($exceptionMock);
+        self::assertEquals(
+            new RequestException('FooBar', $request, $response),
+            ExceptionFactory::fromException($exceptionMock)
+        );
     }
 
     /**
@@ -67,10 +63,10 @@ class ExceptionFactoryTest extends TestCase
      */
     public function testFromServiceResponseWithoutTargetException()
     {
-        $this->expectException(NotFoundException::class);
-        $this->expectExceptionCode(404);
         $exceptionMock = $this->createExceptionMock(404, '{}');
-        ExceptionFactory::fromException($exceptionMock);
+        $exception = ExceptionFactory::fromException($exceptionMock);
+        self::assertEquals('The requested item was not found.', $exception->getMessage());
+        self::assertEquals(404, $exception->getCode());
     }
 
     /**
@@ -86,11 +82,7 @@ class ExceptionFactoryTest extends TestCase
             $this->getServiceNotFoundBody()
         );
 
-        try {
-            ExceptionFactory::fromException($exceptionMock);
-        } catch (Exception $exception) {
-            // No catch specific code.
-        }
+        $exception = ExceptionFactory::fromException($exceptionMock);
 
         $this->assertInstanceOf(ServiceNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
@@ -110,12 +102,7 @@ class ExceptionFactoryTest extends TestCase
             $this->getServiceNotFoundBody()
         );
 
-        try {
-            ExceptionFactory::fromException($exceptionMock);
-        } catch (Exception $exception) {
-            // No catch specific code.
-        }
-
+        $exception = ExceptionFactory::fromException($exceptionMock);
         $this->assertInstanceOf(ServiceNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
         $this->assertSame($exceptionMock->getResponse(), $exception->getResponse());
@@ -134,11 +121,7 @@ class ExceptionFactoryTest extends TestCase
             $this->getChannelNotFoundBody()
         );
 
-        try {
-            ExceptionFactory::fromException($exceptionMock);
-        } catch (Exception $exception) {
-            // No catch specific code.
-        }
+        $exception = ExceptionFactory::fromException($exceptionMock);
 
         $this->assertInstanceOf(ChannelNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
@@ -158,11 +141,7 @@ class ExceptionFactoryTest extends TestCase
             $this->getChannelNotFoundBody()
         );
 
-        try {
-            ExceptionFactory::fromException($exceptionMock);
-        } catch (Exception $exception) {
-            // No catch specific code.
-        }
+        $exception = ExceptionFactory::fromException($exceptionMock);
 
         $this->assertInstanceOf(ChannelNotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
@@ -182,11 +161,7 @@ class ExceptionFactoryTest extends TestCase
             $this->getItemNotFoundBody()
         );
 
-        try {
-            ExceptionFactory::fromException($exceptionMock);
-        } catch (Exception $exception) {
-            // No catch specific code.
-        }
+        $exception = ExceptionFactory::fromException($exceptionMock);
 
         $this->assertInstanceOf(NotFoundException::class, $exception);
         $this->assertSame(404, $exception->getCode());
