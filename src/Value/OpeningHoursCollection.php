@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\CollectionAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 
 /**
  * Object describing a collection of OpeningHours.
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class OpeningHoursCollection extends CollectionAbstract implements ValueFromArrayInterface
+final class OpeningHoursCollection extends CollectionAbstract implements ValueFromArrayInterface
 {
     /**
      * Use only the named constructors.
@@ -25,7 +26,6 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * Create a Collection of OpeningHours objects from an array of data.
      *
      * The array may contain a set of OpeningHours array data.
-     * @see \StadGent\Services\OpeningHours\Value\OpeningHours.
      *
      * @param array $data
      *   Array of OpeningHours data.
@@ -33,9 +33,12 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * @return \StadGent\Services\OpeningHours\Value\OpeningHoursCollection
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If one of the items does not have a date.
+     * @see \StadGent\Services\OpeningHours\Value\OpeningHours.
+     *
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): OpeningHoursCollection
     {
         $collection = new self();
 
@@ -52,14 +55,13 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * Will return the channel names separated by ", ":
      * General, First line, Second line
      */
-    public function __toString()
+    public function __toString(): string
     {
         $labels = [];
         foreach ($this->values as $value) {
-            /* @var $value \StadGent\Services\OpeningHours\Value\OpeningHours */
             $labels[] = (string) $value;
         }
 
-        return (string) implode(', ', $labels);
+        return implode(', ', $labels);
     }
 }

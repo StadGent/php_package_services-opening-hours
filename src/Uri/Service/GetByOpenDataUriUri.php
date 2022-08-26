@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Uri\Service;
 
-use DigipolisGent\API\Client\Uri\Uri;
+use StadGent\Services\OpeningHours\Uri\BaseUri;
 
 /**
  * Uri to get a single service by its open data URI.
  *
  * @package StadGent\Services\OpeningHours\Uri\Channel
  */
-class GetByOpenDataUriUri extends Uri
+final class GetByOpenDataUriUri extends BaseUri
 {
     /**
      * Construct the URI.
@@ -17,9 +19,8 @@ class GetByOpenDataUriUri extends Uri
      * @param string $openDataUri
      *   The Service open data URI.
      */
-    public function __construct($openDataUri)
+    public function __construct(string $openDataUri)
     {
-        $uri = sprintf('services?uri=%s', $openDataUri);
-        parent::__construct($uri);
+        $this->uri = sprintf('services?uri=%s', $openDataUri);
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Handler\Channel;
 
 use StadGent\Services\OpeningHours\Handler\HtmlHandlerAbstract;
@@ -14,12 +16,12 @@ use StadGent\Services\OpeningHours\Request\Channel\OpeningHoursYearHtmlRequest;
  *
  * @package StadGent\Services\OpeningHours\Handler\Channel
  */
-class OpeningHoursHtmlHandler extends HtmlHandlerAbstract
+final class OpeningHoursHtmlHandler extends HtmlHandlerAbstract
 {
     /**
      * @inheritDoc
      */
-    public function handles()
+    public function handles(): array
     {
         return [
             OpeningHoursDayHtmlRequest::class,

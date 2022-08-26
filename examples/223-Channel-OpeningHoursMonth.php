@@ -4,6 +4,12 @@
  * StadGent\Services\OpeningHours Examples.
  *
  * Example how to get the OpeningHours object for a single week by the Service and Channel ID.
+ *
+ * @var string $apiEndpoint
+ * @var string $apiKey
+ * @var int|string $service_id
+ * @var int|string $channel_id
+ * @var string $openinghours_month_date
  */
 
 use GuzzleHttp\Client as GuzzleClient;

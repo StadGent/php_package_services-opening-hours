@@ -2,6 +2,23 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [2.0.0]
+
+### Added
+
+- Add strong typing to values & services.
+- Add missing interfaces.
+
+### Fixed
+
+- Fix found code issues.
+
+### Updated
+
+- Update qa-php.
+- Update digipolisgent/api-client to 3.x.
+- Update digipolisgent/value to 3.x.
+
 ## [1.2.0]
 
 ### Changed
@@ -65,10 +82,11 @@ hours for a Channel.
 * DMOH-17: Added the OpeningHoursPeriod & OpeningHoursPeriodHTML methods to the
   ChannelService.
 
-[Unreleased]: https://github.com/StadGent/php_package_services-opening-hours/compare/master...develop
+[2.0.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.2.0...2.0.0
 [1.2.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.1.0...1.2.0
 [1.1.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.0.1...1.1.0
 [1.0.1]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.0.0...1.0.1
 [1.0.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/0.2.0...1.0.0
 [0.2.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/0.1.0...0.2.0
 [0.1.0]: https://github.com/StadGent/php_package_services-opening-hours/releases/tag/0.1.0
+[Unreleased]: https://github.com/StadGent/php_package_services-opening-hours/compare/master...develop

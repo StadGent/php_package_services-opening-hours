@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use DigipolisGent\API\Client\Request\AbstractRequest;
+use DigipolisGent\API\Client\Request\AbstractJsonRequest;
 use StadGent\Services\OpeningHours\Uri\Service\GetByOpenDataUriUri;
 
 /**
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Service\GetByOpenDataUriUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class GetByOpenDataUriRequest extends AbstractRequest
+final class GetByOpenDataUriRequest extends AbstractJsonRequest
 {
     /**
      * Get a single Service by its open data URI.
@@ -18,7 +20,7 @@ class GetByOpenDataUriRequest extends AbstractRequest
      * @param string $openDataUri
      *   The Service open data URI.
      */
-    public function __construct($openDataUri)
+    public function __construct(string $openDataUri)
     {
         $uri = new GetByOpenDataUriUri($openDataUri);
         parent::__construct($uri);

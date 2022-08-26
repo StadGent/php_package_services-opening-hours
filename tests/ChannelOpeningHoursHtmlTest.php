@@ -64,8 +64,6 @@ class ChannelOpeningHoursHtmlTest extends TestCase
      */
     public function testCreateWithCache()
     {
-        $collection = ChannelCollection::fromArray([]);
-
         $client = $this->createMock(ClientInterface::class);
         $client
             ->expects($this->any())
@@ -77,12 +75,11 @@ class ChannelOpeningHoursHtmlTest extends TestCase
             ->expects($this->once())
             ->method('get')
             ->with($this->equalTo('OpeningHours:channel:html:day:12:34:2020-01-02'))
-            ->will($this->returnValue($collection));
+            ->will($this->returnValue('<html></html>'));
 
         /* @var $client \StadGent\Services\OpeningHours\Client\Client */
         $service = ChannelOpeningHoursHtml::create($client, $cache);
 
-        $responseCollection = $service->getDay(12, 34, '2020-01-02');
-        $this->assertSame($collection, $responseCollection);
+        $this->assertSame('<html></html>', $service->getDay(12, 34, '2020-01-02'));
     }
 }

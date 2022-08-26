@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Configuration;
 
 use DigipolisGent\API\Client\Configuration\ConfigurationInterface as BaseConfigurationInterface;
@@ -17,5 +19,5 @@ interface ConfigurationInterface extends BaseConfigurationInterface
      * @return string
      *   The API key.
      */
-    public function getKey();
+    public function getKey(): string;
 }

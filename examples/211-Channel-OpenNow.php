@@ -4,6 +4,11 @@
  * StadGent\Services\OpeningHours Examples.
  *
  * Example how to get the Open Now status object by the Service and Channel ID.
+ *
+ * @var string $apiEndpoint
+ * @var string $apiKey
+ * @var int|string $service_id
+ * @var int|string $channel_id
  */
 
 use GuzzleHttp\Client as GuzzleClient;

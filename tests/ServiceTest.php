@@ -31,8 +31,7 @@ class ServiceTest extends TestCase
         $expectedHandlers = [
             GetAllHandler::class,
             GetByIdHandler::class,
-            GetByOpenDataUriHandler::class,
-            SearchByLabelHandler::class,
+            GetByOpenDataUriHandler::class
         ];
 
         // Create the client so we can spy on the factory method.

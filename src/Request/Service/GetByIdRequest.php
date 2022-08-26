@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use DigipolisGent\API\Client\Request\AbstractRequest;
+use DigipolisGent\API\Client\Request\AbstractJsonRequest;
 use StadGent\Services\OpeningHours\Uri\Service\GetByIdUri;
 
 /**
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Service\GetByIdUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class GetByIdRequest extends AbstractRequest
+final class GetByIdRequest extends AbstractJsonRequest
 {
     /**
      * Get a single Service by its ID.
@@ -18,7 +20,7 @@ class GetByIdRequest extends AbstractRequest
      * @param int $serviceId
      *   The Service ID.
      */
-    public function __construct($serviceId)
+    public function __construct(int $serviceId)
     {
         $uri = new GetByIdUri($serviceId);
         parent::__construct($uri);

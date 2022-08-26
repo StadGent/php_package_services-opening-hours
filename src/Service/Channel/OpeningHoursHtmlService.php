@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
+use Exception;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use Psr\Http\Message\RequestInterface;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
@@ -17,64 +20,33 @@ use StadGent\Services\OpeningHours\Response\HtmlResponse;
  * Service to access the Channel OpeningHours.
  *
  * @package StadGent\Services\OpeningHours
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class OpeningHoursHtmlService extends ServiceAbstract
+final class OpeningHoursHtmlService extends ServiceAbstract implements OpeningHoursHtmlServiceInterface
 {
     /**
-     * Get the Open now status as HTML.
-     *
-     * @param int $serviceId
-     *   The Service ID.
-     * @param int $channelId
-     *   The Channel ID.
-     *
-     * @return string
-     *   The HTML.
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getOpenNow($serviceId, $channelId)
+    public function getOpenNow(int $serviceId, int $channelId): string
     {
         try {
-            // Get from service.
+            /** @var \StadGent\Services\OpeningHours\Response\HtmlResponse $response */
             $response = $this->send(
                 new OpenNowHtmlRequest($serviceId, $channelId),
                 HtmlResponse::class
             );
-        } catch (\Exception $e) {
-            ExceptionFactory::fromException($e);
+        } catch (Exception $e) {
+            throw ExceptionFactory::fromException($e);
         }
 
-        /* @var $response \StadGent\Services\OpeningHours\Response\HtmlResponse */
         return $response->getHtml();
     }
 
     /**
-     * Get the Opening Hours for a single day as HTML.
-     *
-     * @param int $serviceId
-     *   The Service ID.
-     * @param int $channelId
-     *   The Channel ID.
-     * @param string $date
-     *   The day date (Y-m-d) to get the data for.
-     *
-     * @return string
-     *   The HTML.
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getDay($serviceId, $channelId, $date)
+    public function getDay(int $serviceId, int $channelId, string $date): string
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['day', $serviceId, $channelId, $date]
@@ -87,26 +59,9 @@ class OpeningHoursHtmlService extends ServiceAbstract
     }
 
     /**
-     * Get the Opening Hours for a single week as HTML.
-     *
-     * @param int $serviceId
-     *   The Service ID.
-     * @param int $channelId
-     *   The Channel ID.
-     * @param string $date
-     *   A date (Y-m-d) in the week to get the data for.
-     *
-     * @return string
-     *   The HTML.
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getWeek($serviceId, $channelId, $date)
+    public function getWeek(int $serviceId, int $channelId, string $date): string
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['week', $serviceId, $channelId, $date]
@@ -119,26 +74,9 @@ class OpeningHoursHtmlService extends ServiceAbstract
     }
 
     /**
-     * Get the Opening Hours for a single month as HTML.
-     *
-     * @param int $serviceId
-     *   The Service ID.
-     * @param int $channelId
-     *   The Channel ID.
-     * @param string $date
-     *   A date (Y-m-d) in the month to get the data for.
-     *
-     * @return string
-     *   The HTML.
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getMonth($serviceId, $channelId, $date)
+    public function getMonth(int $serviceId, int $channelId, string $date): string
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['month', $serviceId, $channelId, $date]
@@ -151,26 +89,9 @@ class OpeningHoursHtmlService extends ServiceAbstract
     }
 
     /**
-     * Get the Opening Hours for a single year as HTML.
-     *
-     * @param int $serviceId
-     *   The Service ID.
-     * @param int $channelId
-     *   The Channel ID.
-     * @param string $date
-     *   A date (Y-m-d) in the year to get the data for.
-     *
-     * @return string
-     *   The HTML.
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getYear($serviceId, $channelId, $date)
+    public function getYear(int $serviceId, int $channelId, string $date): string
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['year', $serviceId, $channelId, $date]
@@ -183,28 +104,9 @@ class OpeningHoursHtmlService extends ServiceAbstract
     }
 
     /**
-     * Get the Opening Hours for a given period as HTML.
-     *
-     * @param int $serviceId
-     *   The Service ID.
-     * @param int $channelId
-     *   The Channel ID.
-     * @param string $dateFrom
-     *   The start date (Y-m-d) of the period to get the data for.
-     * @param string $dateUntil
-     *   The end date (Y-m-d) of the period to get the data for.
-     *
-     * @return string
-     *   The HTML.
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getPeriod($serviceId, $channelId, $dateFrom, $dateUntil)
+    public function getPeriod(int $serviceId, int $channelId, string $dateFrom, string $dateUntil): string
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['period', $serviceId, $channelId, $dateFrom, $dateUntil]
@@ -229,12 +131,8 @@ class OpeningHoursHtmlService extends ServiceAbstract
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    protected function sendHtmlRequest($cacheKey, RequestInterface $request)
+    protected function sendHtmlRequest(string $cacheKey, RequestInterface $request): string
     {
         // By default from cache.
         $cached = $this->cacheGet($cacheKey);
@@ -243,13 +141,12 @@ class OpeningHoursHtmlService extends ServiceAbstract
         }
 
         try {
-            // Get from service.
+            /** @var \StadGent\Services\OpeningHours\Response\HtmlResponse $response */
             $response = $this->send($request, HtmlResponse::class);
-        } catch (\Exception $e) {
-            ExceptionFactory::fromException($e);
+        } catch (Exception $e) {
+            throw ExceptionFactory::fromException($e);
         }
 
-        /* @var $response \StadGent\Services\OpeningHours\Response\HtmlResponse */
         $html = $response->getHtml();
         $this->cacheSet($cacheKey, $html);
         return $html;
@@ -264,7 +161,7 @@ class OpeningHoursHtmlService extends ServiceAbstract
      * @return string
      *   Prefixed cache key.
      */
-    protected function createCacheKeyFromArray(array $parts)
+    protected function createCacheKeyFromArray(array $parts): string
     {
         $key = 'channel:html:' . implode(':', $parts);
         return $this->createCacheKey($key);

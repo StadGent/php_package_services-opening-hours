@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
-use DigipolisGent\API\Client\Request\AbstractRequest;
+use DigipolisGent\API\Client\Request\AbstractJsonRequest;
 use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursPeriodUri;
 
 /**
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursPeriodUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursPeriodRequest extends AbstractRequest
+final class OpeningHoursPeriodRequest extends AbstractJsonRequest
 {
     /**
      * Get the OpeningHours for a given period by the Service & Channel ID.
@@ -24,7 +26,7 @@ class OpeningHoursPeriodRequest extends AbstractRequest
      * @param string $dateUntil
      *   The end date (in Y-m-d format) of the period.
      */
-    public function __construct($serviceId, $channelId, $dateFrom, $dateUntil)
+    public function __construct(int $serviceId, int $channelId, string $dateFrom, string $dateUntil)
     {
         $uri = new OpeningHoursPeriodUri($serviceId, $channelId, $dateFrom, $dateUntil);
         parent::__construct($uri);

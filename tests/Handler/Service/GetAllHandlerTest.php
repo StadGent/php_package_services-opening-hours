@@ -4,6 +4,7 @@ namespace StadGent\Services\Test\OpeningHours\Handler\Service;
 
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
+use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
 use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
@@ -21,7 +22,7 @@ class GetAllHandlerTest extends HandlerTestBase
     {
         $handler = new GetAllHandler();
         $this->assertEquals(
-            [GetAllRequest::class],
+            [GetAllRequest::class, SearchByLabelRequest::class],
             $handler->handles(),
             'Handler only handles \StadGent\Services\OpeningHours\Request\Service\GetAllRequest.'
         );

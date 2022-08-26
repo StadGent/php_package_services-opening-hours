@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 
 /**
@@ -11,26 +12,26 @@ use DigipolisGent\Value\ValueInterface;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
+final class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The service identifier.
      *
-     * @var string
+     * @var string|null
      */
-    protected $id;
+    private ?string $sourceId;
 
     /**
      * The data source for the service.
      *
      * @var string|null
      */
-    protected $name;
+    private ?string $name;
 
     /**
      * Use only the named constructors.
      */
-    protected function __construct()
+    private function __construct()
     {
         // The constructor is protected:
         // Create the object using the named constructors.
@@ -49,16 +50,12 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
      * @return \StadGent\Services\OpeningHours\Value\ServiceSource
      *   The Service Source object.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): ServiceSource
     {
         $service = new self();
 
-        if (!empty($data['sourceIdentifier'])) {
-            $service->id = $data['sourceIdentifier'];
-        }
-        if (!empty($data['source'])) {
-            $service->name = $data['source'];
-        }
+        $service->sourceId = $data['sourceIdentifier'] ?? null;
+        $service->name = $data['source'] ?? null;
 
         return $service;
     }
@@ -66,11 +63,11 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the identifier for the service at the source.
      *
-     * @return string
+     * @return string|null
      */
-    public function getId()
+    public function getId(): ?string
     {
-        return $this->id;
+        return $this->sourceId;
     }
 
     /**
@@ -78,7 +75,7 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return null|string
      */
-    public function getName()
+    public function getName(): ?string
     {
         return $this->name;
     }
@@ -90,17 +87,18 @@ class ServiceSource extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof ServiceSource) {
-            return false;
-        }
-
-        return $this->getId() === $object->getId()
+        /** @var \StadGent\Services\OpeningHours\Value\ServiceSource $object */
+        return $this->sameValueTypeAs($object)
+            && $this->getId() === $object->getId()
             && $this->getName() === $object->getName();
     }
 
-    public function __toString()
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
     {
         return (string) $this->getName();
     }

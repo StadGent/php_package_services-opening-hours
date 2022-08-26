@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 
 /**
@@ -11,40 +12,40 @@ use DigipolisGent\Value\ValueInterface;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class Channel extends ValueAbstract implements ValueFromArrayInterface
+final class Channel extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The Channel ID.
      *
-     * @var int
+     * @var int|null
      */
-    protected $id;
+    private ?int $channelId;
 
     /**
      * The Channel label (name).
      *
-     * @var string
+     * @var string|null
      */
-    protected $label;
+    private ?string $label;
 
     /**
      * The Service ID the Channel belongs to.
      *
-     * @var int
+     * @var int|null
      */
-    protected $serviceId;
+    private ?int $serviceId;
 
     /**
      * The date attributes for the Channel.
      *
      * @var \StadGent\Services\OpeningHours\Value\DateAttributes
      */
-    protected $dateAttributes;
+    private DateAttributes $dateAttributes;
 
     /**
      * Use only the named constructors.
      */
-    protected function __construct()
+    private function __construct()
     {
         // The constructor is protected:
         // Create the object using the named constructors.
@@ -56,7 +57,7 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
      * The array may contain following data:
      * - id (int) : The Channel ID.
      * - label (string) : The Channel label (name).
-     * - serviceId (int) : The Service id the Channel belongs to.
+     * - serviceId (int) : The Service ID the Channel belongs to.
      * - createdAt (string) : The creation date of the Channel.
      * - updatedAt (string) : The last update date of the Channel.
      *
@@ -65,21 +66,16 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
      * @return \StadGent\Services\OpeningHours\Value\Channel
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If the created_at/update_at are empty.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): Channel
     {
         $channel = new self();
 
-        if (!empty($data['id'])) {
-            $channel->id = (int) $data['id'];
-        }
-        if (!empty($data['label'])) {
-            $channel->label = $data['label'];
-        }
-        if (!empty($data['serviceId'])) {
-            $channel->serviceId = (int) $data['serviceId'];
-        }
+        $channel->channelId = !empty($data['id']) ? (int) $data['id'] : null;
+        $channel->label = $data['label'] ?? null;
+        $channel->serviceId = !empty($data['serviceId']) ? (int) $data['serviceId'] : null;
 
         $channel->dateAttributes = DateAttributes::fromArray($data);
 
@@ -90,19 +86,19 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the unique identifier for the Channel.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->id;
+        return $this->channelId;
     }
 
     /**
      * Get the Channel label.
      *
-     * @return string
+     * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -110,9 +106,9 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the Service ID the channel belongs to.
      *
-     * @return int
+     * @return int|null
      */
-    public function getServiceId()
+    public function getServiceId(): ?int
     {
         return $this->serviceId;
     }
@@ -122,7 +118,7 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\DateAttributes
      */
-    public function getDateAttributes()
+    public function getDateAttributes(): DateAttributes
     {
         return $this->dateAttributes;
     }
@@ -134,20 +130,19 @@ class Channel extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof Channel) {
-            return false;
-        }
-
-        return $this->getId() === $object->getId()
+        /** @var \StadGent\Services\OpeningHours\Value\Channel $object */
+        return
+            $this->sameValueTypeAs($object)
+            && $this->getId() === $object->getId()
             && $this->getLabel() === $object->getLabel()
             && $this->getServiceId() === $object->getServiceId()
             && $this->getDateAttributes()->sameValueAs($object->getDateAttributes())
             ;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getLabel();
     }

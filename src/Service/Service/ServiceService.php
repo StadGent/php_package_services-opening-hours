@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Service\Service;
 
+use Exception;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
@@ -10,23 +13,22 @@ use StadGent\Services\OpeningHours\Request\Service\GetByOpenDataUriRequest;
 use StadGent\Services\OpeningHours\Request\Service\SearchByLabelRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\Response\ServicesResponse;
+use StadGent\Services\OpeningHours\Value\Service;
+use StadGent\Services\OpeningHours\Value\ServiceCollection;
 
 /**
  * Service to access the Service related API.
  *
  * @package StadGent\Services\OpeningHours
+ *
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
-class ServiceService extends ServiceAbstract
+final class ServiceService extends ServiceAbstract implements ServiceServiceInterface
 {
     /**
-     * Get all Services.
-     *
-     * @return \StadGent\Services\OpeningHours\Value\ServiceCollection
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
+     * @inheritDoc
      */
-    public function getAll()
+    public function getAll(): ServiceCollection
     {
         $cacheKey = $this->createCacheKeyFromArray(['all']);
 
@@ -37,7 +39,7 @@ class ServiceService extends ServiceAbstract
         }
 
         // Get from service.
-        /* @var $response \StadGent\Services\OpeningHours\Response\ServicesResponse */
+        /** @var \StadGent\Services\OpeningHours\Response\ServicesResponse $response */
         $response = $this->send(
             new GetAllRequest(),
             ServicesResponse::class
@@ -49,22 +51,11 @@ class ServiceService extends ServiceAbstract
     }
 
     /**
-     * Find services by their (partial) label.
-     *
-     * NOTE: The search results are never cached.
-     *
-     * @param string $label
-     *   The (partial) label to search by.
-     *
-     * @return \StadGent\Services\OpeningHours\Value\ServiceCollection
-     *   Collection of found Services (if any).
-     *
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
+     * @inheritDoc
      */
-    public function searchByLabel($label)
+    public function searchByLabel(string $label): ServiceCollection
     {
-        /* @var $response \StadGent\Services\OpeningHours\Response\ServicesResponse */
+        /** @var \StadGent\Services\OpeningHours\Response\ServicesResponse $response */
         $response = $this->send(
             new SearchByLabelRequest($label),
             ServicesResponse::class
@@ -74,20 +65,9 @@ class ServiceService extends ServiceAbstract
     }
 
     /**
-     * Get a single Service by its ID.
-     *
-     * @param string $serviceId
-     *   The Service ID.
-     *
-     * @return \StadGent\Services\OpeningHours\Value\Service
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getById($serviceId)
+    public function getById($serviceId): Service
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['id', $serviceId]
@@ -102,14 +82,14 @@ class ServiceService extends ServiceAbstract
         try {
             // Get from service.
             $response = $this->send(
-                new GetByIdRequest($serviceId),
+                new GetByIdRequest((int) $serviceId),
                 ServiceResponse::class
             );
-        } catch (\Exception $e) {
-            ExceptionFactory::fromException($e);
+        } catch (Exception $e) {
+            throw ExceptionFactory::fromException($e);
         }
 
-        /* @var $response \StadGent\Services\OpeningHours\Response\ServiceResponse */
+        /** @var \StadGent\Services\OpeningHours\Response\ServiceResponse $response */
         $service = $response->getService();
         $this->cacheSet($cacheKey, $service);
 
@@ -117,20 +97,9 @@ class ServiceService extends ServiceAbstract
     }
 
     /**
-     * Get a single Service by its open data uri.
-     *
-     * @param string $openDataUri
-     *   The Service open data uri.
-     *
-     * @return \StadGent\Services\OpeningHours\Value\Service
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getByOpenDataUri($openDataUri)
+    public function getByOpenDataUri(string $openDataUri): Service
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['uri', $openDataUri]
@@ -148,11 +117,11 @@ class ServiceService extends ServiceAbstract
                 new GetByOpenDataUriRequest($openDataUri),
                 ServiceResponse::class
             );
-        } catch (\Exception $e) {
-            ExceptionFactory::fromException($e);
+        } catch (Exception $e) {
+            throw ExceptionFactory::fromException($e);
         }
 
-        /* @var $response \StadGent\Services\OpeningHours\Response\ServiceResponse */
+        /** @var \StadGent\Services\OpeningHours\Response\ServiceResponse $response */
         $service = $response->getService();
         $this->cacheSet($cacheKey, $service);
 
@@ -160,19 +129,9 @@ class ServiceService extends ServiceAbstract
     }
 
     /**
-     * Get a service by its Vesta Id.
-     *
-     * @param string $vestaId
-     *
-     * @return \StadGent\Services\OpeningHours\Value\Service
-     *
-     * @throws \Exception
-     * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \Psr\SimpleCache\InvalidArgumentException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     * @inheritDoc
      */
-    public function getByVestaId($vestaId)
+    public function getByVestaId(string $vestaId): Service
     {
         $uri = sprintf('https://stad.gent/id/agents/%s', $vestaId);
         return $this->getByOpenDataUri($uri);
@@ -187,7 +146,7 @@ class ServiceService extends ServiceAbstract
      * @return string
      *   Prefixed cache key.
      */
-    protected function createCacheKeyFromArray(array $parts)
+    protected function createCacheKeyFromArray(array $parts): string
     {
         $key = 'service:value:' . implode(':', $parts);
         return $this->createCacheKey($key);

@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\CollectionAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 
 /**
  * Object describing a collection of Hours.
@@ -37,7 +38,7 @@ class HoursCollection extends CollectionAbstract implements ValueFromArrayInterf
      * @throws \InvalidArgumentException
      *   If the data does not contain a "channelId" value.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): HoursCollection
     {
         $collection = new self();
 
@@ -54,14 +55,13 @@ class HoursCollection extends CollectionAbstract implements ValueFromArrayInterf
      * Will return the opening hours separated by ", ":
      * 10:00 > 12:00, 12:30 > 18:00
      */
-    public function __toString()
+    public function __toString(): string
     {
         $labels = [];
         foreach ($this->values as $value) {
-            /* @var $value \StadGent\Services\OpeningHours\Value\Hours */
             $labels[] = (string) $value;
         }
 
-        return (string) implode(', ', $labels);
+        return implode(', ', $labels);
     }
 }

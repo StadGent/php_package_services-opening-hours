@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Client;
 
 use DigipolisGent\API\Client\AbstractClient;
@@ -10,14 +12,17 @@ use Psr\Http\Message\RequestInterface;
  *
  * @package StadGent\Services\OpeningHours\Client
  */
-class Client extends AbstractClient
+final class Client extends AbstractClient
 {
     /**
      * {@inheritdoc}
      */
-    protected function injectHeaders(RequestInterface $request)
+    protected function injectHeaders(RequestInterface $request): RequestInterface
     {
+        /** @var \StadGent\Services\OpeningHours\Configuration\ConfigurationInterface $configuration */
+        $configuration = $this->configuration;
+
         return parent::injectHeaders($request)
-            ->withHeader('user-key', $this->configuration->getKey());
+            ->withHeader('user-key', $configuration->getKey());
     }
 }
