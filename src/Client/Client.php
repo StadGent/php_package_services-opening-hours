@@ -17,7 +17,10 @@ class Client extends AbstractClient
      */
     protected function injectHeaders(RequestInterface $request)
     {
+        /** @var \StadGent\Services\OpeningHours\Configuration\ConfigurationInterface $configuration */
+        $configuration = $this->configuration;
+
         return parent::injectHeaders($request)
-            ->withHeader('user-key', $this->configuration->getKey());
+            ->withHeader('user-key', $configuration->getKey());
     }
 }

@@ -4,6 +4,10 @@
  * StadGent\Services\OpeningHours Examples.
  *
  * Example how to get a list of all available Channels.
+ *
+ * @var string $apiEndpoint
+ * @var string $apiKey
+ * @var int|string $service_id
  */
 
 use GuzzleHttp\Client as GuzzleClient;

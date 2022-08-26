@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 use InvalidArgumentException;
 
@@ -12,21 +13,21 @@ use InvalidArgumentException;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
+final class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The creation date-time.
      *
-     * @var \StadGent\Services\OpeningHours\Value\DateTime|null
+     * @var \StadGent\Services\OpeningHours\Value\DateTime
      */
-    protected $createdAt;
+    private DateTime $createdAt;
 
     /**
      * The last update date-time.
      *
-     * @var \StadGent\Services\OpeningHours\Value\DateTime|null
+     * @var \StadGent\Services\OpeningHours\Value\DateTime
      */
-    protected $updatedAt;
+    private DateTime $updatedAt;
 
     /**
      * Use only the named constructors.
@@ -53,7 +54,7 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      * @throws \InvalidArgumentException
      *   If the array does not contains "createdAt" or "updatedAt" values.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): DateAttributes
     {
         $attributes = new self();
 
@@ -76,7 +77,7 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      * @return \StadGent\Services\OpeningHours\Value\DateTime
      *   The DateTime object if a created date-time is set.
      */
-    public function getCreatedAt()
+    public function getCreatedAt(): DateTime
     {
         return $this->createdAt;
     }
@@ -87,7 +88,7 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      * @return \StadGent\Services\OpeningHours\Value\DateTime
      *   The DateTime object if an update date-time is set.
      */
-    public function getUpdatedAt()
+    public function getUpdatedAt(): DateTime
     {
         return $this->updatedAt;
     }
@@ -99,13 +100,12 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof DateAttributes) {
-            return false;
-        }
-
-        return $this->getCreatedAt()->sameValueAs($object->getCreatedAt())
+        /** @var \StadGent\Services\OpeningHours\Value\DateAttributes $object */
+        return
+            $this->sameValueTypeAs($object)
+            && $this->getCreatedAt()->sameValueAs($object->getCreatedAt())
             && $this->getUpdatedAt()->sameValueAs($object->getUpdatedAt());
     }
 
@@ -114,7 +114,7 @@ class DateAttributes extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getCreatedAt();
     }

@@ -2,12 +2,14 @@
 
 namespace StadGent\Services\OpeningHours\Exception;
 
+use Exception;
+
 /**
  * Exception when the received response does not match what was expected.
  *
  * @package StadGent\Services\OpeningHours\Exception
  */
-final class UnexpectedResponseException extends \Exception
+final class UnexpectedResponseException extends Exception
 {
     /**
      * Generates exception with certain message

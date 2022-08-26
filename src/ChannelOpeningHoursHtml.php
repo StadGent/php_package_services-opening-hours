@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours;
 
 use DigipolisGent\API\Client\ClientInterface;
@@ -7,6 +9,7 @@ use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Channel\OpeningHoursHtmlHandler;
 use StadGent\Services\OpeningHours\Handler\Channel\OpenNowHtmlHandler;
 use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlService;
+use StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlServiceInterface;
 
 /**
  * Factory to create the ChannelOpeningHoursHtmlService.
@@ -24,14 +27,12 @@ class ChannelOpeningHoursHtml
      * @param \DigipolisGent\API\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return \StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlService
+     * @return \StadGent\Services\OpeningHours\Service\Channel\OpeningHoursHtmlServiceInterface
      */
-    public static function create(ClientInterface $client, CacheInterface $cache = null)
+    public static function create(ClientInterface $client, CacheInterface $cache = null): OpeningHoursHtmlServiceInterface
     {
-        $client
-            ->addHandler(new OpenNowHtmlHandler())
-            ->addHandler(new OpeningHoursHtmlHandler())
-        ;
+        $client->addHandler(new OpenNowHtmlHandler());
+        $client->addHandler(new OpeningHoursHtmlHandler());
 
         $service = new OpeningHoursHtmlService($client);
         if ($cache) {

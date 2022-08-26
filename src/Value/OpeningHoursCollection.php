@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\CollectionAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 
 /**
  * Object describing a collection of OpeningHours.
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class OpeningHoursCollection extends CollectionAbstract implements ValueFromArrayInterface
+final class OpeningHoursCollection extends CollectionAbstract implements ValueFromArrayInterface
 {
     /**
      * Use only the named constructors.
@@ -35,7 +36,7 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * @throws \InvalidArgumentException
      *   If one of the items does not have a date.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): OpeningHoursCollection
     {
         $collection = new self();
 
@@ -52,14 +53,13 @@ class OpeningHoursCollection extends CollectionAbstract implements ValueFromArra
      * Will return the channel names separated by ", ":
      * General, First line, Second line
      */
-    public function __toString()
+    public function __toString(): string
     {
         $labels = [];
         foreach ($this->values as $value) {
-            /* @var $value \StadGent\Services\OpeningHours\Value\OpeningHours */
             $labels[] = (string) $value;
         }
 
-        return (string) implode(', ', $labels);
+        return implode(', ', $labels);
     }
 }

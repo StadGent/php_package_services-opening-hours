@@ -22,22 +22,22 @@ abstract class ServiceAbstract extends BaseServiceAbstract
      *
      * @param RequestInterface $request
      *   The request object to send trough the client.
-     * @param string $expectedResponseClassName
+     * @param string $expectedClass
      *   The expected response class.
      *
      * @return ResponseInterface
      *
      * @throws \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
-    protected function send(RequestInterface $request, $expectedResponseClassName)
+    protected function send(RequestInterface $request, $expectedClass)
     {
         // Get from service.
         $response = $this->client->send($request);
 
-        if (!$response instanceof $expectedResponseClassName) {
+        if (!$response instanceof $expectedClass) {
             throw UnexpectedResponseException::fromClass(
                 get_class($response),
-                $expectedResponseClassName
+                $expectedClass
             );
         }
 

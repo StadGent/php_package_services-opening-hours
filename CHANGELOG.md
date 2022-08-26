@@ -2,6 +2,21 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Added
+
+- Add strong typing to values & services.
+- Add missing interfaces.
+
+### Fixed
+
+- Fix found code issues.
+
+### Updated
+
+- Update qa-php.
+
 ## [1.2.0]
 
 ### Changed

@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\CollectionAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 
 /**
  * Object describing a collection of Services.
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class ServiceCollection extends CollectionAbstract implements ValueFromArrayInterface
+final class ServiceCollection extends CollectionAbstract implements ValueFromArrayInterface
 {
     /**
      * Use only the named constructors.
@@ -35,7 +36,7 @@ class ServiceCollection extends CollectionAbstract implements ValueFromArrayInte
      * @throws \InvalidArgumentException
      *   If the createdAt/updateAt are empty.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): ServiceCollection
     {
         $collection = new self();
 
@@ -49,15 +50,13 @@ class ServiceCollection extends CollectionAbstract implements ValueFromArrayInte
     /**
      * @inheritdoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         $labels = [];
         foreach ($this->values as $value) {
-            if ($value instanceof Service) {
-                $labels[] = $value->getLabel();
-            }
+            $labels[] = (string) $value;
         }
 
-        return (string) implode(', ', $labels);
+        return implode(', ', $labels);
     }
 }

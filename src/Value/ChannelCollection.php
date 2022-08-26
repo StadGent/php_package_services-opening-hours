@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\CollectionAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 
 /**
  * Object describing a collection of Channels.
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class ChannelCollection extends CollectionAbstract implements ValueFromArrayInterface
+final class ChannelCollection extends CollectionAbstract implements ValueFromArrayInterface
 {
     /**
      * Use only the named constructors.
@@ -35,7 +36,7 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
      * @throws \InvalidArgumentException
      *   If the createdAt/updateAt are empty.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): ChannelCollection
     {
         $collection = new self();
 
@@ -49,13 +50,12 @@ class ChannelCollection extends CollectionAbstract implements ValueFromArrayInte
     /**
      * @inheritdoc
      */
-    public function __toString()
+    public function __toString(): string
     {
         $labels = [];
         foreach ($this->values as $value) {
-            if ($value instanceof Channel) {
-                $labels[] = $value->getLabel();
-            }
+            /** @var \StadGent\Services\OpeningHours\Value\Channel $value */
+            $labels[] = $value->getLabel();
         }
 
         return (string) implode(', ', $labels);

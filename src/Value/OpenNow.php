@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 use InvalidArgumentException;
 
@@ -12,33 +13,33 @@ use InvalidArgumentException;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class OpenNow extends ValueAbstract implements ValueFromArrayInterface
+final class OpenNow extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The Channel ID.
      *
      * @var int
      */
-    protected $channelId;
+    private int $channelId;
 
     /**
      * The Channel label.
      *
      * @var string
      */
-    protected $channelLabel;
+    private string $channelLabel;
 
     /**
      * Is the channel now open.
      *
      * @var bool
      */
-    protected $isOpen;
+    private bool $isOpen;
 
     /**
      * Use only the named constructors.
      */
-    protected function __construct()
+    private function __construct()
     {
         // The constructor is protected:
         // Create the object using the named constructors.
@@ -61,7 +62,7 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
      * @throws \InvalidArgumentException
      *   If the data does not contain a "channel" or "channelId" value.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): OpenNow
     {
         if (empty($data['channel'])) {
             throw new InvalidArgumentException('The array should contain a "channel" value.');
@@ -83,7 +84,7 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return int
      */
-    public function getChannelId()
+    public function getChannelId(): int
     {
         return $this->channelId;
     }
@@ -93,7 +94,7 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return string
      */
-    public function getChannelLabel()
+    public function getChannelLabel(): string
     {
         return $this->channelLabel;
     }
@@ -103,7 +104,7 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function isOpen()
+    public function isOpen(): bool
     {
         return $this->isOpen;
     }
@@ -115,13 +116,11 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof OpenNow) {
-            return false;
-        }
-
-        return $this->getChannelId() === $object->getChannelId()
+        /** @var \StadGent\Services\OpeningHours\Value\OpenNow $object */
+        return $this->sameValueTypeAs($object)
+            && $this->getChannelId() === $object->getChannelId()
             && $this->getChannelLabel() === $object->getChannelLabel()
             && $this->isOpen() === $object->isOpen()
             ;
@@ -133,8 +132,8 @@ class OpenNow extends ValueAbstract implements ValueFromArrayInterface
      * @return string
      *   The Channel label.
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return (string) $this->getChannelLabel();
+        return $this->getChannelLabel();
     }
 }

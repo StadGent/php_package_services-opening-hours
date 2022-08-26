@@ -1,16 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\CollectionAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 
 /**
  * Object describing a collection of Days.
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class DayCollection extends CollectionAbstract implements ValueFromArrayInterface
+final class DayCollection extends CollectionAbstract implements ValueFromArrayInterface
 {
     /**
      * Use only the named constructors.
@@ -35,7 +36,7 @@ class DayCollection extends CollectionAbstract implements ValueFromArrayInterfac
      * @throws \InvalidArgumentException
      *   If one of the items does not have a date.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): DayCollection
     {
         $collection = new self();
 
@@ -52,14 +53,13 @@ class DayCollection extends CollectionAbstract implements ValueFromArrayInterfac
      * Will return the days separated by ", ":
      * 2020-02-01, 2020-02-02, 2020-02-03
      */
-    public function __toString()
+    public function __toString(): string
     {
         $labels = [];
         foreach ($this->values as $value) {
-            /* @var $value \StadGent\Services\OpeningHours\Value\Day */
             $labels[] = (string) $value;
         }
 
-        return (string) implode(', ', $labels);
+        return implode(', ', $labels);
     }
 }

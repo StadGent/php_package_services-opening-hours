@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 
 /**
@@ -11,61 +12,61 @@ use DigipolisGent\Value\ValueInterface;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class Service extends ValueAbstract implements ValueFromArrayInterface
+final class Service extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The service ID.
      *
-     * @var int
+     * @var int|null
      */
-    protected $id;
+    private ?int $serviceId;
 
     /**
      * The URI of the services.
      *
-     * @var string
+     * @var string|null
      */
-    protected $uri;
+    private ?string $uri;
 
     /**
      * The service label (name).
      *
-     * @var string
+     * @var string|null
      */
-    protected $label;
+    private ?string $label;
 
     /**
      * The service description.
      *
-     * @var string
+     * @var string|null
      */
-    protected $description;
+    private ?string $description;
 
     /**
      * The date attributes for the Service.
      *
      * @var \StadGent\Services\OpeningHours\Value\DateAttributes
      */
-    protected $dateAttributes;
+    private DateAttributes $dateAttributes;
 
     /**
      * The data source for the service.
      *
      * @var \StadGent\Services\OpeningHours\Value\ServiceSource
      */
-    protected $source;
+    private ServiceSource $source;
 
     /**
      * Is the service a draft item.
      *
      * @var bool
      */
-    protected $isDraft;
+    private bool $isDraft;
 
     /**
      * Use only the named constructors.
      */
-    protected function __construct()
+    private function __construct()
     {
         // The constructor is protected:
         // Create the object using the named constructors.
@@ -92,22 +93,14 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      * @throws \InvalidArgumentException
      *   If the createdAt/updateAt are empty.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): Service
     {
         $service = new self();
 
-        if (!empty($data['id'])) {
-            $service->id = (int) $data['id'];
-        }
-        if (!empty($data['uri'])) {
-            $service->uri = $data['uri'];
-        }
-        if (!empty($data['label'])) {
-            $service->label = $data['label'];
-        }
-        if (!empty($data['description'])) {
-            $service->description = $data['description'];
-        }
+        $service->serviceId = !empty($data['id']) ? (int) $data['id'] : null;
+        $service->uri = $data['uri'] ?? null;
+        $service->label = $data['label'] ?? null;
+        $service->description = $data['description'] ?? null;
 
         $service->source = ServiceSource::fromArray($data);
         $service->dateAttributes = DateAttributes::fromArray($data);
@@ -120,19 +113,19 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the unique identifier for the Service.
      *
-     * @return int
+     * @return int|null
      */
-    public function getId()
+    public function getId(): ?int
     {
-        return $this->id;
+        return $this->serviceId;
     }
 
     /**
      * Get the URI of the service.
      *
-     * @return string
+     * @return string|null
      */
-    public function getUri()
+    public function getUri(): ?string
     {
         return $this->uri;
     }
@@ -140,9 +133,9 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the service label.
      *
-     * @return string
+     * @return string|null
      */
-    public function getLabel()
+    public function getLabel(): ?string
     {
         return $this->label;
     }
@@ -150,9 +143,9 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
     /**
      * Get the service description.
      *
-     * @return string
+     * @return string|null
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -162,7 +155,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\DateAttributes
      */
-    public function getDateAttributes()
+    public function getDateAttributes(): DateAttributes
     {
         return $this->dateAttributes;
     }
@@ -172,7 +165,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\ServiceSource
      */
-    public function getSource()
+    public function getSource(): ServiceSource
     {
         return $this->source;
     }
@@ -182,7 +175,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function hasSource()
+    public function hasSource(): bool
     {
         return $this->getSource()->getName() !== null
             && $this->getSource()->getId() !== null;
@@ -193,7 +186,7 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function isDraft()
+    public function isDraft(): bool
     {
         return $this->isDraft;
     }
@@ -205,13 +198,11 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof Service) {
-            return false;
-        }
-
-        return $this->getId() === $object->getId()
+        /** @var \StadGent\Services\OpeningHours\Value\Service $object */
+        return $this->sameValueTypeAs($object)
+            && $this->getId() === $object->getId()
             && $this->getUri() === $object->getUri()
             && $this->getLabel() === $object->getLabel()
             && $this->getDescription() === $object->getDescription()
@@ -221,7 +212,10 @@ class Service extends ValueAbstract implements ValueFromArrayInterface
             ;
     }
 
-    public function __toString()
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
     {
         return (string) $this->getLabel();
     }

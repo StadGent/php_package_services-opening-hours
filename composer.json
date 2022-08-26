@@ -6,17 +6,18 @@
     "keywords": [
         "gent",
         "services",
-        "opening hours"
+        "opening hours",
+        "district09"
     ],
     "authors": [
         {
             "name": "Peter Decuyper",
-            "email": "peter.decuyper@digipolis.gent"
+            "email": "peter.decuyper@district09.gent"
         }
     ],
     "homepage": "https://github.com/StadGent/php_package_services-opening-hours",
     "require": {
-        "php": "^7.4 || ^8.1",
+        "php": "^7.4 || ^8.0",
         "ext-json": "*",
         "digipolisgent/api-client": "^1.1.0",
         "digipolisgent/value": "^1.1",

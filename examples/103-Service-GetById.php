@@ -4,6 +4,10 @@
  * StadGent\Services\OpeningHours Examples.
  *
  * Example how to load a single Service by its id.
+ *
+ * @var string $apiEndpoint
+ * @var string $apiKey
+ * @var int|string $service_id
  */
 
 use GuzzleHttp\Client as GuzzleClient;

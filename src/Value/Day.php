@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Value;
 
 use DigipolisGent\Value\ValueAbstract;
-use DigipolisGent\Value\ValueFromArrayInterface;
 use DigipolisGent\Value\ValueInterface;
 use InvalidArgumentException;
 
@@ -12,33 +13,33 @@ use InvalidArgumentException;
  *
  * @package StadGent\Services\OpeningHours\Value
  */
-class Day extends ValueAbstract implements ValueFromArrayInterface
+final class Day extends ValueAbstract implements ValueFromArrayInterface
 {
     /**
      * The Days date.
      *
      * @var \StadGent\Services\OpeningHours\Value\Date
      */
-    protected $date;
+    private Date $date;
 
     /**
      * Is open on this date.
      *
      * @var bool
      */
-    protected $isOpen;
+    private bool $isOpen;
 
     /**
      * The hours for this day.
      *
      * @var \StadGent\Services\OpeningHours\Value\HoursCollection
      */
-    protected $hours;
+    private HoursCollection $hours;
 
     /**
      * Use only the named constructors.
      */
-    protected function __construct()
+    private function __construct()
     {
         // The constructor is protected:
         // Create the object using the named constructors.
@@ -59,7 +60,7 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
      * @throws \InvalidArgumentException
      *   If the data does not contain a date value.
      */
-    public static function fromArray(array $data)
+    public static function fromArray(array $data): Day
     {
         if (empty($data['date'])) {
             throw new InvalidArgumentException('The array should contain a "date" value.');
@@ -82,7 +83,7 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\Date
      */
-    public function getDate()
+    public function getDate(): Date
     {
         return $this->date;
     }
@@ -92,7 +93,7 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function isOpen()
+    public function isOpen(): bool
     {
         return $this->isOpen;
     }
@@ -102,7 +103,7 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\HoursCollection
      */
-    public function getHours()
+    public function getHours(): HoursCollection
     {
         return $this->hours;
     }
@@ -114,19 +115,20 @@ class Day extends ValueAbstract implements ValueFromArrayInterface
      *
      * @return bool
      */
-    public function sameValueAs(ValueInterface $object)
+    public function sameValueAs(ValueInterface $object): bool
     {
-        if (!$this->sameValueTypeAs($object) || !$object instanceof Day) {
-            return false;
-        }
-
-        return $this->getDate()->sameValueAs($object->getDate())
+        /** @var \StadGent\Services\OpeningHours\Value\Day $object */
+        return $this->sameValueTypeAs($object)
+            && $this->getDate()->sameValueAs($object->getDate())
             && $this->isOpen() === $object->isOpen()
             && $this->getHours()->sameValueAs($object->getHours())
             ;
     }
 
-    public function __toString()
+    /**
+     * @inheritDoc
+     */
+    public function __toString(): string
     {
         return (string) $this->getDate();
     }

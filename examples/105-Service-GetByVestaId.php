@@ -4,6 +4,10 @@
  * StadGent\Services\OpeningHours Examples.
  *
  * Example how to get a single service by its Vesta ID.
+ *
+ * @var string $apiEndpoint
+ * @var string $apiKey
+ * @var string $service_vesta_id
  */
 
 use GuzzleHttp\Client as GuzzleClient;

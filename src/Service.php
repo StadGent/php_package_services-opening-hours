@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours;
 
 use DigipolisGent\API\Client\ClientInterface;
@@ -9,6 +11,7 @@ use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
 use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
+use StadGent\Services\OpeningHours\Service\Service\ServiceServiceInterface;
 
 /**
  * Factory to create the ServiceService.
@@ -26,16 +29,14 @@ class Service
      * @param \DigipolisGent\API\Client\ClientInterface $client
      * @param \Psr\SimpleCache\CacheInterface $cache
      *
-     * @return \StadGent\Services\OpeningHours\Service\Service\ServiceService
+     * @return \StadGent\Services\OpeningHours\Service\Service\ServiceServiceInterface
      */
-    public static function create(ClientInterface $client, CacheInterface $cache = null)
+    public static function create(ClientInterface $client, CacheInterface $cache = null): ServiceServiceInterface
     {
-        $client
-            ->addHandler(new GetAllHandler())
-            ->addHandler(new GetByIdHandler())
-            ->addHandler(new GetByOpenDataUriHandler())
-            ->addHandler(new SearchByLabelHandler())
-        ;
+        $client->addHandler(new GetAllHandler());
+        $client->addHandler(new GetByIdHandler());
+        $client->addHandler(new GetByOpenDataUriHandler());
+        $client->addHandler(new SearchByLabelHandler());
 
         $service = new ServiceService($client);
         if ($cache) {

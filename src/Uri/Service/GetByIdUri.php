@@ -14,12 +14,12 @@ class GetByIdUri extends Uri
     /**
      * Construct the URI.
      *
-     * @param int $id
+     * @param int $serviceId
      *   The Service ID.
      */
-    public function __construct($id)
+    public function __construct($serviceId)
     {
-        $uri = sprintf('services/%d', $id);
+        $uri = sprintf('services/%d', $serviceId);
         parent::__construct($uri);
     }
 }
