@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Exception;
 
 use Exception;
@@ -22,13 +24,13 @@ final class ExceptionFactory
      *
      * @return \Exception
      */
-    public static function fromException(\Exception $exception): Exception
+    public static function fromException(Exception $exception): Exception
     {
         if (!($exception instanceof RequestException)) {
             return $exception;
         }
 
-        $factory = new static();
+        $factory = new self();
         if ($factory->isNotFound($exception)) {
             return $factory->throwNotFound($exception);
         }
@@ -45,7 +47,7 @@ final class ExceptionFactory
      * @return bool
      *   Is Not Found.
      */
-    protected function isNotFound(RequestException $exception)
+    protected function isNotFound(RequestException $exception): bool
     {
         $codes = [404, 422];
         return in_array($exception->getCode(), $codes, true);
@@ -61,7 +63,17 @@ final class ExceptionFactory
      */
     protected function throwNotFound(RequestException $exception): Exception
     {
-        $body = json_decode($exception->getResponse()->getBody()->getContents());
+        $response = $exception->getResponse();
+        if (!$response) {
+            return NotFoundException::fromException($exception);
+        }
+
+        $body = json_decode(
+            $response->getBody()->getContents(),
+            false,
+            512,
+            JSON_THROW_ON_ERROR
+        );
 
         if (!isset($body->error->target)) {
             return NotFoundException::fromException($exception);

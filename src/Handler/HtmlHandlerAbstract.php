@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Handler;
 
 use DigipolisGent\API\Client\Handler\HandlerInterface;
@@ -23,7 +25,7 @@ abstract class HtmlHandlerAbstract implements HandlerInterface
      *
      * @throws \InvalidArgumentException
      */
-    public function toResponse(Psr\ResponseInterface $response)
+    public function toResponse(Psr\ResponseInterface $response): HtmlResponse
     {
         $data = $this->getBodyData($response);
         return new HtmlResponse($data);
@@ -37,7 +39,7 @@ abstract class HtmlHandlerAbstract implements HandlerInterface
      *
      * @return string
      */
-    protected function getBodyData(Psr\ResponseInterface $response)
+    protected function getBodyData(Psr\ResponseInterface $response): string
     {
         return (string) $response->getBody();
     }

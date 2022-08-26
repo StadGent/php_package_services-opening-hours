@@ -57,7 +57,7 @@ final class Channel extends ValueAbstract implements ValueFromArrayInterface
      * The array may contain following data:
      * - id (int) : The Channel ID.
      * - label (string) : The Channel label (name).
-     * - serviceId (int) : The Service id the Channel belongs to.
+     * - serviceId (int) : The Service ID the Channel belongs to.
      * - createdAt (string) : The creation date of the Channel.
      * - updatedAt (string) : The last update date of the Channel.
      *
@@ -66,6 +66,7 @@ final class Channel extends ValueAbstract implements ValueFromArrayInterface
      * @return \StadGent\Services\OpeningHours\Value\Channel
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If the created_at/update_at are empty.
      */
     public static function fromArray(array $data): Channel

@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Uri\Channel;
 
-use DigipolisGent\API\Client\Uri\Uri;
+use StadGent\Services\OpeningHours\Uri\BaseUri;
 
 /**
  * Uri to get openinghours for a given day (date).
  *
  * @package StadGent\Services\OpeningHours\Uri\Channel
  */
-class OpeningHoursDayUri extends Uri
+final class OpeningHoursDayUri extends BaseUri
 {
     /**
      * Construct the Day URI.
@@ -21,14 +23,13 @@ class OpeningHoursDayUri extends Uri
      * @param string $date
      *   The day (date in Y-m-d format) to get the opening hours for.
      */
-    public function __construct($serviceId, $channelId, $date)
+    public function __construct(int $serviceId, int $channelId, string $date)
     {
-        $uri = sprintf(
+        $this->uri = sprintf(
             'services/%d/channels/%d/openinghours/day?date=%s',
-            (int) $serviceId,
-            (int) $channelId,
+            $serviceId,
+            $channelId,
             $date
         );
-        parent::__construct($uri);
     }
 }

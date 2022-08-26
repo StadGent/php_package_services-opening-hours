@@ -27,8 +27,10 @@ final class Date extends ValueAbstract
      *
      * @param string $date
      *   The date in Y-m-d format.
+     *
+     * @throws \Exception
      */
-    public function __construct($date)
+    public function __construct(string $date)
     {
         $dateString = sprintf('%sT00:00:00+00:00', $date);
         $this->dateTime = new DateTimeImmutable($dateString);

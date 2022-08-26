@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
+use Exception;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Channel\GetAllRequest;
@@ -42,7 +43,7 @@ final class ChannelService extends ServiceAbstract implements ChannelServiceInte
                 new GetAllRequest($serviceId),
                 ChannelsResponse::class
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 
@@ -72,7 +73,7 @@ final class ChannelService extends ServiceAbstract implements ChannelServiceInte
                 new GetByIdRequest($serviceId, $channelId),
                 ChannelResponse::class
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 

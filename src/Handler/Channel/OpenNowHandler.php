@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Handler\Channel;
 
 use StadGent\Services\OpeningHours\Handler\HandlerAbstract;
@@ -13,12 +15,12 @@ use StadGent\Services\OpeningHours\Value\OpenNow;
  *
  * @package StadGent\Services\OpeningHours\Handler\Channel
  */
-class OpenNowHandler extends HandlerAbstract
+final class OpenNowHandler extends HandlerAbstract
 {
     /**
      * @inheritDoc
      */
-    public function handles()
+    public function handles(): array
     {
         return [
             OpenNowRequest::class,
@@ -27,10 +29,8 @@ class OpenNowHandler extends HandlerAbstract
 
     /**
      * @inheritDoc
-     *
-     * @throws \InvalidArgumentException
      */
-    public function toResponse(Psr\ResponseInterface $response)
+    public function toResponse(Psr\ResponseInterface $response): OpenNowResponse
     {
         $data = $this->getBodyData($response);
         $openNow = OpenNow::fromArray($data);

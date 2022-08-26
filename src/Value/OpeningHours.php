@@ -57,6 +57,7 @@ final class OpeningHours extends ValueAbstract implements ValueFromArrayInterfac
      *
      * @return \StadGent\Services\OpeningHours\Value\OpeningHours
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If the data does not contain a "channel" or "channelId" value.
      */
     public static function fromArray(array $data): OpeningHours

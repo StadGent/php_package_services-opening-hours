@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Cache;
 
 /**
@@ -20,7 +22,7 @@ trait CacheKeyTrait
      * @return string
      *   Prefixed cache key.
      */
-    protected function createCacheKey($key)
+    protected function createCacheKey(string $key): string
     {
         return sprintf('OpeningHours:%s', $key);
     }

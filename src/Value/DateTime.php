@@ -26,6 +26,8 @@ final class DateTime extends ValueAbstract
      * Date constructor.
      *
      * @param string $dateTime
+     *
+     * @throws \Exception
      */
     public function __construct(string $dateTime)
     {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Channel;
 
 use DigipolisGent\API\Client\Request\AbstractHtmlRequest;
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Channel\OpeningHoursDayUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Channel
  */
-class OpeningHoursDayHtmlRequest extends AbstractHtmlRequest
+final class OpeningHoursDayHtmlRequest extends AbstractHtmlRequest
 {
     /**
      * Get the OpeningHours for a single day by the Service & Channel ID.
@@ -22,7 +24,7 @@ class OpeningHoursDayHtmlRequest extends AbstractHtmlRequest
      * @param string $date
      *   The day (date in Y-m-d format) to get the opening hours for.
      */
-    public function __construct($serviceId, $channelId, $date)
+    public function __construct(int $serviceId, int $channelId, string $date)
     {
         $uri = new OpeningHoursDayUri($serviceId, $channelId, $date);
         parent::__construct($uri);

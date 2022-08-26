@@ -16,7 +16,7 @@ use StadGent\Services\OpeningHours\Value\ChannelCollection;
 interface ChannelServiceInterface extends ServiceInterface
 {
     /**
-     * Get all Channels for the given Service Id.
+     * Get all Channels for the given Service ID.
      *
      * @param int $serviceId
      *   The ID of the Service to get all Channels for.

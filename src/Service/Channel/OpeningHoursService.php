@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
+use Exception;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use Psr\Http\Message\RequestInterface;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
@@ -38,7 +39,7 @@ final class OpeningHoursService extends ServiceAbstract implements OpeningHoursS
                 new OpenNowRequest($serviceId, $channelId),
                 OpenNowResponse::class
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 
@@ -133,9 +134,6 @@ final class OpeningHoursService extends ServiceAbstract implements OpeningHoursS
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     protected function sendOpeninghoursRequest(string $cacheKey, RequestInterface $request): OpeningHours
     {
@@ -148,7 +146,7 @@ final class OpeningHoursService extends ServiceAbstract implements OpeningHoursS
         try {
             /** @var \StadGent\Services\OpeningHours\Response\OpeningHoursResponse $response */
             $response = $this->send($request, OpeningHoursResponse::class);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 

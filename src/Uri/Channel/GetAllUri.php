@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Uri\Channel;
 
-use DigipolisGent\API\Client\Uri\Uri;
+use StadGent\Services\OpeningHours\Uri\BaseUri;
 
 /**
  * Uri to get all Channels for a given Service id.
  *
  * @package StadGent\Services\OpeningHours\Uri\Channel
  */
-class GetAllUri extends Uri
+final class GetAllUri extends BaseUri
 {
     /**
      * Construct the URI from the Service ID.
@@ -17,9 +19,8 @@ class GetAllUri extends Uri
      * @param int $serviceId
      *   The Service ID.
      */
-    public function __construct($serviceId)
+    public function __construct(int $serviceId)
     {
-        $uri = sprintf('services/%d/channels', (int) $serviceId);
-        parent::__construct($uri);
+        $this->uri = sprintf('services/%d/channels', $serviceId);
     }
 }

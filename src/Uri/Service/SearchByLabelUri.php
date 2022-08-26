@@ -1,15 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Uri\Service;
 
-use DigipolisGent\API\Client\Uri\Uri;
+use StadGent\Services\OpeningHours\Uri\BaseUri;
 
 /**
  * Uri to get all Services by their (partial) label.
  *
  * @package StadGent\Services\OpeningHours\Uri\Channel
  */
-class SearchByLabelUri extends Uri
+final class SearchByLabelUri extends BaseUri
 {
     /**
      * Construct the URI.
@@ -17,9 +19,8 @@ class SearchByLabelUri extends Uri
      * @param string $label
      *   The (partial) Service label.
      */
-    public function __construct($label)
+    public function __construct(string $label)
     {
-        $uri = sprintf('services?label=%s', $label);
-        parent::__construct($uri);
+        $this->uri = sprintf('services?label=%s', $label);
     }
 }

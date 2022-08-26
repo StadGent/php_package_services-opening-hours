@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Exception;
 
 use Exception;
@@ -21,8 +23,12 @@ final class UnexpectedResponseException extends Exception
      *
      * @return \StadGent\Services\OpeningHours\Exception\UnexpectedResponseException
      */
-    public static function fromClass($actual, $expected)
+    public static function fromClass(string $actual, string $expected): UnexpectedResponseException
     {
-        return new static(sprintf('Got instance of %s expected %s response.', $actual, $expected));
+        return new self(sprintf(
+            'Got instance of %s expected %s response.',
+            $actual,
+            $expected
+        ));
     }
 }

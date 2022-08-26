@@ -58,6 +58,7 @@ final class Day extends ValueAbstract implements ValueFromArrayInterface
      * @return \StadGent\Services\OpeningHours\Value\Day
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If the data does not contain a date value.
      */
     public static function fromArray(array $data): Day

@@ -26,7 +26,6 @@ final class ChannelCollection extends CollectionAbstract implements ValueFromArr
      * Create a Collection of Channel objects from an array of data.
      *
      * The array may contain a set of Channel array data.
-     * @see \StadGent\Services\OpeningHours\Value\Channel.
      *
      * @param array $data
      *   The array to extract the collection from.
@@ -34,7 +33,10 @@ final class ChannelCollection extends CollectionAbstract implements ValueFromArr
      * @return \StadGent\Services\OpeningHours\Value\ChannelCollection
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If the createdAt/updateAt are empty.
+     * @see \StadGent\Services\OpeningHours\Value\Channel.
+     *
      */
     public static function fromArray(array $data): ChannelCollection
     {
@@ -58,6 +60,6 @@ final class ChannelCollection extends CollectionAbstract implements ValueFromArr
             $labels[] = $value->getLabel();
         }
 
-        return (string) implode(', ', $labels);
+        return implode(', ', $labels);
     }
 }

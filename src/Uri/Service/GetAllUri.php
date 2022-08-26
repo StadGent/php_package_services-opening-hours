@@ -1,21 +1,23 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Uri\Service;
 
-use DigipolisGent\API\Client\Uri\Uri;
+use StadGent\Services\OpeningHours\Uri\BaseUri;
 
 /**
  * Uri to get all Services.
  *
  * @package StadGent\Services\OpeningHours\Uri\Channel
  */
-class GetAllUri extends Uri
+final class GetAllUri extends BaseUri
 {
     /**
      * Construct the URI.
      */
     public function __construct()
     {
-        parent::__construct('services');
+        $this->uri = 'services';
     }
 }

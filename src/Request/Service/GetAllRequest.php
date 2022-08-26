@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Request\Service;
 
-use DigipolisGent\API\Client\Request\AbstractRequest;
+use DigipolisGent\API\Client\Request\AbstractJsonRequest;
 use StadGent\Services\OpeningHours\Uri\Service\GetAllUri;
 
 /**
@@ -10,7 +12,7 @@ use StadGent\Services\OpeningHours\Uri\Service\GetAllUri;
  *
  * @package StadGent\Services\OpeningHours\Request\Service
  */
-class GetAllRequest extends AbstractRequest
+final class GetAllRequest extends AbstractJsonRequest
 {
     /**
      * @inheritDoc

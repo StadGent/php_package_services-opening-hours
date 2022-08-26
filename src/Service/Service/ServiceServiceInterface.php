@@ -44,7 +44,7 @@ interface ServiceServiceInterface extends ServiceInterface, LoggableInterface, C
     /**
      * Get a single Service by its ID.
      *
-     * @param string $serviceId
+     * @param string|int $serviceId
      *   The Service ID.
      *
      * @return \StadGent\Services\OpeningHours\Value\Service
@@ -54,7 +54,7 @@ interface ServiceServiceInterface extends ServiceInterface, LoggableInterface, C
      * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
-    public function getById(string $serviceId): Service;
+    public function getById($serviceId): Service;
 
     /**
      * Get a single Service by its open data uri.
@@ -72,7 +72,7 @@ interface ServiceServiceInterface extends ServiceInterface, LoggableInterface, C
     public function getByOpenDataUri(string $openDataUri): Service;
 
     /**
-     * Get a service by its Vesta Id.
+     * Get a service by its Vesta ID.
      *
      * @param string $vestaId
      *

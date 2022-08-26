@@ -26,7 +26,6 @@ final class DayCollection extends CollectionAbstract implements ValueFromArrayIn
      * Create a Collection of Day objects from an array of data.
      *
      * The array may contain a set of Day array data keyed by the day date.
-     * @see \StadGent\Services\OpeningHours\Value\Day.
      *
      * @param array $data
      *   Array of days data.
@@ -34,7 +33,10 @@ final class DayCollection extends CollectionAbstract implements ValueFromArrayIn
      * @return \StadGent\Services\OpeningHours\Value\DayCollection
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If one of the items does not have a date.
+     * @see \StadGent\Services\OpeningHours\Value\Day.
+     *
      */
     public static function fromArray(array $data): DayCollection
     {

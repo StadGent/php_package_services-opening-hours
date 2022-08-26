@@ -16,7 +16,7 @@ use StadGent\Services\OpeningHours\Service\Channel\ChannelServiceInterface;
  *
  * @package StadGent\Services\OpeningHours
  */
-class Channel
+final class Channel
 {
     /**
      * Expects a Client object.
@@ -25,11 +25,11 @@ class Channel
      * into the ServiceService.
      *
      * @param \DigipolisGent\API\Client\ClientInterface $client
-     * @param \Psr\SimpleCache\CacheInterface $cache
+     * @param \Psr\SimpleCache\CacheInterface|null $cache
      *
      * @return \StadGent\Services\OpeningHours\Service\Channel\ChannelServiceInterface
      */
-    public static function create(ClientInterface $client, CacheInterface $cache = null): ChannelServiceInterface
+    public static function create(ClientInterface $client, ?CacheInterface $cache = null): ChannelServiceInterface
     {
         $client->addHandler(new GetAllHandler());
         $client->addHandler(new GetByIdHandler());

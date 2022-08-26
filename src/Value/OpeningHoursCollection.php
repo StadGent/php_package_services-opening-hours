@@ -26,7 +26,6 @@ final class OpeningHoursCollection extends CollectionAbstract implements ValueFr
      * Create a Collection of OpeningHours objects from an array of data.
      *
      * The array may contain a set of OpeningHours array data.
-     * @see \StadGent\Services\OpeningHours\Value\OpeningHours.
      *
      * @param array $data
      *   Array of OpeningHours data.
@@ -34,7 +33,10 @@ final class OpeningHoursCollection extends CollectionAbstract implements ValueFr
      * @return \StadGent\Services\OpeningHours\Value\OpeningHoursCollection
      *
      * @throws \InvalidArgumentException
+     * @throws \Exception
      *   If one of the items does not have a date.
+     * @see \StadGent\Services\OpeningHours\Value\OpeningHours.
+     *
      */
     public static function fromArray(array $data): OpeningHoursCollection
     {

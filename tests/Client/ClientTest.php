@@ -3,6 +3,7 @@
 namespace StadGent\Services\Test\OpeningHours\Client;
 
 use DigipolisGent\API\Client\Exception\HandlerNotFound;
+use DigipolisGent\API\Client\Response\ResponseInterface as ServiceResponseInterface;
 use GuzzleHttp\Client as GuzzleClient;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -51,13 +52,16 @@ class ClientTest extends TestCase
             ->method('withHeader')
             ->willReturnSelf();
         $response = $this->getResponseMock();
+
+        $serviceResponse = $this->createMock(ServiceResponseInterface::class);
+
         $guzzle = $this->getGuzzleClientMock($request, $response);
-        $handler = $this->getHandlerMock($request, $response, 'Success');
+        $handler = $this->getHandlerMock($request, $response, $serviceResponse);
 
         $client = new Client($guzzle, $config);
         $client->addHandler($handler);
         $this->assertEquals(
-            'Success',
+            $serviceResponse,
             $client->send($request)
         );
     }

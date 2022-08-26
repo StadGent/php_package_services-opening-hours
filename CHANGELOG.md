@@ -16,6 +16,8 @@ All Notable changes to `gent/services-opening-hours` package.
 ### Updated
 
 - Update qa-php.
+- Update digipolisgent/api-client to 3.x.
+- Update digipolisgent/value to 3.x.
 
 ## [1.2.0]
 

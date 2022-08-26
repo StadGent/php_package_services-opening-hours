@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StadGent\Services\OpeningHours\Service\Channel;
 
+use Exception;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use Psr\Http\Message\RequestInterface;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
@@ -35,7 +36,7 @@ final class OpeningHoursHtmlService extends ServiceAbstract implements OpeningHo
                 new OpenNowHtmlRequest($serviceId, $channelId),
                 HtmlResponse::class
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 
@@ -130,9 +131,6 @@ final class OpeningHoursHtmlService extends ServiceAbstract implements OpeningHo
      *
      * @throws \Exception
      * @throws \GuzzleHttp\Exception\RequestException
-     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ChannelNotFoundException
-     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     protected function sendHtmlRequest(string $cacheKey, RequestInterface $request): string
     {
@@ -145,7 +143,7 @@ final class OpeningHoursHtmlService extends ServiceAbstract implements OpeningHo
         try {
             /** @var \StadGent\Services\OpeningHours\Response\HtmlResponse $response */
             $response = $this->send($request, HtmlResponse::class);
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 

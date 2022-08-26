@@ -9,7 +9,6 @@ use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
-use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 use StadGent\Services\OpeningHours\Service\Service\ServiceServiceInterface;
 
@@ -18,7 +17,7 @@ use StadGent\Services\OpeningHours\Service\Service\ServiceServiceInterface;
  *
  * @package StadGent\Services\OpeningHours
  */
-class Service
+final class Service
 {
     /**
      * Expects a Client object.
@@ -27,16 +26,15 @@ class Service
      * into the ServiceService.
      *
      * @param \DigipolisGent\API\Client\ClientInterface $client
-     * @param \Psr\SimpleCache\CacheInterface $cache
+     * @param \Psr\SimpleCache\CacheInterface|null $cache
      *
      * @return \StadGent\Services\OpeningHours\Service\Service\ServiceServiceInterface
      */
-    public static function create(ClientInterface $client, CacheInterface $cache = null): ServiceServiceInterface
+    public static function create(ClientInterface $client, ?CacheInterface $cache = null): ServiceServiceInterface
     {
         $client->addHandler(new GetAllHandler());
         $client->addHandler(new GetByIdHandler());
         $client->addHandler(new GetByOpenDataUriHandler());
-        $client->addHandler(new SearchByLabelHandler());
 
         $service = new ServiceService($client);
         if ($cache) {

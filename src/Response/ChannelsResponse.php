@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\OpeningHours\Response;
 
 use DigipolisGent\API\Client\Response\ResponseInterface;
@@ -10,14 +12,14 @@ use StadGent\Services\OpeningHours\Value\ChannelCollection;
  *
  * @package StadGent\Services\OpeningHours\Response
  */
-class ChannelsResponse implements ResponseInterface
+final class ChannelsResponse implements ResponseInterface
 {
     /**
      * Collection containing the Channels.
      *
      * @var \StadGent\Services\OpeningHours\Value\ChannelCollection
      */
-    private $channels;
+    private ChannelCollection $channels;
 
     /**
      * Response Constructor.
@@ -34,7 +36,7 @@ class ChannelsResponse implements ResponseInterface
      *
      * @return \StadGent\Services\OpeningHours\Value\ChannelCollection
      */
-    public function getChannels()
+    public function getChannels(): ChannelCollection
     {
         return $this->channels;
     }

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace StadGent\Services\OpeningHours\Service\Service;
 
+use Exception;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
@@ -66,7 +67,7 @@ final class ServiceService extends ServiceAbstract implements ServiceServiceInte
     /**
      * @inheritDoc
      */
-    public function getById(string $serviceId): Service
+    public function getById($serviceId): Service
     {
         $cacheKey = $this->createCacheKeyFromArray(
             ['id', $serviceId]
@@ -81,10 +82,10 @@ final class ServiceService extends ServiceAbstract implements ServiceServiceInte
         try {
             // Get from service.
             $response = $this->send(
-                new GetByIdRequest($serviceId),
+                new GetByIdRequest((int) $serviceId),
                 ServiceResponse::class
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 
@@ -116,7 +117,7 @@ final class ServiceService extends ServiceAbstract implements ServiceServiceInte
                 new GetByOpenDataUriRequest($openDataUri),
                 ServiceResponse::class
             );
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             throw ExceptionFactory::fromException($e);
         }
 
