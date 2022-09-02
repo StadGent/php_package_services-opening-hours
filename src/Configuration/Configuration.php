@@ -16,14 +16,14 @@ final class Configuration extends BaseConfiguration implements ConfigurationInte
     /**
      * The API key.
      *
-     * @var string
+     * @var string|null
      */
-    private string $key;
+    private ?string $key;
 
     /**
      * @inheritDoc
      */
-    public function __construct(string $endpointUri, string $key, array $options = [])
+    public function __construct(string $endpointUri, ?string $key = null, array $options = [])
     {
         parent::__construct($endpointUri, $options);
         $this->key = $key;
@@ -32,7 +32,7 @@ final class Configuration extends BaseConfiguration implements ConfigurationInte
     /**
      * @inheritDoc
      */
-    public function getKey(): string
+    public function getKey(): ?string
     {
         return $this->key;
     }

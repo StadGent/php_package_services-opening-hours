@@ -13,16 +13,15 @@ use PHPUnit\Framework\TestCase;
 class ConfigurationTest extends TestCase
 {
     /**
-     * Test constructor without options.
+     * Test constructor without key.
      */
-    public function testConstructorWithoutOptions()
+    public function testConstructorWithoutKeyAndOptions()
     {
         $uri = 'https://test-endpoint.stad.gent';
-        $key = 'whatever-key';
-        $configuration = new Configuration($uri, $key);
+        $configuration = new Configuration($uri);
 
         $this->assertEquals($uri, $configuration->getUri(), 'Uri is set.');
-        $this->assertEquals($key, $configuration->getKey(), 'Key is set.');
+        $this->assertNull($configuration->getKey(), 'Key is by default null.');
 
         // Default options
         $this->assertEquals(
@@ -37,14 +36,16 @@ class ConfigurationTest extends TestCase
      */
     public function testConstructorWithOptions()
     {
+        $uri = 'https://test-endpoint.stad.gent';
+        $key = 'foo-bar';
         $options = [
             'timeout' => 10,
         ];
-        $configuration = new Configuration(
-            'https://foo.com',
-            'whatever-key',
-            $options
-        );
+
+        $configuration = new Configuration($uri, $key, $options);
+
+        $this->assertEquals($uri, $configuration->getUri(), 'Uri is set.');
+        $this->assertEquals($key, $configuration->getKey(), 'Key is set.');
 
         // Custom options
         $this->assertEquals(
