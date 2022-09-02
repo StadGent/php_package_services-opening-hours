@@ -16,8 +16,8 @@ interface ConfigurationInterface extends BaseConfigurationInterface
     /**
      * Get the API key.
      *
-     * @return string
+     * @return string|null
      *   The API key.
      */
-    public function getKey(): string;
+    public function getKey(): ?string;
 }

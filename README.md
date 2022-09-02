@@ -85,13 +85,13 @@ projects. Questions about our approach can be asked through the issue queue
 [ico-version-unstable]: https://img.shields.io/packagist/vpre/stadgent/services-opening-hours.svg
 [ico-downloads]: https://img.shields.io/packagist/dt/stadgent/services-opening-hours.svg
 [ico-license]: https://img.shields.io/github/license/StadGent/php_package_services-opening-hours.svg
-[ico-travis]: https://img.shields.io/travis/StadGent/php_package_services-opening-hours/master.svg
+[ico-travis]: https://app.travis-ci.com/StadGent/php_package_services-opening-hours.svg?branch=develop
 [ico-maintainability]: https://api.codeclimate.com/v1/badges/84475b0bcdae04464dd8/maintainability
 [ico-test-coverage]: https://api.codeclimate.com/v1/badges/84475b0bcdae04464dd8/test_coverage
 
 [link-packagist]: https://packagist.org/packages/stadgent/services-opening-hours
 [link-license]: LICENSE.md
-[link-travis]: https://travis-ci.org/StadGent/php_package_services-opening-hours
+[link-travis]: https://app.travis-ci.com/StadGent/php_package_services-opening-hours
 [link-maintainability]: https://codeclimate.com/github/StadGent/php_package_services-opening-hours/maintainability
 [link-test-coverage]: https://codeclimate.com/github/StadGent/php_package_services-opening-hours/test_coverage
 [link-author-stadgent]: https://github.com/stadgent

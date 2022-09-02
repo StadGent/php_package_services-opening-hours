@@ -2,6 +2,12 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Fixed
+
+- TTWEBTAKEN-134: Fix endpoint key is optional.
+
 ## [2.0.0]
 
 ### Added
