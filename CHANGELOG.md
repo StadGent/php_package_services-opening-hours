@@ -2,6 +2,12 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [Unreleased]
+
+### Added
+
+- DMOH-58: Add load service by source id.
+
 ## [2.0.1]
 
 ### Fixed

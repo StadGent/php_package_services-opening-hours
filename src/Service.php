@@ -7,8 +7,8 @@ namespace StadGent\Services\OpeningHours;
 use DigipolisGent\API\Client\ClientInterface;
 use Psr\SimpleCache\CacheInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
+use StadGent\Services\OpeningHours\Handler\Service\ExtractFirstHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
-use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
 use StadGent\Services\OpeningHours\Service\Service\ServiceServiceInterface;
 
@@ -34,7 +34,7 @@ final class Service
     {
         $client->addHandler(new GetAllHandler());
         $client->addHandler(new GetByIdHandler());
-        $client->addHandler(new GetByOpenDataUriHandler());
+        $client->addHandler(new ExtractFirstHandler());
 
         $service = new ServiceService($client);
         if ($cache) {

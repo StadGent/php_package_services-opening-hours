@@ -26,8 +26,9 @@ $service_uri = '';
 // Service to load by its Vesta ID.
 $service_vesta_id = '';
 
-
-
+// Service to load by its source ID
+$service_source = '';
+$service_source_id = '';
 
 
 // Channel Data to lookup data for --------------------------------------------
@@ -35,9 +36,6 @@ $service_vesta_id = '';
 // Channel to load by its id.
 // This id will also be used to lookup channel opening hours.
 $channel_id = '';
-
-
-
 
 
 // Dates to lookup OpeningHours for -------------------------------------------
