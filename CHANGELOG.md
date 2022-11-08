@@ -2,6 +2,12 @@
 
 All Notable changes to `gent/services-opening-hours` package.
 
+## [2.1.0]
+
+### Added
+
+- DMOH-58: Add load service by source id.
+
 ## [2.0.1]
 
 ### Fixed
@@ -88,6 +94,7 @@ hours for a Channel.
 * DMOH-17: Added the OpeningHoursPeriod & OpeningHoursPeriodHTML methods to the
   ChannelService.
 
+[2.1.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/2.0.1...2.1.0
 [2.0.1]: https://github.com/StadGent/php_package_services-opening-hours/compare/2.0.0...2.0.1
 [2.0.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.2.0...2.0.0
 [1.2.0]: https://github.com/StadGent/php_package_services-opening-hours/compare/1.1.0...1.2.0

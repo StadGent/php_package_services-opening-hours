@@ -1,38 +1,40 @@
 <?php
 
+declare(strict_types=1);
+
 namespace StadGent\Services\Test\OpeningHours\Handler\Service;
 
-use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
+use StadGent\Services\OpeningHours\Handler\Service\ExtractFirstHandler;
 use StadGent\Services\OpeningHours\Request\Service\GetByOpenDataUriRequest;
+use StadGent\Services\OpeningHours\Request\Service\GetBySourceIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\Test\OpeningHours\Handler\HandlerTestBase;
 
 /**
- * Test the GetByIdHandler.
- *
- * @package StadGent\Services\Test\OpeningHours\Handler\Service
- *
- * @covers StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler
+ * @covers \StadGent\Services\OpeningHours\Handler\Service\ExtractFirstHandler
  */
-class GetByOpenDataUriHandlerTest extends HandlerTestBase
+final class GetFirstHandlerTest extends HandlerTestBase
 {
     /**
      * Test the handles method.
      */
-    public function testHandles()
+    public function testHandles(): void
     {
-        $handler = new GetByOpenDataUriHandler();
+        $handler = new ExtractFirstHandler();
         $this->assertEquals(
-            [GetByOpenDataUriRequest::class],
+            [
+                GetByOpenDataUriRequest::class,
+                GetBySourceIdRequest::class,
+            ],
             $handler->handles(),
-            'Handler only handles \StadGent\Services\OpeningHours\Request\Service\GetByOpenDataUriRequest.'
+            'Handles GetByOpenDataUriRequest & GetBySourceIdRequest.'
         );
     }
 
     /**
      * Test the toResponse method with returned data.
      */
-    public function testToResponseWithData()
+    public function testToResponseWithData(): void
     {
         $body = <<<EOT
     [
@@ -52,7 +54,7 @@ class GetByOpenDataUriHandlerTest extends HandlerTestBase
 EOT;
         $serviceResponse = $this->createResponseMock(200, $body);
 
-        $handler = new GetByOpenDataUriHandler();
+        $handler = new ExtractFirstHandler();
         $response = $handler->toResponse($serviceResponse);
 
         $this->assertInstanceOf(
