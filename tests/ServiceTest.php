@@ -7,7 +7,7 @@ use Psr\SimpleCache\CacheInterface;
 use DigipolisGent\API\Client\ClientInterface;
 use StadGent\Services\OpeningHours\Handler\Service\GetAllHandler;
 use StadGent\Services\OpeningHours\Handler\Service\GetByIdHandler;
-use StadGent\Services\OpeningHours\Handler\Service\GetByOpenDataUriHandler;
+use StadGent\Services\OpeningHours\Handler\Service\ExtractFirstHandler;
 use StadGent\Services\OpeningHours\Handler\Service\SearchByLabelHandler;
 use StadGent\Services\OpeningHours\Service;
 use StadGent\Services\OpeningHours\Service\Service\ServiceService;
@@ -31,7 +31,7 @@ class ServiceTest extends TestCase
         $expectedHandlers = [
             GetAllHandler::class,
             GetByIdHandler::class,
-            GetByOpenDataUriHandler::class
+            ExtractFirstHandler::class
         ];
 
         // Create the client so we can spy on the factory method.

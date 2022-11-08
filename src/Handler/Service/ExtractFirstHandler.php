@@ -6,16 +6,18 @@ namespace StadGent\Services\OpeningHours\Handler\Service;
 
 use StadGent\Services\OpeningHours\Handler\HandlerAbstract;
 use StadGent\Services\OpeningHours\Request\Service\GetByOpenDataUriRequest;
+use StadGent\Services\OpeningHours\Request\Service\GetBySourceIdRequest;
 use StadGent\Services\OpeningHours\Response\ServiceResponse;
 use StadGent\Services\OpeningHours\Value\Service;
 use Psr\Http\Message as Psr;
 
 /**
- * Handler to Get a Service by its open data URI.
+ * Handler to extract the first item from all services response.
  *
- * @package StadGent\Services\OpeningHours\Handler\Service
+ * Is used to extract all services responses where there is filtered by a single
+ * sourceId or Uri.
  */
-final class GetByOpenDataUriHandler extends HandlerAbstract
+final class ExtractFirstHandler extends HandlerAbstract
 {
     /**
      * @inheritDoc
@@ -24,6 +26,7 @@ final class GetByOpenDataUriHandler extends HandlerAbstract
     {
         return [
             GetByOpenDataUriRequest::class,
+            GetBySourceIdRequest::class,
         ];
     }
 

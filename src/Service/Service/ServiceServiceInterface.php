@@ -84,4 +84,21 @@ interface ServiceServiceInterface extends ServiceInterface, LoggableInterface, C
      * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
      */
     public function getByVestaId(string $vestaId): Service;
+
+    /**
+     * Get a single Service by its source name & source id.
+     *
+     * @param string $source
+     *   The source name (eg. recreatex).
+     * @param string $sourceId
+     *   The source ID (eg. ReCreateX  record UUID).
+     *
+     * @return \StadGent\Services\OpeningHours\Value\Service
+     *
+     * @throws \Exception
+     * @throws \GuzzleHttp\Exception\RequestException
+     * @throws \StadGent\Services\OpeningHours\Exception\NotFoundException
+     * @throws \StadGent\Services\OpeningHours\Exception\ServiceNotFoundException
+     */
+    public function getBySourceId(string $source, string $sourceId): Service;
 }

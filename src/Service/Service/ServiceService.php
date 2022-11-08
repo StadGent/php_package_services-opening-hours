@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace StadGent\Services\OpeningHours\Service\Service;
 
 use Exception;
+use StadGent\Services\OpeningHours\Request\Service\GetBySourceIdRequest;
 use StadGent\Services\OpeningHours\Service\ServiceAbstract;
 use StadGent\Services\OpeningHours\Exception\ExceptionFactory;
 use StadGent\Services\OpeningHours\Request\Service\GetAllRequest;
@@ -135,6 +136,38 @@ final class ServiceService extends ServiceAbstract implements ServiceServiceInte
     {
         $uri = sprintf('https://stad.gent/id/agents/%s', $vestaId);
         return $this->getByOpenDataUri($uri);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getBySourceId(string $source, string $sourceId): Service
+    {
+        $cacheKey = $this->createCacheKeyFromArray(
+            ['sourceId', $source, $sourceId]
+        );
+
+        // By default from cache.
+        $cached = $this->cacheGet($cacheKey);
+        if ($cached) {
+            return $cached;
+        }
+
+        try {
+            // Get from service.
+            $response = $this->send(
+                new GetBySourceIdRequest($source, $sourceId),
+                ServiceResponse::class
+            );
+        } catch (Exception $e) {
+            throw ExceptionFactory::fromException($e);
+        }
+
+        /** @var \StadGent\Services\OpeningHours\Response\ServiceResponse $response */
+        $service = $response->getService();
+        $this->cacheSet($cacheKey, $service);
+
+        return $service;
     }
 
     /**
