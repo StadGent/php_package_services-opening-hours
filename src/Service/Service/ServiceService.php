@@ -134,8 +134,7 @@ final class ServiceService extends ServiceAbstract implements ServiceServiceInte
      */
     public function getByVestaId(string $vestaId): Service
     {
-        $uri = sprintf('https://stad.gent/id/agents/%s', $vestaId);
-        return $this->getByOpenDataUri($uri);
+        return $this->getBySourceId('vesta', $vestaId);
     }
 
     /**

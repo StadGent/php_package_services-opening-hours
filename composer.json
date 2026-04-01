@@ -40,8 +40,8 @@
     },
     "config": {
         "allow-plugins": {
-            "phpro/grumphp-shim": true,
-            "ergebnis/composer-normalize": true
+            "ergebnis/composer-normalize": true,
+            "phpro/grumphp-shim": true
         }
     },
     "extra": {
