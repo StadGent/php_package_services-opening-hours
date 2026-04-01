@@ -24,7 +24,7 @@ class ServiceServiceGetByVestaIdTest extends ServiceTestBase
     {
         $service = $this->createService();
         $client = $this->createClientForService($service);
-        $cache = $this->getFromCacheMock('OpeningHours:service:value:uri:https://stad.gent/id/agents/123', $service);
+        $cache = $this->getFromCacheMock('OpeningHours:service:value:sourceId:vesta:123', $service);
 
         $serviceService = new ServiceService($client);
         $serviceService->setCacheService($cache);
